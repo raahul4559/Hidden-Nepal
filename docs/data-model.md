@@ -3,10 +3,10 @@
 Source of truth: `prisma/schema.prisma`. This document explains the decisions
 behind it and records models that are planned but not yet built.
 
-## Implemented (Chunk 2)
+## Implemented
 
 ```
-User                         (standalone until auth lands)
+User 1 ── * PlaceSubmission * ── 0..1 Region / Category
 
 Region 1 ── * Destination * ── * Category        via DestinationCategory
                   │
@@ -23,6 +23,11 @@ Region 1 ── * Destination * ── * Category        via DestinationCategory
 | `DestinationCategory` | Destination ↔ category; lowest `position` is primary | PK `(destinationId, categoryId)` |
 | `DestinationImage` | Gallery with attribution; `position 0` is the cover | unique `(destinationId, position)` |
 | `DestinationSeason` | Best seasons (`SPRING`, `MONSOON`, `AUTUMN`, `WINTER`) | PK `(destinationId, season)` |
+| `PlaceSubmission` | Community suggestions from `/contribute`, moderated (`PENDING` → `APPROVED`/`REJECTED`/`SPAM`) | consent must be true; lowercase email; length limits; reviewed ⇒ `reviewedAt` |
+
+`Destination.isFeatured` drives the homepage "Featured" grid and
+`Destination.isHiddenGem` the editorial "Off the map" section. Editors set
+both; neither implies the content is verified.
 
 ### Delete behaviour
 
@@ -31,15 +36,18 @@ Region 1 ── * Destination * ── * Category        via DestinationCategory
 | Destination → Region | **Restrict** | A province with destinations must not vanish. |
 | DestinationCategory → Category | **Restrict** | Retiring a category is a deliberate reassignment. |
 | DestinationCategory / Image / Season → Destination | **Cascade** | Children are owned by the destination. |
+| PlaceSubmission → Region / Category / User | **SetNull** | A suggestion outlives the things it references. |
 
 ### Indexes
 
 | Index | Serves |
 | --- | --- |
 | `Destination(status, isFeatured, publishedAt DESC)` | Homepage featured list |
+| `Destination(status, isHiddenGem, publishedAt DESC)` | Homepage "Off the map" |
+| `PlaceSubmission(status, createdAt)` | Moderation queue |
 | `Destination(regionId, status)` | Explore → province filter |
 | `DestinationCategory(categoryId)` | Explore → category filter |
-| `DestinationSeason(season)` | Future "best in season" filter |
+| `DestinationSeason(season)` | Explore → season filter |
 | `Destination(difficulty)` | Future difficulty filter |
 | Unique `slug` on Destination, Category, Region | Lookups by URL |
 
@@ -96,5 +104,5 @@ carry unused tables. The sketches show intended shape and delete behaviour.
 | `Trip` | Trip planner | `id`, `userId` (Cascade), `title`, `startDate?`, `endDate?`, `visibility` enum, timestamps; index `(userId, updatedAt)`. |
 | `TripStop` | Trip planner | `id`, `tripId` (Cascade), `destinationId` (Restrict, or SetNull with a snapshot name), `position`, `nights?`, `notes?`; unique `(tripId, position)`. |
 | `TravelGuide` | Guides | `id`, unique `slug`, `title`, `excerpt`, `body`, `status` (PublishStatus), `authorId` (User, SetNull), `publishedAt`, timestamps; optional guide ↔ destination join. |
-| `PlaceSubmission` | Community | `id`, `submitterId` (User, SetNull), `name`, `regionId?`, `description`, `status` enum (`PENDING`, `APPROVED`, `REJECTED`), `reviewerId?`, `reviewedAt?`, `reviewNotes?`, `destinationId?` once promoted; index `(status, createdAt)`. |
+| `PlaceSubmission` additions | Admin | `reviewerId?` (User, SetNull) and `destinationId?` once a suggestion is promoted. |
 | `AuditLog` | Admin | Append-only: `id`, `actorId` (User, SetNull so history survives), `action`, `entityType`, `entityId`, `metadata Json`, `createdAt`; indexes `(entityType, entityId)` and `(actorId, createdAt)`. |

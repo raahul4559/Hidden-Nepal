@@ -1,9 +1,8 @@
 import { expect, test } from "@playwright/test";
 
-/**
- * Data-dependent: runs against whatever DATABASE_URL the server uses. Tests
- * that need published destinations skip themselves when there are none.
- */
+// Data-dependent: runs against whatever DATABASE_URL the server uses. Tests
+// that need published destinations skip themselves when there are none.
+
 /** Featured and spotlight sections stream in; wait until their skeletons are gone. */
 async function waitForStreamedSections(page: import("@playwright/test").Page) {
   await expect(page.locator("#featured [role=status], #off-the-map [role=status]")).toHaveCount(0);

@@ -135,6 +135,20 @@ behaviour, indexes and planned models are in
 
 The first Playwright run needs a browser: `npx playwright install chromium`.
 
+## Routes
+
+| Route | What it shows |
+| --- | --- |
+| `/` | Hero search, 5 experiences, featured (DB), Off the map (DB), provinces with live counts, seasons, responsible travel, community CTA |
+| `/explore` | Search plus `q`, `theme`, `category`, `region` and `season` filters (all in the URL) |
+| `/destinations/[slug]` | Published destination; practical details only when `VERIFIED` |
+| `/contribute` | Place suggestion form, stored as `PlaceSubmission` (status `PENDING`) |
+| `/credits` | Attribution for bundled photography |
+
+Experiences: the homepage shows five themes (Nature, Culture, Adventure,
+Villages, Food). Each groups one or more of the seven database categories
+(`src/features/experiences/themes.ts`).
+
 ## Project structure
 
 ```
@@ -155,8 +169,10 @@ src/
     brand/               Logo
   content/photos.ts      Photo registry with author/license/source
   features/
-    destinations/        Search + input validation, server queries, cards, states
-    experiences/         Category definitions and grid
+    destinations/        Search + input validation, queries, cards, detail, states
+    seasons/             Season definitions and homepage section
+    submissions/         Place suggestion form, server action, validation
+    experiences/         Categories, themes and the theme grid
     regions/             Province definitions and grid
     home/                Hero, responsible-travel section
   lib/
@@ -214,6 +230,8 @@ is credited where it appears, and is listed on `/credits`. When adding images:
 
 - Phase 1: foundation and design system.
 - Phase 2: PostgreSQL schema, migrations, validated idempotent seed.
+- Phase 3: Production homepage, destination detail pages, explore filters
+  (experience, province, season) and community place suggestions.
 
-Still to come: destination detail pages, content management, authentication
-(Auth.js), saved places, trips, guides and community submissions.
+Still to come: admin and moderation (Chunk 4), authentication (Auth.js),
+saved places, trips and guides.
