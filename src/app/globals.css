@@ -1,0 +1,189 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
+
+/*
+ * Hidden Nepal design tokens.
+ * Brand palette first; shadcn/ui semantic tokens are mapped onto it below.
+ *
+ * Contrast notes (WCAG 2.2):
+ * - navy on ivory 15.3:1, blue on ivory 5.3:1, muted ink on ivory 6.7:1
+ * - teal (6.7:1) and gold (8.4:1) pass on navy only; on ivory/white they
+ *   are decoration, never text.
+ * - focus ring: blue on light surfaces, gold on dark (blue is 2.9:1 on navy).
+ */
+:root {
+  --navy: #0b1f33;
+  --navy-800: #13304b;
+  --navy-700: #1d4062;
+  --blue: #1769aa;
+  --teal: #20b8a6;
+  --gold: #d6b36a;
+  --ivory: #f7f5f0;
+  --ivory-deep: #efeae0;
+  --white: #ffffff;
+  --ink-muted: #4a5868;
+  --line: #e3ddd0;
+
+  --background: var(--ivory);
+  --foreground: var(--navy);
+  --card: var(--white);
+  --card-foreground: var(--navy);
+  --popover: var(--white);
+  --popover-foreground: var(--navy);
+  --primary: var(--navy);
+  --primary-foreground: var(--ivory);
+  --secondary: var(--ivory-deep);
+  --secondary-foreground: var(--navy);
+  --muted: var(--ivory-deep);
+  --muted-foreground: var(--ink-muted);
+  --accent: var(--ivory-deep);
+  --accent-foreground: var(--navy);
+  --destructive: #b42318;
+  --border: var(--line);
+  /* Form-control boundaries need 3:1 against ivory. */
+  --input: #7b8794;
+  --ring: var(--blue);
+  --radius: 0.375rem;
+}
+
+/*
+ * Content placed on dark imagery or navy. `.on-dark` swaps tokens only (for
+ * transparent overlays like the header); `.surface-dark` also paints navy.
+ */
+.on-dark,
+.surface-dark {
+  --background: var(--navy);
+  --foreground: var(--ivory);
+  --muted-foreground: rgb(247 245 240 / 0.78);
+  --border: rgb(247 245 240 / 0.16);
+  --input: rgb(247 245 240 / 0.45);
+  --ring: var(--gold);
+  color: var(--ivory);
+}
+
+.surface-dark {
+  background-color: var(--navy);
+}
+
+@theme inline {
+  --color-navy: var(--navy);
+  --color-navy-800: var(--navy-800);
+  --color-navy-700: var(--navy-700);
+  --color-himalaya: var(--blue);
+  --color-teal: var(--teal);
+  --color-gold: var(--gold);
+  --color-ivory: var(--ivory);
+  --color-ivory-deep: var(--ivory-deep);
+  --color-ink-muted: var(--ink-muted);
+  --color-line: var(--line);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-heading: var(--font-serif);
+
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+
+  --ease-out-soft: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    @apply font-sans;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  /* One consistent, highly visible focus indicator. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 3px;
+  }
+
+  [id] {
+    scroll-margin-top: 1.5rem;
+  }
+
+  ::selection {
+    background: color-mix(in oklab, var(--teal) 35%, transparent);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+    }
+  }
+}
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem;
+  padding-inline: 1rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 1.5rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Small uppercase label used above section headings. */
+@utility eyebrow {
+  font-size: 0.75rem;
+  line-height: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+}
+
+/* Thin rule with a gold lead, used as an editorial divider. */
+@utility rule-gold {
+  height: 1px;
+  background: linear-gradient(
+    to right,
+    var(--gold) 0 3rem,
+    var(--border) 3rem 100%
+  );
+}

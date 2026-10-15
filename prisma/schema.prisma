@@ -1,0 +1,74 @@
+// Hidden Nepal data model.
+// Docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+/// Experience categories surfaced across the product. The URL-facing slugs
+/// live in src/features/experiences/categories.ts.
+enum ExperienceCategory {
+  WATERFALL
+  VILLAGE
+  LAKE
+  TREK
+  HERITAGE
+  FOOD
+  CULTURE
+}
+
+enum PublishStatus {
+  DRAFT
+  PUBLISHED
+  ARCHIVED
+}
+
+/// Nepal's seven provinces. Seeded from src/features/regions/provinces.ts.
+model Region {
+  id           String        @id @default(cuid())
+  slug         String        @unique
+  name         String
+  sortOrder    Int           @default(0)
+  destinations Destination[]
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+}
+
+model Destination {
+  id          String             @id @default(cuid())
+  slug        String             @unique
+  name        String
+  summary     String
+  description String?
+  category    ExperienceCategory
+  status      PublishStatus      @default(DRAFT)
+  isFeatured  Boolean            @default(false)
+
+  region   Region  @relation(fields: [regionId], references: [id], onDelete: Restrict)
+  regionId String
+  district String?
+
+  elevationM Int?
+  latitude   Decimal? @db.Decimal(9, 6)
+  longitude  Decimal? @db.Decimal(9, 6)
+
+  // Cover photo with the attribution its license requires.
+  coverImageUrl       String?
+  coverImageAlt       String?
+  coverImageCredit    String?
+  coverImageLicense   String?
+  coverImageSourceUrl String?
+
+  publishedAt DateTime?
+  createdAt   DateTime  @default(now())
+  updatedAt   DateTime  @updatedAt
+
+  @@index([status, isFeatured])
+  @@index([category])
+  @@index([regionId])
+}
