@@ -8,47 +8,35 @@ import { PhotoCredit } from "@/components/media/photo-credit";
 import { PHOTOS } from "@/content/photos";
 import { exploreHref } from "@/features/destinations/schemas";
 
-import { CATEGORIES } from "../categories";
+import { THEMES } from "../themes";
 
 /*
- * Editorial mosaic on large screens (4 columns, 3 rows):
- *   [ big  big ][ sm ][ sm ]
- *   [ big  big ][  wide   ]
- *   [  wide    ][ sm ][ sm ]
+ * Mosaic on large screens (4 columns × 2 rows):
+ *   [ lead lead ][ sm ][ sm ]
+ *   [ lead lead ][ sm ][ sm ]
+ * On small screens the lead spans both columns above a 2×2 grid.
  */
-const layout: Record<number, string> = {
-  0: "col-span-2 lg:row-span-2",
-  3: "col-span-2",
-  4: "col-span-2",
-};
-
-export function CategoryGrid() {
+export function ThemeGrid() {
   return (
-    <section
-      id="experiences"
-      aria-labelledby="experiences-title"
-      className="py-20 sm:py-28"
-    >
+    <section id="experiences" aria-labelledby="experiences-title" className="py-20 sm:py-28">
       <div className="container-page">
         <SectionHeading
           id="experiences-title"
           eyebrow="Experiences"
-          title="Seven ways into the country"
-          intro="Start with what draws you: water, mountains, history or the table. Each path leads somewhere most itineraries pass by."
+          title="Five ways into the country"
+          intro="Start with what draws you: wild water, living culture, the trail, village life or the table."
         />
 
-        <ul
-          className="mt-12 grid auto-rows-[200px] grid-cols-2 gap-3 sm:auto-rows-[240px] sm:gap-4 lg:grid-cols-4 lg:auto-rows-[250px]"
-        >
-          {CATEGORIES.map((category, index) => {
-            const photo = PHOTOS[category.photo];
-            const large = index === 0;
+        <ul className="mt-12 grid auto-rows-[190px] grid-cols-2 gap-3 sm:auto-rows-[240px] sm:gap-4 lg:auto-rows-[260px] lg:grid-cols-4">
+          {THEMES.map((theme, index) => {
+            const photo = PHOTOS[theme.photo];
+            const lead = index === 0;
             return (
               <li
-                key={category.slug}
+                key={theme.slug}
                 className={cn(
                   "group relative isolate overflow-hidden rounded-md bg-navy-800",
-                  layout[index],
+                  lead && "col-span-2 row-span-2",
                 )}
               >
                 <Image
@@ -56,11 +44,7 @@ export function CategoryGrid() {
                   alt=""
                   fill
                   placeholder="blur"
-                  sizes={
-                    large || layout[index]
-                      ? "(min-width: 1024px) 50vw, 100vw"
-                      : "(min-width: 1024px) 25vw, 50vw"
-                  }
+                  sizes={lead ? "(min-width: 1024px) 50vw, 100vw" : "(min-width: 1024px) 25vw, 50vw"}
                   className="-z-20 object-cover transition-transform duration-700 ease-out-soft motion-safe:group-hover:scale-[1.04]"
                 />
                 <div
@@ -68,27 +52,27 @@ export function CategoryGrid() {
                   className="absolute inset-0 -z-10 bg-linear-to-t from-navy/90 via-navy/35 to-navy/0 transition-colors duration-500 group-hover:from-navy/95"
                 />
 
-                <div className="on-dark flex h-full flex-col justify-end p-4 sm:p-5">
+                <div className="on-dark flex h-full flex-col justify-end p-4 sm:p-6">
                   <h3
                     className={cn(
-                      "font-serif leading-tight font-normal text-balance",
-                      large ? "text-2xl sm:text-4xl" : "text-lg sm:text-2xl",
+                      "font-serif leading-tight font-normal",
+                      lead ? "text-3xl sm:text-5xl" : "text-xl sm:text-3xl",
                     )}
                   >
                     <Link
-                      href={exploreHref({ category: category.slug })}
+                      href={exploreHref({ theme: theme.slug })}
                       className="rounded-sm after:absolute after:inset-0 after:content-['']"
                     >
-                      {category.label}
+                      {theme.label}
                     </Link>
                   </h3>
                   <p
                     className={cn(
                       "mt-2 max-w-sm text-sm leading-relaxed text-ivory/80",
-                      !large && !layout[index] && "hidden sm:block",
+                      lead ? "sm:text-base" : "hidden sm:block",
                     )}
                   >
-                    {category.description}
+                    {theme.description}
                   </p>
                   <ArrowUpRight
                     aria-hidden

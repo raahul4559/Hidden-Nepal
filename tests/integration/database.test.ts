@@ -35,7 +35,7 @@ describe.skipIf(!url)("database (integration)", () => {
 
     prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: url! }) });
     await prisma.$executeRawUnsafe(
-      'TRUNCATE "DestinationImage", "DestinationSeason", "DestinationCategory", "Destination", "Category", "Region", "User" CASCADE',
+      'TRUNCATE "PlaceSubmission", "DestinationImage", "DestinationSeason", "DestinationCategory", "Destination", "Category", "Region", "User" CASCADE',
     );
   }, 60_000);
 
@@ -74,42 +74,121 @@ describe.skipIf(!url)("database (integration)", () => {
 
   it("returns sample destinations through the app's query layer", async () => {
     process.env.DATABASE_URL = url;
-    const { searchDestinations, getFeaturedDestinations } = await import(
-      "@/features/destinations/queries"
-    );
+    const q = await import("@/features/destinations/queries");
 
-    const featured = await getFeaturedDestinations();
-    expect(featured.status).toBe("ok");
-    if (featured.status !== "ok") return;
-    // Newest publishedAt first.
-    expect(featured.destinations.map((d) => d.slug)).toEqual([
+    const featured = await q.getFeaturedDestinations();
+    expect(featured.status === "ok" && featured.destinations.map((d) => d.slug)).toEqual([
       "rara-lake",
       "tansen",
-      "khaptad-national-park",
-      "tsum-valley",
     ]);
-    const rara = featured.destinations[0];
-    expect(rara).toMatchObject({
+    if (featured.status !== "ok") return;
+    expect(featured.destinations[0]).toMatchObject({
       category: "lakes",
       region: { slug: "karnali", name: "Karnali" },
       isSample: true,
       practicalInfoStatus: "PLACEHOLDER",
       elevationM: null, // placeholder details are withheld
     });
-    expect(rara.coverImage?.credit).toBe("Chandra Chakradhar");
+    expect(featured.destinations[0].coverImage?.credit).toBe("Chandra Chakradhar");
 
-    const treks = await searchDestinations({ category: "treks" });
-    expect(treks.status === "ok" && treks.destinations.map((d) => d.slug).sort()).toEqual([
+    const gems = await q.getHiddenGems();
+    expect(gems.status === "ok" && gems.destinations.map((d) => d.slug)).toEqual([
       "khaptad-national-park",
-      "rara-lake",
       "tsum-valley",
     ]);
+    expect(gems.status === "ok" && gems.destinations[0].description).toMatch(/Khaptad Baba/);
 
-    const palpa = await searchDestinations({ q: "PALPA" });
-    expect(palpa.status === "ok" && palpa.destinations.map((d) => d.slug)).toEqual(["tansen"]);
+    const slugs = async (search: Parameters<typeof q.searchDestinations>[0]) => {
+      const r = await q.searchDestinations(search);
+      return r.status === "ok" ? r.destinations.map((d) => d.slug).sort() : r.status;
+    };
+    expect(await slugs({ category: "treks" })).toEqual(["khaptad-national-park", "rara-lake", "tsum-valley"]);
+    expect(await slugs({ theme: "nature" })).toEqual(["rara-lake"]);
+    expect(await slugs({ theme: "culture", region: "gandaki" })).toEqual(["tsum-valley"]);
+    expect(await slugs({ season: "winter" })).toEqual(["tansen"]);
+    expect(await slugs({ q: "PALPA" })).toEqual(["tansen"]);
+    expect(await slugs({ region: "madhesh" })).toEqual([]);
 
-    const none = await searchDestinations({ region: "madhesh" });
-    expect(none).toEqual({ status: "ok", destinations: [] });
+    const counts = await q.getProvinceCounts();
+    expect(counts.status === "ok" && counts.counts).toEqual({
+      koshi: 0,
+      madhesh: 0,
+      bagmati: 0,
+      gandaki: 1,
+      lumbini: 1,
+      karnali: 1,
+      sudurpashchim: 1,
+    });
+
+    const detail = await q.getDestinationBySlug("tansen");
+    expect(detail.status === "ok" && detail.destination).toMatchObject({
+      name: "Tansen",
+      categories: ["heritage", "culture", "food"],
+      practicalInfo: null, // placeholder → withheld
+    });
+    expect(detail.status === "ok" && detail.destination?.images).toHaveLength(2);
+
+    const related = await q.getRelatedDestinations("tansen", "lumbini");
+    expect(related).toEqual({ status: "ok", destinations: [] });
+
+    expect(await q.getDestinationBySlug("does-not-exist")).toEqual({ status: "ok", destination: null });
+  });
+
+  it("never returns unpublished destinations", async () => {
+    await prisma.destination.update({ where: { slug: "tansen" }, data: { status: "DRAFT", publishedAt: null } });
+    const q = await import("@/features/destinations/queries");
+    expect(await q.getDestinationBySlug("tansen")).toEqual({ status: "ok", destination: null });
+    await upsertDestination(prisma, SAMPLE_DESTINATIONS.find((d) => d.slug === "tansen")!);
+  });
+
+  it("stores place submissions with constraints", async () => {
+    const karnali = await prisma.region.findUniqueOrThrow({ where: { slug: "karnali" } });
+    const created = await prisma.placeSubmission.create({
+      data: {
+        placeName: "Test waterfall",
+        description: "An integration-test submission that is long enough.",
+        consentToShare: true,
+        regionId: karnali.id,
+      },
+    });
+    expect(created.status).toBe("PENDING");
+
+    const base = { placeName: "Test", description: "Long enough description for the check.", consentToShare: true };
+    await expect(prisma.placeSubmission.create({ data: { ...base, consentToShare: false } })).rejects.toThrow(
+      /PlaceSubmission_consent_required/,
+    );
+    await expect(
+      prisma.placeSubmission.create({ data: { ...base, submitterEmail: "Upper@Case.com" } }),
+    ).rejects.toThrow(/PlaceSubmission_email_lowercase/);
+    await expect(prisma.placeSubmission.create({ data: { ...base, status: "APPROVED" } })).rejects.toThrow(
+      /PlaceSubmission_reviewed_has_timestamp/,
+    );
+  });
+
+  it("submits through the server action", async () => {
+    const { submitPlace } = await import("@/features/submissions/actions");
+    const data = new FormData();
+    data.set("placeName", "Action test place");
+    data.set("region", "koshi");
+    data.set("category", "waterfalls");
+    data.set("description", "Submitted through the real server action in a test.");
+    data.set("submitterEmail", "Tester@Example.com");
+    data.set("consentToShare", "on");
+
+    expect(await submitPlace({ status: "idle" }, data)).toEqual({ status: "success" });
+    const saved = await prisma.placeSubmission.findFirstOrThrow({
+      where: { placeName: "Action test place" },
+      include: { region: true, category: true },
+    });
+    expect(saved).toMatchObject({ submitterEmail: "tester@example.com", status: "PENDING" });
+    expect(saved.region?.slug).toBe("koshi");
+    expect(saved.category?.slug).toBe("waterfalls");
+
+    // Honeypot: reports success, writes nothing.
+    data.set("placeName", "Bot place");
+    data.set("website", "http://spam.example");
+    expect(await submitPlace({ status: "idle" }, data)).toEqual({ status: "success" });
+    expect(await prisma.placeSubmission.count({ where: { placeName: "Bot place" } })).toBe(0);
   });
 
   it("enforces unique destination slugs", async () => {

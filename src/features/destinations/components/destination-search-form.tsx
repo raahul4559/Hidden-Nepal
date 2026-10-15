@@ -3,7 +3,8 @@ import Form from "next/form";
 import { cn } from "cn";
 
 import { Button } from "@/components/ui/button";
-import { CATEGORIES } from "@/features/experiences/categories";
+import { getCategory } from "@/features/experiences/categories";
+import { THEMES } from "@/features/experiences/themes";
 
 import type { DestinationSearch } from "../schemas";
 
@@ -33,9 +34,12 @@ export function DestinationSearchForm({
         className,
       )}
     >
-      {/* Keep an active region filter when searching from /explore. */}
+      {/* Keep active province/season filters when searching from /explore. */}
       {defaultValues?.region ? (
         <input type="hidden" name="region" value={defaultValues.region} />
+      ) : null}
+      {defaultValues?.season ? (
+        <input type="hidden" name="season" value={defaultValues.season} />
       ) : null}
 
       <div className="grid gap-1.5">
@@ -69,10 +73,14 @@ export function DestinationSearchForm({
             className={cn(fieldClass, "appearance-none pr-10")}
           >
             <option value="">Any experience</option>
-            {CATEGORIES.map((c) => (
-              <option key={c.slug} value={c.slug}>
-                {c.label}
-              </option>
+            {THEMES.map((theme) => (
+              <optgroup key={theme.slug} label={theme.label}>
+                {theme.categories.map((slug) => (
+                  <option key={slug} value={slug}>
+                    {getCategory(slug)?.label}
+                  </option>
+                ))}
+              </optgroup>
             ))}
           </select>
           <ChevronDown

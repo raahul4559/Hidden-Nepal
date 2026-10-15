@@ -11,9 +11,8 @@ test("mobile menu opens and navigates", async ({ page, isMobile }) => {
     "true",
   );
 
-  await page
-    .getByRole("navigation", { name: "Main" })
-    .getByRole("link", { name: "Explore" })
-    .click();
+  const menu = page.getByRole("navigation", { name: "Main" });
+  await expect(menu.getByRole("link", { name: "Suggest a place" })).toBeVisible();
+  await menu.getByRole("link", { name: "Explore" }).click();
   await expect(page).toHaveURL(/\/explore$/);
 });

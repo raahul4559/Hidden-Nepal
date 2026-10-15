@@ -12,18 +12,20 @@ import {
 } from "@/features/destinations/components/destination-results";
 import { DestinationSearchForm } from "@/features/destinations/components/destination-search-form";
 import { searchDestinations } from "@/features/destinations/queries";
+import { describeSearch } from "@/features/destinations/describe-search";
 import {
   type DestinationSearch,
   exploreHref,
   parseDestinationSearch,
 } from "@/features/destinations/schemas";
-import { getCategory } from "@/features/experiences/categories";
-import { getProvince, PROVINCES } from "@/features/regions/provinces";
+import { THEMES } from "@/features/experiences/themes";
+import { PROVINCES } from "@/features/regions/provinces";
+import { SEASONS } from "@/features/seasons/seasons";
 
 export const metadata: Metadata = {
   title: "Explore destinations",
   description:
-    "Search Nepal's hidden waterfalls, remote villages, Himalayan lakes, trekking routes, heritage and food by experience or province.",
+    "Search Nepal's hidden waterfalls, remote villages, Himalayan lakes, trekking routes, heritage and food by experience, province or season.",
 };
 
 export default function ExplorePage({ searchParams }: PageProps<"/explore">) {
@@ -34,7 +36,7 @@ export default function ExplorePage({ searchParams }: PageProps<"/explore">) {
       <PageHeader
         eyebrow="Explore"
         title="Find your way beyond the ordinary"
-        intro="Search by place or narrow by experience and province."
+        intro="Search by place, or narrow by experience, province and season."
       >
         <Suspense fallback={<DestinationSearchForm className="mt-10 max-w-4xl" />}>
           <SearchFormWithParams search={search} />
@@ -72,20 +74,15 @@ function ResultsFallback() {
 async function Results({ search: searchPromise }: { search: Promise<DestinationSearch> }) {
   const search = await searchPromise;
   const result = await searchDestinations(search);
-  const category = search.category ? getCategory(search.category) : undefined;
-  const province = search.region ? getProvince(search.region) : undefined;
-  const hasFilters = Boolean(search.q || category || province);
-
-  const heading = [category?.label, province && `in ${province.name}`]
-    .filter(Boolean)
-    .join(" ");
+  const hasFilters = Boolean(search.q || search.theme || search.category || search.region || search.season);
+  const hasSamples = result.status === "ok" && result.destinations.some((d) => d.isSample);
 
   return (
     <>
       <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
         <div>
           <h2 id="results-title" className="font-serif text-3xl sm:text-4xl">
-            {heading || "All destinations"}
+            {describeSearch(search) || "All destinations"}
           </h2>
           {search.q ? (
             <p className="mt-2 text-muted-foreground">
@@ -104,26 +101,57 @@ async function Results({ search: searchPromise }: { search: Promise<DestinationS
         ) : null}
       </div>
 
-      <nav aria-label="Filter by province" className="mt-8">
-        <ul className="flex flex-wrap gap-2">
-          <li>
-            <FilterChip href={exploreHref({ ...search, region: undefined })} active={!province}>
-              All provinces
-            </FilterChip>
-          </li>
-          {PROVINCES.map((p) => (
-            <li key={p.slug}>
-              <FilterChip href={exploreHref({ ...search, region: p.slug })} active={p.slug === search.region}>
-                {p.name}
-              </FilterChip>
-            </li>
-          ))}
-        </ul>
-      </nav>
+      <div className="mt-8 space-y-4">
+        <FilterGroup
+          label="Experience"
+          options={[
+            {
+              label: "All",
+              href: exploreHref({ ...search, theme: undefined, category: undefined }),
+              active: !search.theme && !search.category,
+            },
+            ...THEMES.map((t) => ({
+              label: t.label,
+              href: exploreHref({ ...search, theme: t.slug, category: undefined }),
+              active: search.theme === t.slug,
+            })),
+          ]}
+        />
+        <FilterGroup
+          label="Province"
+          options={[
+            { label: "All", href: exploreHref({ ...search, region: undefined }), active: !search.region },
+            ...PROVINCES.map((p) => ({
+              label: p.name,
+              href: exploreHref({ ...search, region: p.slug }),
+              active: search.region === p.slug,
+            })),
+          ]}
+        />
+        <FilterGroup
+          label="Season"
+          options={[
+            { label: "Any", href: exploreHref({ ...search, season: undefined }), active: !search.season },
+            ...SEASONS.map((season) => ({
+              label: season.label,
+              href: exploreHref({ ...search, season: season.slug }),
+              active: search.season === season.slug,
+            })),
+          ]}
+        />
+      </div>
+
+      {search.season && hasSamples ? (
+        <p role="note" className="mt-6 rounded-md bg-gold/10 px-4 py-3 text-sm">
+          Seasons for destinations marked <strong className="font-semibold">Sample content</strong>{" "}
+          are development placeholders, not travel advice.
+        </p>
+      ) : null}
 
       <div className="mt-10">
         <DestinationResults
           result={result}
+          headingLevel="h3"
           empty={{
             title: hasFilters ? "No destinations match yet" : "No destinations published yet",
             body: hasFilters
@@ -141,28 +169,37 @@ async function Results({ search: searchPromise }: { search: Promise<DestinationS
   );
 }
 
-function FilterChip({
-  href,
-  active,
-  children,
-}: {
-  href: string;
-  active: boolean;
-  children: React.ReactNode;
-}) {
+type FilterOption = { label: string; href: string; active: boolean };
+
+function FilterGroup({ label, options }: { label: string; options: FilterOption[] }) {
   return (
-    <Link
-      href={href}
-      aria-current={active ? "true" : undefined}
-      scroll={false}
-      className={cn(
-        "inline-flex h-9 items-center rounded-full border px-4 text-sm font-medium transition-colors",
-        active
-          ? "border-navy bg-navy text-ivory"
-          : "border-input/50 bg-white text-navy hover:border-navy",
-      )}
+    <nav
+      aria-label={`Filter by ${label.toLowerCase()}`}
+      className="flex flex-col gap-2 sm:flex-row sm:items-center sm:gap-4"
     >
-      {children}
-    </Link>
+      <span className="w-24 shrink-0 text-xs font-semibold tracking-wide text-muted-foreground uppercase">
+        {label}
+      </span>
+      {/* Scrolls sideways on phones rather than wrapping into a tall block. */}
+      <ul className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-1 sm:mx-0 sm:flex-wrap sm:overflow-visible sm:px-0 sm:pb-0">
+        {options.map((option) => (
+          <li key={option.label} className="shrink-0">
+            <Link
+              href={option.href}
+              aria-current={option.active ? "true" : undefined}
+              scroll={false}
+              className={cn(
+                "inline-flex h-9 items-center rounded-full border px-4 text-sm font-medium whitespace-nowrap transition-colors",
+                option.active
+                  ? "border-navy bg-navy text-ivory"
+                  : "border-input/50 bg-white text-navy hover:border-navy",
+              )}
+            >
+              {option.label}
+            </Link>
+          </li>
+        ))}
+      </ul>
+    </nav>
   );
 }

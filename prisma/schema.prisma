@@ -59,6 +59,13 @@ enum InfoStatus {
   VERIFIED
 }
 
+enum SubmissionStatus {
+  PENDING
+  APPROVED
+  REJECTED
+  SPAM
+}
+
 // ─── Identity ───────────────────────────────────────────────────────────────
 
 /// Core user record. Field names follow Auth.js conventions so its adapter
@@ -73,19 +80,22 @@ model User {
   role          UserRole  @default(TRAVELER)
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
+
+  placeSubmissions PlaceSubmission[]
 }
 
 // ─── Catalogue ──────────────────────────────────────────────────────────────
 
 /// Nepal's seven provinces. Seeded from src/features/regions/provinces.ts.
 model Region {
-  id           String        @id @default(cuid())
-  slug         String        @unique
+  id           String            @id @default(cuid())
+  slug         String            @unique
   name         String
-  sortOrder    Int           @default(0)
+  sortOrder    Int               @default(0)
   destinations Destination[]
-  createdAt    DateTime      @default(now())
-  updatedAt    DateTime      @updatedAt
+  submissions  PlaceSubmission[]
+  createdAt    DateTime          @default(now())
+  updatedAt    DateTime          @updatedAt
 }
 
 /// Experience categories. Seeded from src/features/experiences/categories.ts,
@@ -97,6 +107,7 @@ model Category {
   description  String
   sortOrder    Int                   @default(0)
   destinations DestinationCategory[]
+  submissions  PlaceSubmission[]
   createdAt    DateTime              @default(now())
   updatedAt    DateTime              @updatedAt
 }
@@ -109,6 +120,8 @@ model Destination {
   description String?
   status      PublishStatus @default(DRAFT)
   isFeatured  Boolean       @default(false)
+  /// Editorially chosen lesser-known place for the homepage "Off the map" section.
+  isHiddenGem Boolean       @default(false)
   /// Development sample content created by the seed script.
   isSample    Boolean       @default(false)
 
@@ -143,6 +156,8 @@ model Destination {
 
   // Homepage: published + featured, newest first.
   @@index([status, isFeatured, publishedAt(sort: Desc)])
+  // Homepage: published hidden gems.
+  @@index([status, isHiddenGem, publishedAt(sort: Desc)])
   // Explore: filter by province among published.
   @@index([regionId, status])
   @@index([difficulty])
@@ -188,4 +203,36 @@ model DestinationSeason {
 
   @@id([destinationId, season])
   @@index([season])
+}
+
+// ─── Community ──────────────────────────────────────────────────────────────
+
+/// A place suggested by a visitor. Nothing is published from here directly:
+/// an editor researches it and, if suitable, creates a Destination.
+model PlaceSubmission {
+  id              String           @id @default(cuid())
+  placeName       String
+  /// SetNull: deleting a province/category must not erase suggestions.
+  region          Region?          @relation(fields: [regionId], references: [id], onDelete: SetNull)
+  regionId        String?
+  category        Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
+  categoryId      String?
+  locationDetails String?
+  description     String
+  submitterName   String?
+  /// Optional, lowercase; used only to follow up on this suggestion.
+  submitterEmail  String?
+  /// Set once accounts exist. SetNull keeps the suggestion if a user is deleted.
+  submitter       User?            @relation(fields: [submitterId], references: [id], onDelete: SetNull)
+  submitterId     String?
+  /// The submitter confirmed the content is theirs to share.
+  consentToShare  Boolean
+  status          SubmissionStatus @default(PENDING)
+  reviewNotes     String?
+  reviewedAt      DateTime?
+  createdAt       DateTime         @default(now())
+  updatedAt       DateTime         @updatedAt
+
+  // Moderation queue: oldest pending first.
+  @@index([status, createdAt])
 }

@@ -2,7 +2,7 @@ import { render, screen } from "@testing-library/react";
 import { describe, expect, it } from "vitest";
 
 import type { DestinationSummary } from "../types";
-import { DestinationResults } from "./destination-results";
+import { DestinationResults, leadCardSpan } from "./destination-results";
 
 const empty = { title: "Nothing here yet", body: "Check back soon." };
 
@@ -48,5 +48,19 @@ describe("DestinationResults", () => {
     render(<DestinationResults result={{ status: "unconfigured" }} empty={empty} />);
     expect(screen.getByRole("heading", { name: empty.title })).toBeInTheDocument();
     expect(screen.queryByText(/No database connected/)).not.toBeInTheDocument();
+  });
+});
+
+describe("leadCardSpan", () => {
+  it.each([
+    [0, 0],
+    [1, 3],
+    [2, 2],
+    [3, 0],
+    [4, 3],
+    [5, 2],
+    [6, 0],
+  ] as const)("%i destinations → lead spans %i columns", (count, span) => {
+    expect(leadCardSpan(count)).toBe(span);
   });
 });

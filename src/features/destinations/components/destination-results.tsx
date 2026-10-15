@@ -1,4 +1,5 @@
 import { CloudOff, Compass, Database } from "lucide-react";
+import { cn } from "cn";
 
 import type { DestinationListResult } from "../types";
 import { DestinationCard, DestinationCardSkeleton } from "./destination-card";
@@ -7,17 +8,55 @@ type DestinationResultsProps = {
   result: DestinationListResult;
   /** Copy for the empty state, which differs between pages. */
   empty: { title: string; body: React.ReactNode; action?: React.ReactNode };
+  /** `featured` gives the first card a larger, editorial treatment. */
+  layout?: "grid" | "featured";
+  headingLevel?: "h2" | "h3";
 };
 
-export function DestinationResults({ result, empty }: DestinationResultsProps) {
+/**
+ * How many of the three desktop columns the lead card spans so the grid
+ * never ends with a gap: 3 (own row), 2 (shares a row with one card) or 0
+ * (no lead; every card is regular).
+ */
+export function leadCardSpan(count: number): 0 | 2 | 3 {
+  if (count <= 1) return count === 1 ? 3 : 0;
+  const remainder = count % 3;
+  return remainder === 1 ? 3 : remainder === 2 ? 2 : 0;
+}
+
+export function DestinationResults({
+  result,
+  empty,
+  layout = "grid",
+  headingLevel,
+}: DestinationResultsProps) {
   if (result.status === "ok" && result.destinations.length > 0) {
+    const count = result.destinations.length;
+    const span = layout === "featured" ? leadCardSpan(count) : 0;
+    // On the 2-column (sm/md) grid, span only if the rest pair up evenly.
+    const spanOnSmall = span > 0 && (count - 1) % 2 === 0;
     return (
       <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-        {result.destinations.map((d) => (
-          <li key={d.slug} className="flex">
-            <DestinationCard destination={d} />
-          </li>
-        ))}
+        {result.destinations.map((d, i) => {
+          const lead = i === 0 && span > 0;
+          return (
+            <li
+              key={d.slug}
+              className={cn(
+                "flex",
+                lead && spanOnSmall && "sm:col-span-2",
+                lead && span === 2 && "lg:col-span-2",
+                lead && span === 3 && "lg:col-span-3",
+              )}
+            >
+              <DestinationCard
+                destination={d}
+                variant={lead ? "feature" : "default"}
+                headingLevel={headingLevel}
+              />
+            </li>
+          );
+        })}
       </ul>
     );
   }
@@ -60,7 +99,7 @@ export function DestinationResults({ result, empty }: DestinationResultsProps) {
   );
 }
 
-function StatePanel({
+export function StatePanel({
   icon,
   title,
   body,

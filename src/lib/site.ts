@@ -8,7 +8,9 @@ export const siteConfig = {
 /** Every entry must resolve to a real route or an on-page section. */
 export const mainNav = [
   { label: "Experiences", href: "/#experiences" },
-  { label: "Regions", href: "/#regions" },
-  { label: "Travel responsibly", href: "/#responsible-travel" },
+  { label: "Provinces", href: "/#provinces" },
+  { label: "Seasons", href: "/#seasons" },
   { label: "Explore", href: "/explore" },
 ] as const;
+
+export const navCta = { label: "Suggest a place", href: "/contribute" } as const;

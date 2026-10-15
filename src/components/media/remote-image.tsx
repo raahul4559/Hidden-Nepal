@@ -12,6 +12,8 @@ type RemoteImageProps = {
   alt: string;
   sizes: string;
   className?: string;
+  /** Above-the-fold hero: load immediately at high priority. */
+  priority?: boolean;
 };
 
 /**
@@ -19,7 +21,7 @@ type RemoteImageProps = {
  * when the URL is missing, from a host next/image is not configured for,
  * or fails to load.
  */
-export function RemoteImage({ src, alt, sizes, className }: RemoteImageProps) {
+export function RemoteImage({ src, alt, sizes, className, priority }: RemoteImageProps) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
 
   if (!src || !isOptimizableImageSrc(src) || failedSrc === src) {
@@ -33,6 +35,8 @@ export function RemoteImage({ src, alt, sizes, className }: RemoteImageProps) {
       fill
       sizes={sizes}
       className={className}
+      loading={priority ? "eager" : undefined}
+      fetchPriority={priority ? "high" : undefined}
       onError={() => setFailedSrc(src)}
     />
   );

@@ -33,6 +33,7 @@ export async function upsertDestination(prisma: PrismaClient, input: Destination
       status: d.status,
       publishedAt: d.publishedAt ?? null,
       isFeatured: d.isFeatured,
+      isHiddenGem: d.isHiddenGem,
       isSample: d.isSample,
       region: { connect: { id: region.id } },
       district: d.district ?? null,

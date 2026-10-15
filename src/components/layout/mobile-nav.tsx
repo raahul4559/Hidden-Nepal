@@ -6,7 +6,7 @@ import { useEffect, useId, useRef, useState } from "react";
 
 type NavItem = { label: string; href: string };
 
-export function MobileNav({ items }: { items: readonly NavItem[] }) {
+export function MobileNav({ items, cta }: { items: readonly NavItem[]; cta?: NavItem }) {
   const [open, setOpen] = useState(false);
   const panelId = useId();
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -24,7 +24,7 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
   }, [open]);
 
   return (
-    <div className="md:hidden">
+    <div className="lg:hidden">
       <button
         ref={buttonRef}
         type="button"
@@ -55,6 +55,17 @@ export function MobileNav({ items }: { items: readonly NavItem[] }) {
               </Link>
             </li>
           ))}
+          {cta ? (
+            <li className="mt-3 border-t border-border pt-5 pb-2">
+              <Link
+                href={cta.href}
+                onClick={() => setOpen(false)}
+                className="inline-flex h-11 w-full items-center justify-center rounded-md bg-teal px-5 text-base font-semibold text-navy"
+              >
+                {cta.label}
+              </Link>
+            </li>
+          ) : null}
         </ul>
       </nav>
     </div>

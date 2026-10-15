@@ -78,6 +78,7 @@ export const destinationInputSchema = z
     status: z.enum(PublishStatus),
     publishedAt: z.date().optional(),
     isFeatured: z.boolean().default(false),
+    isHiddenGem: z.boolean().default(false),
     isSample: z.boolean().default(false),
 
     regionSlug: z.enum(PROVINCE_SLUGS),
