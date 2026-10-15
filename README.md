@@ -244,6 +244,9 @@ shell.
   read-only. The register → save → sign-out flow writes a user and only runs
   with `E2E_DB_WRITES=1`. Use a disposable database:
   `DATABASE_URL=… E2E_DB_WRITES=1 npm run test:e2e`.
+  Each run registers two users, so after a few runs within an hour the
+  registration limit (5 per IP) applies; `TRUNCATE "RateLimit"` on that
+  disposable database resets it.
 
 ## Project structure
 
