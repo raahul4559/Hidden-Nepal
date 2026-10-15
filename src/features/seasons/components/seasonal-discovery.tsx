@@ -29,8 +29,9 @@ export function SeasonalDiscovery() {
             className="lg:col-span-7"
           />
           <p className="text-sm leading-relaxed text-muted-foreground lg:col-span-5">
-            Months are approximate and shift with altitude and year. Always
-            check current conditions locally before you travel.
+            Months are approximate and shift with altitude and year. Season
+            links only show destinations whose seasonal details have been
+            verified. Always check current conditions locally before you travel.
           </p>
         </div>
 

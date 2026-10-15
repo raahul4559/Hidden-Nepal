@@ -4,6 +4,7 @@ import { Fraunces, Manrope } from "next/font/google";
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
 import { siteConfig } from "@/lib/site";
+import { getSiteUrl } from "@/lib/site-url";
 
 import "./globals.css";
 
@@ -21,6 +22,7 @@ const fraunces = Fraunces({
 });
 
 export const metadata: Metadata = {
+  metadataBase: getSiteUrl(),
   title: {
     default: `${siteConfig.name} | ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.name}`,
@@ -29,8 +31,10 @@ export const metadata: Metadata = {
   openGraph: {
     siteName: siteConfig.name,
     type: "website",
+    locale: "en_GB",
     description: siteConfig.description,
   },
+  twitter: { card: "summary_large_image" },
 };
 
 export const viewport: Viewport = {

@@ -4,6 +4,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { PlaceSubmissionForm } from "@/features/submissions/components/place-submission-form";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contribute" },
   title: "Suggest a place",
   description:
     "Tell Hidden Nepal about a lesser-known place: a waterfall, village, trail, festival or kitchen worth a visit.",

@@ -13,9 +13,10 @@ export function describeSearch(search: DestinationSearch): string {
     "";
   const province = search.region ? getProvince(search.region) : undefined;
   const season = search.season ? getSeason(search.season) : undefined;
+  const where = [search.district, province?.name].filter(Boolean).join(", ");
   return [
-    what || (province || season ? "Destinations" : ""),
-    province && `in ${province.name}`,
+    what || (where || season ? "Destinations" : ""),
+    where && `in ${where}`,
     season && `for ${season.label.toLowerCase()}`,
   ]
     .filter(Boolean)

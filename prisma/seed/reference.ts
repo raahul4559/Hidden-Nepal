@@ -1,3 +1,4 @@
+import { ACTIVITIES } from "@/features/destinations/activities";
 import { CATEGORIES } from "@/features/experiences/categories";
 import { PROVINCES } from "@/features/regions/provinces";
 import type { PrismaClient } from "@/generated/prisma/client";
@@ -28,7 +29,14 @@ export async function seedReferenceData(prisma: PrismaClient) {
         },
       }),
     ),
+    ...ACTIVITIES.map((activity, index) =>
+      prisma.activity.upsert({
+        where: { slug: activity.slug },
+        update: { name: activity.name, sortOrder: index },
+        create: { slug: activity.slug, name: activity.name, sortOrder: index },
+      }),
+    ),
   ]);
 
-  return { regions: PROVINCES.length, categories: CATEGORIES.length };
+  return { regions: PROVINCES.length, categories: CATEGORIES.length, activities: ACTIVITIES.length };
 }

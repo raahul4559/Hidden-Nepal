@@ -1,6 +1,12 @@
 import { describe, expect, it } from "vitest";
 
-import { destinationHref, exploreHref, parseDestinationSearch } from "./schemas";
+import {
+  activeFilterCount,
+  destinationHref,
+  exploreHref,
+  parseDestinationSearch,
+  provinceHref,
+} from "./schemas";
 
 describe("parseDestinationSearch", () => {
   it("accepts known category and province slugs", () => {
@@ -66,5 +72,41 @@ describe("theme and season params", () => {
 describe("destinationHref", () => {
   it("builds detail URLs", () => {
     expect(destinationHref("rara-lake")).toBe("/destinations/rara-lake");
+  });
+});
+
+describe("discovery params", () => {
+  it("parses district, difficulty, budget, sort and page", () => {
+    expect(
+      parseDestinationSearch({ district: " Mugu ", difficulty: "moderate", budget: "mid", sort: "name", page: "3" }),
+    ).toMatchObject({ district: "Mugu", difficulty: "moderate", budget: "mid", sort: "name", page: 3 });
+  });
+
+  it.each([
+    ["page", "0"],
+    ["page", "-2"],
+    ["page", "2.5"],
+    ["page", "abc"],
+    ["page", "100000"],
+    ["sort", "random"],
+    ["difficulty", "extreme"],
+    ["budget", "cheap"],
+    ["district", "<script>"],
+    ["district", "x".repeat(61)],
+  ])("drops invalid %s=%s", (key, value) => {
+    expect(parseDestinationSearch({ [key]: value })[key as "page"]).toBeUndefined();
+  });
+
+  it("omits defaults from canonical URLs", () => {
+    expect(exploreHref({ sort: "featured", page: 1 })).toBe("/explore");
+    expect(exploreHref({ sort: "name", page: 2, district: "Mugu" })).toBe("/explore?district=Mugu&sort=name&page=2");
+  });
+
+  it("counts active filters but not sort or page", () => {
+    expect(activeFilterCount({ q: "lake", region: "karnali", sort: "name", page: 2 })).toBe(2);
+  });
+
+  it("builds province URLs", () => {
+    expect(provinceHref("karnali")).toBe("/provinces/karnali");
   });
 });

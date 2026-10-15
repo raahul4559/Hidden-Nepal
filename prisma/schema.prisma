@@ -142,6 +142,10 @@ model Destination {
   difficulty       Difficulty?
   suggestedDays    Int?
   bestSeasonNotes  String?
+  /// How to get there: transport, road/trail access, permits. VERIFIED only.
+  accessInfo       String?
+  /// Safety and preparation: altitude, weather hazards, what to carry. VERIFIED only.
+  safetyInfo       String?
 
   practicalInfoStatus     InfoStatus @default(UNVERIFIED)
   practicalInfoVerifiedAt DateTime?
@@ -149,6 +153,8 @@ model Destination {
   categories DestinationCategory[]
   images     DestinationImage[]
   seasons    DestinationSeason[]
+  activities DestinationActivity[]
+  sources    DestinationSource[]
 
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
@@ -161,6 +167,12 @@ model Destination {
   // Explore: filter by province among published.
   @@index([regionId, status])
   @@index([difficulty])
+  // Explore: alphabetical sort among published.
+  @@index([status, name])
+  // Explore: district filter within a province.
+  @@index([regionId, district])
+  // Explore: practical filters (difficulty, budget, season) need VERIFIED rows.
+  @@index([status, practicalInfoStatus, estimatedCostMin])
 }
 
 /// Many-to-many destination ↔ category. The lowest `position` is the
@@ -194,6 +206,46 @@ model DestinationImage {
   updatedAt     DateTime    @updatedAt
 
   @@unique([destinationId, position])
+}
+
+/// Things to do. Seeded from src/features/destinations/activities.ts.
+model Activity {
+  id           String                @id @default(cuid())
+  slug         String                @unique
+  name         String
+  sortOrder    Int                   @default(0)
+  destinations DestinationActivity[]
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+}
+
+/// Activities available at a destination. Shown only when practical info is
+/// VERIFIED, since availability changes with season and local conditions.
+model DestinationActivity {
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  destinationId String
+  activity      Activity    @relation(fields: [activityId], references: [id], onDelete: Restrict)
+  activityId    String
+  position      Int         @default(0)
+
+  @@id([destinationId, activityId])
+  @@index([activityId])
+}
+
+/// Where the published facts come from. Shown on the detail page.
+model DestinationSource {
+  id            String      @id @default(cuid())
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  destinationId String
+  title         String
+  url           String
+  publisher     String?
+  accessedAt    DateTime?
+  position      Int         @default(0)
+  createdAt     DateTime    @default(now())
+
+  @@unique([destinationId, url])
+  @@index([destinationId, position])
 }
 
 model DestinationSeason {

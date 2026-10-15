@@ -5,6 +5,7 @@ import { PageHeader } from "@/components/layout/page-header";
 import { PHOTOS } from "@/content/photos";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/credits" },
   title: "Photo credits",
   description: "Attribution and licenses for photography used on Hidden Nepal.",
 };

@@ -2,10 +2,11 @@ import { ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
+import { cn } from "cn";
 
 import { SectionHeading } from "@/components/editorial/section-heading";
 import { getProvinceCounts } from "@/features/destinations/queries";
-import { exploreHref } from "@/features/destinations/schemas";
+import { provinceHref } from "@/features/destinations/schemas";
 
 import { PROVINCES, type ProvinceSlug } from "../provinces";
 
@@ -27,20 +28,26 @@ export function RegionGrid() {
             intro="Nepal’s provinces run north to south across lowland plains, middle hills and mountains. Pick one and see what lies beyond the usual stops."
           />
         </div>
-        {/* The list is static; only the published counts stream in. */}
-        <Suspense fallback={<ProvinceList counts={null} />}>
-          <ProvinceListWithCounts />
-        </Suspense>
+        <ProvinceDirectory className="lg:col-span-7" />
       </div>
     </section>
   );
 }
 
-async function ProvinceListWithCounts() {
+/** The seven provinces with live published counts (the list itself is static). */
+export function ProvinceDirectory({ className }: { className?: string }) {
+  return (
+    <Suspense fallback={<ProvinceList counts={null} className={className} />}>
+      <ProvinceListWithCounts className={className} />
+    </Suspense>
+  );
+}
+
+async function ProvinceListWithCounts({ className }: { className?: string }) {
   await connection();
   const result = await getProvinceCounts();
   // On failure or without a database, simply omit counts.
-  return <ProvinceList counts={result.status === "ok" ? result.counts : null} />;
+  return <ProvinceList counts={result.status === "ok" ? result.counts : null} className={className} />;
 }
 
 function countLabel(count: number) {
@@ -49,9 +56,9 @@ function countLabel(count: number) {
     : `${count} destination${count === 1 ? "" : "s"}`;
 }
 
-function ProvinceList({ counts }: { counts: Counts }) {
+function ProvinceList({ counts, className }: { counts: Counts; className?: string }) {
   return (
-    <ol className="grid border-t border-border sm:grid-cols-2 lg:col-span-7">
+    <ol className={cn("grid border-t border-border sm:grid-cols-2", className)}>
       {PROVINCES.map((province, index) => {
         const count = counts?.[province.slug];
         return (
@@ -66,7 +73,7 @@ function ProvinceList({ counts }: { counts: Counts }) {
               <div className="flex-1">
                 <h3 className="font-serif text-2xl leading-tight sm:text-3xl">
                   <Link
-                    href={exploreHref({ region: province.slug })}
+                    href={provinceHref(province.slug)}
                     className="rounded-sm after:absolute after:inset-0 after:content-['']"
                   >
                     {province.name}

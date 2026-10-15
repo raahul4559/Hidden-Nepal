@@ -15,6 +15,8 @@ import { PrismaClient } from "@/generated/prisma/client";
 
 import { upsertDestination } from "../../prisma/seed/destinations";
 import { seedDatabase } from "../../prisma/seed/index";
+import type { DestinationInput } from "@/features/destinations/validation";
+
 import { SAMPLE_DESTINATIONS } from "../../prisma/seed/sample-destinations";
 
 const url = process.env.TEST_DATABASE_URL;
@@ -35,7 +37,7 @@ describe.skipIf(!url)("database (integration)", () => {
 
     prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: url! }) });
     await prisma.$executeRawUnsafe(
-      'TRUNCATE "PlaceSubmission", "DestinationImage", "DestinationSeason", "DestinationCategory", "Destination", "Category", "Region", "User" CASCADE',
+      'TRUNCATE "PlaceSubmission", "DestinationSource", "DestinationActivity", "Activity", "DestinationImage", "DestinationSeason", "DestinationCategory", "Destination", "Category", "Region", "User" CASCADE',
     );
   }, 60_000);
 
@@ -105,7 +107,8 @@ describe.skipIf(!url)("database (integration)", () => {
     expect(await slugs({ category: "treks" })).toEqual(["khaptad-national-park", "rara-lake", "tsum-valley"]);
     expect(await slugs({ theme: "nature" })).toEqual(["rara-lake"]);
     expect(await slugs({ theme: "culture", region: "gandaki" })).toEqual(["tsum-valley"]);
-    expect(await slugs({ season: "winter" })).toEqual(["tansen"]);
+    // Tansen's WINTER season is a placeholder, so season filters must skip it.
+    expect(await slugs({ season: "winter" })).toEqual([]);
     expect(await slugs({ q: "PALPA" })).toEqual(["tansen"]);
     expect(await slugs({ region: "madhesh" })).toEqual([]);
 
@@ -237,5 +240,128 @@ describe.skipIf(!url)("database (integration)", () => {
 
     // Restore for idempotence of the suite.
     await upsertDestination(prisma, SAMPLE_DESTINATIONS.find((d) => d.slug === "tansen")!);
+  });
+
+  describe("discovery", () => {
+    const VERIFIED_AT = new Date("2026-03-01T00:00:00Z");
+    // 14 verified, non-sample test destinations in Koshi, plus unpublished rows.
+    const fixtures: DestinationInput[] = Array.from({ length: 14 }, (_, i) => {
+      const n = String(i + 1).padStart(2, "0");
+      return {
+        slug: `qa-place-${n}`,
+        name: `QA Place ${String.fromCharCode(90 - i)}`, // reverse-alphabetical vs slug order
+        summary: "Integration-test destination with verified practical details.",
+        status: "PUBLISHED",
+        publishedAt: new Date(Date.UTC(2026, 1, i + 1)),
+        isFeatured: i % 5 === 0,
+        regionSlug: "koshi",
+        district: i % 2 ? "Taplejung" : "Ilam",
+        categorySlugs: [i % 2 ? "treks" : "villages"],
+        difficulty: i % 3 === 0 ? "EASY" : "MODERATE",
+        cost: { min: 5000 * (i + 1), max: 5000 * (i + 2), currency: "NPR" },
+        seasons: i % 2 ? ["AUTUMN"] : ["SPRING", "AUTUMN"],
+        practicalInfo: { status: "VERIFIED", verifiedAt: VERIFIED_AT },
+        accessInfo: "Test access notes.",
+        activitySlugs: ["hiking"],
+        sources: [{ title: "Test source", url: `https://example.org/${n}` }],
+      };
+    });
+
+    beforeAll(async () => {
+      for (const f of fixtures) await upsertDestination(prisma, f);
+      await upsertDestination(prisma, { ...fixtures[0], slug: "qa-draft", name: "QA Draft", status: "DRAFT", publishedAt: undefined });
+      await upsertDestination(prisma, { ...fixtures[0], slug: "qa-archived", name: "QA Archived", status: "ARCHIVED" });
+    });
+
+    const q = () => import("@/features/destinations/queries");
+    const slugs = (r: { status: string; destinations?: { slug: string }[] }) =>
+      r.status === "ok" ? r.destinations!.map((d) => d.slug) : r.status;
+
+    it("paginates server-side without overlap", async () => {
+      const { searchDestinations } = await q();
+      const p1 = await searchDestinations({ region: "koshi", sort: "name" });
+      const p2 = await searchDestinations({ region: "koshi", sort: "name", page: 2 });
+      expect(p1).toMatchObject({ status: "ok", total: 14, page: 1, pageCount: 2, pageSize: 12 });
+      expect(slugs(p1)).toHaveLength(12);
+      expect(slugs(p2)).toHaveLength(2);
+      expect(new Set([...(slugs(p1) as string[]), ...(slugs(p2) as string[])]).size).toBe(14);
+
+      const beyond = await searchDestinations({ region: "koshi", page: 3 });
+      expect(beyond).toMatchObject({ status: "ok", total: 14, page: 3, pageCount: 2, destinations: [] });
+    });
+
+    it("sorts alphabetically or featured-first", async () => {
+      const { searchDestinations } = await q();
+      const byName = await searchDestinations({ region: "koshi", sort: "name" }, 50);
+      const names = byName.status === "ok" ? byName.destinations.map((d) => d.name) : [];
+      expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b)));
+
+      const featured = await searchDestinations({ region: "koshi" }, 50);
+      expect(slugs(featured).slice(0, 3)).toEqual(["qa-place-11", "qa-place-06", "qa-place-01"]);
+    });
+
+    it("filters by district case-insensitively", async () => {
+      const { searchDestinations, getDistricts } = await q();
+      const r = await searchDestinations({ district: "TAPLEJUNG" }, 50);
+      expect(r.status === "ok" && r.total).toBe(7);
+      expect(await getDistricts("koshi")).toEqual({ status: "ok", districts: ["Ilam", "Taplejung"] });
+    });
+
+    it("applies practical filters to verified destinations only", async () => {
+      const { searchDestinations } = await q();
+      // Samples carry placeholder seasons (e.g. Tansen: WINTER) and must never match.
+      expect(await searchDestinations({ season: "winter" })).toMatchObject({ total: 0 });
+      const spring = await searchDestinations({ season: "spring" }, 50);
+      expect(slugs(spring)).not.toContain("rara-lake");
+      expect(spring.status === "ok" && spring.total).toBe(7);
+
+      const easy = await searchDestinations({ difficulty: "easy" }, 50);
+      expect(easy.status === "ok" && easy.total).toBe(5); // i = 0, 3, 6, 9, 12
+
+      // Starting cost 5,000 × (i+1): low < 15,000 → i = 0, 1
+      expect(await searchDestinations({ budget: "low" })).toMatchObject({ total: 2 });
+      expect(await searchDestinations({ budget: "mid" })).toMatchObject({ total: 8 });
+      expect(await searchDestinations({ budget: "high" })).toMatchObject({ total: 4 });
+    });
+
+    it("never exposes draft or archived destinations", async () => {
+      const { searchDestinations, getDestinationBySlug, getSitemapDestinations } = await q();
+      const all = await searchDestinations({}, 100);
+      expect(slugs(all)).not.toContain("qa-draft");
+      expect(slugs(all)).not.toContain("qa-archived");
+      expect(await getDestinationBySlug("qa-draft")).toEqual({ status: "ok", destination: null });
+      expect(await getDestinationBySlug("qa-archived")).toEqual({ status: "ok", destination: null });
+
+      const sitemap = await getSitemapDestinations();
+      const sitemapSlugs = sitemap.status === "ok" ? sitemap.destinations.map((d) => d.slug) : [];
+      expect(sitemapSlugs).toHaveLength(14); // fixtures only: samples and unpublished excluded
+      expect(sitemapSlugs).not.toContain("rara-lake");
+    });
+
+    it("returns verified details, activities and sources on the detail page", async () => {
+      const { getDestinationBySlug } = await q();
+      const r = await getDestinationBySlug("qa-place-02");
+      expect(r.status === "ok" && r.destination).toMatchObject({
+        practicalInfo: {
+          verifiedAt: VERIFIED_AT,
+          difficulty: "MODERATE",
+          accessInfo: "Test access notes.",
+          activities: ["Hiking"],
+          seasons: ["AUTUMN"],
+          cost: { min: 10000, max: 15000, currency: "NPR" },
+        },
+        sources: [{ title: "Test source", url: "https://example.org/02" }],
+      });
+    });
+
+    it("returns an empty page, not an error, when nothing matches", async () => {
+      const { searchDestinations } = await q();
+      expect(await searchDestinations({ q: "zzz-no-such-place" })).toMatchObject({
+        status: "ok",
+        total: 0,
+        pageCount: 1,
+        destinations: [],
+      });
+    });
   });
 });

@@ -20,3 +20,10 @@ describe("describeSearch", () => {
     expect(describeSearch({ season: "winter" })).toBe("Destinations for winter");
   });
 });
+
+describe("describeSearch with districts", () => {
+  it("names the district before the province", () => {
+    expect(describeSearch({ district: "Mugu", region: "karnali" })).toBe("Destinations in Mugu, Karnali");
+    expect(describeSearch({ theme: "food", district: "Palpa" })).toBe("Food in Palpa");
+  });
+});

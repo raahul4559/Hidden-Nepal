@@ -4,6 +4,7 @@ import { Suspense } from "react";
 
 import { DestinationDetail } from "@/features/destinations/components/destination-detail";
 import { getDestinationBySlug } from "@/features/destinations/queries";
+import { destinationHref } from "@/features/destinations/schemas";
 
 import { DestinationDetailSkeleton } from "./skeleton";
 
@@ -13,18 +14,20 @@ export async function generateMetadata({
   const { slug } = await params;
   const result = await getDestinationBySlug(slug);
   const destination = result.status === "ok" ? result.destination : null;
-  if (!destination) return { title: "Destination" };
+  if (!destination) return { title: "Destination not found", robots: { index: false } };
 
   const cover = destination.images[0];
   return {
     title: destination.name,
     description: destination.summary,
+    alternates: { canonical: destinationHref(destination.slug) },
     // Sample content should never be indexed.
     robots: destination.isSample ? { index: false, follow: true } : undefined,
     openGraph: {
       title: destination.name,
       description: destination.summary,
       type: "article",
+      url: destinationHref(destination.slug),
       images: cover ? [{ url: cover.url, alt: cover.alt }] : undefined,
     },
   };

@@ -32,7 +32,8 @@ test("sample destinations are labelled and withhold practical details", async ({
 
   await sample.getByRole("heading").getByRole("link").click();
   await expect(page.getByRole("note").filter({ hasText: "Sample content." })).toBeVisible();
-  await expect(page.getByText("We haven’t verified costs, access, elevation")).toBeVisible();
+  await expect(page.getByText(/Costs, difficulty, elevation, best seasons and coordinates/)).toBeVisible();
+  await expect(page.getByText(/transport and access, permits, and safety/)).toBeVisible();
   await expect(page.locator('meta[name="robots"]')).toHaveAttribute("content", /noindex/);
 });
 

@@ -42,16 +42,16 @@ test.describe("homepage", () => {
 
     await expect(page).toHaveURL(/\/explore\?q=lake&category=lakes/);
     await expect(page.getByRole("heading", { level: 2, name: "Himalayan lakes" })).toBeVisible();
-    await expect(page.getByLabel("Where to?")).toHaveValue("lake");
+    // The explore filter panel carries the submitted values.
+    await expect(page.getByLabel("Keyword")).toHaveValue("lake");
+    await expect(page.getByLabel("Category")).toHaveValue("lakes");
   });
 
-  test("province and season links lead to filtered explore pages", async ({ page }) => {
+  test("province and season links lead to their discovery pages", async ({ page }) => {
     await page.goto("/");
     await page.locator("#provinces").getByRole("link", { name: "Karnali" }).click();
-    await expect(page).toHaveURL(/\/explore\?region=karnali$/);
-    await expect(
-      page.getByRole("navigation", { name: "Filter by province" }).getByRole("link", { name: "Karnali" }),
-    ).toHaveAttribute("aria-current", "true");
+    await expect(page).toHaveURL(/\/provinces\/karnali$/);
+    await expect(page.getByRole("heading", { level: 1, name: "Karnali" })).toBeVisible();
 
     await page.goto("/");
     await page.locator("#seasons").getByRole("link", { name: "Autumn" }).click();

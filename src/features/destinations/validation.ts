@@ -14,6 +14,7 @@ import {
   PublishStatus,
   Season,
 } from "@/generated/prisma/enums";
+import { ACTIVITY_SLUGS } from "@/features/destinations/activities";
 import { CATEGORY_SLUGS } from "@/features/experiences/categories";
 import { PROVINCE_SLUGS } from "@/features/regions/provinces";
 
@@ -102,6 +103,13 @@ export const destinationInputSchema = z
       .refine(uniqueItems, "Seasons must be unique")
       .default([]),
     bestSeasonNotes: z.string().trim().max(500).optional(),
+    accessInfo: z.string().trim().max(3000).optional(),
+    safetyInfo: z.string().trim().max(3000).optional(),
+    activitySlugs: z
+      .array(z.enum(ACTIVITY_SLUGS))
+      .max(12)
+      .refine(uniqueItems, "Activities must be unique")
+      .default([]),
     practicalInfo: z
       .object({
         status: z.enum(InfoStatus),
@@ -114,6 +122,18 @@ export const destinationInputSchema = z
 
     /** Ordered; the first is the cover. */
     images: z.array(imageSchema).max(12).default([]),
+    sources: z
+      .array(
+        z.object({
+          title: z.string().trim().min(2).max(200),
+          url: z.url({ protocol: /^https$/ }),
+          publisher: z.string().trim().max(120).optional(),
+          accessedAt: z.date().optional(),
+        }),
+      )
+      .max(20)
+      .refine((s) => uniqueItems(s.map((x) => x.url)), "Source URLs must be unique")
+      .default([]),
   })
   .refine((d) => d.status !== "PUBLISHED" || d.publishedAt, {
     message: "Published destinations need a publication date",

@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/brand/logo";
-import { exploreHref } from "@/features/destinations/schemas";
+import { exploreHref, provinceHref } from "@/features/destinations/schemas";
 import { THEMES } from "@/features/experiences/themes";
 import { PROVINCES } from "@/features/regions/provinces";
 import { SEASONS } from "@/features/seasons/seasons";
@@ -12,6 +12,7 @@ const linkClass =
 
 const SITE_LINKS = [
   { label: "All destinations", href: "/explore" },
+  { label: "All provinces", href: "/provinces" },
   { label: "Off the map", href: "/#off-the-map" },
   { label: "Travel responsibly", href: "/#responsible-travel" },
   { label: "Suggest a place", href: "/contribute" },
@@ -46,7 +47,7 @@ export function SiteFooter() {
         <FooterColumn title="Provinces" className="lg:col-span-2">
           {PROVINCES.map((p) => (
             <li key={p.slug}>
-              <Link href={exploreHref({ region: p.slug })} className={linkClass}>
+              <Link href={provinceHref(p.slug)} className={linkClass}>
                 {p.name}
               </Link>
             </li>

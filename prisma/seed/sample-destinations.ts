@@ -19,6 +19,12 @@ const commonsThumb = (path: string, file: string) =>
   `https://upload.wikimedia.org/wikipedia/commons/thumb/${path}/${file}/1920px-${file}`;
 const commonsPage = (file: string) => `https://commons.wikimedia.org/wiki/File:${file}`;
 
+const wikipedia = (article: string, title: string) => ({
+  title,
+  url: `https://en.wikipedia.org/wiki/${article}`,
+  publisher: "Wikipedia",
+});
+
 // Fixed dates keep ordering reproducible across seed runs.
 const published = (day: number) => new Date(Date.UTC(2026, 0, day));
 
@@ -46,6 +52,8 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
     seasons: ["SPRING", "AUTUMN"],
     bestSeasonNotes: PLACEHOLDER,
     practicalInfo: { status: "PLACEHOLDER" },
+    // Sources for the descriptive text only; practical figures remain placeholders.
+    sources: [wikipedia("Rara_Lake", "Rara Lake"), wikipedia("Rara_National_Park", "Rara National Park")],
     images: [
       {
         url: commonsThumb("b/bf", "Rara_Lake%2C_Mugu%2C_Nepal.jpg"),
@@ -80,6 +88,8 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
     seasons: ["AUTUMN", "WINTER", "SPRING"],
     bestSeasonNotes: PLACEHOLDER,
     practicalInfo: { status: "PLACEHOLDER" },
+    // Sources for the descriptive text only; practical figures remain placeholders.
+    sources: [wikipedia("Tansen", "Tansen"), wikipedia("Palpa_District", "Palpa District")],
     images: [
       {
         url: commonsThumb("9/9c", "Tansen%2C_Palpa%2C_Nepal.jpg"),
@@ -122,6 +132,8 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
     seasons: ["SPRING", "AUTUMN"],
     bestSeasonNotes: PLACEHOLDER,
     practicalInfo: { status: "PLACEHOLDER" },
+    // Sources for the descriptive text only; practical figures remain placeholders.
+    sources: [wikipedia("Khaptad_National_Park", "Khaptad National Park")],
     images: [
       {
         url: commonsThumb("a/ac", "Khaptad_National_Park%2C_Nepal.jpg"),
@@ -156,6 +168,8 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
     seasons: ["SPRING", "AUTUMN"],
     bestSeasonNotes: PLACEHOLDER,
     practicalInfo: { status: "PLACEHOLDER" },
+    // Sources for the descriptive text only; practical figures remain placeholders.
+    sources: [wikipedia("Tsum_Valley", "Tsum Valley")],
     images: [
       {
         url: commonsThumb("4/4b", "Tsum_Valley.jpg"),

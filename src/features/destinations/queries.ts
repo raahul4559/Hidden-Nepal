@@ -9,12 +9,14 @@ import type { ProvinceSlug } from "@/features/regions/provinces";
 import { getSeason } from "@/features/seasons/seasons";
 import { getDb } from "@/lib/db";
 
+import { getBudget, getDifficulty, PAGE_SIZE } from "./filters";
 import type { DestinationSearch } from "./schemas";
 import type {
   DestinationDetail,
   DestinationListResult,
   DestinationSummary,
   LoadResult,
+  SearchPage,
   SpotlightListResult,
 } from "./types";
 
@@ -70,11 +72,18 @@ export function toSummary(row: SummaryRow): DestinationSummary {
   };
 }
 
+/** True when the search uses filters that require verified practical info. */
+export function usesPracticalFilters(search: DestinationSearch): boolean {
+  return Boolean(search.season || search.difficulty || search.budget);
+}
+
 export function buildDestinationWhere(
   search: DestinationSearch,
 ): Prisma.DestinationWhereInput {
   const theme = search.theme ? getTheme(search.theme) : undefined;
   const season = search.season ? getSeason(search.season) : undefined;
+  const difficulty = search.difficulty ? getDifficulty(search.difficulty) : undefined;
+  const budget = search.budget ? getBudget(search.budget) : undefined;
   const and: Prisma.DestinationWhereInput[] = [];
 
   if (theme) {
@@ -86,18 +95,44 @@ export function buildDestinationWhere(
     and.push({ categories: { some: { category: { slug: search.category } } } });
   }
   if (search.region) and.push({ region: { slug: search.region } });
+  if (search.district) {
+    and.push({ district: { equals: search.district, mode: "insensitive" } });
+  }
+
+  // Practical filters never match placeholder or unverified figures.
+  if (usesPracticalFilters(search)) and.push({ practicalInfoStatus: "VERIFIED" });
   if (season) and.push({ seasons: { some: { season: season.value } } });
+  if (difficulty) and.push({ difficulty: difficulty.value });
+  if (budget) {
+    and.push({
+      currency: "NPR",
+      estimatedCostMin: { gte: budget.min, ...(budget.max !== null && { lte: budget.max }) },
+    });
+  }
+
   if (search.q) {
+    const contains = { contains: search.q, mode: "insensitive" } as const;
     and.push({
       OR: [
-        { name: { contains: search.q, mode: "insensitive" } },
-        { summary: { contains: search.q, mode: "insensitive" } },
-        { district: { contains: search.q, mode: "insensitive" } },
+        { name: contains },
+        { summary: contains },
+        { description: contains },
+        { district: contains },
+        { region: { name: contains } },
       ],
     });
   }
 
   return and.length ? { ...PUBLISHED, AND: and } : { ...PUBLISHED };
+}
+
+/** Stable ordering: a unique final key keeps pages from overlapping. */
+export function buildDestinationOrder(
+  sort: DestinationSearch["sort"],
+): Prisma.DestinationOrderByWithRelationInput[] {
+  return sort === "name"
+    ? [{ name: "asc" }, { slug: "asc" }]
+    : [{ isFeatured: "desc" }, { publishedAt: "desc" }, { name: "asc" }, { slug: "asc" }];
 }
 
 /** Runs a query with the shared "no database / failed" handling. */
@@ -127,8 +162,46 @@ export function getFeaturedDestinations(limit = 6) {
   return listDestinations("featured", { ...PUBLISHED, isFeatured: true }, limit);
 }
 
-export function searchDestinations(search: DestinationSearch, limit = 24) {
-  return listDestinations("search", buildDestinationWhere(search), limit);
+/** Paginated search for /explore and province pages. Never unbounded. */
+export function searchDestinations(
+  search: DestinationSearch,
+  pageSize = PAGE_SIZE,
+): Promise<LoadResult<SearchPage>> {
+  return load("search", async (db) => {
+    const where = buildDestinationWhere(search);
+    const requested = search.page ?? 1;
+    const [total, rows] = await db.$transaction([
+      db.destination.count({ where }),
+      db.destination.findMany({
+        where,
+        select: summarySelect,
+        orderBy: buildDestinationOrder(search.sort),
+        skip: (requested - 1) * pageSize,
+        take: pageSize,
+      }),
+    ]);
+    return {
+      destinations: rows.map(toSummary),
+      total,
+      page: requested,
+      pageCount: Math.max(1, Math.ceil(total / pageSize)),
+      pageSize,
+    };
+  });
+}
+
+/** Districts that have published destinations, optionally within a province. */
+export function getDistricts(region?: ProvinceSlug): Promise<LoadResult<{ districts: string[] }>> {
+  return load("districts", async (db) => {
+    const rows = await db.destination.findMany({
+      where: { ...PUBLISHED, district: { not: null }, ...(region && { region: { slug: region } }) },
+      select: { district: true },
+      distinct: ["district"],
+      orderBy: { district: "asc" },
+      take: 100,
+    });
+    return { districts: rows.map((r) => r.district!).filter(Boolean) };
+  });
 }
 
 export function getHiddenGems(limit = 3): Promise<SpotlightListResult> {
@@ -180,8 +253,18 @@ const detailSelect = {
   currency: true,
   costNotes: true,
   bestSeasonNotes: true,
+  accessInfo: true,
+  safetyInfo: true,
   latitude: true,
   longitude: true,
+  activities: {
+    select: { activity: { select: { slug: true, name: true } } },
+    orderBy: { position: "asc" },
+  },
+  sources: {
+    select: { title: true, url: true, publisher: true, accessedAt: true },
+    orderBy: { position: "asc" },
+  },
 } satisfies Prisma.DestinationSelect;
 
 type DetailRow = Prisma.DestinationGetPayload<{ select: typeof detailSelect }>;
@@ -208,6 +291,7 @@ export function toDetail(row: DetailRow): DestinationDetail {
     practicalInfoStatus: row.practicalInfoStatus,
     publishedAt: row.publishedAt,
     updatedAt: row.updatedAt,
+    sources: row.sources,
     practicalInfo: verified
       ? {
           verifiedAt: row.practicalInfoVerifiedAt!,
@@ -225,6 +309,9 @@ export function toDetail(row: DetailRow): DestinationDetail {
               : null,
           seasons: SEASON_ORDER.filter((s) => row.seasons.some((r) => r.season === s)),
           bestSeasonNotes: row.bestSeasonNotes,
+          accessInfo: row.accessInfo,
+          safetyInfo: row.safetyInfo,
+          activities: row.activities.map((a) => a.activity.name),
           coordinates:
             row.latitude && row.longitude
               ? { latitude: row.latitude.toNumber(), longitude: row.longitude.toNumber() }
@@ -255,4 +342,16 @@ export function getRelatedDestinations(slug: string, region: ProvinceSlug, limit
     { ...PUBLISHED, slug: { not: slug }, region: { slug: region } },
     limit,
   );
+}
+
+/** Indexable destinations for the sitemap: published and not sample content. */
+export function getSitemapDestinations(): Promise<LoadResult<{ destinations: { slug: string; updatedAt: Date }[] }>> {
+  return load("sitemap", async (db) => ({
+    destinations: await db.destination.findMany({
+      where: { ...PUBLISHED, isSample: false },
+      select: { slug: true, updatedAt: true },
+      orderBy: { slug: "asc" },
+      take: 5000,
+    }),
+  }));
 }

@@ -13,10 +13,14 @@ export async function upsertDestination(prisma: PrismaClient, input: Destination
   const d = destinationInputSchema.parse(input);
 
   return prisma.$transaction(async (tx) => {
-    const [region, categories] = await Promise.all([
+    const [region, categories, activities] = await Promise.all([
       tx.region.findUniqueOrThrow({ where: { slug: d.regionSlug }, select: { id: true } }),
       tx.category.findMany({
         where: { slug: { in: d.categorySlugs } },
+        select: { id: true, slug: true },
+      }),
+      tx.activity.findMany({
+        where: { slug: { in: d.activitySlugs } },
         select: { id: true, slug: true },
       }),
     ]);
@@ -24,6 +28,11 @@ export async function upsertDestination(prisma: PrismaClient, input: Destination
     const missing = d.categorySlugs.filter((slug) => !categoryId.has(slug));
     if (missing.length) {
       throw new Error(`Unknown categories for ${d.slug}: ${missing.join(", ")}. Seed reference data first.`);
+    }
+    const activityId = new Map(activities.map((a) => [a.slug, a.id]));
+    const missingActivities = d.activitySlugs.filter((slug) => !activityId.has(slug));
+    if (missingActivities.length) {
+      throw new Error(`Unknown activities for ${d.slug}: ${missingActivities.join(", ")}. Seed reference data first.`);
     }
 
     const fields = {
@@ -47,6 +56,8 @@ export async function upsertDestination(prisma: PrismaClient, input: Destination
       difficulty: d.difficulty ?? null,
       suggestedDays: d.suggestedDays ?? null,
       bestSeasonNotes: d.bestSeasonNotes ?? null,
+      accessInfo: d.accessInfo ?? null,
+      safetyInfo: d.safetyInfo ?? null,
       practicalInfoStatus: d.practicalInfo.status,
       practicalInfoVerifiedAt: d.practicalInfo.verifiedAt ?? null,
     };
@@ -63,6 +74,8 @@ export async function upsertDestination(prisma: PrismaClient, input: Destination
     await tx.destinationCategory.deleteMany({ where: { destinationId } });
     await tx.destinationSeason.deleteMany({ where: { destinationId } });
     await tx.destinationImage.deleteMany({ where: { destinationId } });
+    await tx.destinationActivity.deleteMany({ where: { destinationId } });
+    await tx.destinationSource.deleteMany({ where: { destinationId } });
 
     await tx.destinationCategory.createMany({
       data: d.categorySlugs.map((slug, position) => ({
@@ -79,6 +92,21 @@ export async function upsertDestination(prisma: PrismaClient, input: Destination
     if (d.images.length) {
       await tx.destinationImage.createMany({
         data: d.images.map((image, position) => ({ destinationId, position, ...image })),
+      });
+    }
+
+    if (d.activitySlugs.length) {
+      await tx.destinationActivity.createMany({
+        data: d.activitySlugs.map((slug, position) => ({
+          destinationId,
+          activityId: activityId.get(slug)!,
+          position,
+        })),
+      });
+    }
+    if (d.sources.length) {
+      await tx.destinationSource.createMany({
+        data: d.sources.map((source, position) => ({ destinationId, position, ...source })),
       });
     }
 

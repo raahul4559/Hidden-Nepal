@@ -23,6 +23,8 @@ Region 1 ── * Destination * ── * Category        via DestinationCategory
 | `DestinationCategory` | Destination ↔ category; lowest `position` is primary | PK `(destinationId, categoryId)` |
 | `DestinationImage` | Gallery with attribution; `position 0` is the cover | unique `(destinationId, position)` |
 | `DestinationSeason` | Best seasons (`SPRING`, `MONSOON`, `AUTUMN`, `WINTER`) | PK `(destinationId, season)` |
+| `Activity` / `DestinationActivity` | Things to do; shown only when practical info is `VERIFIED` | slug format; PK `(destinationId, activityId)` |
+| `DestinationSource` | References for the published text | https only; unique `(destinationId, url)` |
 | `PlaceSubmission` | Community suggestions from `/contribute`, moderated (`PENDING` → `APPROVED`/`REJECTED`/`SPAM`) | consent must be true; lowercase email; length limits; reviewed ⇒ `reviewedAt` |
 
 `Destination.isFeatured` drives the homepage "Featured" grid and
@@ -48,7 +50,10 @@ both; neither implies the content is verified.
 | `Destination(regionId, status)` | Explore → province filter |
 | `DestinationCategory(categoryId)` | Explore → category filter |
 | `DestinationSeason(season)` | Explore → season filter |
-| `Destination(difficulty)` | Future difficulty filter |
+| `Destination(difficulty)` | Explore → difficulty filter |
+| `Destination(status, name)` | Explore → A–Z sort |
+| `Destination(regionId, district)` | Explore → district filter |
+| `Destination(status, practicalInfoStatus, estimatedCostMin)` | Explore → verified-only budget filter |
 | Unique `slug` on Destination, Category, Region | Lookups by URL |
 
 Text search currently uses `ILIKE` (`contains` + `insensitive`). With more
@@ -78,7 +83,8 @@ seasons must be known and unique, and sample data must be marked
 ### Trustworthiness of practical details
 
 `Destination.practicalInfoStatus` covers cost, coordinates, elevation,
-difficulty, suggested days and seasons:
+difficulty, suggested days, seasons, activities, access (`accessInfo`) and
+safety (`safetyInfo`):
 
 - `PLACEHOLDER`: invented for development. Seed samples always use this.
 - `UNVERIFIED`: sourced but not checked. This is the default for new rows.

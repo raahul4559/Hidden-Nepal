@@ -1,6 +1,6 @@
 import { describe, expect, it } from "vitest";
 
-import { buildDestinationWhere, toDetail, toSummary } from "./queries";
+import { buildDestinationOrder, buildDestinationWhere, toDetail, toSummary } from "./queries";
 
 describe("buildDestinationWhere", () => {
   it("only ever returns published destinations", () => {
@@ -25,16 +25,48 @@ describe("buildDestinationWhere", () => {
     ]);
   });
 
-  it("maps season slugs to the database enum", () => {
+  it("only matches verified practical info for season, difficulty and budget", () => {
     expect(buildDestinationWhere({ season: "autumn" }).AND).toEqual([
+      { practicalInfoStatus: "VERIFIED" },
       { seasons: { some: { season: "AUTUMN" } } },
+    ]);
+    expect(buildDestinationWhere({ difficulty: "easy", budget: "high" }).AND).toEqual([
+      { practicalInfoStatus: "VERIFIED" },
+      { difficulty: "EASY" },
+      { currency: "NPR", estimatedCostMin: { gte: 50_001 } },
+    ]);
+    expect(buildDestinationWhere({ budget: "mid" }).AND).toContainEqual({
+      currency: "NPR",
+      estimatedCostMin: { gte: 15_000, lte: 50_000 },
+    });
+  });
+
+  it("does not require verification for descriptive filters", () => {
+    expect(JSON.stringify(buildDestinationWhere({ theme: "food", district: "Palpa", q: "x" }))).not.toContain(
+      "practicalInfoStatus",
+    );
+  });
+
+  it("matches districts case-insensitively", () => {
+    expect(buildDestinationWhere({ district: "mugu" }).AND).toEqual([
+      { district: { equals: "mugu", mode: "insensitive" } },
     ]);
   });
 
-  it("searches name, summary and district case-insensitively", () => {
+  it("searches name, summary, description, district and province", () => {
     const [clause] = buildDestinationWhere({ q: "rara" }).AND as { OR: unknown[] }[];
-    expect(clause.OR).toHaveLength(3);
+    expect(clause.OR).toHaveLength(5);
     expect(clause.OR[0]).toEqual({ name: { contains: "rara", mode: "insensitive" } });
+    expect(clause.OR[4]).toEqual({ region: { name: { contains: "rara", mode: "insensitive" } } });
+  });
+});
+
+describe("buildDestinationOrder", () => {
+  it("defaults to featured first and always ends on a unique key", () => {
+    const order = buildDestinationOrder(undefined);
+    expect(order[0]).toEqual({ isFeatured: "desc" });
+    expect(order.at(-1)).toEqual({ slug: "asc" });
+    expect(buildDestinationOrder("name")).toEqual([{ name: "asc" }, { slug: "asc" }]);
   });
 });
 
@@ -99,6 +131,10 @@ describe("toDetail", () => {
     currency: "NPR" as const,
     costNotes: null,
     bestSeasonNotes: null,
+    accessInfo: "By road then on foot.",
+    safetyInfo: null,
+    activities: [{ activity: { slug: "hiking", name: "Hiking" } }],
+    sources: [{ title: "Source", url: "https://example.org", publisher: null, accessedAt: null }],
     latitude: new Decimal(29.53),
     longitude: new Decimal(82.08),
   } as unknown as Parameters<typeof toDetail>[0];
@@ -111,10 +147,16 @@ describe("toDetail", () => {
       seasons: ["SPRING", "AUTUMN"],
       cost: { min: 100, max: 200, currency: "NPR" },
       coordinates: { latitude: 29.53, longitude: 82.08 },
+      accessInfo: "By road then on foot.",
+      activities: ["Hiking"],
     });
+    expect(detail.sources).toHaveLength(1);
   });
 
   it.each(["PLACEHOLDER", "UNVERIFIED"] as const)("withholds %s practical info entirely", (status) => {
-    expect(toDetail({ ...row, practicalInfoStatus: status }).practicalInfo).toBeNull();
+    const detail = toDetail({ ...row, practicalInfoStatus: status });
+    expect(detail.practicalInfo).toBeNull();
+    // Sources describe the text, so they are shown regardless.
+    expect(detail.sources).toHaveLength(1);
   });
 });

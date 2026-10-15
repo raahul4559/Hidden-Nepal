@@ -140,10 +140,23 @@ The first Playwright run needs a browser: `npx playwright install chromium`.
 | Route | What it shows |
 | --- | --- |
 | `/` | Hero search, 5 experiences, featured (DB), Off the map (DB), provinces with live counts, seasons, responsible travel, community CTA |
-| `/explore` | Search plus `q`, `theme`, `category`, `region` and `season` filters (all in the URL) |
-| `/destinations/[slug]` | Published destination; practical details only when `VERIFIED` |
+| `/explore` | Server-side search, filters and pagination. Params: `q`, `theme`, `category`, `region`, `district`, `season`, `difficulty`, `budget`, `sort` (`featured`/`name`), `page`. Invalid values are ignored. |
+| `/provinces`, `/provinces/[slug]` | All seven provinces; each prerendered, with its published destinations, filters and pagination |
+| `/sitemap.xml`, `/robots.txt` | Sitemap of static routes, provinces and published non-sample destinations (read at request time) |
+| `/destinations/[slug]` | Published destination: gallery, description, sources, related places. Practical details (difficulty, budget, seasons, activities, access, safety, coordinates) only when `VERIFIED` |
 | `/contribute` | Place suggestion form, stored as `PlaceSubmission` (status `PENDING`) |
 | `/credits` | Attribution for bundled photography |
+
+**Verified-only filters.** Season, difficulty and budget filters only match
+destinations whose `practicalInfoStatus` is `VERIFIED`. Placeholder or
+unverified figures are never used to filter or rank. Budget bands use the
+per-person starting cost in NPR.
+
+**SEO.** Set `SITE_URL` (or deploy on Vercel) so canonical URLs, Open Graph
+and the sitemap use the right origin. Keyword searches and sample
+destinations are `noindex`. Unknown destination or province URLs render
+not-found pages with `noindex`; Next.js keeps status 200 once streaming has
+started.
 
 Experiences: the homepage shows five themes (Nature, Culture, Adventure,
 Villages, Food). Each groups one or more of the seven database categories
@@ -232,6 +245,9 @@ is credited where it appears, and is listed on `/credits`. When adding images:
 - Phase 2: PostgreSQL schema, migrations, validated idempotent seed.
 - Phase 3: Production homepage, destination detail pages, explore filters
   (experience, province, season) and community place suggestions.
+- Phase 4: Discovery engine: paginated, validated explore; province pages;
+  verified-only practical filters; activities, access, safety and sources on
+  detail pages; canonical URLs, sitemap and robots.txt.
 
-Still to come: admin and moderation (Chunk 4), authentication (Auth.js),
-saved places, trips and guides.
+Still to come: authentication (Auth.js) and saved destinations, admin and
+moderation, trips and guides.

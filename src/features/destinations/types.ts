@@ -49,6 +49,9 @@ export type VerifiedPracticalInfo = {
   cost: { min: number; max: number; currency: Currency; notes: string | null } | null;
   seasons: Season[];
   bestSeasonNotes: string | null;
+  accessInfo: string | null;
+  safetyInfo: string | null;
+  activities: string[];
   coordinates: { latitude: number; longitude: number } | null;
 };
 
@@ -57,6 +60,8 @@ export type DestinationDetail = Omit<DestinationSummary, "elevationM" | "coverIm
   categories: CategorySlug[];
   images: DestinationImageView[];
   practicalInfo: VerifiedPracticalInfo | null;
+  /** References for the published text, shown regardless of verification. */
+  sources: { title: string; url: string; publisher: string | null; accessedAt: Date | null }[];
   publishedAt: Date | null;
   updatedAt: Date;
 };
@@ -71,4 +76,13 @@ export type LoadResult<T> =
   | { status: "error" };
 
 export type DestinationListResult = LoadResult<{ destinations: DestinationSummary[] }>;
+
+export type SearchPage = {
+  destinations: DestinationSummary[];
+  total: number;
+  /** The requested page; may exceed pageCount when the URL asks for too much. */
+  page: number;
+  pageCount: number;
+  pageSize: number;
+};
 export type SpotlightListResult = LoadResult<{ destinations: DestinationSpotlight[] }>;

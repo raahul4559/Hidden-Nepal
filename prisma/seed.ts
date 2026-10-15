@@ -23,7 +23,7 @@ const prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString }) })
 seedDatabase(prisma, resolveSeedOptions(process.env))
   .then((result) => {
     console.log(
-      `Seeded ${result.regions} provinces, ${result.categories} categories, ` +
+      `Seeded ${result.regions} provinces, ${result.categories} categories, ${result.activities} activities, ` +
         `${result.sampleDestinations} sample destinations (placeholder practical info).`,
     );
   })

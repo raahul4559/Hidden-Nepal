@@ -1,5 +1,7 @@
 import {
+  BookOpen,
   CalendarRange,
+  ExternalLink,
   ChevronRight,
   Clock,
   FlaskConical,
@@ -27,7 +29,7 @@ import {
   toParagraphs,
 } from "../format";
 import { getRelatedDestinations } from "../queries";
-import { exploreHref } from "../schemas";
+import { exploreHref, provinceHref } from "../schemas";
 import type { DestinationDetail as Detail, VerifiedPracticalInfo } from "../types";
 import { DestinationResults, DestinationResultsSkeleton } from "./destination-results";
 
@@ -66,7 +68,7 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
               <li aria-hidden><ChevronRight className="size-3.5" /></li>
               <li>
                 <Link
-                  href={exploreHref({ region: destination.region.slug })}
+                  href={provinceHref(destination.region.slug)}
                   className="rounded-sm hover:text-ivory hover:underline"
                 >
                   {destination.region.name}
@@ -126,6 +128,8 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
             )}
           </div>
 
+          <PlanYourVisit info={destination.practicalInfo} />
+
           {gallery.length ? (
             <section aria-labelledby="gallery-title" className="mt-14">
               <h2 id="gallery-title" className="font-serif text-2xl">Gallery</h2>
@@ -158,6 +162,8 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
               </ul>
             </section>
           ) : null}
+
+          <Sources sources={destination.sources} />
         </div>
 
         <aside aria-labelledby="practical-title" className="lg:col-span-5">
@@ -168,11 +174,12 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
             ) : (
               <UnverifiedPracticalInfo />
             )}
-            {destination.publishedAt ? (
-              <p className="mt-6 border-t border-border pt-4 text-xs text-muted-foreground">
-                Last updated {formatDate(destination.updatedAt)}
-              </p>
-            ) : null}
+            <p className="mt-6 border-t border-border pt-4 text-xs text-muted-foreground">
+              {destination.practicalInfo
+                ? `Last verified ${formatDate(destination.practicalInfo.verifiedAt)}`
+                : "Practical details not yet verified"}
+              {" · "}Page updated {formatDate(destination.updatedAt)}
+            </p>
           </div>
         </aside>
       </div>
@@ -187,7 +194,7 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
               More in {destination.region.name}
             </h2>
             <Link
-              href={exploreHref({ region: destination.region.slug })}
+              href={provinceHref(destination.region.slug)}
               className="rounded-sm font-semibold text-himalaya hover:underline"
             >
               All of {destination.region.name}
@@ -238,8 +245,8 @@ function UnverifiedPracticalInfo() {
     <div className="mt-5 flex gap-3 rounded-md bg-ivory p-4">
       <ShieldQuestion aria-hidden className="mt-0.5 size-5 shrink-0 text-himalaya" />
       <p className="text-sm leading-relaxed text-muted-foreground">
-        We haven’t verified costs, access, elevation or the best seasons for this place
-        yet, so we’re not showing them. Check with local sources before you travel.
+        Costs, difficulty, elevation, best seasons and coordinates for this place haven’t
+        been verified yet, so we’re not showing them. Check with local sources before you travel.
       </p>
     </div>
   );
@@ -304,7 +311,89 @@ function PracticalInfo({ info }: { info: VerifiedPracticalInfo }) {
           </div>
         ))}
       </dl>
-      <p className="mt-4 text-xs text-muted-foreground">Verified {formatDate(info.verifiedAt)}.</p>
     </>
+  );
+}
+
+function PlanYourVisit({ info }: { info: VerifiedPracticalInfo | null }) {
+  return (
+    <section aria-labelledby="plan-title" className="mt-14">
+      <h2 id="plan-title" className="font-serif text-2xl sm:text-3xl">Plan your visit</h2>
+      {info ? (
+        <div className="mt-6 space-y-8">
+          <PlanBlock title="Activities">
+            {info.activities.length ? (
+              <ul className="flex flex-wrap gap-2">
+                {info.activities.map((a) => (
+                  <li key={a} className="rounded-full bg-ivory-deep px-3 py-1 text-sm">{a}</li>
+                ))}
+              </ul>
+            ) : null}
+          </PlanBlock>
+          <PlanBlock title="Getting there">
+            {toParagraphs(info.accessInfo).map((p, i) => <p key={i}>{p}</p>)}
+          </PlanBlock>
+          <PlanBlock title="Safety and preparation">
+            {toParagraphs(info.safetyInfo).map((p, i) => <p key={i}>{p}</p>)}
+          </PlanBlock>
+        </div>
+      ) : (
+        <div className="mt-5 flex gap-3 rounded-md border border-border bg-white p-5">
+          <ShieldQuestion aria-hidden className="mt-0.5 size-5 shrink-0 text-himalaya" />
+          <p className="leading-relaxed text-muted-foreground">
+            Activities, transport and access, permits, and safety and preparation advice for this
+            place haven’t been verified yet, so we don’t show them. Conditions in Nepal change with
+            the season; check with local authorities and operators before you travel.
+          </p>
+        </div>
+      )}
+    </section>
+  );
+}
+
+/** A verified section; says so plainly when there's nothing verified to show. */
+function PlanBlock({ title, children }: { title: string; children: React.ReactNode }) {
+  const items = Array.isArray(children) ? children.filter(Boolean) : children;
+  const empty = Array.isArray(items) ? items.length === 0 : !items;
+  return (
+    <div>
+      <h3 className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">{title}</h3>
+      <div className="mt-3 space-y-3 leading-relaxed">
+        {empty ? <p className="text-muted-foreground">No verified information yet.</p> : items}
+      </div>
+    </div>
+  );
+}
+
+function Sources({ sources }: { sources: Detail["sources"] }) {
+  if (!sources.length) return null;
+  return (
+    <section aria-labelledby="sources-title" className="mt-14 border-t border-border pt-8">
+      <h2 id="sources-title" className="flex items-center gap-2 font-serif text-2xl">
+        <BookOpen aria-hidden className="size-5 text-himalaya" />
+        Sources
+      </h2>
+      <p className="mt-2 text-sm text-muted-foreground">References for the description above.</p>
+      <ul className="mt-4 space-y-2">
+        {sources.map((source) => (
+          <li key={source.url} className="text-sm">
+            <a
+              href={source.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 font-medium text-himalaya underline-offset-2 hover:underline"
+            >
+              {source.title}
+              <ExternalLink aria-hidden className="size-3.5" />
+              <span className="sr-only"> (opens in a new tab)</span>
+            </a>
+            {source.publisher ? <span className="text-muted-foreground"> · {source.publisher}</span> : null}
+            {source.accessedAt ? (
+              <span className="text-muted-foreground"> · accessed {formatDate(source.accessedAt)}</span>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
