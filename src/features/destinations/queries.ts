@@ -1,67 +1,60 @@
 import "server-only";
 
-import type {
-  ExperienceCategory,
-  Prisma,
-} from "@/generated/prisma/client";
-import type { CategorySlug } from "@/features/experiences/categories";
+import type { Prisma } from "@/generated/prisma/client";
+import { getCategory, type CategorySlug } from "@/features/experiences/categories";
 import type { ProvinceSlug } from "@/features/regions/provinces";
 import { getDb } from "@/lib/db";
 
 import type { DestinationSearch } from "./schemas";
 import type { DestinationListResult, DestinationSummary } from "./types";
 
-const CATEGORY_TO_DB = {
-  waterfalls: "WATERFALL",
-  villages: "VILLAGE",
-  lakes: "LAKE",
-  treks: "TREK",
-  heritage: "HERITAGE",
-  food: "FOOD",
-  culture: "CULTURE",
-} as const satisfies Record<CategorySlug, ExperienceCategory>;
-
-const CATEGORY_FROM_DB = Object.fromEntries(
-  Object.entries(CATEGORY_TO_DB).map(([slug, value]) => [value, slug]),
-) as Record<ExperienceCategory, CategorySlug>;
-
 const summarySelect = {
   slug: true,
   name: true,
   summary: true,
-  category: true,
   district: true,
   elevationM: true,
-  coverImageUrl: true,
-  coverImageAlt: true,
-  coverImageCredit: true,
-  coverImageLicense: true,
-  coverImageSourceUrl: true,
+  isSample: true,
+  practicalInfoStatus: true,
   region: { select: { slug: true, name: true } },
+  categories: {
+    select: { category: { select: { slug: true } } },
+    orderBy: { position: "asc" },
+    take: 1,
+  },
+  images: {
+    select: { url: true, alt: true, credit: true, license: true, sourceUrl: true },
+    orderBy: { position: "asc" },
+    take: 1,
+  },
 } satisfies Prisma.DestinationSelect;
 
-type SummaryRow = Prisma.DestinationGetPayload<{
-  select: typeof summarySelect;
-}>;
+type SummaryRow = Prisma.DestinationGetPayload<{ select: typeof summarySelect }>;
 
-function toSummary(row: SummaryRow): DestinationSummary {
+export function toSummary(row: SummaryRow): DestinationSummary {
+  const primary = row.categories[0]?.category.slug;
+  const cover = row.images[0];
   return {
     slug: row.slug,
     name: row.name,
     summary: row.summary,
-    category: CATEGORY_FROM_DB[row.category],
+    // Ignore categories the UI doesn't know rather than crash.
+    category: primary && getCategory(primary) ? (primary as CategorySlug) : null,
     region: { slug: row.region.slug as ProvinceSlug, name: row.region.name },
     district: row.district,
-    elevationM: row.elevationM,
-    coverImage: row.coverImageUrl
+    // Unverified practical details are never shown as fact.
+    elevationM: row.practicalInfoStatus === "VERIFIED" ? row.elevationM : null,
+    coverImage: cover
       ? {
-          url: row.coverImageUrl,
-          alt: row.coverImageAlt ?? "",
-          credit: row.coverImageCredit,
-          license: row.coverImageLicense,
-          sourceUrl: row.coverImageSourceUrl,
+          url: cover.url,
+          alt: cover.alt,
+          credit: cover.credit,
+          license: cover.license,
+          sourceUrl: cover.sourceUrl,
         }
       : null,
+    isSample: row.isSample,
+    practicalInfoStatus: row.practicalInfoStatus,
   };
 }
 
@@ -70,7 +63,9 @@ export function buildDestinationWhere(
 ): Prisma.DestinationWhereInput {
   return {
     status: "PUBLISHED",
-    ...(search.category && { category: CATEGORY_TO_DB[search.category] }),
+    ...(search.category && {
+      categories: { some: { category: { slug: search.category } } },
+    }),
     ...(search.region && { region: { slug: search.region } }),
     ...(search.q && {
       OR: [

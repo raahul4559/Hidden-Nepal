@@ -22,50 +22,116 @@ separate API server.
 
 ## Getting started
 
-Requirements: Node.js `^20.19 || ^22.12 || >=24`, npm. PostgreSQL is optional
-for UI work.
+Requirements: Node.js `^20.19 || ^22.12 || >=24`, npm, and PostgreSQL 14+
+(optional for UI-only work).
 
 ```bash
 npm install            # also runs `prisma generate`
-cp .env.example .env
+cp .env.example .env   # then edit DATABASE_URL
 npm run dev            # http://localhost:3000
 ```
 
-Without `DATABASE_URL`, the site runs fully. Destination sections show an
+Without `DATABASE_URL`, the site still runs. Destination sections show an
 empty state, plus a "no database connected" hint in development.
 
-### Connecting a database
+## Database
 
-1. Create a PostgreSQL database, for example with Homebrew:
-   `brew services start postgresql@17 && createdb hidden_nepal`.
-2. Set `DATABASE_URL` in `.env`, e.g.
-   `postgresql://<user>@localhost:5432/hidden_nepal`.
-3. Apply migrations and seed reference data:
+### 1. PostgreSQL
 
-   ```bash
-   npm run db:migrate   # prisma migrate dev
-   npm run db:seed      # seeds Nepal's 7 provinces only
-   ```
+Use a database dedicated to Hidden Nepal. **Do not share a database with
+another application:** Prisma tracks history in `_prisma_migrations`, and
+foreign tables such as another app's `User` would collide.
 
-The seed intentionally creates **no destinations**. Destinations must come from
-verified research, not placeholders.
+**Local (Homebrew):**
+
+```bash
+brew services start postgresql@17
+createdb hidden_nepal
+createdb hidden_nepal_test   # only for integration tests
+```
+
+**Hosted (e.g. Neon):** create a separate database or branch for this project,
+and copy its connection string from the provider's dashboard.
+
+### 2. `DATABASE_URL`
+
+Set it in `.env`. The file is git-ignored; never commit credentials.
+
+```bash
+DATABASE_URL="postgresql://USER:PASSWORD@HOST:5432/hidden_nepal"
+# Hosted providers usually need TLS:
+DATABASE_URL="postgresql://USER:PASSWORD@HOST/DB?sslmode=require"
+```
+
+- The scheme must be `postgresql://` or `postgres://`. Python-style URLs such
+  as `postgresql+psycopg://` are rejected with an explanatory error.
+- For Neon, use the **direct** host (no `-pooler`) for migrations. Neon
+  recommends direct connections for schema changes.
+- The URL is read only on the server (`src/lib/env.ts` and `src/lib/db.ts`,
+  both `server-only`). It is never sent to the browser, and there are no
+  `NEXT_PUBLIC_` variables.
+
+### 3. Generate the client, migrate, seed
+
+```bash
+npm run db:generate    # prisma generate (also runs on install and build)
+npm run db:migrate     # development: apply migrations, create new ones from schema changes
+npm run db:seed        # provinces, categories and 4 sample destinations
+```
+
+In production or CI, apply committed migrations without creating new ones:
+
+```bash
+npm run db:deploy      # prisma migrate deploy
+SEED_SAMPLE_DATA=false npm run db:seed   # reference data only
+```
+
+The seed is **idempotent**. Rows are upserted by slug and a destination's
+categories, images and seasons are replaced, so re-running never duplicates.
+
+**Sample destinations** (Rara Lake, Tansen, Khaptad National Park, Tsum Valley)
+are for development only:
+
+- Their descriptions reflect widely documented facts.
+- Every practical figure (cost, coordinates, elevation, difficulty, days,
+  seasons) is a **development placeholder**.
+- They're stored as `isSample = true` and `practicalInfoStatus = PLACEHOLDER`.
+  The UI badges them as "Sample content" and hides unverified practical details.
+- The seed refuses to load samples when `NODE_ENV=production`.
+
+Inspect data with `npm run db:studio`.
+
+### Schema changes
+
+1. Edit `prisma/schema.prisma`.
+2. Run `npm run db:migrate -- --name describe_change`, then commit the new
+   folder under `prisma/migrations/`.
+3. Don't edit a migration once it has been applied anywhere shared. Add a new
+   one.
+
+Some invariants (slug format, coordinate and cost ranges, lowercase email) are
+database CHECK constraints written by hand in a migration. Model design, delete
+behaviour, indexes and planned models are in
+[`docs/data-model.md`](docs/data-model.md).
 
 ## Scripts
 
-| Script                | What it does                                    |
-| --------------------- | ----------------------------------------------- |
-| `npm run dev`         | Development server                              |
-| `npm run build`       | `prisma generate` + production build            |
-| `npm run start`       | Serve the production build                      |
-| `npm run lint`        | ESLint                                          |
-| `npm run typecheck`   | Generate route types and run `tsc --noEmit`     |
-| `npm test`            | Vitest unit/component tests                     |
-| `npm run test:e2e`    | Playwright (builds and serves on port 3100)     |
-| `npm run check`       | lint + typecheck + unit tests                   |
-| `npm run db:migrate`  | Create/apply migrations in development          |
-| `npm run db:deploy`   | Apply migrations in production                  |
-| `npm run db:seed`     | Seed provinces                                  |
-| `npm run db:studio`   | Prisma Studio                                   |
+| Script                     | What it does                                          |
+| -------------------------- | ----------------------------------------------------- |
+| `npm run dev`              | Development server                                    |
+| `npm run build`            | `prisma generate` + production build                  |
+| `npm run start`            | Serve the production build                            |
+| `npm run lint`             | ESLint                                                |
+| `npm run typecheck`        | Generate route types and run `tsc --noEmit`           |
+| `npm test`                 | Vitest unit tests (integration tests skip without a test DB) |
+| `npm run test:integration` | Database tests; needs `TEST_DATABASE_URL` (name ends in `_test`) |
+| `npm run test:e2e`         | Playwright (builds and serves on port 3100)           |
+| `npm run check`            | lint + typecheck + unit tests                         |
+| `npm run db:generate`      | Generate the Prisma client                            |
+| `npm run db:migrate`       | Create/apply migrations in development                |
+| `npm run db:deploy`        | Apply committed migrations (production/CI)            |
+| `npm run db:seed`          | Seed reference data (+ samples unless disabled)       |
+| `npm run db:studio`        | Prisma Studio                                         |
 
 The first Playwright run needs a browser: `npx playwright install chromium`.
 
@@ -73,9 +139,11 @@ The first Playwright run needs a browser: `npx playwright install chromium`.
 
 ```
 prisma/
-  schema.prisma          Region, Destination, enums
-  migrations/            SQL migrations
-  seed.ts                Province seed
+  schema.prisma          Data model (see docs/data-model.md)
+  migrations/            SQL migrations (incl. hand-written CHECKs)
+  seed.ts                Seed entry point
+  seed/                  Reference data, sample destinations, idempotent writer
+docs/data-model.md       Model decisions and planned models
 src/
   app/                   Routes: /, /explore, /credits, 404, error boundary
   assets/photos/         Bundled, licensed photography
@@ -87,7 +155,7 @@ src/
     brand/               Logo
   content/photos.ts      Photo registry with author/license/source
   features/
-    destinations/        Search schema, server queries, cards, result states
+    destinations/        Search + input validation, server queries, cards, states
     experiences/         Category definitions and grid
     regions/             Province definitions and grid
     home/                Hero, responsible-travel section
@@ -97,6 +165,7 @@ src/
     images.ts            Allowed remote image hosts (shared with next.config)
     site.ts              Site name, tagline, navigation
 tests/e2e/               Playwright specs
+tests/integration/       Database tests (real PostgreSQL)
 ```
 
 Conventions:
@@ -143,6 +212,8 @@ is credited where it appears, and is listed on `/credits`. When adding images:
 
 ## Roadmap
 
-This is phase 1 of 8 (foundation and design system). Destination detail pages,
-content management, authentication (Auth.js) and other features follow in
-later phases.
+- Phase 1: foundation and design system.
+- Phase 2: PostgreSQL schema, migrations, validated idempotent seed.
+
+Still to come: destination detail pages, content management, authentication
+(Auth.js), saved places, trips, guides and community submissions.

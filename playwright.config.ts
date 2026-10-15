@@ -21,7 +21,8 @@ export default defineConfig({
   webServer: {
     command: `npm run build && npm run start -- --port ${PORT}`,
     url: baseURL,
-    reuseExistingServer: !process.env.CI,
+    // Always start fresh: a stale server from an older build serves dead CSS.
+    reuseExistingServer: false,
     timeout: 180_000,
   },
 });

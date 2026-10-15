@@ -15,6 +15,8 @@ const destination: DestinationSummary = {
   district: "Test District",
   elevationM: 2990,
   coverImage: null,
+  isSample: true,
+  practicalInfoStatus: "VERIFIED",
 };
 
 describe("DestinationResults", () => {
@@ -28,6 +30,7 @@ describe("DestinationResults", () => {
     expect(screen.getByRole("heading", { name: "Test Place" })).toBeInTheDocument();
     expect(screen.getByText(/Test District, Karnali/)).toBeInTheDocument();
     expect(screen.getByText(/2,990 m/)).toBeInTheDocument();
+    expect(screen.getByText("Sample content")).toBeInTheDocument();
   });
 
   it("shows the empty state when nothing is published", () => {

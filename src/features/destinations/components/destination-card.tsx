@@ -1,4 +1,4 @@
-import { MapPin } from "lucide-react";
+import { FlaskConical, MapPin } from "lucide-react";
 
 import { PhotoCredit } from "@/components/media/photo-credit";
 import { RemoteImage } from "@/components/media/remote-image";
@@ -11,7 +11,7 @@ import type { DestinationSummary } from "../types";
  * pages arrive in a later phase, and we don't ship links to missing routes.
  */
 export function DestinationCard({ destination }: { destination: DestinationSummary }) {
-  const category = getCategory(destination.category);
+  const category = destination.category ? getCategory(destination.category) : undefined;
   const cover = destination.coverImage;
   const place = [destination.district, destination.region.name]
     .filter(Boolean)
@@ -36,9 +36,17 @@ export function DestinationCard({ destination }: { destination: DestinationSumma
         ) : null}
       </div>
       <div className="flex flex-1 flex-col p-5">
-        {category ? (
-          <p className="eyebrow text-himalaya">{category.shortLabel}</p>
-        ) : null}
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          {category ? (
+            <p className="eyebrow text-himalaya">{category.shortLabel}</p>
+          ) : null}
+          {destination.isSample ? (
+            <p className="inline-flex items-center gap-1 rounded-sm border border-gold/70 bg-gold/15 px-1.5 py-0.5 text-[0.6875rem] font-semibold text-navy">
+              <FlaskConical aria-hidden className="size-3" />
+              Sample content
+            </p>
+          ) : null}
+        </div>
         <h3 className="mt-2 font-serif text-2xl leading-tight">{destination.name}</h3>
         <p className="mt-2 flex items-center gap-1.5 text-sm text-muted-foreground">
           <MapPin aria-hidden className="size-3.5" />

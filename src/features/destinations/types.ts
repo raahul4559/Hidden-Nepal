@@ -1,5 +1,6 @@
 import type { CategorySlug } from "@/features/experiences/categories";
 import type { ProvinceSlug } from "@/features/regions/provinces";
+import type { InfoStatus } from "@/generated/prisma/enums";
 
 export type DestinationCoverImage = {
   url: string;
@@ -14,11 +15,15 @@ export type DestinationSummary = {
   slug: string;
   name: string;
   summary: string;
-  category: CategorySlug;
+  /** Primary category: the destination's lowest-position category. */
+  category: CategorySlug | null;
   region: { slug: ProvinceSlug; name: string };
   district: string | null;
+  /** Only populated when practical info is VERIFIED. */
   elevationM: number | null;
   coverImage: DestinationCoverImage | null;
+  isSample: boolean;
+  practicalInfoStatus: InfoStatus;
 };
 
 /**

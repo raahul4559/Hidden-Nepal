@@ -17,7 +17,8 @@
     "db:deploy": "prisma migrate deploy",
     "db:seed": "prisma db seed",
     "db:studio": "prisma studio",
-    "check": "npm run lint && npm run typecheck && npm run test"
+    "check": "npm run lint && npm run typecheck && npm run test",
+    "test:integration": "vitest run tests/integration"
   },
   "dependencies": {
     "@base-ui/react": "^1.9.0",

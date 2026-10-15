@@ -13,6 +13,23 @@ describe("parseServerEnv", () => {
     expect(parseServerEnv({ DATABASE_URL: url }).DATABASE_URL).toBe(url);
   });
 
+  it("explains SQLAlchemy-style driver suffixes", () => {
+    expect(() =>
+      parseServerEnv({ DATABASE_URL: "postgresql+psycopg://u:p@host/db" }),
+    ).toThrow(/\+driver/);
+  });
+
+  it("does not echo the URL (and its password) in errors", () => {
+    let message = "";
+    try {
+      parseServerEnv({ DATABASE_URL: "mysql://user:s3cret@host/db" });
+    } catch (error) {
+      message = String(error);
+    }
+    expect(message).toMatch(/postgres/);
+    expect(message).not.toContain("s3cret");
+  });
+
   it("rejects non-postgres URLs loudly", () => {
     expect(() => parseServerEnv({ DATABASE_URL: "mysql://localhost/db" })).toThrow(
       /postgres/,

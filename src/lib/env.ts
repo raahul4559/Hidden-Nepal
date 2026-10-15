@@ -11,6 +11,11 @@ const serverEnvSchema = z.object({
     .string()
     .trim()
     .min(1)
+    .refine((v) => !/^postgres(ql)?\+\w+:\/\//.test(v), {
+      // e.g. postgresql+psycopg:// from Python/SQLAlchemy examples.
+      message:
+        "DATABASE_URL has a '+driver' suffix (SQLAlchemy style). Use plain postgresql:// for Prisma",
+    })
     .refine((v) => /^postgres(ql)?:\/\//.test(v), {
       message: "DATABASE_URL must be a postgres:// or postgresql:// URL",
     })

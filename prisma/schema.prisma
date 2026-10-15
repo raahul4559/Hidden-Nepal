@@ -1,5 +1,10 @@
 // Hidden Nepal data model.
 // Docs: https://pris.ly/d/prisma-schema
+// Design notes and planned models: docs/data-model.md
+//
+// Some invariants are enforced with CHECK constraints added by hand in
+// migrations (Prisma cannot express them): slug format, coordinate and cost
+// ranges, lowercase email. See prisma/migrations/*_catalog_relations.
 
 generator client {
   provider = "prisma-client"
@@ -10,16 +15,12 @@ datasource db {
   provider = "postgresql"
 }
 
-/// Experience categories surfaced across the product. The URL-facing slugs
-/// live in src/features/experiences/categories.ts.
-enum ExperienceCategory {
-  WATERFALL
-  VILLAGE
-  LAKE
-  TREK
-  HERITAGE
-  FOOD
-  CULTURE
+// ─── Enums ──────────────────────────────────────────────────────────────────
+
+enum UserRole {
+  TRAVELER
+  EDITOR
+  ADMIN
 }
 
 enum PublishStatus {
@@ -27,6 +28,54 @@ enum PublishStatus {
   PUBLISHED
   ARCHIVED
 }
+
+enum Difficulty {
+  EASY
+  MODERATE
+  CHALLENGING
+  STRENUOUS
+}
+
+/// ISO 4217 codes the platform prices in.
+enum Currency {
+  NPR
+  USD
+}
+
+/// Nepal's four broad travel seasons.
+enum Season {
+  SPRING // roughly March–May
+  MONSOON // roughly June–August
+  AUTUMN // roughly September–November
+  WINTER // roughly December–February
+}
+
+/// How trustworthy a destination's practical details are (cost, coordinates,
+/// elevation, difficulty, seasons, suggested days). Only VERIFIED details may
+/// be presented to travellers as advice.
+enum InfoStatus {
+  PLACEHOLDER // invented for development; never show as fact
+  UNVERIFIED // sourced but not yet checked
+  VERIFIED
+}
+
+// ─── Identity ───────────────────────────────────────────────────────────────
+
+/// Core user record. Field names follow Auth.js conventions so its adapter
+/// tables (Account, Session, VerificationToken) can be added without changes.
+model User {
+  id            String    @id @default(cuid())
+  /// Stored lowercase (CHECK constraint) so uniqueness is case-insensitive.
+  email         String    @unique
+  emailVerified DateTime?
+  name          String?
+  image         String?
+  role          UserRole  @default(TRAVELER)
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+}
+
+// ─── Catalogue ──────────────────────────────────────────────────────────────
 
 /// Nepal's seven provinces. Seeded from src/features/regions/provinces.ts.
 model Region {
@@ -39,36 +88,104 @@ model Region {
   updatedAt    DateTime      @updatedAt
 }
 
+/// Experience categories. Seeded from src/features/experiences/categories.ts,
+/// which remains the source of truth for slugs used in URLs.
+model Category {
+  id           String                @id @default(cuid())
+  slug         String                @unique
+  name         String
+  description  String
+  sortOrder    Int                   @default(0)
+  destinations DestinationCategory[]
+  createdAt    DateTime              @default(now())
+  updatedAt    DateTime              @updatedAt
+}
+
 model Destination {
-  id          String             @id @default(cuid())
-  slug        String             @unique
+  id          String        @id @default(cuid())
+  slug        String        @unique
   name        String
   summary     String
   description String?
-  category    ExperienceCategory
-  status      PublishStatus      @default(DRAFT)
-  isFeatured  Boolean            @default(false)
+  status      PublishStatus @default(DRAFT)
+  isFeatured  Boolean       @default(false)
+  /// Development sample content created by the seed script.
+  isSample    Boolean       @default(false)
 
+  /// Province. Restrict: a province with destinations cannot be deleted.
   region   Region  @relation(fields: [regionId], references: [id], onDelete: Restrict)
   regionId String
   district String?
 
-  elevationM Int?
-  latitude   Decimal? @db.Decimal(9, 6)
-  longitude  Decimal? @db.Decimal(9, 6)
+  // Practical details. Trust level is recorded in practicalInfoStatus.
+  latitude         Decimal?    @db.Decimal(9, 6)
+  longitude        Decimal?    @db.Decimal(9, 6)
+  elevationM       Int?
+  /// Whole currency units per person for a typical visit.
+  estimatedCostMin Int?
+  estimatedCostMax Int?
+  currency         Currency    @default(NPR)
+  costNotes        String?
+  difficulty       Difficulty?
+  suggestedDays    Int?
+  bestSeasonNotes  String?
 
-  // Cover photo with the attribution its license requires.
-  coverImageUrl       String?
-  coverImageAlt       String?
-  coverImageCredit    String?
-  coverImageLicense   String?
-  coverImageSourceUrl String?
+  practicalInfoStatus     InfoStatus @default(UNVERIFIED)
+  practicalInfoVerifiedAt DateTime?
+
+  categories DestinationCategory[]
+  images     DestinationImage[]
+  seasons    DestinationSeason[]
 
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
   updatedAt   DateTime  @updatedAt
 
-  @@index([status, isFeatured])
-  @@index([category])
-  @@index([regionId])
+  // Homepage: published + featured, newest first.
+  @@index([status, isFeatured, publishedAt(sort: Desc)])
+  // Explore: filter by province among published.
+  @@index([regionId, status])
+  @@index([difficulty])
+}
+
+/// Many-to-many destination ↔ category. The lowest `position` is the
+/// destination's primary category.
+model DestinationCategory {
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  destinationId String
+  /// Restrict: retire a category by reassigning its destinations first.
+  category      Category    @relation(fields: [categoryId], references: [id], onDelete: Restrict)
+  categoryId    String
+  position      Int         @default(0)
+
+  @@id([destinationId, categoryId])
+  // Explore: filter by category.
+  @@index([categoryId])
+}
+
+/// Ordered gallery; position 0 is the cover. Attribution travels with the image.
+model DestinationImage {
+  id            String      @id @default(cuid())
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  destinationId String
+  url           String
+  alt           String
+  caption       String?
+  credit        String?
+  license       String?
+  sourceUrl     String?
+  position      Int         @default(0)
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+
+  @@unique([destinationId, position])
+}
+
+model DestinationSeason {
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  destinationId String
+  season        Season
+
+  @@id([destinationId, season])
+  @@index([season])
 }

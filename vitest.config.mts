@@ -15,7 +15,11 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./test/setup.ts"],
-    include: ["src/**/*.test.{ts,tsx}"],
+    include: [
+      "src/**/*.test.{ts,tsx}",
+      "prisma/**/*.test.ts",
+      "tests/integration/**/*.test.ts",
+    ],
     css: false,
   },
 });
