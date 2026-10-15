@@ -17,8 +17,11 @@ datasource db {
 
 // ─── Enums ──────────────────────────────────────────────────────────────────
 
+/// Never accepted from the browser. New accounts are always USER; ADMIN is
+/// granted only by `npm run admin:grant` or by another admin.
 enum UserRole {
-  TRAVELER
+  USER
+  /// Reserved for the editorial workflow; no extra permissions yet.
   EDITOR
   ADMIN
 }
@@ -71,17 +74,47 @@ enum SubmissionStatus {
 /// Core user record. Field names follow Auth.js conventions so its adapter
 /// tables (Account, Session, VerificationToken) can be added without changes.
 model User {
-  id            String    @id @default(cuid())
+  id             String    @id @default(cuid())
   /// Stored lowercase (CHECK constraint) so uniqueness is case-insensitive.
-  email         String    @unique
-  emailVerified DateTime?
-  name          String?
-  image         String?
-  role          UserRole  @default(TRAVELER)
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  email          String    @unique
+  emailVerified  DateTime?
+  name           String?
+  image          String?
+  role           UserRole  @default(USER)
+  /// scrypt hash (src/features/auth/password.ts). Null for accounts that
+  /// cannot sign in with a password. Never selected outside the auth module.
+  passwordHash   String?
+  /// Embedded in every session token; incrementing it revokes all sessions.
+  sessionVersion Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
 
-  placeSubmissions PlaceSubmission[]
+  placeSubmissions  PlaceSubmission[]
+  savedDestinations SavedDestination[]
+}
+
+/// A user's favourite destination. The composite key prevents duplicates.
+model SavedDestination {
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId        String
+  destination   Destination @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  destinationId String
+  createdAt     DateTime    @default(now())
+
+  @@id([userId, destinationId])
+  // Profile: a user's saves, newest first.
+  @@index([userId, createdAt(sort: Desc)])
+  @@index([destinationId])
+}
+
+/// Fixed-window counters for rate-limited endpoints (sign-in, registration).
+/// Keys are SHA-256 hashes, so no email or IP address is stored.
+model RateLimit {
+  key     String   @id
+  count   Int
+  resetAt DateTime
+
+  @@index([resetAt])
 }
 
 // ─── Catalogue ──────────────────────────────────────────────────────────────
@@ -155,6 +188,7 @@ model Destination {
   seasons    DestinationSeason[]
   activities DestinationActivity[]
   sources    DestinationSource[]
+  savedBy    SavedDestination[]
 
   publishedAt DateTime?
   createdAt   DateTime  @default(now())

@@ -18,6 +18,7 @@ separate API server.
 | Styling    | Tailwind CSS v4, shadcn/ui (Base UI), Lucide icons       |
 | Data       | PostgreSQL via Prisma 7 (`@prisma/adapter-pg`)           |
 | Validation | Zod                                                      |
+| Auth       | Auth.js v5 (Credentials, encrypted JWT cookie), scrypt   |
 | Tests      | Vitest + Testing Library (unit), Playwright (end-to-end) |
 
 ## Getting started
@@ -27,7 +28,7 @@ Requirements: Node.js `^20.19 || ^22.12 || >=24`, npm, and PostgreSQL 14+
 
 ```bash
 npm install            # also runs `prisma generate`
-cp .env.example .env   # then edit DATABASE_URL
+cp .env.example .env   # then edit DATABASE_URL and AUTH_SECRET
 npm run dev            # http://localhost:3000
 ```
 
@@ -132,6 +133,7 @@ behaviour, indexes and planned models are in
 | `npm run db:deploy`        | Apply committed migrations (production/CI)            |
 | `npm run db:seed`          | Seed reference data (+ samples unless disabled)       |
 | `npm run db:studio`        | Prisma Studio                                         |
+| `npm run admin:grant -- <email> [--revoke]` | Make an existing account ADMIN (or revert to USER) |
 
 The first Playwright run needs a browser: `npx playwright install chromium`.
 
@@ -146,6 +148,12 @@ The first Playwright run needs a browser: `npx playwright install chromium`.
 | `/destinations/[slug]` | Published destination: gallery, description, sources, related places. Practical details (difficulty, budget, seasons, activities, access, safety, coordinates) only when `VERIFIED` |
 | `/contribute` | Place suggestion form, stored as `PlaceSubmission` (status `PENDING`) |
 | `/credits` | Attribution for bundled photography |
+| `/login`, `/register` | Sign in and create an account. `?next=` returns to a same-site path only |
+| `/account` | Profile, saved destinations, sign out (this device or everywhere). Signed-in users only |
+| `/admin` | Role management. Admins only; everyone else gets a 404 |
+| `/api/auth/*` | Auth.js endpoints (CSRF-protected) |
+| `/api/me/saved-destinations` | `GET` list, `POST`/`DELETE` `{ slug }`. Session user only |
+| `/api/admin/users/[id]/role` | `PATCH { role }`. Admins only; not their own role |
 
 **Verified-only filters.** Season, difficulty and budget filters only match
 destinations whose `practicalInfoStatus` is `VERIFIED`. Placeholder or
@@ -161,6 +169,81 @@ started.
 Experiences: the homepage shows five themes (Nature, Culture, Adventure,
 Villages, Food). Each groups one or more of the seven database categories
 (`src/features/experiences/themes.ts`).
+
+## Authentication and authorization
+
+Email + password accounts with [Auth.js](https://authjs.dev) v5 (Credentials
+provider). There is no separate auth service.
+
+### Setup
+
+1. Set `AUTH_SECRET` in `.env` (≥ 32 characters): `npx auth secret` or
+   `openssl rand -base64 33`. It encrypts session cookies; rotating it signs
+   everyone out. The app refuses a shorter value.
+2. Apply migrations: `npm run db:migrate` (development) or `npm run db:deploy`.
+3. Production outside Vercel: set `AUTH_URL` to the public origin (or
+   `AUTH_TRUST_HOST=true` behind a proxy that sets the host headers).
+   Serve over HTTPS so cookies get the `Secure` flag and `__Secure-` prefix.
+
+### First administrator
+
+New accounts are always `USER`. Nothing a browser submits can set a role. To
+create the first admin:
+
+```bash
+# 1. Register normally at /register.
+# 2. With DATABASE_URL pointing at the target database:
+npm run admin:grant -- you@example.com
+```
+
+Only someone with database credentials can run this. After that, admins can
+change other users' roles at `/admin`, but never their own, so the last admin
+can't lock themselves out. `--revoke` sets the account back to `USER` and
+signs it out everywhere.
+
+### How it works
+
+| Concern | Approach |
+| --- | --- |
+| Passwords | scrypt (Node `crypto`, N=2¹⁷, r=8, p=1, random 16-byte salt) in `src/features/auth/password.ts`. A DB CHECK rejects anything not in the `scrypt$…` format. 10–128 characters, no composition rules. |
+| Sessions | Encrypted JWT cookie (Auth.js), 7 days, refreshed daily. HttpOnly, SameSite=Lax, Secure on HTTPS. The token holds only the user id and `sessionVersion`. |
+| Current user | `getCurrentUser()` in `src/features/auth/session.ts` re-reads the user (role included) from the database on every request. Role changes apply immediately; bumping `sessionVersion` revokes every session ("Sign out everywhere", `admin:grant --revoke`). |
+| Pages | `requireUser()` redirects to `/login?next=…`; `requireAdminPage()` returns 404 for non-admins. `src/proxy.ts` only adds an early redirect when there is no session cookie. It is not the access check. |
+| Server Actions | Each resolves the user itself (`getCurrentUser`/`assertAdmin`) and validates input with Zod. Next.js rejects cross-origin calls. |
+| Route Handlers | Each calls `assertUser`/`assertAdmin`. Mutations also require a same-origin `Origin` header and `application/json` (`src/lib/http.ts`). |
+| Ownership | Saved destinations are always queried by the session user's id; ids sent by the browser are ignored. Admin services re-check the actor's role next to the data. |
+| Rate limits | PostgreSQL-backed fixed windows (`RateLimit` table, hashed keys): sign-in 5 per email and 30 per IP per 15 min; registration 5 per IP per hour. Enforced inside the Credentials provider, so direct posts to `/api/auth/callback/credentials` are limited too. |
+| CSRF | Server Actions: Next.js Origin check. Auth.js endpoints: double-submit CSRF token. JSON APIs: Origin check + JSON content type + SameSite cookies. |
+| Errors | Sign-in failures say "Incorrect email or password" for both unknown email and wrong password (with matching timing). Unexpected errors are logged without credentials and shown generically. |
+
+**Known trade-offs**
+
+- Registration says when an email is already registered. Hiding it needs
+  email verification, which needs an email provider.
+- The per-email sign-in limit lets someone lock an account out of password
+  sign-in for 15 minutes by guessing wrongly.
+- Per-IP limits trust the first `X-Forwarded-For` entry. That holds on Vercel
+  and behind most load balancers, but not when the app is exposed directly.
+
+**Not implemented:** password reset and email verification. Both need an
+outbound email provider (e.g. Resend or SES) to send single-use, expiring
+tokens, and none is configured. Until one is, an admin can't reset a
+password from the UI. Delete the account, or set a new hash from a trusted
+shell.
+
+### Tests
+
+- `tests/integration/auth.test.ts` (real PostgreSQL) covers: signed-out
+  access to pages, actions and APIs; users blocked from admin actions and
+  routes; cross-user edits of saves and profiles; self-promotion through
+  registration, profile, action and API; malformed credentials, rate limits
+  and session revocation; CSRF checks on Route Handlers.
+- Unit tests: `password.test.ts`, `validation.test.ts` (open-redirect
+  guard), `proxy.test.ts`, `src/lib/http.test.ts`.
+- `tests/e2e/auth.spec.ts`: protected-route redirects and API 401s,
+  read-only. The register → save → sign-out flow writes a user and only runs
+  with `E2E_DB_WRITES=1`. Use a disposable database:
+  `DATABASE_URL=… E2E_DB_WRITES=1 npm run test:e2e`.
 
 ## Project structure
 
@@ -185,6 +268,9 @@ src/
     destinations/        Search + input validation, queries, cards, detail, states
     seasons/             Season definitions and homepage section
     submissions/         Place suggestion form, server action, validation
+    auth/                Auth.js credentials check, session DAL, actions, forms, rate limits
+    saved/               Saved destinations: service, actions, save button
+    admin/               Role management (service, action, form)
     experiences/         Categories, themes and the theme grid
     regions/             Province definitions and grid
     home/                Hero, responsible-travel section
@@ -193,6 +279,10 @@ src/
     env.ts               Zod-validated server env
     images.ts            Allowed remote image hosts (shared with next.config)
     site.ts              Site name, tagline, navigation
+    http.ts              Route Handler helpers: same-origin check, JSON errors
+  auth.ts                Auth.js configuration
+  proxy.ts               Optimistic redirect for /account and /admin
+scripts/grant-admin.ts   First-admin bootstrap (npm run admin:grant)
 tests/e2e/               Playwright specs
 tests/integration/       Database tests (real PostgreSQL)
 ```
@@ -200,7 +290,11 @@ tests/integration/       Database tests (real PostgreSQL)
 Conventions:
 
 - Server Components by default. Client Components exist only for interactivity
-  (`mobile-nav.tsx`, `remote-image.tsx`, `error.tsx`).
+  (`mobile-nav.tsx`, `remote-image.tsx`, `error.tsx`, forms, the save button).
+- Identity comes only from `src/features/auth/session.ts`. Never read a user
+  id, role or owner from form data, JSON, params or hidden fields. Every
+  Server Action and Route Handler checks access itself, even when the page
+  that renders it already did.
 - Database access lives in `features/*/queries.ts`, guarded by `server-only`.
   Loaders return a tagged result (`ok` / `unconfigured` / `error`) so pages
   render honest states instead of throwing.
@@ -249,5 +343,8 @@ is credited where it appears, and is listed on `/credits`. When adding images:
   verified-only practical filters; activities, access, safety and sources on
   detail pages; canonical URLs, sitemap and robots.txt.
 
-Still to come: authentication (Auth.js) and saved destinations, admin and
-moderation, trips and guides.
+- Phase 5: Authentication (Auth.js), USER/ADMIN roles with server-side
+  checks, saved destinations, minimal role management.
+
+Still to come: admin and moderation, trips and guides, password reset (needs
+an email provider).

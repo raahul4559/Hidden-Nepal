@@ -35,4 +35,18 @@ describe("parseServerEnv", () => {
       /postgres/,
     );
   });
+
+  it("requires a long AUTH_SECRET without echoing it", () => {
+    expect(parseServerEnv({}).AUTH_SECRET).toBeUndefined();
+    let message = "";
+    try {
+      parseServerEnv({ AUTH_SECRET: "short-secret" });
+    } catch (error) {
+      message = String(error);
+    }
+    expect(message).toMatch(/at least 32/);
+    expect(message).not.toContain("short-secret");
+    const strong = "x".repeat(44);
+    expect(parseServerEnv({ AUTH_SECRET: strong }).AUTH_SECRET).toBe(strong);
+  });
 });

@@ -15,11 +15,32 @@ export default defineConfig({
   test: {
     environment: "jsdom",
     setupFiles: ["./test/setup.ts"],
-    include: [
-      "src/**/*.test.{ts,tsx}",
-      "prisma/**/*.test.ts",
-      "tests/integration/**/*.test.ts",
-    ],
     css: false,
+    server: {
+      deps: {
+        // next-auth imports "next/server" without an extension, which Node's
+        // ESM resolver rejects; let Vite resolve it instead.
+        inline: ["next-auth"],
+      },
+    },
+    projects: [
+      {
+        extends: true,
+        test: {
+          name: "unit",
+          include: ["src/**/*.test.{ts,tsx}", "prisma/**/*.test.ts"],
+        },
+      },
+      {
+        extends: true,
+        test: {
+          name: "integration",
+          include: ["tests/integration/**/*.test.ts"],
+          // Integration files share one test database and truncate tables,
+          // so they must not run at the same time.
+          fileParallelism: false,
+        },
+      },
+    ],
   },
 });

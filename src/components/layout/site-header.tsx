@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import { Logo } from "@/components/brand/logo";
-import { mainNav, navCta } from "@/lib/site";
+import { accountNav, mainNav, navCta } from "@/lib/site";
 
 import { MobileNav } from "./mobile-nav";
 
@@ -30,13 +30,19 @@ export function SiteHeader() {
             </ul>
           </nav>
           <Link
+            href={accountNav.href}
+            className="rounded-sm py-1 text-sm font-medium text-ivory/85 underline-offset-8 transition-colors hover:text-ivory hover:underline hover:decoration-gold"
+          >
+            {accountNav.label}
+          </Link>
+          <Link
             href={navCta.href}
             className="inline-flex h-10 items-center rounded-md border border-ivory/35 px-4 text-sm font-semibold text-ivory transition-colors hover:border-gold hover:bg-ivory/10"
           >
             {navCta.label}
           </Link>
         </div>
-        <MobileNav items={mainNav} cta={navCta} />
+        <MobileNav items={[...mainNav, accountNav]} cta={navCta} />
       </div>
     </header>
   );

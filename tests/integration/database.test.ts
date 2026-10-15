@@ -37,7 +37,7 @@ describe.skipIf(!url)("database (integration)", () => {
 
     prisma = new PrismaClient({ adapter: new PrismaPg({ connectionString: url! }) });
     await prisma.$executeRawUnsafe(
-      'TRUNCATE "PlaceSubmission", "DestinationSource", "DestinationActivity", "Activity", "DestinationImage", "DestinationSeason", "DestinationCategory", "Destination", "Category", "Region", "User" CASCADE',
+      'TRUNCATE "SavedDestination", "RateLimit", "PlaceSubmission", "DestinationSource", "DestinationActivity", "Activity", "DestinationImage", "DestinationSeason", "DestinationCategory", "Destination", "Category", "Region", "User" CASCADE',
     );
   }, 60_000);
 

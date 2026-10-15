@@ -23,6 +23,9 @@ export default defineConfig({
     url: baseURL,
     // Always start fresh: a stale server from an older build serves dead CSS.
     reuseExistingServer: false,
+    // `next start` is a production server; Auth.js only trusts the request
+    // host there when told to. Deployments set AUTH_URL or AUTH_TRUST_HOST.
+    env: { AUTH_TRUST_HOST: "true" },
     timeout: 180_000,
   },
 });

@@ -14,3 +14,6 @@ export const mainNav = [
 ] as const;
 
 export const navCta = { label: "Suggest a place", href: "/contribute" } as const;
+
+/** Signed-out visitors are redirected from here to sign in. */
+export const accountNav = { label: "Account", href: "/account" } as const;

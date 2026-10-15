@@ -18,6 +18,7 @@ import { Suspense } from "react";
 import { PhotoCredit } from "@/components/media/photo-credit";
 import { RemoteImage } from "@/components/media/remote-image";
 import { getCategory } from "@/features/experiences/categories";
+import { SaveDestination } from "@/features/saved/components/save-destination";
 import { getSeasonByValue } from "@/features/seasons/seasons";
 
 import {
@@ -88,6 +89,12 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
             <MapPin aria-hidden className="size-4 text-gold" />
             {place}
           </p>
+          <div className="mt-8 min-h-11">
+            {/* Reads the session, so it streams in without holding the page. */}
+            <Suspense fallback={null}>
+              <SaveDestination slug={destination.slug} />
+            </Suspense>
+          </div>
         </div>
         {cover?.credit ? (
           <PhotoCredit
