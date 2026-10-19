@@ -3,7 +3,6 @@ import Image from "next/image";
 import { PhotoCredit } from "@/components/media/photo-credit";
 import { PHOTOS } from "@/content/photos";
 import { DestinationSearchForm } from "@/features/destinations/components/destination-search-form";
-import { siteConfig } from "@/lib/site";
 
 const photo = PHOTOS.hero;
 
@@ -36,12 +35,12 @@ export function Hero() {
             id="hero-title"
             className="mt-5 font-serif text-[2.75rem] leading-[1.02] font-normal tracking-tight text-balance sm:text-6xl lg:text-7xl"
           >
-            {siteConfig.tagline}
+            Hidden places to visit in Nepal
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-pretty text-ivory/85">
-            Hidden waterfalls, remote villages, Himalayan lakes and the people
-            who keep their traditions alive: a slower, more considered way to
-            see the country.
+            Explore offbeat places in Nepal, from Himalayan trails and remote
+            villages to living traditions and regional food, with practical
+            guides to help plan a more considered journey.
           </p>
         </div>
 

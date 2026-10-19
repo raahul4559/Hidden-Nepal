@@ -10,14 +10,14 @@ import { SeasonalDiscovery } from "@/features/seasons/components/seasonal-discov
 import { CommunityCta } from "@/features/submissions/components/community-cta";
 
 export const metadata: Metadata = {
-  title: "Discover Nepal's hidden places",
+  title: "Hidden Places to Visit in Nepal",
   description:
-    "Find lesser-known destinations across Nepal, from Himalayan trails and remote villages to living cultural traditions and regional food.",
+    "Find hidden and offbeat places to visit in Nepal, with destination guides to Himalayan trails, remote villages, cultural traditions and regional food.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Discover Nepal's hidden places | Hidden Nepal",
+    title: "Hidden Places to Visit in Nepal | Hidden Nepal",
     description:
-      "Find lesser-known destinations across Nepal, from Himalayan trails and remote villages to living cultural traditions and regional food.",
+      "Find hidden and offbeat places to visit in Nepal, with destination guides to Himalayan trails, remote villages, cultural traditions and regional food.",
     url: "/",
     images: ["/images/destinations/kathmandu-valley.jpg"],
   },

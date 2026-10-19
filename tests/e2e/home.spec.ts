@@ -6,7 +6,7 @@ test.describe("homepage", () => {
 
     await expect(page.locator("h1")).toHaveCount(1);
     await expect(
-      page.getByRole("heading", { level: 1, name: "Discover the Nepal beyond the ordinary." }),
+      page.getByRole("heading", { level: 1, name: "Hidden places to visit in Nepal" }),
     ).toBeVisible();
 
     for (const name of [
