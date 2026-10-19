@@ -1,0 +1,182 @@
+{
+  "kathmandu-valley": {
+    "short_description": "A valley of seven UNESCO-listed monument zones that holds the densest concentration of Newar religious and palace architecture in Nepal.",
+    "description": "The Kathmandu Valley is the bowl-shaped basin in Bagmati Province that contains Nepal's capital, Kathmandu, along with the historic cities of Patan and Bhaktapur. Since 1979 UNESCO has protected the valley under a single World Heritage property composed of seven separate monument zones. The zones are the Durbar Squares of Hanuman Dhoka (Kathmandu), Patan and Bhaktapur, the Buddhist stupas of Swayambhu and Bauddhanath, and the Hindu temples of Pashupati and Changu Narayan. The government intervened in the definition of the listed area in 2006.\n\nThe valley's importance lies in the way its monuments form a living cultural landscape rather than an assembly of detached ruins. Temples, stupas, palace courtyards and traditional townhouses are still used for worship, festivals and daily life. The architecture in brick and carved timber, the metalwork and stone sculpture, and the essentially Newar character of the towns developed over many centuries and continued to be sustained by their communities. UNESCO placed the property on the List of World Heritage in Danger between 2003 and 2007 and in 2015 a major earthquake caused severe damage, much of which has since been repaired.\n\nA visit to the valley is usually built from short trips between the monument zones rather than a single route. Most lie within a few kilometres of one another, and travellers commonly move between the Durbar Squares, the two great stupas and the river-side temple complex over several days. Between these formal sites the valley offers markets, alleys, courtyards and hilltop outlooks, and the wider basin can be viewed from its surrounding rims.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/121/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "kathmandu-durbar-square": {
+    "short_description": "The historic royal square of Kathmandu, known as Hanuman Dhoka, and one of the three Durbar Square monument zones of the Kathmandu Valley.",
+    "description": "Kathmandu Durbar Square, also called Hanuman Dhoka, is the historic royal square in the centre of Kathmandu Metropolitan City in Bagmati Province. It is one of the three Durbar Square monument zones of the Kathmandu Valley World Heritage property, alongside those of Patan and Bhaktapur. The square formed the seat of the Malla kings and later of the Shah dynasty until the court moved elsewhere in the nineteenth century.\n\nThe square is an open assembly of palace buildings, courtyards and temples in the Newar architectural traditions of brick, carved timber and stone. Among the best-known structures are the Hanuman Dhoka palace complex, the Taleju temple, the Kumari Ghar, which is the residence of the living goddess Kumari, and the Kasthamandap, a timber pavilion from which the city takes its name. The Kal Bhairav image and the nearby freestanding temples are part of the same dense ensemble, and the square remains an active setting for festivals and rituals.\n\nVisitors generally approach the square on foot and spend time moving between the courtyards and the open fronts of the temples. The palace compounds contain museums, and the surrounding streets return visitors directly to the life of the old city. The 2015 earthquake damaged several structures in the square, and reconstruction has continued since. The square sits at the heart of the walkable historic core, so it can be combined with nearby markets and lanes in a single outing.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/121/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "patan-durbar-square": {
+    "short_description": "The palace square of Lalitpur, its Newar courtyards and temples forming one of the Kathmandu Valley's three Durbar Square monument zones.",
+    "description": "Patan Durbar Square stands in Lalitpur Metropolitan City in the district of Lalitpur, Bagmati Province, on the southern side of the Kathmandu Valley. It is one of the three Durbar Square monument zones of the Kathmandu Valley World Heritage property, together with Hanuman Dhoka in Kathmandu and the square at Bhaktapur. The square was the court of the Malla rulers of Patan.\n\nThe square and the old town around it contain some of the finest Newar architecture in the valley. The most celebrated building is the Krishna Mandir, a stone temple built in 1667, and the ensemble also includes the Bhimsen temple, the Vishwanath temple, the royal palace with its courtyards, and a bell and column added before the end of the seventeenth century. Patan is also known for its many Buddhist courtyards, called bahals, and for the surrounding craft quarters where metal casting, wood carving and stone work have long been practised.\n\nVisitors typically explore the square itself and then walk into the adjoining streets of the old town, where the palace museums, temple platforms and neighbourhood courtyards follow one another closely. The square is small enough to cross on foot in minutes but detailed enough to occupy much longer, and it forms part of a wider historic area that can be seen over the course of a day.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/121/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "bhaktapur-durbar-square": {
+    "short_description": "The royal square of Bhaktapur, the easternmost of the three Durbar Square monument zones of the Kathmandu Valley.",
+    "description": "Bhaktapur Durbar Square lies in Bhaktapur Municipality in Bhaktapur District, Bagmati Province, in the eastern part of the Kathmandu Valley. It is the easternmost of the three Durbar Square monument zones of the Kathmandu Valley World Heritage property, alongside those of Kathmandu and Patan. The square was the palace complex of the Malla kings of Bhaktapur.\n\nThe square is known for a group of buildings from the seventeenth and eighteenth centuries. The Golden Gate, or Sun Dhoka, dates from the mid-eighteenth century, and the adjoining Fifty-Five Window Palace, the Nyatapola temple with its stepped plinth, and the tall temple of Bhairav are among the structures that define the area. The monuments have survived repeated earthquakes, including those of 1833, 1934 and 2015, and reconstructions have followed each of them. The square forms the centre of a wider historic town whose brick lanes, squares and craft traditions are themselves part of the setting.\n\nVisitors usually enter the old town on foot and spend several hours among the palace courtyards, temples and open squares. Pottery, weaving and other traditional crafts can be seen in the surrounding quarters, and the town's layout allows a walk to continue well beyond the monument zone itself. Because the square sits within the living town, its temples and public spaces remain in active everyday use.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/121/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "swayambhunath": {
+    "short_description": "A hilltop stupa and religious ensemble above Kathmandu, venerated by both Buddhists and Hindus and a Kathmandu Valley monument zone.",
+    "description": "Swayambhunath is a religious complex centred on a stupa on a hill to the west of central Kathmandu, in Kathmandu Metropolitan City, Bagmati Province. It is one of the seven monument zones of the Kathmandu Valley World Heritage property. The site is venerated by Buddhists and also treated as sacred by Hindus, and its hilltop position gives it a distinct setting above the city.\n\nThe complex is built around a domed stupa crowned by a gilded spire painted with the eyes of the Buddha, and it is surrounded by smaller shrines, chaityas, prayer wheels and monastic and temple buildings. Swayambhunath has long been a place of pilgrimage and is associated with the foundation legends of the valley. The site shows the close overlap of Buddhist and Hindu practice in Nepal, and it continues to be the focus of festivals and everyday worship as much as of heritage interest.\n\nVisitors reach the complex by a long stairway of stone steps that climbs the hill, or by a road that arrives nearer the top. Once there, they move around the stupa in the customary clockwise direction, past the shrine buildings and smaller monuments, with views across Kathmandu in several directions. The site is commonly combined with nearby parts of the city in a half-day visit, and the walk up and down is part of the experience for many travellers.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/121/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "boudhanath-stupa": {
+    "short_description": "A vast white stupa in eastern Kathmandu, described by UNESCO as the largest in Nepal, and one of the Kathmandu Valley monument zones.",
+    "description": "Boudhanath Stupa stands in Kathmandu Metropolitan City, Bagmati Province, in the eastern part of the city. It is one of the seven monument zones of the Kathmandu Valley World Heritage property, and UNESCO describes it as the largest stupa in Nepal. The surrounding neighbourhood is a centre of Tibetan Buddhist life in Kathmandu.\n\nThe stupa's form is a large whitewashed dome rising to a square painted harmika and a gilded spire, encircled by a low wall set with prayer wheels. It is a major pilgrimage destination and is closely associated with Tibetan Buddhism, having become a focus for Tibetan communities and monasteries in Nepal. The stupa and its setting continue to function as a place of daily worship, with circumambulation, offerings and festivals forming part of its regular life rather than a scheduled attraction.\n\nVisitors usually walk around the base of the stupa in the clockwise direction along the encircling path, alongside pilgrims turning the prayer wheels. The rooftops and terraces of the surrounding buildings give elevated views of the dome, and the lanes around the stupa contain monasteries, shops and small restaurants. A visit is typically quiet and unhurried, lasting somewhere between a short walk and a longer stay in the neighbourhood.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/121/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "pashupatinath-temple": {
+    "short_description": "An extensive Hindu temple precinct on the Bagmati river in Kathmandu and one of the Kathmandu Valley's seven monument zones.",
+    "description": "Pashupatinath is a Hindu temple precinct on the banks of the Bagmati river in Kathmandu Metropolitan City, Bagmati Province. UNESCO describes it as an extensive temple precinct and includes it as one of the seven monument zones of the Kathmandu Valley World Heritage property. The complex covers a large area of temples, shrines, platforms and river-side structures rather than a single building.\n\nThe principal temple is dedicated to Shiva as Pashupati, and the site is one of the most important Hindu pilgrimage destinations in Nepal. The precinct contains many temples and shrines, and the Bagmati river flows through it, with stone platforms and ghats along the banks used for ritual bathing and for cremation rites. The complex is the focus of major festivals, above all Maha Shivaratri, when large numbers of pilgrims gather. Because it remains an active religious site, much of the precinct is given over to worship rather than to display.\n\nVisitors move through the complex on foot along paths and terraces, passing temple courtyards, the river and the surrounding wooded ground. Views of the main temple are available from across the river, and the wider precinct can be explored over an hour or more. The atmosphere varies greatly between ordinary days and festival times, when crowds fill the site and the surrounding routes.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/121/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "changu-narayan-temple": {
+    "short_description": "A hilltop Hindu temple complex near Bhaktapur with an early fifth-century inscription, one of the Kathmandu Valley monument zones.",
+    "description": "Changu Narayan is a Hindu temple complex in Changunarayan Municipality, Bhaktapur District, Bagmati Province, on a ridge to the north of Bhaktapur. It is one of the seven monument zones of the Kathmandu Valley World Heritage property. UNESCO describes it as a temple complex set within a traditional Newar settlement and notes an inscription from the early fifth century.\n\nThe temple is dedicated to Vishnu in his form as Narayan, and the site is considered one of the oldest Hindu temple locations in the Kathmandu Valley. Its stone pillar carries an inscription associated with the Licchavi king Manadeva and dated to the fifth century, and the complex includes stone sculptures, carved struts and other decorative and devotional elements from different periods. Around the temple, the traditional settlement shows the pattern of Newar village building in brick and timber, and the temple remains in active worship.\n\nVisitors reach the complex along the ridge road or on foot, arriving at an open court facing the temple and its pillar. The site is compact but richly detailed, and the walk through the adjoining village streets rounds out a visit. There are open views along the ridge towards the valley, and the temple is often seen on the same trip as Bhaktapur, a short distance to the south.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/121/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "langtang-national-park": {
+    "short_description": "Nepal's first Himalayan national park, a protected area of high mountains, forests and alpine valleys north of Kathmandu in Bagmati Province.",
+    "description": "Langtang National Park is a protected area in the central Nepal Himalaya, within Bagmati Province and extending across the districts of Nuwakot, Rasuwa and Sindhupalchok. It was established in 1976 as the country's first Himalayan national park and covers an area of about 1,710 square kilometres, with a buffer zone added in 1998. The park lies north of Kathmandu, close to the border with the Tibet region of China.\n\nThe park spans a wide range of altitude and habitat, from subtropical forest through temperate and subalpine woodland to high alpine country and permanent snow, which gives it considerable biological and landscape variety. It contains glaciers, river valleys, high pastures and peaks, and it is home to wildlife including red panda, Himalayan black bear, langur and various birds, along with populations of snow leopard and musk deer in its higher reaches. Several settlements and herding areas lie within and beside the park, and the valleys have long been used by local communities and by herders moving with livestock to summer pastures.\n\nThe park is best known as the setting of the Langtang trek, which follows the Langtang valley northwards through villages and forests towards the head of the valley and its viewpoints, with side routes to high lakes and passes. The trekking season normally runs in the drier months of spring and autumn, when the trails and high routes are most accessible. Visits generally take the form of multi-day walks between settlements, with tea houses providing accommodation, and the landscapes range from terraced lower valleys to open alpine ground beneath the peaks.",
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Langtang_National_Park",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "gosaikunda-lake": {
+    "short_description": "A high alpine lake in Rasuwa District held sacred by Hindus and a focus of pilgrimage and trekking in the Langtang region.",
+    "description": "Gosaikunda is a high alpine lake in Rasuwa District, Bagmati Province, in the Langtang region north of Kathmandu. It lies in the upper Gosaikunda basin, part of an area of many small lakes at high altitude. Because sources give different figures for the exact elevation of the lake, it is usually described simply as lying at high altitude in the Langtang National Park area rather than with a single stated height.\n\nThe lake is sacred to Hindus and is associated with Shiva, and it is the focus of an annual pilgrimage, particularly around Janai Purnima, when worshippers travel up to the lake. The wider basin contains a large number of small lakes and tarns, and the area was recognised as a Ramsar wetland site in 2007. The lake and its surroundings form part of the high country of the Langtang region, with alpine terrain, rocky slopes and seasonal snow above the tree line.\n\nVisitors reach Gosaikunda on foot as part of a trek from the Langtang valley or from the ridge route to the south, staying at lodges in the settlements below the lake. The walking is over high ground, and the weather and snow cover determine when the route is passable. At the lake itself the setting is open and austere, and the place is as much a pilgrimage destination as a trekking objective.",
+    "notes": [
+      "Elevation of the lake differs between sources (about 4,300 m vs about 4,380 m); the figure was omitted rather than stated in the copy.",
+      "Ramsar designation dates differ between sources (23 September 2007 vs 29 September 2007); the year is stated, the exact day omitted."
+    ],
+    "add_sources": [
+      {
+        "url": "https://rsis.ramsar.org/ris/1693",
+        "publisher": "Ramsar Sites Information Service",
+        "license": "Unknown",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Gosaikunda",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "panch-pokhari": {
+    "short_description": "A group of five high alpine lakes in Sindhupalchok District, Bagmati Province, visited as a trekking and pilgrimage destination.",
+    "description": "Panch Pokhari is a group of five alpine lakes in Sindhupalchok District, Bagmati Province, north-east of Kathmandu. The name means five lakes, and the group lies in high country within the Langtang National Park area. The lakes sit far above the valley settlements, in open terrain that is snow-covered for part of the year. Because elevations given by different sources vary, the site is described here simply as high alpine rather than with a single stated height.\n\nThe lakes are a pilgrimage destination as well as a trekking objective, and they are visited in connection with local religious practice in the surrounding districts. The setting is one of alpine basins, ridges and small lakes rather than a single feature, and the route to them passes through forests and hill villages before reaching the high ground. The group is one of several high lake areas in the northern part of Bagmati Province, and its remoteness is part of what defines it.\n\nVisitors reach Panch Pokhari on foot over several days, usually by a route that climbs from the lower valleys through settlements and forest to the lake basin. Accommodation is basic and generally takes the form of lodges or camping along the way. The walking is demanding because of the altitude and the length of the approach, and the accessible season is limited to the drier months when the high trails are clear of snow.",
+    "notes": [
+      "Elevation figures for Panch Pokhari differ between sources; no single figure was used in the copy.",
+      "Unlike Beeshazar, Panch Pokhari is not described as a Ramsar site in the sources consulted; no Ramsar claim is made."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Panch_Pokhari",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "namo-buddha": {
+    "short_description": "A Buddhist pilgrimage site south-east of Kathmandu in Kavrepalanchok District, centred on a stupa and monastery in the hills.",
+    "description": "Namo Buddha is a Buddhist pilgrimage site in Namo Buddha Municipality, Kavrepalanchok District, Bagmati Province, in the hills south-east of Kathmandu, roughly 50 kilometres from the city by road. The site is centred on a stupa and a monastery standing on a ridge in the middle hills.\n\nThe place is associated with a well-known Buddhist story of the bodhisattva who gave his own body to feed a starving tigress and her cubs, and this account gives the site its religious importance. The stupa marks the place connected with that story, and the adjoining Thrangu Tashi Yangtse Monastery is a large and active monastic complex that has grown around the pilgrimage site. Together they make Namo Buddha a living centre of Buddhist practice and teaching as well as a destination for visitors, and the ridge setting gives the site wide views over the surrounding hills.\n\nVisitors generally reach Namo Buddha by road from Kathmandu or from the nearby town of Dhulikhel, arriving on the ridge above the monastery. The site is quiet and open, with the stupa, prayer flags and monastery buildings set among terraced fields and forested slopes. A visit can be brief or can include time at the monastery, and the route combines well with the hill country around Dhulikhel and Panauti.",
+    "notes": [
+      "The record has no district or municipality confirmed by a single source, and claims about the stupa's size or height were not verified; these were omitted.",
+      "Namo Buddha Municipality in Kavrepalanchok District is the administrative location given by the sources consulted."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Namo_Buddha",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "beeshazar-and-associated-lakes": {
+    "short_description": "An oxbow lake and wetland system in the Chitwan National Park buffer zone, listed as a Ramsar wetland site in 2003.",
+    "description": "Beeshazar and Associated Lakes is a wetland of oxbow lakes and surrounding water bodies in Chitwan District, Bagmati Province, in the Inner Terai of southern Nepal. It lies within the buffer zone of Chitwan National Park and was designated as a Ramsar wetland site of international importance in 2003, which recognises its value for waterbirds and wetland habitat.\n\nThe site takes its name from Beeshazar Tal, the main lake, and includes a group of associated lakes and pools set among forest and grassland in the flat terrain of the Inner Terai. The combination of open water, marsh, woodland and adjoining forest makes the area important for resident and migratory waterbirds and for other wetland wildlife, and its position inside the Chitwan buffer zone links it to the wider conservation landscape of the national park. The lakes also have local significance as a source of water and as part of the surroundings of the communities living near the buffer zone.\n\nVisitors usually experience the area on foot or by bicycle along the tracks and embankments around the lakes, watching birds and looking for wildlife in the adjoining forest. The setting is quiet and flat, with open views across the water and through the surrounding trees, and the wetland is often visited alongside the national park. A visit is typically a half day of slow walking and observation rather than a set route.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/284/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "Unknown",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://rsis.ramsar.org/ris/1313",
+        "publisher": "Ramsar Sites Information Service",
+        "license": "Unknown",
+        "fields": ["description"]
+      }
+    ]
+  }
+}

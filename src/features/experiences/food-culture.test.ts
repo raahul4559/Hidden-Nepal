@@ -1,5 +1,6 @@
 import { describe, expect, it } from "vitest";
-import { existsSync } from "node:fs";
+import { createHash } from "node:crypto";
+import { existsSync, readFileSync } from "node:fs";
 import { join } from "node:path";
 
 import { PROVINCES } from "@/features/regions/provinces";
@@ -62,6 +63,17 @@ describe("food and culture explorer data", () => {
     const food = FOOD_CULTURE_EXPERIENCES.filter((item) => item.kind === "food");
     expect(food.filter((item) => item.image)).toHaveLength(30);
     expect(food.filter((item) => !item.image)).toHaveLength(0);
+    expect(new Set(food.map((item) => item.image?.url)).size).toBe(food.length);
+    const imageHashes = food.map((item) =>
+      createHash("sha256")
+        .update(readFileSync(join(process.cwd(), "public", item.image!.url.slice(1))))
+        .digest("hex"),
+    );
+    expect(new Set(imageHashes).size).toBe(food.length);
+    const samayBaji = food.find((item) => item.slug === "newar-samay-baji")?.image;
+    expect(samayBaji?.url).toBe("/images/food-culture/samay-baji.jpg");
+    expect(samayBaji?.source_url).toBe("https://commons.wikimedia.org/wiki/File:Samaybaji.JPG");
+    expect(samayBaji?.creator).toBe("Ashish J.");
     expect(
       food.filter((item) => ["eastern-nepal-yangben", "far-western-deuda-food"].includes(item.slug))
         .every((item) => item.image?.context_note),
@@ -108,10 +120,11 @@ describe("food and culture explorer data", () => {
     expect(mithilaPainting?.license).toBe("CC BY-SA 3.0");
   });
 
-  it("uses the Kathmandu Valley place photo for Yomari with an explicit context note", () => {
+  it("uses a dedicated, credited Yomari dumpling photo", () => {
     const yomari = FOOD_CULTURE_EXPERIENCES.find((item) => item.slug === "newar-yomari");
-    expect(yomari?.image?.url).toBe("/images/destinations/kathmandu-valley.jpg");
-    expect(yomari?.image?.context_note).toMatch(/not Yomari dumplings/i);
+    expect(yomari?.image?.url).toBe("/images/food-culture/yomari-food.jpg");
+    expect(yomari?.image?.source_url).toBe("https://commons.wikimedia.org/wiki/File:Yomari_2.jpg");
+    expect(yomari?.image?.creator).toBe("Gaurav Dhwaj Khadka");
   });
 
   it("documents research coverage and cultural-respect limitations", () => {

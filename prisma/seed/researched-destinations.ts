@@ -54,11 +54,11 @@ const CURATED_IMAGES: Record<string, NonNullable<DestinationInput["images"]>> = 
   "kathmandu-valley": [
     {
       url: "/images/destinations/kathmandu-valley.jpg",
-      alt: "Kathmandu Durbar Square with historic heritage architecture and a sadhu",
-      caption: "Historic palace square in Kathmandu Valley.",
-      credit: "Anton Gutmann / Aristeas",
+      alt: "Swayambhunath Stupa above Kathmandu Valley, with the city and Himalayan range beyond",
+      caption: "Swayambhunath Stupa overlooks Kathmandu Valley and its surrounding mountain landscape.",
+      credit: "Megaurab09",
       license: "CC BY-SA 4.0",
-      sourceUrl: "https://commons.wikimedia.org/wiki/File:Saddhu_at_Durbar_Square,_Kathmandu_(edited).jpg",
+      sourceUrl: "https://commons.wikimedia.org/wiki/File:Swayambhunath_Stupa_Above_Kathmandu_Valley.jpg",
     },
   ],
   "boudhanath-stupa": [

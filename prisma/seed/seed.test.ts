@@ -117,6 +117,15 @@ describe("researched destinations", () => {
     expect(RESEARCHED_DESTINATIONS.filter((destination) => destination.status === "PUBLISHED")).toHaveLength(59);
     expect(RESEARCHED_DESTINATIONS.filter((destination) => destination.status === "DRAFT")).toHaveLength(0);
 
+    expect(RESEARCHED_DESTINATIONS.find((destination) => destination.slug === "kathmandu-valley")?.images?.[0])
+      .toMatchObject({
+        url: "/images/destinations/kathmandu-valley.jpg",
+        credit: "Megaurab09",
+        license: "CC BY-SA 4.0",
+        sourceUrl:
+          "https://commons.wikimedia.org/wiki/File:Swayambhunath_Stupa_Above_Kathmandu_Valley.jpg",
+      });
+
     for (const destination of RESEARCHED_DESTINATIONS) {
       expect(destination.status, destination.slug).toBe("PUBLISHED");
       expect(destination.isSample, destination.slug).toBe(false);

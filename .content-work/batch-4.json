@@ -1,0 +1,251 @@
+{
+  "tilicho-lake": {
+    "short_description": "A high glacial lake on the Annapurna circuit in Manang District, Gandaki Province, reached by a side trek through the Marsyangdi valley.",
+    "description": "Tilicho Lake is a glacial lake in Manang District, Gandaki Province, in the Annapurna range of the Himalayas. It lies within the Annapurna Conservation Area, Nepal's largest protected area, and sits in high alpine terrain well above the tree line. Its elevation is reported differently by different sources, generally around 4,900 metres, and the lake is fed by glaciers and seasonal melt rather than by a large river system.\n\nThe lake is best known for its setting and for the unusual difficulty of reaching it. Because of the cold and the altitude, surveys have recorded no aquatic organisms in the lake itself, while the surrounding alpine zone supports hardy mountain wildlife. The lake also features in Hindu tradition, where it is associated with Kak Bhusundi of the Ramayana, and it drew attention in 2000 when a diving team carried out a high-altitude scuba dive in its waters.\n\nVisitors reach Tilicho as a side trip from the Annapurna Circuit, usually leaving the main trail and walking up the Marsyangdi valley to a lodge settlement near the lake. The final approach crosses steep, exposed slopes and loose ground, so the route is normally done with a local guide and an acclimatisation stop. The reward is a stark, cold basin ringed by snow and rock, with wide views of the surrounding peaks.",
+    "notes": [
+      "Elevation differs between sources (about 4,919 m vs 4,949 m); omitted the precise figure and described it as around 4,900 m.",
+      "Lake coordinates come from the Wikidata item; route access and current trail conditions were not independently verified."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Tilicho_Lake",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Annapurna_Conservation_Area",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "ghandruk": {
+    "short_description": "A traditional Gurung village in the Annapurna foothills of Kaski District, a common overnight stop on the Annapurna Base Camp trek.",
+    "description": "Ghandruk is a traditional Gurung village in Annapurna Rural Municipality, Kaski District, Gandaki Province. It lies in the foothills of the Annapurna range, roughly 32 km north-west of Pokhara, at an elevation reported at about 2,000 metres. Before the 2015 reorganisation of local government it was a separate village development committee; it now forms part of a larger rural municipality and is one of the larger surviving Gurung settlements in Nepal.\n\nThe village is known for its living culture as much as its position on the trail. Ghandruk is a Gurung community, and its stone-paved lanes, slate-roofed houses and neighbourhood temples reflect that heritage. It has a Gurung cultural museum and a long-established school serving the surrounding area. Local celebrations combine animist, Buddhist and Hindu practice, and the village is a common place to encounter Gurung music, dance and food rather than only passing through.\n\nGhandruk sits on the main Annapurna Base Camp trekking route and is also used as a base for walks toward Poon Hill. From the village and the ridges above it there are close views of Annapurna South, Machapuchare, Hiunchuli and Gangapurna. Visitors typically stay overnight in lodges or community homestays, walk the village lanes, visit the museum and temples, and continue the next day along the trail network.",
+    "notes": [
+      "Elevation is reported at about 2,012 m by one source; other sources vary, so it is described as about 2,000 m.",
+      "Homestay availability and current community permissions were not verified."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ghandruk",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "tsum-valley": {
+    "short_description": "A remote Buddhist valley in northern Gorkha District, inside the Manaslu Conservation Area and close to the Tibetan border.",
+    "description": "Tsum Valley is a remote Himalayan valley in the northern part of Gorkha District, Gandaki Province, close to the border with Tibet. It lies within the Manaslu Conservation Area, a protected area established in 1998 that covers a large part of the Mansiri Himal, and its settlements climb from roughly 1,900 metres to above 4,000 metres. The valley is reached mainly by following the Budhi Gandaki river corridor and is bounded by the Ganesh Himal, Sringi Himal and Boudha Himal ranges.\n\nTsum has strong cultural and religious ties to Tibet and is known among Tibetan Buddhists as a beyul, or hidden valley, understood as a place of spiritual refuge. Its inhabitants, the Tsumba, speak a Tibetan-derived dialect and maintain traditions that survived because the valley stayed largely closed to outsiders until the early 21st century. The valley holds important monasteries including Mu Gompa and Rachen Gompa, and the Tibetan saint Milarepa is believed to have meditated in caves here, making Tsum a place of pilgrimage. Subsistence farming and yak and sheep herding remain central to daily life.\n\nTsum is now walked as an extension of the Manaslu trekking route, with entry controlled as a restricted area, so trekkers travel with an organised group and the required permits. The walking is long and steep, passing mani walls, chortens and small villages, with high mountain scenery and a notably different cultural atmosphere from the main Manaslu trail. The valley was opened to trekkers in 2008 and now supports a modest flow of lodge-based trekking.",
+    "notes": [
+      "The record's coordinate is a broad representative point for the valley, not a village centre.",
+      "Permit rules and local access were not verified against a current official source."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Tsum_Valley",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Manaslu_Conservation_Area",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "bandipur": {
+    "short_description": "A preserved hilltop Newar trading town on the Mahabharat ridge in Tanahun District, Gandaki Province, known for its old main street and views.",
+    "description": "Bandipur is a hilltop settlement and rural municipality in Tanahun District, Gandaki Province. It sits on a saddle of the Mahabharat range at an elevation reported at roughly 1,030 metres, about 700 metres above the Marsyangdi River valley and between Kathmandu and Pokhara. The old town occupies a narrow ridge, with a single main street lined by two- and three-storey buildings whose back walls drop steeply down the hillside.\n\nBandipur was developed as a trade stop by Newar merchants from the Kathmandu valley after the region was conquered in 1768, chosen partly for its malaria-free height. It grew into a prosperous commercial centre on the India-Tibet trade route, and its Newar architecture, shuttered facades, slate-paved lanes and covered veranda along the main street survive largely intact. Its importance declined in the twentieth century after the Prithvi Highway was built in the valley below and the district headquarters moved to Damauli. Bandipur nonetheless retains a library, a large open Tundikhel and many historic houses.\n\nVisitors come to Bandipur for the town itself and for the surrounding countryside. The car-free main street is best explored on foot, and the ridge offers wide views of the Marsyangdi valley and, on clear days, the Annapurna and Manaslu ranges. Walks lead to nearby Gurung and Magar villages, viewpoints and caves, and the town serves as a quiet base between Kathmandu, Pokhara and the Chitwan lowlands.",
+    "notes": [
+      "The mapped Wikidata point represents the rural municipality rather than the old town centre; the visitor point was not independently verified.",
+      "Elevation is reported at roughly 1,030 m by one source and as about 1,000 m elsewhere, so it is given as an approximate figure."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Bandipur_Rural_Municipality",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "manakamana-temple": {
+    "short_description": "A hilltop Hindu temple to the goddess Bhagwati in Gorkha District, Gandaki Province, reached by trail or by a long-running cable car.",
+    "description": "Manakamana Temple is a Hindu temple in Gorkha District, Gandaki Province, dedicated to the goddess Bhagwati. It stands on Kafakdada hill at an elevation reported at about 1,300 metres, above the confluence of the Trishuli and Marsyangdi rivers, roughly midway between Kathmandu and Pokhara. The name is commonly understood to mean the temple that grants the wishes of its devotees.\n\nThe temple is built in the pagoda style and is closely tied to the history of the Gorkha kingdom, from which the Shah rulers who unified Nepal emerged. Its legends connect it to a Gorkha queen and to the Magar priest Lakhan Thapa, and by tradition the priests of the shrine belong to his lineage. The temple has received patronage from Gorkha rulers over the centuries, and documents record donations of materials and worship provisions. It is one of the better-known pilgrimage sites in central Nepal and draws large numbers of devotees, particularly around major festivals.\n\nMost visitors reach Manakamana either by walking up from the river valley or by taking the cable car that links Kurintar, in Chitwan, to the hill above the temple; the cable car began commercial operation in 1998 as Nepal's first such service. The temple compound includes the main shrine, an ambulatory and smaller shrines, and the hilltop opens to views of the surrounding valleys and, on clear days, the Annapurna and Manaslu ranges. The atmosphere is busiest on festival days and quieter on ordinary mornings.",
+    "notes": [
+      "Elevation is given as about 1,300 m, consistent with the temple's own and cable-car sources.",
+      "Municipality in the record ('Manakamana') and the temple's location across Sahid Lakhan Rural Municipality were not fully reconciled; the district (Gorkha) is verified."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Manakamana_Temple",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Manakamana_Cable_Car",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "lumbini": {
+    "short_description": "The UNESCO-listed birthplace of the Buddha in Rupandehi District, Lumbini Province, with the Maya Devi Temple, Ashoka Pillar and monastic zone.",
+    "description": "Lumbini is a Buddhist pilgrimage site in Rupandehi District, Lumbini Province, in the Terai plains of southern Nepal. It is identified as the birthplace of Siddhartha Gautama, the Buddha, and was inscribed on the UNESCO World Heritage List in 1997 under criteria (iii) and (vi). The inscribed property is small, about 1.95 hectares with a buffer zone of about 22.78 hectares, and is protected under Nepal's Ancient Monument Preservation Act. It is owned by the Government of Nepal and managed by the Lumbini Development Trust.\n\nThe archaeological conservation area contains the sacred garden, the Shakya Tank, the Maya Devi Temple and the sandstone Ashoka Pillar bearing a Pali inscription in Brahmi script. The Ashoka Pillar, erected in the third century BC, is the main documentary evidence for the site's identification. UNESCO describes excavated brick structures in a cross-wall system, Buddhist viharas from the third century BC to the fifth century AD and stupas from the third century BC to the fifteenth century AD, showing that Lumbini was an active pilgrimage centre over many centuries. The wider area also holds a master-planned monastic zone with temples and monasteries built by Buddhist communities from several countries, a museum and a research institute.\n\nA visit to Lumbini centres on the peaceful sacred garden, the Maya Devi Temple and the pillar, with the surrounding monastic precincts and the museum explored on foot, by cycle rickshaw or by local transport. Many pilgrims come for meditation and devotion rather than sightseeing, and the flat Terai landscape, the sacred pond and the tree-lined paths give the site a quiet, contemplative character.",
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/666/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "CC BY-SA IGO 3.0",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://ntb.gov.np/en/lumbini-province",
+        "publisher": "Nepal Tourism Board",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "maya-devi-temple": {
+    "short_description": "The main Buddhist temple at Lumbini, built over archaeological remains marking the traditional birthplace of the Buddha in Rupandehi District.",
+    "description": "Maya Devi Temple is the main Buddhist temple at Lumbini, in Rupandehi District, Lumbini Province. It stands inside the archaeological conservation area of the Lumbini World Heritage property, next to a sacred pool and within the sacred garden. The temple is named for Maya Devi, the mother of Siddhartha Gautama, and the site is traditionally identified as the place of the Buddha's birth.\n\nBrick structures beneath and around the temple were formerly dated to the third century BC, the period of the Mauryan emperor Ashoka, and the nearby Ashoka Pillar carries the inscription that identifies the site. Excavations reported in 2013 found the remains of an older timber shrine below the brickwork, pushing the sequence of worship here back to around the sixth century BC. The Maya Devi Temple area is therefore central to the archaeological case for Lumbini, alongside the excavated monasteries and stupas elsewhere in the property. The temple remains an active place of worship and pilgrimage rather than only a monument.\n\nPilgrims and visitors enter the temple to see the exposed archaeological remains and the marker associated with the birth, then walk the sacred garden and the pool beside it. The presentation is deliberately restrained, with the fragile brickwork protected and viewed from a walkway. Many visitors combine the temple with the Ashoka Pillar, the museum and the wider monastic zone, and the temple is busiest during Buddhist festivals and pilgrimage seasons.",
+    "notes": [
+      "The 2013 discovery of a timber shrine is attributed to published excavation reporting; the wider archaeological dating still depends on ongoing research.",
+      "The record's separate Wikidata Maya Devi item is a disambiguation page; this text relies on UNESCO's Lumbini property description."
+    ],
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/list/666/",
+        "publisher": "UNESCO World Heritage Centre",
+        "license": "CC BY-SA IGO 3.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "tilaurakot": {
+    "short_description": "An archaeological site in Kapilvastu District, on Nepal's UNESCO Tentative List as the remains of the ancient Shakya city of Kapilavastu.",
+    "description": "Tilaurakot is an archaeological site in Kapilvastu Municipality, Kapilvastu District, Lumbini Province, in the southern Terai. It lies about 25 km north-west of the Maya Devi Temple at Lumbini and is identified by Nepal's Department of Archaeology as the probable site of the ancient Shakyan capital, Kapilavastu, where the Buddha is said to have spent the first part of his life. It was submitted to Nepal's UNESCO Tentative List in 1996 as 'Tilaurakot, the archaeological remains of ancient Shakya Kingdom'; it is a tentative-list candidate, not an inscribed World Heritage property.\n\nThe site is among the better-preserved early historic city remains in South Asia. It consists of a fortified citadel of roughly 500 by 400 metres laid out on a regular grid, with an earthen and later brick wall that was built over an earlier wooden palisade. At its centre is a smaller walled complex with monumental gateways, and excavations have uncovered a stupa, tanks, industrial remains and a large quantity of iron slag radiocarbon-dated to around 400 BC. Finds at the site have been dated across a long sequence from early agricultural layers through Mauryan and later periods, and the city appears to have been planned from an early phase.\n\nA visit to Tilaurakot is an archaeological and historical experience rather than a monument visit. The remains are low, grassy and spread across open ground, so interpretation depends on the excavation reports and on walking the outlines of the walls, gates and central complex. The site's identification with Kapilavastu has been debated by scholars, and visitors should treat the attribution as the leading but not universally accepted reading. The area sits within the wider Buddhist circuit around Lumbini and Kapilvastu, alongside sites such as Nigali Sagar.",
+    "notes": [
+      "Tilaurakot is on Nepal's UNESCO Tentative List (1996), not inscribed on the World Heritage List.",
+      "The identification of Tilaurakot with ancient Kapilavastu remains debated; the text presents it as a leading archaeological attribution."
+    ],
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/tentativelists/840/",
+        "publisher": "UNESCO World Heritage Centre",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Tilaurakot",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "bardiya-national-park": {
+    "short_description": "A large protected wilderness in Bardiya District, Lumbini Province, with Sal forest, grassland, the Karnali River and abundant wildlife.",
+    "description": "Bardiya National Park is a protected area in Bardiya District, Lumbini Province, in the western Terai of Nepal. It covers about 968 square kilometres, making it the largest and among the least disturbed national parks in Nepal's Terai, and it adjoins the eastern bank of the Karnali River, with the Babai River running through it. The park was first set aside as a hunting reserve in 1969, gazetted as a wildlife reserve in 1976 and upgraded to a national park in 1988, when it was known as Royal Bardia National Park. Its northern edge follows the crest of the Siwalik Hills.\n\nThe park's value lies in its range of habitats and the wildlife they support. About seventy percent of the area is forest, with the remainder a mix of grassland, savannah and riverine forest, and its flora and fauna inventories run to hundreds of species. The park is known for tigers, one-horned rhinoceros, Asian elephants, swamp deer and Gangetic dolphin in the Karnali, along with gharial and marsh mugger crocodiles and a long bird list that includes the Bengal florican and sarus crane. Together with the neighbouring Banke National Park it forms a large connected protected landscape that is important for tiger conservation.\n\nAccess is usually from Nepalgunj, from where the park headquarters at Thakurdwara is reached by road. Visitors stay in jungle lodges near the park boundary and explore on guided activities such as jungle walks, jeep drives, boat trips on the Karnali and river-side birdwatching. The regulated format suits a visit of several days, with mornings and late afternoons given to wildlife viewing and the middle of the day to rest. The dry months from autumn to spring are the most comfortable, while the pre-monsoon period is hot and the monsoon brings rain and restricted access.",
+    "add_sources": [
+      {
+        "url": "https://ntb.gov.np/bardiya",
+        "publisher": "Nepal Tourism Board",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Bardiya_National_Park",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "rani-mahal": {
+    "short_description": "A nineteenth-century Rana palace on the banks of the Kali Gandaki in Palpa District, Lumbini Province, since restored and opened as a museum.",
+    "description": "Rani Mahal, also called Ranighat Palace, is a historic Rana palace on the banks of the Kali Gandaki River in Palpa District, Lumbini Province. It was built in 1893 by General Khadga Shamsher Jang Bahadur Rana, who had been exiled to the Palpa area after a failed attempt to remove the prime minister. The name means Queen's Palace: the building was raised in memory of his wife, Tej Kumari Devi, who died in 1892. It is not on the UNESCO World Heritage List, but the nearby medieval town of Tansen in the same district is on Nepal's Tentative List.\n\nThe palace is a product of its builder's position and resources. It was designed by a British architect and built over about four years with workers brought from India, a detachment of soldiers and local labour, and the surrounding forest and river ghats were renamed in the queen's memory. Khadga Shamsher abandoned Rani Mahal in 1902 when he left for India, after which the building stood without a caretaker and deteriorated through the twentieth century. The Government of Nepal funded a restoration completed in the 2010s, and a museum was established in the building. It is sometimes compared to the Taj Mahal because both were built in memory of a wife and stand beside a river.\n\nThe palace stands in a quiet riverside setting at the foot of forested hills, below Tansen. Visitors reach it by a short motorable road from Tansen or by a longer foot trail, and generally combine it with sightseeing in Tansen itself. The visit is largely an architectural and scenic one: walking the restored building, looking out over the Kali Gandaki, and taking in the wooded slopes and riverbank around the palace.",
+    "notes": [
+      "Rani Mahal is not a World Heritage property; only Tansen, in the same district, is a Tentative List entry.",
+      "The record had no coordinates for this site, and restoration and opening details were reported but not checked against a government source."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Ranighat_Palace",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://ntb.gov.np/en/lumbini-province",
+        "publisher": "Nepal Tourism Board",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "tansen": {
+    "short_description": "A historic Newar hill town and the administrative centre of Palpa District, Lumbini Province, on Nepal's UNESCO Tentative List.",
+    "description": "Tansen is a municipality and the administrative centre of Palpa District, Lumbini Province, in the hills of central Nepal. It sits at an elevation reported at about 1,370 metres on the southern slope of Shreenagar hill, overlooking the Kali Gandaki valley, roughly between Butwal and Pokhara. The town was submitted to Nepal's UNESCO Tentative List in 2008 as 'The Medieval Town of Tansen' under criteria (iii), (iv) and (vi); it is a tentative-list candidate and has not been inscribed on the World Heritage List.\n\nTansen's history runs back to around the eleventh century, when the area formed part of the Bara Magarat, the twelve territories administered by Magar rulers. It later developed as a market centre for Newar traders and artisans known for metalwork and dhaka cloth, and it preserves a compact settlement of steep, narrow lanes lined with Newar shophouses, temples and monuments. Surviving structures include the Bhairab Temple, the Amar Narayan Temple, the Ran-Ujjeshwari Bhagawati Temple and the Tansen Durbar, the palace of the Rana governors, which was destroyed in 2005 and later rebuilt. Palpa was also the seat of the Sen kingdom that ruled the region for nearly three centuries.\n\nVisitors experience Tansen on foot. The town centre is a walkable maze of alleys and small squares, and the walking is what reveals its architecture and street life. The surrounding hills offer viewpoints and short walks, and Tansen works well as a base for exploring Palpa District, including the nearby Rani Mahal on the Kali Gandaki. Its position on the highway between Butwal and Pokhara makes it a convenient stop between the Terai and the Annapurna region.",
+    "notes": [
+      "Tansen is on Nepal's UNESCO Tentative List (2008), not inscribed on the World Heritage List.",
+      "The mapped point represents the municipality rather than the town centre; the elevation of about 1,372 m comes from the Tentative List entry."
+    ],
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/tentativelists/5262/",
+        "publisher": "UNESCO World Heritage Centre",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Tansen,_Nepal",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "swargadwari": {
+    "short_description": "A hilltop Hindu pilgrimage site in Pyuthan District, Lumbini Province, associated with cows and the legacy of Swami Hamsananda.",
+    "description": "Swargadwari is a hilltop temple and pilgrimage site in Pyuthan District, Lumbini Province, in the mid-hills of western Nepal. It stands on a ridge above the surrounding valleys and is listed in Nepal's national inventory of cultural and historic heritage sites. The site is dedicated to Hindu worship with a special emphasis on the role of cows, and it is regarded as one of the better-known pilgrimage destinations in the country.\n\nThe temple is associated with Guru Maharaj Narayana Gautama Khatri, also known as Swami Hamsananda, who is said to have founded it and who spent much of his life in the area herding and milking large numbers of cattle. That pastoral tradition remains part of the site's identity, and resident cattle have long been kept at the temple complex. Over time the site developed into a religious centre with temples, ashrams and accommodation for pilgrims, and it has also been known for the donations of fodder and supplies that sustain its animals.\n\nPilgrims come to Swargadwari for darshan and for the quiet hilltop setting, walking or driving up to the temple complex and staying in its simple accommodation. The ridge gives wide views over the surrounding hills and the Dang and Pyuthan valleys. The site is busiest during major festivals and quieter on ordinary days, and a cable car connecting the base to the temple complex has been developed to improve access.",
+    "notes": [
+      "Swargadwari is not a World Heritage or Ramsar site; it is listed in Nepal's national heritage inventory.",
+      "The record's coordinates and current visitor access were not verified against a current official source; the cable car status should be confirmed locally."
+    ],
+    "add_sources": [
+      {
+        "url": "https://en.wikipedia.org/wiki/Swargadwari",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  },
+  "ramagrama-stupa": {
+    "short_description": "A buried Buddhist relic stupa in Parasi District, Lumbini Province, on Nepal's UNESCO Tentative List as the relic stupa of the Buddha.",
+    "description": "Ramagrama Stupa is an ancient Buddhist stupa in Ramgram Municipality, Parasi District (Nawalparasi West), Lumbini Province, in the western Terai. It was submitted to Nepal's UNESCO Tentative List in 1996 as 'Ramagrama, the relic stupa of Lord Buddha' and is a tentative-list candidate, not an inscribed World Heritage property. UNESCO's entry describes it as the only undisturbed original stupa containing relics of the Buddha, and Nepal's Department of Archaeology dates its construction to between the Mauryan and Gupta periods.\n\nAccording to Buddhist tradition, after the Buddha's death his remains were divided among eight kingdoms, each of which enshrined a portion in a stupa, with Ramagrama being the stupa of the Koliya kingdom. When the Mauryan emperor Ashoka later sought to collect the relics from these stupas to redistribute them, tradition holds that he was prevented at Ramagrama by a naga guarding the site, leaving it the one original stupa never opened. The reliquary is understood to remain in place. The mound is roughly 7 metres high with a complex measuring about 10 metres high and 23.5 metres in diameter, and the core has not been excavated. A geophysical survey detected a quadrangular Kushan-era monastery buried beneath the surface.\n\nBecause the stupa is unexcavated and covered by earth, a visit is quiet and low-key rather than monumental: visitors see the grassy mound and the surrounding site rather than exposed structures. The location is an active pilgrimage destination with a long history of veneration, and it sits within the wider Buddhist circuit of Lumbini Province along with Lumbini and Tilaurakot. Development and conservation planning for the site has been under way in recent years, with a masterplan for its conservation and enhancement presented in 2023.",
+    "notes": [
+      "Ramagrama is on Nepal's UNESCO Tentative List (1996), not inscribed on the World Heritage List.",
+      "UNESCO's Tentative List entry describes it as the only undisturbed original relic stupa; this reflects the State Party's submission and Buddhist tradition rather than independent archaeological confirmation, since the core is unexcavated.",
+      "The district is recorded as Parasi (Nawalparasi West), which UNESCO's 1996 entry gives as Nawalparasi; the modern administrative name is Nawalparasi West / Parasi."
+    ],
+    "add_sources": [
+      {
+        "url": "https://whc.unesco.org/en/tentativelists/843/",
+        "publisher": "UNESCO World Heritage Centre",
+        "fields": ["description"]
+      },
+      {
+        "url": "https://en.wikipedia.org/wiki/Ramagrama_stupa",
+        "publisher": "Wikipedia",
+        "license": "CC BY-SA 4.0",
+        "fields": ["description"]
+      }
+    ]
+  }
+}

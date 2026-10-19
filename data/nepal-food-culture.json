@@ -210,11 +210,11 @@
         "https://en.wikipedia.org/wiki/Newar"
       ],
       "image": {
-        "url": "/images/food-culture/newari-khaja.jpg",
-        "alt": "A Newar khaja set with assorted traditional foods.",
-        "creator": "Gaurav Dhwaj Khadka",
+        "url": "/images/food-culture/samay-baji.jpg",
+        "alt": "A Newar Samay Baji platter with beaten rice, beans, greens and traditional accompaniments.",
+        "creator": "Ashish J.",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Khaja_Set_2.jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Samaybaji.JPG"
       }
     },
     {
@@ -235,12 +235,11 @@
         "https://en.wikipedia.org/wiki/Newa_cuisine"
       ],
       "image": {
-        "url": "/images/destinations/kathmandu-valley.jpg",
-        "alt": "A sadhu at Kathmandu Durbar Square in the Kathmandu Valley.",
-        "creator": "Anton Gutmann / Aristeas",
+        "url": "/images/food-culture/yomari-food.jpg",
+        "alt": "Two steamed Yomari rice-flour dumplings served in a bowl.",
+        "creator": "Gaurav Dhwaj Khadka",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Saddhu_at_Durbar_Square,_Kathmandu_(edited).jpg",
-        "context_note": "This photo shows a heritage site in the Kathmandu Valley, not Yomari dumplings."
+        "source_url": "https://commons.wikimedia.org/wiki/File:Yomari_2.jpg"
       }
     },
     {
@@ -772,10 +771,10 @@
       ],
       "image": {
         "url": "/images/food-culture/far-west-representative-dal-bhat.jpg",
-        "alt": "A Nepali dal-bhat meal with rice, lentil soup, vegetables and accompaniments.",
-        "creator": "Gaurav Dhwaj Khadka",
+        "alt": "A Nepali dal-bhat meal with rice, lentils, vegetables and side dishes.",
+        "creator": "Subhashish Panigrahi",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Dal_Bhat_Tarkari_2.jpg",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Nepali_dal-bhat-tarkari.jpg",
         "context_note": "Representative everyday Nepali food; not a distinct or exclusive far-western recipe."
       }
     },
