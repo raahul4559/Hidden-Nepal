@@ -61,25 +61,29 @@ describe("food and culture explorer data", () => {
 
   it("provides photos for all food entries and labels representative images", () => {
     const food = FOOD_CULTURE_EXPERIENCES.filter((item) => item.kind === "food");
-    expect(food.filter((item) => item.image)).toHaveLength(30);
-    expect(food.filter((item) => !item.image)).toHaveLength(0);
-    expect(new Set(food.map((item) => item.image?.url)).size).toBe(food.length);
-    const imageHashes = food.map((item) =>
+    const illustrated = food.filter((item) => item.image);
+    expect(illustrated).toHaveLength(28);
+    expect(food.filter((item) => !item.image).map((item) => item.slug).sort()).toEqual([
+      "eastern-nepal-wachipa",
+      "eastern-nepal-yangben",
+    ]);
+    expect(new Set(illustrated.map((item) => item.image?.url)).size).toBe(illustrated.length);
+    const imageHashes = illustrated.map((item) =>
       createHash("sha256")
         .update(readFileSync(join(process.cwd(), "public", item.image!.url.slice(1))))
         .digest("hex"),
     );
-    expect(new Set(imageHashes).size).toBe(food.length);
+    expect(new Set(imageHashes).size).toBe(illustrated.length);
     const samayBaji = food.find((item) => item.slug === "newar-samay-baji")?.image;
     expect(samayBaji?.url).toBe("/images/food-culture/samay-baji.jpg");
     expect(samayBaji?.source_url).toBe("https://commons.wikimedia.org/wiki/File:Samaybaji.JPG");
     expect(samayBaji?.creator).toBe("Ashish J.");
-    expect(
-      food.filter((item) => ["eastern-nepal-yangben", "far-western-deuda-food"].includes(item.slug))
-        .every((item) => item.image?.context_note),
-    ).toBe(true);
+    expect(food.find((item) => item.slug === "far-western-deuda-food")?.image?.context_note).toBeTruthy();
     expect(FOOD_CULTURE_METADATA.coverage_notes).toContain(
-      "30 of 30 food entries have locally bundled, attributed images. Dish-specific photos are used where found; representative images are visibly labeled and explain what they do and do not depict.",
+      "28 of 30 food entries have locally bundled, attributed images. Cards without a directly matching, reusable photo omit the image until one is verified.",
+    );
+    expect(FOOD_CULTURE_METADATA.limitations).toContain(
+      "Directly matching, reusable photos were not verified for Wachipa or Yangben; those food cards intentionally omit photos pending verification.",
     );
   });
 

@@ -104,9 +104,18 @@ sample are left untouched to preserve that sample content.
 Selected Wikimedia Commons photos are bundled as size-limited local assets so
 the website does not depend on Commons availability or rate limits at runtime.
 Each image retains its Commons source link, license and author attribution.
-The researched destination catalogue currently has 17 curated photos for 59
+The researched destination catalogue has a curated photo for all 59
 destinations; entries without a directly relevant verified photo use the
 designed fallback rather than an unrelated image.
+
+Every researched destination carries a written, source-attributed body: a
+one-sentence summary for cards and page headers plus a three-paragraph
+"About this place" section covering what and where the place is, what makes it
+notable, and what a visit involves. Each entry records the sources behind its
+copy, and the page lists them. Figures that could not be reconciled between
+sources are described approximately or left out entirely, with the
+discrepancy recorded in the record's `data_quality_notes` rather than
+published as fact.
 
 The home page Food and Culture tiles open dedicated, searchable directories at
 [`/food`](./src/app/food/page.tsx) and [`/culture`](./src/app/culture/page.tsx).
@@ -155,43 +164,43 @@ behaviour, indexes and planned models are in
 
 ## Scripts
 
-| Script                     | What it does                                          |
-| -------------------------- | ----------------------------------------------------- |
-| `npm run dev`              | Development server                                    |
-| `npm run build`            | `prisma generate` + production build                  |
-| `npm run start`            | Serve the production build                            |
-| `npm run lint`             | ESLint                                                |
-| `npm run typecheck`        | Generate route types and run `tsc --noEmit`           |
-| `npm test`                 | Vitest unit tests (integration tests skip without a test DB) |
-| `npm run test:integration` | Database tests; needs `TEST_DATABASE_URL` (name ends in `_test`) |
-| `npm run test:e2e`         | Playwright (builds and serves on port 3100)           |
-| `npm run check`            | lint + typecheck + unit tests                         |
-| `npm run db:generate`      | Generate the Prisma client                            |
-| `npm run db:migrate`       | Create/apply migrations in development                |
-| `npm run db:deploy`        | Apply committed migrations (production/CI)            |
-| `npm run db:seed`          | Seed reference data (+ samples unless disabled)       |
-| `npm run db:studio`        | Prisma Studio                                         |
-| `npm run admin:grant -- <email> [--revoke]` | Make an existing account ADMIN (or revert to USER) |
+| Script                                      | What it does                                                     |
+| ------------------------------------------- | ---------------------------------------------------------------- |
+| `npm run dev`                               | Development server                                               |
+| `npm run build`                             | `prisma generate` + production build                             |
+| `npm run start`                             | Serve the production build                                       |
+| `npm run lint`                              | ESLint                                                           |
+| `npm run typecheck`                         | Generate route types and run `tsc --noEmit`                      |
+| `npm test`                                  | Vitest unit tests (integration tests skip without a test DB)     |
+| `npm run test:integration`                  | Database tests; needs `TEST_DATABASE_URL` (name ends in `_test`) |
+| `npm run test:e2e`                          | Playwright (builds and serves on port 3100)                      |
+| `npm run check`                             | lint + typecheck + unit tests                                    |
+| `npm run db:generate`                       | Generate the Prisma client                                       |
+| `npm run db:migrate`                        | Create/apply migrations in development                           |
+| `npm run db:deploy`                         | Apply committed migrations (production/CI)                       |
+| `npm run db:seed`                           | Seed reference data (+ samples unless disabled)                  |
+| `npm run db:studio`                         | Prisma Studio                                                    |
+| `npm run admin:grant -- <email> [--revoke]` | Make an existing account ADMIN (or revert to USER)               |
 
 The first Playwright run needs a browser: `npx playwright install chromium`.
 
 ## Routes
 
-| Route | What it shows |
-| --- | --- |
-| `/` | Hero search, 5 experiences, featured (DB), Off the map (DB), provinces with live counts, seasons, responsible travel, community CTA |
-| `/explore` | Server-side search, filters and pagination. Params: `q`, `theme`, `category`, `region`, `district`, `season`, `difficulty`, `budget`, `sort` (`featured`/`name`), `page`. Invalid values are ignored. |
-| `/provinces`, `/provinces/[slug]` | All seven provinces; each prerendered, with its published destinations, filters and pagination |
-| `/sitemap.xml`, `/robots.txt` | Sitemap of static routes, provinces and published non-sample destinations (read at request time) |
-| `/destinations/[slug]` | Published destination: gallery, description, sources, related places. Practical details (difficulty, budget, seasons, activities, access, safety, coordinates) only when `VERIFIED` |
-| `/contribute` | Place suggestion form, stored as `PlaceSubmission` (status `PENDING`) |
-| `/credits` | Attribution for bundled photography |
-| `/login`, `/register` | Sign in and create an account. `?next=` returns to a same-site path only |
-| `/account` | Profile, saved destinations, sign out (this device or everywhere). Signed-in users only |
-| `/admin` | Role management. Admins only; everyone else gets a 404 |
-| `/api/auth/*` | Auth.js endpoints (CSRF-protected) |
-| `/api/me/saved-destinations` | `GET` list, `POST`/`DELETE` `{ slug }`. Session user only |
-| `/api/admin/users/[id]/role` | `PATCH { role }`. Admins only; not their own role |
+| Route                             | What it shows                                                                                                                                                                                         |
+| --------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                               | Hero search, 5 experiences, featured (DB), Off the map (DB), provinces with live counts, seasons, responsible travel, community CTA                                                                   |
+| `/explore`                        | Server-side search, filters and pagination. Params: `q`, `theme`, `category`, `region`, `district`, `season`, `difficulty`, `budget`, `sort` (`featured`/`name`), `page`. Invalid values are ignored. |
+| `/provinces`, `/provinces/[slug]` | All seven provinces; each prerendered, with its published destinations, filters and pagination                                                                                                        |
+| `/sitemap.xml`, `/robots.txt`     | Sitemap of static routes, provinces and published non-sample destinations (read at request time)                                                                                                      |
+| `/destinations/[slug]`            | Published destination: gallery, description, sources, related places. Practical details (difficulty, budget, seasons, activities, access, safety, coordinates) only when `VERIFIED`                   |
+| `/contribute`                     | Place suggestion form, stored as `PlaceSubmission` (status `PENDING`)                                                                                                                                 |
+| `/credits`                        | Attribution for bundled photography                                                                                                                                                                   |
+| `/login`, `/register`             | Sign in and create an account. `?next=` returns to a same-site path only                                                                                                                              |
+| `/account`                        | Profile, saved destinations, sign out (this device or everywhere). Signed-in users only                                                                                                               |
+| `/admin`                          | Role management. Admins only; everyone else gets a 404                                                                                                                                                |
+| `/api/auth/*`                     | Auth.js endpoints (CSRF-protected)                                                                                                                                                                    |
+| `/api/me/saved-destinations`      | `GET` list, `POST`/`DELETE` `{ slug }`. Session user only                                                                                                                                             |
+| `/api/admin/users/[id]/role`      | `PATCH { role }`. Admins only; not their own role                                                                                                                                                     |
 
 **Verified-only filters.** Season, difficulty and budget filters only match
 destinations whose `practicalInfoStatus` is `VERIFIED`. Placeholder or
@@ -241,18 +250,18 @@ signs it out everywhere.
 
 ### How it works
 
-| Concern | Approach |
-| --- | --- |
-| Passwords | scrypt (Node `crypto`, N=2¹⁷, r=8, p=1, random 16-byte salt) in `src/features/auth/password.ts`. A DB CHECK rejects anything not in the `scrypt$…` format. 10–128 characters, no composition rules. |
-| Sessions | Encrypted JWT cookie (Auth.js), 7 days, refreshed daily. HttpOnly, SameSite=Lax, Secure on HTTPS. The token holds only the user id and `sessionVersion`. |
-| Current user | `getCurrentUser()` in `src/features/auth/session.ts` re-reads the user (role included) from the database on every request. Role changes apply immediately; bumping `sessionVersion` revokes every session ("Sign out everywhere", `admin:grant --revoke`). |
-| Pages | `requireUser()` redirects to `/login?next=…`; `requireAdminPage()` returns 404 for non-admins. `src/proxy.ts` only adds an early redirect when there is no session cookie. It is not the access check. |
-| Server Actions | Each resolves the user itself (`getCurrentUser`/`assertAdmin`) and validates input with Zod. Next.js rejects cross-origin calls. |
-| Route Handlers | Each calls `assertUser`/`assertAdmin`. Mutations also require a same-origin `Origin` header and `application/json` (`src/lib/http.ts`). |
-| Ownership | Saved destinations are always queried by the session user's id; ids sent by the browser are ignored. Admin services re-check the actor's role next to the data. |
-| Rate limits | PostgreSQL-backed fixed windows (`RateLimit` table, hashed keys): sign-in 5 per email and 30 per IP per 15 min; registration 5 per IP per hour. Enforced inside the Credentials provider, so direct posts to `/api/auth/callback/credentials` are limited too. |
-| CSRF | Server Actions: Next.js Origin check. Auth.js endpoints: double-submit CSRF token. JSON APIs: Origin check + JSON content type + SameSite cookies. |
-| Errors | Sign-in failures say "Incorrect email or password" for both unknown email and wrong password (with matching timing). Unexpected errors are logged without credentials and shown generically. |
+| Concern        | Approach                                                                                                                                                                                                                                                       |
+| -------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Passwords      | scrypt (Node `crypto`, N=2¹⁷, r=8, p=1, random 16-byte salt) in `src/features/auth/password.ts`. A DB CHECK rejects anything not in the `scrypt$…` format. 10–128 characters, no composition rules.                                                            |
+| Sessions       | Encrypted JWT cookie (Auth.js), 7 days, refreshed daily. HttpOnly, SameSite=Lax, Secure on HTTPS. The token holds only the user id and `sessionVersion`.                                                                                                       |
+| Current user   | `getCurrentUser()` in `src/features/auth/session.ts` re-reads the user (role included) from the database on every request. Role changes apply immediately; bumping `sessionVersion` revokes every session ("Sign out everywhere", `admin:grant --revoke`).     |
+| Pages          | `requireUser()` redirects to `/login?next=…`; `requireAdminPage()` returns 404 for non-admins. `src/proxy.ts` only adds an early redirect when there is no session cookie. It is not the access check.                                                         |
+| Server Actions | Each resolves the user itself (`getCurrentUser`/`assertAdmin`) and validates input with Zod. Next.js rejects cross-origin calls.                                                                                                                               |
+| Route Handlers | Each calls `assertUser`/`assertAdmin`. Mutations also require a same-origin `Origin` header and `application/json` (`src/lib/http.ts`).                                                                                                                        |
+| Ownership      | Saved destinations are always queried by the session user's id; ids sent by the browser are ignored. Admin services re-check the actor's role next to the data.                                                                                                |
+| Rate limits    | PostgreSQL-backed fixed windows (`RateLimit` table, hashed keys): sign-in 5 per email and 30 per IP per 15 min; registration 5 per IP per hour. Enforced inside the Credentials provider, so direct posts to `/api/auth/callback/credentials` are limited too. |
+| CSRF           | Server Actions: Next.js Origin check. Auth.js endpoints: double-submit CSRF token. JSON APIs: Origin check + JSON content type + SameSite cookies.                                                                                                             |
+| Errors         | Sign-in failures say "Incorrect email or password" for both unknown email and wrong password (with matching timing). Unexpected errors are logged without credentials and shown generically.                                                                   |
 
 **Known trade-offs**
 
@@ -347,14 +356,14 @@ Conventions:
 
 Tokens are defined in `src/app/globals.css`.
 
-| Token        | Hex       | Use                                        |
-| ------------ | --------- | ------------------------------------------ |
-| `navy`       | `#0B1F33` | Primary text, dark surfaces, primary button |
-| `himalaya`   | `#1769AA` | Links and focus ring on light surfaces     |
-| `teal`       | `#20B8A6` | Accent; text only on navy                  |
-| `gold`       | `#D6B36A` | Eyebrows, rules; focus ring on dark        |
-| `ivory`      | `#F7F5F0` | Page background                            |
-| `white`      | `#FFFFFF` | Cards, alternate section                   |
+| Token      | Hex       | Use                                         |
+| ---------- | --------- | ------------------------------------------- |
+| `navy`     | `#0B1F33` | Primary text, dark surfaces, primary button |
+| `himalaya` | `#1769AA` | Links and focus ring on light surfaces      |
+| `teal`     | `#20B8A6` | Accent; text only on navy                   |
+| `gold`     | `#D6B36A` | Eyebrows, rules; focus ring on dark         |
+| `ivory`    | `#F7F5F0` | Page background                             |
+| `white`    | `#FFFFFF` | Cards, alternate section                    |
 
 - Type: Manrope (interface) and Fraunces (editorial headings), via `next/font`.
 - `.surface-dark` / `.on-dark` swap semantic tokens for navy contexts,

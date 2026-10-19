@@ -4,7 +4,7 @@
     "research_date": "2026-10-19",
     "editorial_method": "Factual summaries are paraphrased from the linked references. This is a curated discovery guide, not an exhaustive inventory or a substitute for community-led interpretation.",
     "coverage_notes": [
-      "30 of 30 food entries have locally bundled, attributed images. Dish-specific photos are used where found; representative images are visibly labeled and explain what they do and do not depict.",
+      "28 of 30 food entries have locally bundled, attributed images. Cards without a directly matching, reusable photo omit the image until one is verified.",
     "All 43 cultural entries have locally bundled photos with creator, license and source metadata. Where a photo illustrates a related place, artwork or celebration rather than the exact practice, a visible context note says so.",
     "Contextual photos are not evidence that a particular event is occurring or that a depicted practice is universal; follow community-specific visitor and photography guidance.",
       "Includes representative foodways, festivals, performing arts, crafts and community traditions associated with all seven provinces.",
@@ -62,6 +62,7 @@
     "limitations": [
       "Nepal's food and cultural life is too diverse to represent completely in one directory; further community review and district-level research are needed.",
       "Items are discovery leads, not endorsements of commercial operators. No ratings, current event dates, prices or access guarantees are asserted.",
+      "Directly matching, reusable photos were not verified for Wachipa or Yangben; those food cards intentionally omit photos pending verification.",
       "Copyrighted prose and third-party photography are not copied into this dataset."
     ]
   },
@@ -485,15 +486,7 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Rai_people",
         "https://en.wikipedia.org/wiki/Nepalese_cuisine"
-      ],
-      "image": {
-        "url": "/images/food-culture/rai-cuisine-chart.jpg",
-        "alt": "A chart of Kirat Rai food and drink; this is a community-cuisine overview, not a dish-specific photograph of Wachipa.",
-        "creator": "Rai504089",
-        "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Varieties_of_Kirat_Rai_Cuisine_dishes_Chart.jpg",
-        "context_note": "This is a Kirat Rai cuisine chart, not a dedicated photograph of Wachipa."
-      }
+      ]
     },
     {
       "slug": "eastern-nepal-yangben",
@@ -512,15 +505,7 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Limbu_people",
         "https://en.wikipedia.org/wiki/Nepalese_cuisine"
-      ],
-      "image": {
-        "url": "/images/food-culture/yangben-lichen-reference.jpg",
-        "alt": "Rock-tripe lichen growing on rock; this is not a photo of a prepared Yangben dish or the species used in it.",
-        "creator": "ceridwen",
-        "license": "CC BY-SA 2.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Rock_tripe_lichen_on_Carn_Goedog,_another_view_-_geograph.org.uk_-_1448840.jpg",
-        "context_note": "Representative lichen reference photographed in Wales; it is not identified as the Limbu ingredient used for Yangben."
-      }
+      ]
     },
     {
       "slug": "maithil-fish-rice",
