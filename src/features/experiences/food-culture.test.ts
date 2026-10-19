@@ -71,19 +71,10 @@ describe("food and culture explorer data", () => {
     );
   });
 
-  it("includes six additional culture-specific photos with source context", () => {
+  it("has a locally bundled, credited photo for every culture entry", () => {
     const culture = FOOD_CULTURE_EXPERIENCES.filter((item) => item.kind === "culture");
-    expect(culture.filter((item) => item.image)).toHaveLength(27);
-    for (const slug of [
-      "holi-fagu-purnima",
-      "sherpa-mani-rimdu",
-      "mustang-tiji",
-      "tharu-maghi",
-      "newar-kumari-tradition",
-      "buddhist-thangka-workshops",
-    ]) {
-      expect(culture.find((item) => item.slug === slug)?.image, slug).toBeTruthy();
-    }
+    expect(culture.filter((item) => item.image)).toHaveLength(43);
+    expect(culture.filter((item) => !item.image).map((item) => item.slug)).toEqual([]);
     expect(culture.find((item) => item.slug === "tharu-maghi")?.image?.context_note).toMatch(
       /customs differ/i,
     );
@@ -93,6 +84,17 @@ describe("food and culture explorer data", () => {
     expect(culture.find((item) => item.slug === "buddhist-thangka-workshops")?.image?.context_note).toMatch(
       /not a photograph of a contemporary workshop/i,
     );
+    for (const slug of [
+      "mithila-samachakewa",
+      "newar-guthi",
+      "palpa-dhaka-craft",
+      "tamang-selo-and-damphu",
+      "maithili-language-and-folk-song",
+      "mithila-music-and-wedding-songs",
+      "nepal-lokta-paper-craft",
+    ]) {
+      expect(culture.find((item) => item.slug === slug)?.image?.context_note, slug).toBeTruthy();
+    }
   });
 
   it("uses the Kathmandu Valley place photo for Yomari with an explicit context note", () => {

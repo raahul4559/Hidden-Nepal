@@ -119,9 +119,11 @@ follow community guidance. Relevant Wikimedia Commons photographs are bundled
 locally in `public/images/food-culture/` for fast, reliable loading. Yomari
 uses its Kathmandu Valley destination photo as contextual place imagery. Each
 illustrated entry records its alt text, creator, license and Commons file-page
-link, which is displayed with the image. All 30 food entries and 27 of 43
-cultural entries have photos. Remaining cultural entries do not use unrelated
-images as substitutes.
+link, which is displayed with the image. All 30 food entries and all 43
+cultural entries have locally bundled photos. When a culture photo shows a
+related place, artwork or celebration rather than the exact practice, its
+context note makes that distinction explicit; the photo is illustrative, not
+evidence of a current event or universal custom.
 Where a dish-specific or region-specific photo was not available, the card
 shows a clearly labeled representative image and explains what it does and does
 not depict.

@@ -5,8 +5,8 @@
     "editorial_method": "Factual summaries are paraphrased from the linked references. This is a curated discovery guide, not an exhaustive inventory or a substitute for community-led interpretation.",
     "coverage_notes": [
       "30 of 30 food entries have locally bundled, attributed images. Dish-specific photos are used where found; representative images are visibly labeled and explain what they do and do not depict.",
-    "27 of 43 cultural entries have locally bundled, attributed photos. Added photos depict the named celebration or place where verified; some show a related scene rather than a comprehensive representation of the tradition.",
-    "16 cultural entries still need suitable, directly relevant photographs; no unrelated images are used to fill those gaps.",
+    "All 43 cultural entries have locally bundled photos with creator, license and source metadata. Where a photo illustrates a related place, artwork or celebration rather than the exact practice, a visible context note says so.",
+    "Contextual photos are not evidence that a particular event is occurring or that a depicted practice is universal; follow community-specific visitor and photography guidance.",
       "Includes representative foodways, festivals, performing arts, crafts and community traditions associated with all seven provinces.",
       "Practices vary by community, locality, family and year. A province tag indicates a useful place to begin exploring, not exclusive ownership or universal practice.",
       "Festival dates move with lunar calendars. Confirm current dates and visitor access locally; ask before photographing people, rituals or private religious spaces.",
@@ -947,7 +947,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Mithila_(region)",
         "https://en.wikipedia.org/wiki/Maithili_culture"
-      ]
+      ],
+      "image": {
+        "url": "/images/destinations/mithila-art.jpg",
+        "alt": "A Mithila wall painting created for the Tulsi Puja festival in Nepal.",
+        "creator": "Shravan012",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting.jpg",
+        "context_note": "This regional painting shows Mithila visual culture, not the Sama-Chakewa figures or gathering."
+      }
     },
     {
       "slug": "mithila-painting",
@@ -967,11 +975,11 @@
         "https://en.wikipedia.org/wiki/Mithila_(region)"
       ],
       "image": {
-        "url": "/images/food-culture/mithila-painting.jpg",
-        "alt": "An artist creating a Mithila painting.",
-        "creator": "Abhishek Singh",
-        "license": "CC BY-SA 2.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting_artist_-_Flickr_-_askmeaks.jpg"
+        "url": "/images/destinations/mithila-art.jpg",
+        "alt": "A Mithila wall painting created for the Tulsi Puja festival in Nepal.",
+        "creator": "Shravan012",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting.jpg"
       }
     },
     {
@@ -1088,7 +1096,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Yomari",
         "https://en.wikipedia.org/wiki/Newar"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/yomari-punhi.jpg",
+        "alt": "Two steamed Yomari rice-flour dumplings, a food associated with Yomari Punhi.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Yomari_1.jpg",
+        "context_note": "The photo shows the dumplings associated with the observance, not a festival gathering."
+      }
     },
     {
       "slug": "newar-guthi",
@@ -1106,7 +1122,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Guthi",
         "https://en.wikipedia.org/wiki/Newar"
-      ]
+      ],
+      "image": {
+        "url": "/images/destinations/kathmandu-valley.jpg",
+        "alt": "A sadhu at Kathmandu Durbar Square in the Kathmandu Valley.",
+        "creator": "Anton Gutmann / Aristeas",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Saddhu_at_Durbar_Square,_Kathmandu_(edited).jpg",
+        "context_note": "This shows a Kathmandu Valley heritage setting, not a guthi meeting or private institution."
+      }
     },
     {
       "slug": "newar-pauba-painting",
@@ -1251,7 +1275,14 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Limbu_people",
         "https://www.britannica.com/place/Nepal/People"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/chasok-tangnam.jpg",
+        "alt": "A Limbu community dance and drumming performance at Chasok Tangnam in Taplejung.",
+        "creator": "Bibek Raj Hanggam",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Chasoke_Tangnam_Dhol_Nach_Lingtep_Meringden_Taplejung_Nepal.jpg"
+      }
     },
     {
       "slug": "eastern-nepal-dhaka-weaving",
@@ -1369,7 +1400,14 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Upper_Mustang",
         "https://whc.unesco.org/en/tentativelists/5263/"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/lo-manthang-heritage.jpg",
+        "alt": "The historic walled settlement of Lo Manthang in Upper Mustang.",
+        "creator": "Pratikshyabhatta",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Lo_Manthang,_The_Historic_Walled_City_of_Upper_Mustang.jpg"
+      }
     },
     {
       "slug": "tharu-maghi",
@@ -1416,7 +1454,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Tharu_people",
         "https://www.britannica.com/place/Nepal/People"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/tharu-hurdanga-dance.jpg",
+        "alt": "A traditional Hurdanga dance performed by Tharu people during Dashain.",
+        "creator": "Krish Dulal",
+        "license": "CC BY-SA 3.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Hurdanga_Dance_01.JPG",
+        "context_note": "This documents a Tharu Dashain dance; local dance names and performance styles vary."
+      }
     },
     {
       "slug": "tharu-homestay-and-village-walk",
@@ -1434,7 +1480,15 @@
       "explore": "Book with a community-run organization, agree on expectations and fees in advance, and ask before taking photographs.",
       "source_urls": [
         "https://en.wikipedia.org/wiki/Tharu_people"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/tharu-village-scene.jpg",
+        "alt": "A rural Tharu village scene in southern Nepal.",
+        "creator": "Rustyproof",
+        "license": "Public domain",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Tharu_village_scene.jpg",
+        "context_note": "A village scene, not a specific homestay or invitation to enter private homes."
+      }
     },
     {
       "slug": "palpa-dhaka-craft",
@@ -1452,7 +1506,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Tansen",
         "https://en.wikipedia.org/wiki/Dhaka_topi"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/dhaka-weaving.jpg",
+        "alt": "A Dhaka weaving center in Nepal.",
+        "creator": "Jim Holmes / AusAID",
+        "license": "CC BY 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Dhaka_Weaving_Center,_Nepal_(10692106583).jpg",
+        "context_note": "The source documents a Dhaka weaving center in Nepal but does not identify this as a Palpa workshop."
+      }
     },
     {
       "slug": "gaura-festival",
@@ -1522,7 +1584,14 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Sinja_Valley",
         "https://en.wikipedia.org/wiki/Khas_language"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/sinja-valley-heritage.jpg",
+        "alt": "Sinja Valley in winter in Jumla, Nepal.",
+        "creator": "asoqpathak",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sinja_Valley_in_Winter.jpg"
+      }
     },
     {
       "slug": "karnali-deuda",
@@ -1566,7 +1635,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Tamang_Selo",
         "https://en.wikipedia.org/wiki/Tamang_people"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/sonam-lhosar.jpg",
+        "alt": "A child at a Sonam Lhosar celebration in Nepal.",
+        "creator": "Wikimedman",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sonam_Lhosar_Portrait.jpg",
+        "context_note": "This photo shows a Sonam Lhosar celebration, not a Tamang Selo music performance."
+      }
     },
     {
       "slug": "tamang-lhosar",
@@ -1609,7 +1686,15 @@
       "source_urls": [
         "https://www.britannica.com/topic/Sherpa-people",
         "https://en.wikipedia.org/wiki/Sherpa_people"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/sherpa-village-lobuche.jpg",
+        "alt": "A Sherpa lodge in Lobuche village, Solukhumbu.",
+        "creator": "Gerd Eichmann",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Lobuche-12-Sherpa_Lodge-2007-gje.jpg",
+        "context_note": "A village and lodge view, not a depiction of every Sherpa language or family tradition."
+      }
     },
     {
       "slug": "limbu-mundhum-storytelling",
@@ -1627,7 +1712,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Mundhum",
         "https://en.wikipedia.org/wiki/Limbu_people"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/chasok-tangnam.jpg",
+        "alt": "A Limbu cultural performance at Chasok Tangnam in eastern Nepal.",
+        "creator": "Bibek Raj Hanggam",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Chasoke_Tangnam_Dhol_Nach_Lingtep_Meringden_Taplejung_Nepal.jpg",
+        "context_note": "This shows a public Chasok Tangnam performance, not restricted Mundhum oral or ritual knowledge."
+      }
     },
     {
       "slug": "maithili-language-and-folk-song",
@@ -1645,7 +1738,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Maithili_language",
         "https://en.wikipedia.org/wiki/Maithili_culture"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/mithila-painting.jpg",
+        "alt": "An artist creating a Mithila painting in the Mithila cultural region.",
+        "creator": "Abhishek Singh",
+        "license": "CC BY-SA 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting_artist_-_Flickr_-_askmeaks.jpg",
+        "context_note": "This shows Mithila visual culture, not a Maithili-language or folk-song performance."
+      }
     },
     {
       "slug": "mithila-music-and-wedding-songs",
@@ -1664,7 +1765,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Maithili_culture",
         "https://en.wikipedia.org/wiki/Maithili_language"
-      ]
+      ],
+      "image": {
+        "url": "/images/destinations/mithila-art.jpg",
+        "alt": "A Mithila wall painting created for the Tulsi Puja festival in Nepal.",
+        "creator": "Shravan012",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting.jpg",
+        "context_note": "This depicts Mithila painting in the region, not wedding or seasonal singing."
+      }
     },
     {
       "slug": "newar-kumari-tradition",
@@ -1737,7 +1846,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Lokta_paper",
         "https://www.britannica.com/place/Nepal/People"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/lokta-paper-enterprise.jpg",
+        "alt": "The Malika Handmade Paper facility in Nepal, associated with lokta paper production.",
+        "creator": "USAID Biodiversity & Forestry",
+        "license": "Public domain",
+        "source_url": "https://commons.wikimedia.org/wiki/File:USAID_Measuring_Impact_Conservation_Enterprise_Retrospective_(Nepal;_Asian_Network_for_Sustainable_Agriculture_and_Bioresrouces)_(39396522075).jpg",
+        "context_note": "This shows a lokta-paper producer's facility, not the paper-making process."
+      }
     },
     {
       "slug": "buddhist-prayer-flags-and-courtesy",
@@ -1757,7 +1874,15 @@
       "source_urls": [
         "https://www.britannica.com/place/Nepal/People",
         "https://en.wikipedia.org/wiki/Buddhism_in_Nepal"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/buddhist-prayer-flags.jpg",
+        "alt": "Colorful Buddhist prayer flags at Namo Buddha monastery in Nepal.",
+        "creator": "Gagan Raj Rai",
+        "license": "CC BY-SA 3.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Colorful_flags_in_buddhist_monastry.JPG",
+        "context_note": "This shows prayer flags at one monastery; visitor access and photography rules vary by site."
+      }
     },
     {
       "slug": "newar-jatra-processions",
