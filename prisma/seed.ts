@@ -2,6 +2,8 @@
  * `npm run db:seed` (prisma db seed). Safe to run repeatedly.
  *
  * - Always: Nepal's seven provinces and the experience categories.
+ * - By default: researched destinations from data/nepal-tourism-destinations.json;
+ *   records needing review are saved as drafts.
  * - Unless SEED_SAMPLE_DATA=false: four DEVELOPMENT SAMPLE destinations whose
  *   practical details are placeholders (see prisma/seed/sample-destinations.ts).
  */
@@ -24,7 +26,9 @@ seedDatabase(prisma, resolveSeedOptions(process.env))
   .then((result) => {
     console.log(
       `Seeded ${result.regions} provinces, ${result.categories} categories, ${result.activities} activities, ` +
-        `${result.sampleDestinations} sample destinations (placeholder practical info).`,
+        `${result.researchedPublished} researched destinations (published), ${result.researchedDrafts} researched destinations (draft), ` +
+        `${result.preservedSampleDestinations} existing sample destinations preserved, and ` +
+        `${result.sampleDestinations} development sample destinations.`,
     );
   })
   .catch((error) => {

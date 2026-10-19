@@ -77,18 +77,54 @@ DATABASE_URL="postgresql://USER:PASSWORD@HOST/DB?sslmode=require"
 ```bash
 npm run db:generate    # prisma generate (also runs on install and build)
 npm run db:migrate     # development: apply migrations, create new ones from schema changes
-npm run db:seed        # provinces, categories and 4 sample destinations
+npm run db:seed        # reference data, researched destination records and optional samples
 ```
 
 In production or CI, apply committed migrations without creating new ones:
 
 ```bash
 npm run db:deploy      # prisma migrate deploy
-SEED_SAMPLE_DATA=false npm run db:seed   # reference data only
+SEED_SAMPLE_DATA=false npm run db:seed   # reference and researched data; no development samples
 ```
 
 The seed is **idempotent**. Rows are upserted by slug and a destination's
 categories, images and seasons are replaced, so re-running never duplicates.
+
+The researched catalogue in [`data/nepal-tourism-destinations.json`](./data/nepal-tourism-destinations.json)
+is imported and published by default so the full 59-record inventory is
+available through Explore and province pages. Publication makes the sourced
+destination entries discoverable; it does not certify every detail.
+Practical information remains `UNVERIFIED` until an editor verifies it, so
+coordinates, seasons, activities and access advice are not presented as
+confirmed visitor guidance. Six destinations are curated for the homepage
+feature section.
+`SEED_RESEARCHED_DATA=false` skips the researched catalogue. When development
+samples are enabled, researched records with the same slug as an existing
+sample are left untouched to preserve that sample content.
+Selected Wikimedia Commons photos are bundled as size-limited local assets so
+the website does not depend on Commons availability or rate limits at runtime.
+Each image retains its Commons source link, license and author attribution.
+The researched destination catalogue currently has 17 curated photos for 59
+destinations; entries without a directly relevant verified photo use the
+designed fallback rather than an unrelated image.
+
+The home page Food and Culture tiles open dedicated, searchable directories at
+[`/food`](./src/app/food/page.tsx) and [`/culture`](./src/app/culture/page.tsx).
+Their 73 paraphrased discovery entries are catalogued in
+[`data/nepal-food-culture.json`](./data/nepal-food-culture.json) with regional
+tags and item-level references. The directory is a starting inventory rather
+than an exhaustive or community-approved account of every tradition; practices
+and festival dates vary, so visitors are encouraged to confirm locally and
+follow community guidance. Relevant Wikimedia Commons photographs are bundled
+locally in `public/images/food-culture/` for fast, reliable loading. Yomari
+uses its Kathmandu Valley destination photo as contextual place imagery. Each
+illustrated entry records its alt text, creator, license and Commons file-page
+link, which is displayed with the image. All 30 food entries and 27 of 43
+cultural entries have photos. Remaining cultural entries do not use unrelated
+images as substitutes.
+Where a dish-specific or region-specific photo was not available, the card
+shows a clearly labeled representative image and explains what it does and does
+not depict.
 
 **Sample destinations** (Rara Lake, Tansen, Khaptad National Park, Tsum Valley)
 are for development only:

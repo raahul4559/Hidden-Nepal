@@ -15,8 +15,6 @@ import type { DestinationInput } from "@/features/destinations/validation";
 
 const PLACEHOLDER = "Development placeholder. Not researched or verified.";
 
-const commonsThumb = (path: string, file: string) =>
-  `https://upload.wikimedia.org/wikipedia/commons/thumb/${path}/${file}/1920px-${file}`;
 const commonsPage = (file: string) => `https://commons.wikimedia.org/wiki/File:${file}`;
 
 const wikipedia = (article: string, title: string) => ({
@@ -56,7 +54,7 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
     sources: [wikipedia("Rara_Lake", "Rara Lake"), wikipedia("Rara_National_Park", "Rara National Park")],
     images: [
       {
-        url: commonsThumb("b/bf", "Rara_Lake%2C_Mugu%2C_Nepal.jpg"),
+        url: "/images/destinations/rara-lake.jpg",
         alt: "Morning mist over a calm lake, with forested hills behind and a wooden watchtower on the shore.",
         caption: "Rara Lake, Mugu",
         credit: "Chandra Chakradhar",
@@ -92,7 +90,7 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
     sources: [wikipedia("Tansen", "Tansen"), wikipedia("Palpa_District", "Palpa District")],
     images: [
       {
-        url: commonsThumb("9/9c", "Tansen%2C_Palpa%2C_Nepal.jpg"),
+        url: "/images/destinations/tansen.jpg",
         alt: "A hillside town of white and brick houses among trees, with a broad valley and mountains beyond.",
         caption: "Tansen, Palpa",
         credit: "Vyacheslav Argenberg",
@@ -100,7 +98,7 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
         sourceUrl: commonsPage("Tansen,_Palpa,_Nepal.jpg"),
       },
       {
-        url: commonsThumb("3/3a", "Tansen_at_sunset%2C_Palpa%2C_Nepal.jpg"),
+        url: "/images/destinations/tansen-sunset.jpg",
         alt: "Tansen’s rooftops at sunset.",
         caption: "Tansen at sunset",
         credit: "Vyacheslav Argenberg",
@@ -136,7 +134,7 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
     sources: [wikipedia("Khaptad_National_Park", "Khaptad National Park")],
     images: [
       {
-        url: commonsThumb("a/ac", "Khaptad_National_Park%2C_Nepal.jpg"),
+        url: "/images/destinations/khaptad-national-park.jpg",
         alt: "A green grassy slope rising to a bright blue sky with scattered clouds.",
         caption: "Grassland in Khaptad National Park",
         credit: "Anil Bhatta",
@@ -172,7 +170,7 @@ export const SAMPLE_DESTINATIONS: DestinationInput[] = [
     sources: [wikipedia("Tsum_Valley", "Tsum Valley")],
     images: [
       {
-        url: commonsThumb("4/4b", "Tsum_Valley.jpg"),
+        url: "/images/destinations/tsum-valley.jpg",
         alt: "A green valley floor with a winding river, small villages and yellow fields beneath steep, cloud-capped mountains.",
         caption: "Tsum Valley, Gorkha",
         credit: "Tsephu",

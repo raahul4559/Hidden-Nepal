@@ -12,7 +12,8 @@ import type { PrismaClient } from "@/generated/prisma/client";
 export async function upsertDestination(prisma: PrismaClient, input: DestinationInput) {
   const d = destinationInputSchema.parse(input);
 
-  return prisma.$transaction(async (tx) => {
+  return prisma.$transaction(
+    async (tx) => {
     const [region, categories, activities] = await Promise.all([
       tx.region.findUniqueOrThrow({ where: { slug: d.regionSlug }, select: { id: true } }),
       tx.category.findMany({
@@ -110,6 +111,10 @@ export async function upsertDestination(prisma: PrismaClient, input: Destination
       });
     }
 
-    return destination;
-  });
+      return destination;
+    },
+    {
+      timeout: 30000,
+    },
+  );
 }

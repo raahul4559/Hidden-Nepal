@@ -1,0 +1,1811 @@
+{
+  "metadata": {
+    "dataset_name": "Hidden Nepal Food and Culture Explorer",
+    "research_date": "2026-10-19",
+    "editorial_method": "Factual summaries are paraphrased from the linked references. This is a curated discovery guide, not an exhaustive inventory or a substitute for community-led interpretation.",
+    "coverage_notes": [
+      "30 of 30 food entries have locally bundled, attributed images. Dish-specific photos are used where found; representative images are visibly labeled and explain what they do and do not depict.",
+    "27 of 43 cultural entries have locally bundled, attributed photos. Added photos depict the named celebration or place where verified; some show a related scene rather than a comprehensive representation of the tradition.",
+    "16 cultural entries still need suitable, directly relevant photographs; no unrelated images are used to fill those gaps.",
+      "Includes representative foodways, festivals, performing arts, crafts and community traditions associated with all seven provinces.",
+      "Practices vary by community, locality, family and year. A province tag indicates a useful place to begin exploring, not exclusive ownership or universal practice.",
+      "Festival dates move with lunar calendars. Confirm current dates and visitor access locally; ask before photographing people, rituals or private religious spaces.",
+      "Food availability and ingredients vary. Ask vendors about allergens, meat, dairy and preparation practices."
+    ],
+    "sources_used": [
+      {
+        "publisher": "Encyclopaedia Britannica",
+        "url": "https://www.britannica.com/place/Nepal/People",
+        "use": "Regional ethnic, linguistic and religious diversity; cultural geography."
+      },
+      {
+        "publisher": "Encyclopaedia Britannica",
+        "url": "https://www.britannica.com/place/Nepal/Daily-life-and-social-customs",
+        "use": "Daily life and social customs; broad geographic context."
+      },
+      {
+        "publisher": "Wikimedia Foundation, Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Nepalese_cuisine",
+        "use": "Reference overview of Nepalese foodways; used for paraphrased discovery summaries, not copied text."
+      },
+      {
+        "publisher": "Wikimedia Foundation, Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Culture_of_Nepal",
+        "use": "Reference overview of Nepal's cultural and festival traditions; details linked at item level where possible."
+      },
+      {
+        "publisher": "Wikimedia Foundation, Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Newa_cuisine",
+        "use": "Newar food traditions and named dishes."
+      },
+      {
+        "publisher": "Wikimedia Foundation, Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Newar",
+        "use": "Newar cultural and community context."
+      },
+      {
+        "publisher": "Wikimedia Foundation, Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Tharu_people",
+        "use": "Tharu community context and regional cultural traditions."
+      },
+      {
+        "publisher": "Wikimedia Foundation, Wikipedia",
+        "url": "https://en.wikipedia.org/wiki/Mithila_painting",
+        "use": "Mithila painting traditions and regional context."
+      },
+      {
+        "publisher": "Wikimedia Commons contributors",
+        "url": "https://commons.wikimedia.org/",
+        "use": "Photographs are individually credited and linked to their file pages; reuse follows the displayed file license."
+      }
+    ],
+    "limitations": [
+      "Nepal's food and cultural life is too diverse to represent completely in one directory; further community review and district-level research are needed.",
+      "Items are discovery leads, not endorsements of commercial operators. No ratings, current event dates, prices or access guarantees are asserted.",
+      "Copyrighted prose and third-party photography are not copied into this dataset."
+    ]
+  },
+  "experiences": [
+    {
+      "slug": "dal-bhat-tarkari",
+      "name": "Dal bhat tarkari",
+      "also_known_as": [
+        "Dal-bhat"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "all"
+      ],
+      "place": "Across Nepal",
+      "description": "A familiar everyday meal built around rice and lentil soup, commonly served with seasonal vegetables, pickle and other accompaniments. Ingredients and serving customs differ between households and regions.",
+      "explore": "Look for a locally run bhojanalaya or ask a host what is in season; ask about refills and ingredients rather than assuming one standard plate.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine",
+        "https://www.britannica.com/place/Nepal/Daily-life-and-social-customs"
+      ],
+      "image": {
+        "url": "/images/food-culture/dal-bhat-tarkari-alt.jpg",
+        "alt": "A Nepali dal-bhat meal with rice, lentil soup, vegetable sides and accompaniments.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Dal_Bhat_Tarkari_2.jpg"
+      }
+    },
+    {
+      "slug": "momo",
+      "name": "Momo",
+      "also_known_as": [
+        "Momo dumplings"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "all"
+      ],
+      "place": "Across Nepal",
+      "description": "Steamed or fried dumplings served in homes, tea shops and restaurants. Fillings and dipping sauces vary, with vegetable and meat versions common in many places.",
+      "explore": "Try a neighborhood momo shop and check the filling, cooking method and allergens before ordering.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Momo_(food)",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/momo-steamed.jpg",
+        "alt": "Steamed Nepali momo dumplings served with dipping sauce.",
+        "creator": "SristiAwasthi21",
+        "license": "CC0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Steam_Momo_%E2%80%93_Traditional_Nepalese_Dumpling.jpg"
+      }
+    },
+    {
+      "slug": "sel-roti",
+      "name": "Sel roti",
+      "also_known_as": [],
+      "kind": "food",
+      "region_slugs": [
+        "all"
+      ],
+      "place": "Across Nepal; especially visible during festivals and family gatherings",
+      "description": "A ring-shaped rice-flour bread fried until crisp outside and soft inside. It is prepared for celebrations and shared in many Nepali communities.",
+      "explore": "Find it fresh at a local market or festival stall; recipes and sweetness vary.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Sel_roti",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/sel-roti.jpg",
+        "alt": "Sel roti served with a cup of tea.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Chiya_Sel_Roti.jpg"
+      }
+    },
+    {
+      "slug": "dhido-and-gundruk",
+      "name": "Dhido with gundruk",
+      "also_known_as": [
+        "Dhido",
+        "Gundruk ko jhol"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "all"
+      ],
+      "place": "Hill and mountain food traditions across Nepal",
+      "description": "Dhido is a cooked, thick staple made from locally available flour such as millet, buckwheat or maize; gundruk is fermented leafy greens, often served as soup or pickle. The combination is not limited to one community.",
+      "explore": "Ask which grain and greens were used and how the gundruk was fermented.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Dhindo",
+        "https://en.wikipedia.org/wiki/Gundruk",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/dhido.jpg",
+        "alt": "A Nepali dhido set meal with the cooked grain staple and accompaniments.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Dhido.jpg"
+      }
+    },
+    {
+      "slug": "thukpa",
+      "name": "Thukpa",
+      "also_known_as": [
+        "Noodle soup"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "all"
+      ],
+      "place": "Mountain towns and urban eateries",
+      "description": "A warming noodle soup found in Himalayan and Tibetan-influenced food traditions, with local variations in broth, vegetables and meat.",
+      "explore": "Ask about the broth and regional style; menus may use the same name for different recipes.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Thukpa",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/thukpa-chicken.jpg",
+        "alt": "A bowl of chicken thukpa, a Himalayan noodle soup variation.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Chicken_Thukpa.jpg"
+      }
+    },
+    {
+      "slug": "newar-samay-baji",
+      "name": "Samay baji",
+      "also_known_as": [
+        "Samaybaji",
+        "Newar ritual feast"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley and Newar communities",
+      "description": "A Newar ceremonial and celebratory platter whose components can include beaten rice, lentil patties, spiced meat, beans, greens and other accompaniments. The set changes by occasion and household.",
+      "explore": "Seek a Newar-run restaurant or a community food event; ask hosts to explain the dishes and their occasion.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Newa_cuisine",
+        "https://en.wikipedia.org/wiki/Newar"
+      ],
+      "image": {
+        "url": "/images/food-culture/newari-khaja.jpg",
+        "alt": "A Newar khaja set with assorted traditional foods.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Khaja_Set_2.jpg"
+      }
+    },
+    {
+      "slug": "newar-yomari",
+      "name": "Yomari",
+      "also_known_as": [
+        "Yomari Punhi dumpling"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley",
+      "description": "A steamed, fish-shaped rice-flour dumpling associated with the Newar winter festival Yomari Punhi. Sweet fillings often include molasses and sesame, with local variations.",
+      "explore": "Ask a Newar bakery or host when seasonal yomari are available and what filling is used.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Yomari",
+        "https://en.wikipedia.org/wiki/Newa_cuisine"
+      ],
+      "image": {
+        "url": "/images/destinations/kathmandu-valley.jpg",
+        "alt": "A sadhu at Kathmandu Durbar Square in the Kathmandu Valley.",
+        "creator": "Anton Gutmann / Aristeas",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Saddhu_at_Durbar_Square,_Kathmandu_(edited).jpg",
+        "context_note": "This photo shows a heritage site in the Kathmandu Valley, not Yomari dumplings."
+      }
+    },
+    {
+      "slug": "newar-bara",
+      "name": "Bara",
+      "also_known_as": [
+        "Wo"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley and Newar communities",
+      "description": "A savory pancake made from ground lentils, cooked on a griddle and served plain or with toppings. It is a well-known item in Newar food traditions.",
+      "explore": "Try a fresh bara from a local Newar eatery; ask whether the version includes egg or meat.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Newa_cuisine",
+        "https://en.wikipedia.org/wiki/Newar"
+      ],
+      "image": {
+        "url": "/images/food-culture/bara.jpg",
+        "alt": "A traditional Newar lentil pancake, bara.",
+        "creator": "SristiAwasthi21",
+        "license": "CC0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bara_–_Traditional_Newari_Lentil_Pancake_of_Nepal.jpg"
+      }
+    },
+    {
+      "slug": "newar-chatamari",
+      "name": "Chatamari",
+      "also_known_as": [
+        "Newar rice crepe"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley",
+      "description": "A thin rice-flour crepe from Newar cuisine, prepared plain or with toppings such as egg, minced meat or vegetables.",
+      "explore": "Look for a Newar-run restaurant and check toppings and allergens.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Newa_cuisine",
+        "https://en.wikipedia.org/wiki/Newar"
+      ],
+      "image": {
+        "url": "/images/food-culture/chatamari.jpg",
+        "alt": "A meat chatamari, a Newar rice-flour crepe.",
+        "creator": "Raunak Maskay",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Meat_Chatamari.jpg"
+      }
+    },
+    {
+      "slug": "newar-choila",
+      "name": "Choila",
+      "also_known_as": [
+        "Chhwela"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley and Newar communities",
+      "description": "A strongly seasoned Newar dish traditionally made with grilled or smoked meat and spices. Ingredients differ between versions; vegetarian adaptations are also offered by some kitchens.",
+      "explore": "Ask whether it is meat-based, how spicy it is and how it was prepared.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Newa_cuisine",
+        "https://en.wikipedia.org/wiki/Newar"
+      ],
+      "image": {
+        "url": "/images/food-culture/choila.jpg",
+        "alt": "Pork choila served as part of a Nepali meal.",
+        "creator": "Gary Stevens",
+        "license": "CC BY 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Pork_Choila,_Nepali_Lunch,_La_Cocina_Food_Conference.jpg"
+      }
+    },
+    {
+      "slug": "newar-khwa-swan",
+      "name": "Newar feast and khaja traditions",
+      "also_known_as": [
+        "Bhoj",
+        "Lapte bhoye"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley",
+      "description": "Newar food culture includes everyday snacks, seasonal dishes and elaborate meals for family, communal and ritual occasions. Menus are shaped by the event and by the participating community.",
+      "explore": "Choose a community-led food walk or restaurant that explains the context; do not treat ritual food as a staged attraction.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Newa_cuisine",
+        "https://en.wikipedia.org/wiki/Newar"
+      ],
+      "image": {
+        "url": "/images/food-culture/newari-khaja.jpg",
+        "alt": "A Newar khaja set with assorted traditional foods.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Khaja_Set_2.jpg"
+      }
+    },
+    {
+      "slug": "juju-dhau",
+      "name": "Juju dhau",
+      "also_known_as": [
+        "King curd"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Bhaktapur",
+      "description": "A rich, set yogurt strongly associated with Bhaktapur and sold by local dairies. It is often served in small clay pots.",
+      "explore": "Buy from a Bhaktapur dairy and ask about milk ingredients and storage.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Juju_dhau",
+        "https://en.wikipedia.org/wiki/Bhaktapur"
+      ],
+      "image": {
+        "url": "/images/food-culture/juju-dhau.jpg",
+        "alt": "Juju dhau, a traditional yogurt from Bhaktapur.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Juju_Dhau_1.jpg"
+      }
+    },
+    {
+      "slug": "thakali-thali",
+      "name": "Thakali thali",
+      "also_known_as": [
+        "Thakali khana"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "gandaki"
+      ],
+      "place": "Thak Khola, Mustang, and Thakali-run kitchens elsewhere",
+      "description": "A meal associated with Thakali food traditions, commonly arranged around rice or another grain with lentils, vegetables, pickle and other accompaniments. Restaurant versions vary and are now found well beyond Mustang.",
+      "explore": "Ask what is locally produced and which dishes are part of the household's own tradition.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Thakali",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/thakali-thali-pork.jpg",
+        "alt": "A Nepali Thakali-style pork thali with rice, lentils, greens, vegetables and pickles; photographed at a Nepali restaurant in Kolkata.",
+        "creator": "Pratiti090",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Nepali_Thali-_Blue_Poppy_Thakali%2C_Kolkata-West_Bengal-DSC025.jpg"
+      }
+    },
+    {
+      "slug": "mustang-buckwheat",
+      "name": "Mustang buckwheat and mountain grains",
+      "also_known_as": [
+        "Fapar"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "gandaki"
+      ],
+      "place": "Mustang and high-altitude communities",
+      "description": "Buckwheat and other hardy grains feature in high-altitude foodways where growing conditions differ from the southern plains. Preparation can include flour-based breads, porridge and dhido.",
+      "explore": "Ask a local host which grain is grown nearby and how it is prepared.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine",
+        "https://www.britannica.com/place/Nepal"
+      ],
+      "image": {
+        "url": "/images/food-culture/buckwheat-products.jpg",
+        "alt": "Buckwheat groats, flakes and crispbread; an example of buckwheat foods, not a Mustang-specific preparation.",
+        "creator": "Andrey Korzun",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Buckwheat_and_products_from_it_01.jpg",
+        "context_note": "Representative buckwheat-food photo from outside Nepal; it is not a Mustang-specific preparation."
+      }
+    },
+    {
+      "slug": "mustang-apples",
+      "name": "Mustang apples and local preserves",
+      "also_known_as": [
+        "Marpha apple products"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "gandaki"
+      ],
+      "place": "Mustang, including Marpha",
+      "description": "The dry mountain valleys of Mustang are associated with apple cultivation and small-scale products such as dried fruit, juice and preserves. Availability follows harvest and supply.",
+      "explore": "Visit local producers when open and ask about harvest timing and production methods.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Mustang_District",
+        "https://en.wikipedia.org/wiki/Marpha"
+      ],
+      "image": {
+        "url": "/images/food-culture/mustang-apple-marpha.jpg",
+        "alt": "An apple at Marpha in Mustang, where apples are cultivated.",
+        "creator": "Pratap Baniya",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mustang_Apple_at_Marpha.jpg"
+      }
+    },
+    {
+      "slug": "kinema",
+      "name": "Kinema",
+      "also_known_as": [
+        "Fermented soybean"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Eastern Nepal, including Limbu and Rai food traditions",
+      "description": "A fermented soybean food with a distinctive aroma, used in soups and other dishes in eastern Himalayan food traditions. Fermentation and recipes vary by household.",
+      "explore": "Ask a local cook how it is fermented and prepared; its strong flavor is part of the experience.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Kinema",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/kinema.jpg",
+        "alt": "Kinema, fermented soybean food from Nepal.",
+        "creator": "Kaajakocks",
+        "license": "CC BY-SA 3.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Original_Kinema-nepal.jpg"
+      }
+    },
+    {
+      "slug": "eastern-nepal-wachipa",
+      "name": "Wachipa",
+      "also_known_as": [
+        "Wachhipa"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Rai communities of eastern Nepal",
+      "description": "A traditional Rai dish associated with eastern Nepal. Recipes are community- and household-specific; ask the cook to describe ingredients and preparation rather than assuming one standard version.",
+      "explore": "Look for a community-hosted meal or cultural event where the food is being prepared by local cooks.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Rai_people",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/rai-cuisine-chart.jpg",
+        "alt": "A chart of Kirat Rai food and drink; this is a community-cuisine overview, not a dish-specific photograph of Wachipa.",
+        "creator": "Rai504089",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Varieties_of_Kirat_Rai_Cuisine_dishes_Chart.jpg",
+        "context_note": "This is a Kirat Rai cuisine chart, not a dedicated photograph of Wachipa."
+      }
+    },
+    {
+      "slug": "eastern-nepal-yangben",
+      "name": "Yangben dishes",
+      "also_known_as": [
+        "Yangben",
+        "Edible lichen"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Limbu communities in eastern Nepal",
+      "description": "Some Limbu food traditions use locally gathered edible lichen in dishes, often alongside meat. This is a specific community foodway, not a general dish across Nepal.",
+      "explore": "Ask Limbu hosts about the ingredient, its local name and when it is traditionally gathered.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Limbu_people",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/yangben-lichen-reference.jpg",
+        "alt": "Rock-tripe lichen growing on rock; this is not a photo of a prepared Yangben dish or the species used in it.",
+        "creator": "ceridwen",
+        "license": "CC BY-SA 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Rock_tripe_lichen_on_Carn_Goedog,_another_view_-_geograph.org.uk_-_1448840.jpg",
+        "context_note": "Representative lichen reference photographed in Wales; it is not identified as the Limbu ingredient used for Yangben."
+      }
+    },
+    {
+      "slug": "maithil-fish-rice",
+      "name": "Maithil fish and rice dishes",
+      "also_known_as": [
+        "Mithila cuisine"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Mithila communities of the eastern Terai",
+      "description": "Food traditions in the Mithila region include rice, seasonal vegetables and fish dishes, reflecting local agriculture and waterways. Recipes vary across households and religious observances.",
+      "explore": "Ask a local host what is seasonal and which ingredients are used; vegetarian options vary by household.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Mithila_(region)",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/fish-rice-sarlahi.jpg",
+        "alt": "Fish curry served with rice, photographed in Sarlahi District, Nepal.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Fish_Rice.jpg"
+      }
+    },
+    {
+      "slug": "thekua",
+      "name": "Thekua",
+      "also_known_as": [
+        "Thekri"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Mithila and Bhojpuri communities in the Terai",
+      "description": "A crisp sweet made from flour and jaggery, prepared in some households and communities for Chhath and other occasions. Recipes and shapes vary.",
+      "explore": "Look for it around local festival periods and ask the seller about ingredients.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Chhath",
+        "https://en.wikipedia.org/wiki/Mithila_(region)"
+      ],
+      "image": {
+        "url": "/images/food-culture/thekuwa.jpg",
+        "alt": "Thekua sweet prepared as Chhath Puja prasad.",
+        "creator": "Nitish12345kumar",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Thekua_Prasadam_of_Chhath_Puja.jpg"
+      }
+    },
+    {
+      "slug": "madhesh-tarai-sattu",
+      "name": "Sattu and roasted-grain drinks",
+      "also_known_as": [
+        "Sattu"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Terai market towns",
+      "description": "Roasted pulse or grain flour is used in drinks and simple foods in parts of the Terai, with recipes connected to neighboring regional foodways. Local versions and ingredients differ.",
+      "explore": "Ask vendors what grain or pulse is used and whether the drink contains sugar, salt or dairy.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Sattu",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/sattu.jpg",
+        "alt": "Sattu, a roasted-grain and pulse flour food photographed in Nepal.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sattu.jpg"
+      }
+    },
+    {
+      "slug": "mithila-makhana",
+      "name": "Makhana and local pond produce",
+      "also_known_as": [
+        "Fox nuts",
+        "Euryale ferox"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Mithila and eastern Terai markets",
+      "description": "Makhana seeds from aquatic plants are traded and eaten in the wider Mithila region. Availability and preparations vary by season and market.",
+      "explore": "Ask vendors whether the product is locally harvested and how it is commonly prepared.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Euryale_ferox",
+        "https://en.wikipedia.org/wiki/Mithila_(region)"
+      ],
+      "image": {
+        "url": "/images/food-culture/makhana-kheer.jpg",
+        "alt": "Makhana kheer made with puffed seeds of the aquatic plant Euryale ferox.",
+        "creator": "SwingingUvula",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Makhane_ki_kheer.JPG"
+      }
+    },
+    {
+      "slug": "tharu-dhikri",
+      "name": "Dhikri",
+      "also_known_as": [
+        "Tharu rice-flour dumpling"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "lumbini",
+        "sudurpashchim"
+      ],
+      "place": "Tharu communities of the western Terai",
+      "description": "A steamed rice-flour food associated with Tharu communities, often prepared for family gatherings and festivals. Shapes and accompaniments vary locally.",
+      "explore": "Choose a Tharu-hosted meal or community food event and ask about the occasion and preparation.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tharu_people",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/dhikri.jpg",
+        "alt": "Dhikri, a traditional Tharu rice-flour food.",
+        "creator": "Janak Bhatta",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Dhikri_Tharu_Food2.jpg"
+      }
+    },
+    {
+      "slug": "tharu-ghonghi",
+      "name": "Ghonghi",
+      "also_known_as": [
+        "Freshwater snails"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "lumbini",
+        "sudurpashchim"
+      ],
+      "place": "Some Tharu communities in the western Terai",
+      "description": "Freshwater snails are prepared as food in some Tharu communities. This is a locally specific food tradition and is not served everywhere.",
+      "explore": "Ask hosts about sourcing and preparation. Avoid collecting wildlife or wetland species yourself.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tharu_people",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/ghonghi.jpg",
+        "alt": "Ghonghi, a traditional Tharu river-snail dish.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ghonghi_1.jpg"
+      }
+    },
+    {
+      "slug": "tharu-bagiya",
+      "name": "Bagiya",
+      "also_known_as": [
+        "Rice-flour dumpling"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "lumbini"
+      ],
+      "place": "Tharu communities in the western Terai",
+      "description": "A rice-flour dumpling found in some Tharu food traditions, with fillings and shapes that vary by locality and occasion.",
+      "explore": "Ask the cook which local ingredients and fillings are used.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tharu_people",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/tharu-bagiya.jpg",
+        "alt": "Bagiya rice-flour dumplings from a Tharu food tradition.",
+        "creator": "Haribanshnp",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bagya_.jpg"
+      }
+    },
+    {
+      "slug": "jumli-marsi-rice",
+      "name": "Jumli Marsi rice",
+      "also_known_as": [
+        "Marsi rice"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "karnali"
+      ],
+      "place": "Jumla and nearby highland settlements",
+      "description": "A locally valued red rice cultivated in parts of Jumla. Production is tied to high-altitude farming conditions and availability can be limited.",
+      "explore": "Ask local cooperatives or hosts about the current harvest and where the rice was grown.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Jumla_District",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/marsi-rice.jpg",
+        "alt": "Marsi rice, a traditional red rice cultivated in Jumla.",
+        "creator": "Prashant",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Marsi_Rice.jpg"
+      }
+    },
+    {
+      "slug": "karnali-buckwheat",
+      "name": "Karnali buckwheat and millet foods",
+      "also_known_as": [
+        "Fapar",
+        "Kodo"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "karnali"
+      ],
+      "place": "Karnali highlands",
+      "description": "Buckwheat and millet are among the hardy grains used in mountain foodways, prepared as flour dishes, breads and dhido depending on place and household.",
+      "explore": "Ask a host which grains are grown locally and try a seasonal home-style preparation.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine",
+        "https://www.britannica.com/place/Nepal"
+      ],
+      "image": {
+        "url": "/images/food-culture/millet-bread.jpg",
+        "alt": "Millet bread photographed in Nepal; one example of a hardy-grain food, not a Karnali-specific recipe.",
+        "creator": "Photojourney stories",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Millet_bread.jpg",
+        "context_note": "Millet bread photographed in Nepal; illustrative of hardy-grain foods, not a Karnali-specific recipe."
+      }
+    },
+    {
+      "slug": "far-western-deuda-food",
+      "name": "Far-western seasonal home cooking",
+      "also_known_as": [
+        "Deuda region foodways"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "sudurpashchim"
+      ],
+      "place": "Far-western hill communities",
+      "description": "Household meals draw on locally available grains, pulses, vegetables and preserved foods. Ingredients vary with altitude, harvest and community; there is no single 'far-western dish'.",
+      "explore": "Stay with a local host or visit a community kitchen to learn what is grown, stored and cooked in that locality.",
+      "source_urls": [
+        "https://www.britannica.com/place/Nepal/People",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/far-west-representative-dal-bhat.jpg",
+        "alt": "A Nepali dal-bhat meal with rice, lentil soup, vegetables and accompaniments.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Dal_Bhat_Tarkari_2.jpg",
+        "context_note": "Representative everyday Nepali food; not a distinct or exclusive far-western recipe."
+      }
+    },
+    {
+      "slug": "mustang-tsampa",
+      "name": "Tsampa and high-Himalayan foodways",
+      "also_known_as": [
+        "Roasted barley flour"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "gandaki"
+      ],
+      "place": "Trans-Himalayan settlements, including parts of Mustang",
+      "description": "Roasted grain flour and preserved foods are part of Tibetan-influenced Himalayan foodways. Ingredients and customs vary across Mustang's distinct communities.",
+      "explore": "Ask a local host about the grain, preparation and cultural setting; do not assume the same practices across all Himalayan communities.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tibetan_cuisine",
+        "https://en.wikipedia.org/wiki/Mustang_District"
+      ],
+      "image": {
+        "url": "/images/food-culture/tsampa-preparation.jpg",
+        "alt": "Tibetan tsampa being prepared from roasted barley flour; a documented example of the Tibetan-influenced foodway, photographed outside Mustang.",
+        "creator": "Matt Ming",
+        "license": "CC BY 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Tibetan_Tsampa_Preparation_(11622364794).jpg",
+        "context_note": "Tibetan tsampa preparation photographed in Tibet; it illustrates the tradition, not a Mustang location."
+      }
+    },
+    {
+      "slug": "chhurpi",
+      "name": "Chhurpi",
+      "also_known_as": [
+        "Himalayan cheese"
+      ],
+      "kind": "food",
+      "region_slugs": [
+        "koshi",
+        "gandaki",
+        "karnali"
+      ],
+      "place": "Himalayan pastoral communities",
+      "description": "A traditional cheese made from yak or cattle milk in Himalayan regions. Soft and hard forms are produced, and local methods differ.",
+      "explore": "Buy from a reputable local producer and ask about milk source, aging and storage.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Chhurpi",
+        "https://en.wikipedia.org/wiki/Nepalese_cuisine"
+      ],
+      "image": {
+        "url": "/images/food-culture/chhurpi.jpg",
+        "alt": "Chhurpi, a traditional Himalayan cheese.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Chhurpi_1.jpg"
+      }
+    },
+    {
+      "slug": "dashain-tika-and-family-gatherings",
+      "name": "Dashain family gatherings",
+      "also_known_as": [
+        "Dashain",
+        "Vijaya Dashami"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "all"
+      ],
+      "place": "Observed in many Nepali communities",
+      "description": "Dashain is a major Hindu festival period observed in varied ways by many families and communities. Tika, jamara, family visits and local traditions are among its recognizable features; practices are not universal.",
+      "explore": "Check locally announced dates and public events. Join only when invited and follow household customs.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Dashain"
+      ],
+      "image": {
+        "url": "/images/food-culture/dashain-tika.jpg",
+        "alt": "Dashain tika ceremony with Nepal’s former king Gyanendra Shah; a documentary image, not a depiction of every family’s practice.",
+        "creator": "Gunjan Raj Giri",
+        "license": "CC0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Dashain_Tika_With_Gyanendra_Shah_Former_King_of_Nepal.jpg"
+      }
+    },
+    {
+      "slug": "tihar-lights-and-bhai-tika",
+      "name": "Tihar lights and Bhai Tika",
+      "also_known_as": [
+        "Deepawali",
+        "Yama Panchak"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "all"
+      ],
+      "place": "Observed across Nepal with community-specific customs",
+      "description": "A multi-day festival period known for household lamps, decorations and different days honoring animals and family relationships. The sequence and local practices may vary.",
+      "explore": "Look for public neighborhood displays and ask permission before photographing homes or ceremonies.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tihar"
+      ],
+      "image": {
+        "url": "/images/food-culture/tihar.jpg",
+        "alt": "A person lights a traditional lamp during Tihar.",
+        "creator": "Mithun Kunwar / Radomianin",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sister_lighting_traditional_lamp_during_Tihar_festival_(edited).jpg"
+      }
+    },
+    {
+      "slug": "holi-fagu-purnima",
+      "name": "Holi / Fagu Purnima",
+      "also_known_as": [
+        "Holi",
+        "Fagu"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "all"
+      ],
+      "place": "Celebrated in different forms across the hills and Terai",
+      "description": "The spring festival of colors is celebrated on different dates in the hill and Terai regions in some years. Local events, safety practices and participation vary.",
+      "explore": "Check the current calendar, wear clothes you can wash, and ask before applying color or taking photographs.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Holi"
+      ],
+      "image": {
+        "url": "/images/food-culture/holi-colors.jpg",
+        "alt": "People applying colored powder during the Holi festival in Nepal.",
+        "creator": "Wikimedman",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Holi_Colors.jpg"
+      }
+    },
+    {
+      "slug": "chhath-puja",
+      "name": "Chhath Puja",
+      "also_known_as": [
+        "Chhath"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Terai communities, especially in Madhesh",
+      "description": "A devotional festival centered on offerings to the setting and rising sun, often observed at rivers, ponds and other water bodies. It is especially prominent in the Terai and also observed elsewhere.",
+      "explore": "Attend from public viewing areas, keep clear of worshippers and follow local guidance around water and offerings.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Chhath"
+      ],
+      "image": {
+        "url": "/images/food-culture/chhath-prasad.jpg",
+        "alt": "Prasad offerings prepared for Chhath Puja.",
+        "creator": "Gaurav Dhwaj Khadka",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Chhath_Puja_Prasad.jpg"
+      }
+    },
+    {
+      "slug": "mithila-samachakewa",
+      "name": "Sama-Chakewa",
+      "also_known_as": [
+        "Sama Chakeva"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Maithil communities in the Terai",
+      "description": "A seasonal Maithil folk tradition involving songs and crafted figures, observed in some communities during the post-monsoon period. Details differ by locality.",
+      "explore": "Ask a Maithil host or cultural organization whether a public gathering is planned and what respectful participation looks like.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Mithila_(region)",
+        "https://en.wikipedia.org/wiki/Maithili_culture"
+      ]
+    },
+    {
+      "slug": "mithila-painting",
+      "name": "Mithila painting",
+      "also_known_as": [
+        "Madhubani painting"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Mithila communities, including Janakpur and surrounding districts",
+      "description": "A painting tradition practiced by artists in the Mithila cultural region. Contemporary practitioners work in homes, studios and cooperatives, using varied motifs and materials.",
+      "explore": "Visit an artist-run studio or cooperative, ask before photographing works, and purchase directly from makers when possible.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Mithila_painting",
+        "https://en.wikipedia.org/wiki/Mithila_(region)"
+      ],
+      "image": {
+        "url": "/images/food-culture/mithila-painting.jpg",
+        "alt": "An artist creating a Mithila painting.",
+        "creator": "Abhishek Singh",
+        "license": "CC BY-SA 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting_artist_-_Flickr_-_askmeaks.jpg"
+      }
+    },
+    {
+      "slug": "mithila-mural-and-house-art",
+      "name": "Mithila wall and household art",
+      "also_known_as": [
+        "Kohbar art"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Mithila communities",
+      "description": "Mithila visual traditions have been used in domestic and ceremonial settings as well as on paper and other media. Artists and households choose their own subjects and meanings.",
+      "explore": "Join a workshop led by local artists and let them interpret their own work rather than assuming every motif has one meaning.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Mithila_painting",
+        "https://en.wikipedia.org/wiki/Mithila_(region)"
+      ],
+      "image": {
+        "url": "/images/food-culture/mithila-painting.jpg",
+        "alt": "An artist creating a Mithila painting, an example of the art tradition.",
+        "creator": "Abhishek Singh",
+        "license": "CC BY-SA 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting_artist_-_Flickr_-_askmeaks.jpg"
+      }
+    },
+    {
+      "slug": "newar-indra-jatra",
+      "name": "Indra Jatra",
+      "also_known_as": [
+        "Yenya"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Durbar Square and neighborhoods of Kathmandu",
+      "description": "An eight-day Kathmandu festival featuring processions, masked dances and community rituals, including the chariot procession of the living goddess Kumari. Dates follow the lunar calendar.",
+      "explore": "Use public viewing areas, check current route and crowd information, and follow restrictions around sacred processions.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Indra_Jatra"
+      ],
+      "image": {
+        "url": "/images/food-culture/indra-jatra.jpg",
+        "alt": "The opening of Indra Jatra in Kathmandu.",
+        "creator": "Wikimedman",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Start_of_Indra_Jatra.jpg"
+      }
+    },
+    {
+      "slug": "newar-bisket-jatra",
+      "name": "Bisket Jatra",
+      "also_known_as": [
+        "Biska Jatra"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Bhaktapur",
+      "description": "A Newar new-year festival known for chariot processions and community events in Bhaktapur. The schedule and public access can change by year.",
+      "explore": "Check municipal notices before visiting; watch from designated public spaces and respect safety barriers.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Bisket_Jatra"
+      ],
+      "image": {
+        "url": "/images/food-culture/bisket-jatra.jpg",
+        "alt": "A scene from Bisket Jatra in Bhaktapur.",
+        "creator": "Sushan Mool",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bisket_Jatra_VIbes.jpg"
+      }
+    },
+    {
+      "slug": "newar-gaijatra",
+      "name": "Gai Jatra",
+      "also_known_as": [
+        "Gai Jatra",
+        "Sa Paru"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley, especially Kathmandu and Bhaktapur",
+      "description": "A festival with distinctive local processions and performance traditions. In Newar communities it can also provide a public space for remembrance and satire.",
+      "explore": "Be considerate around families observing bereavement customs; ask permission before photographing participants.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Gai_Jatra"
+      ],
+      "image": {
+        "url": "/images/food-culture/gai-jatra.jpg",
+        "alt": "A satirical performance during Gai Jatra (Saparu).",
+        "creator": "Nyeta",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Political_satire_in_Gai_Jatra_(Sā_pāru).jpg"
+      }
+    },
+    {
+      "slug": "newar-yomari-punhi",
+      "name": "Yomari Punhi",
+      "also_known_as": [
+        "Yomari Purnima"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Newar communities of Kathmandu Valley",
+      "description": "A Newar harvest-linked observance in which yomari dumplings are prepared and shared. Household rituals and public events vary.",
+      "explore": "Ask a local cultural group about public demonstrations and when seasonal yomari are available.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Yomari",
+        "https://en.wikipedia.org/wiki/Newar"
+      ]
+    },
+    {
+      "slug": "newar-guthi",
+      "name": "Guthi community institutions",
+      "also_known_as": [
+        "Guthi"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Newar settlements, particularly the Kathmandu Valley",
+      "description": "Guthi institutions have supported communal, religious, social and cultural responsibilities in Newar communities. Their roles differ across place and group.",
+      "explore": "Learn through a local museum, guide or community organization; do not enter private guthi spaces without an invitation.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Guthi",
+        "https://en.wikipedia.org/wiki/Newar"
+      ]
+    },
+    {
+      "slug": "newar-pauba-painting",
+      "name": "Paubha painting",
+      "also_known_as": [
+        "Paubha",
+        "Newar sacred painting"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley, including Patan",
+      "description": "A Newar religious painting tradition using detailed iconography and mineral pigments. Artists continue the form in contemporary studios as well as devotional settings.",
+      "explore": "Visit a working artist's studio by appointment and ask before photographing sacred works.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Paubha",
+        "https://en.wikipedia.org/wiki/Newar"
+      ],
+      "image": {
+        "url": "/images/food-culture/paubha.jpg",
+        "alt": "A traditional Paubha painting depicting a bejeweled Buddha.",
+        "creator": "Unknown author",
+        "license": "CC0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Paubha_painting_of_Bejeweled_Buddha_Preaching,_1648_CE,_Nepal.jpg"
+      }
+    },
+    {
+      "slug": "newar-wood-carving",
+      "name": "Newar wood carving and metal craft",
+      "also_known_as": [
+        "Traditional craft workshops"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Patan, Bhaktapur and other Kathmandu Valley towns",
+      "description": "Wood carving, metal casting and other craft traditions are visible in historic architecture, religious objects and contemporary workshops. Artists and workshops are diverse.",
+      "explore": "Choose a maker-led demonstration or museum visit, ask about workshop etiquette and buy directly where possible.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Newar",
+        "https://whc.unesco.org/en/list/121/"
+      ],
+      "image": {
+        "url": "/images/food-culture/newar-window.jpg",
+        "alt": "A carved Newar window in Bhaktapur, showing traditional woodwork.",
+        "creator": "Jean-Pierre Dalbéra",
+        "license": "CC BY 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Fenêtre_newar_(Bhaktapur)_(8555632248).jpg"
+      }
+    },
+    {
+      "slug": "ratomachhindranath-jatra",
+      "name": "Rato Machhindranath Jatra",
+      "also_known_as": [
+        "Bunga Dyah Jatra"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Patan, Lalitpur",
+      "description": "A major communal chariot festival in the Kathmandu Valley, with a route and schedule that vary. It brings together Buddhist and Hindu traditions in local practice.",
+      "explore": "Consult current local notices and view from safe public areas; procession arrangements can change.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Rato_Machindranath_Jatra",
+        "https://whc.unesco.org/en/list/121/"
+      ],
+      "image": {
+        "url": "/images/food-culture/rato-machhindranath.jpg",
+        "alt": "Rato Machhindranath Jatra in Nepal.",
+        "creator": "Wikimedman",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Rato_Machhindranath_Jatra.jpg"
+      }
+    },
+    {
+      "slug": "sherpa-mani-rimdu",
+      "name": "Mani Rimdu",
+      "also_known_as": [
+        "Mani Rimdu festival"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Sherpa communities and monasteries in the Everest region",
+      "description": "A Buddhist monastery festival associated with Sherpa communities, featuring prayers, masked dances and teachings. Dates and access depend on the monastery calendar.",
+      "explore": "Confirm the monastery's calendar and visitor rules before travel; observe quietly and follow photography restrictions.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Mani_Rimdu",
+        "https://en.wikipedia.org/wiki/Sherpa_people"
+      ],
+      "image": {
+        "url": "/images/food-culture/mani-rimdu.jpg",
+        "alt": "Mani Rimdu festival at Tengboche Monastery in Nepal.",
+        "creator": "Rohit Sharma",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mani_Rimdu_festival,_Tengboche_Monastery,_Nepal_02.jpg"
+      }
+    },
+    {
+      "slug": "kirat-sakela-ubhauli-udhauli",
+      "name": "Sakela: Ubhauli and Udhauli",
+      "also_known_as": [
+        "Sakela",
+        "Sakewa"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Kirat Rai communities, especially in eastern Nepal",
+      "description": "Seasonal community observances that include group dances and prayers connected with land, livelihood and the cycle of the year. Names and practice vary among Kirat communities.",
+      "explore": "Attend public events only when invited or explicitly open; learn local expectations from organizers.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Sakela",
+        "https://en.wikipedia.org/wiki/Rai_people"
+      ],
+      "image": {
+        "url": "/images/food-culture/sakela.jpg",
+        "alt": "Khaling Rai women performing Sakela Silli dance.",
+        "creator": "Rachhenhang Rai",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Khaling_Rai_Womens_Dancing_Sakela_silli.jpg"
+      }
+    },
+    {
+      "slug": "limbu-chasok-tangnam",
+      "name": "Chasok Tangnam",
+      "also_known_as": [
+        "Nwagi"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Limbu communities of eastern Nepal",
+      "description": "A Limbu harvest and offering observance whose practices are rooted in local community traditions. The timing and forms may differ between settlements.",
+      "explore": "Ask a Limbu cultural organization about public events and whether visitors may participate.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Limbu_people",
+        "https://www.britannica.com/place/Nepal/People"
+      ]
+    },
+    {
+      "slug": "eastern-nepal-dhaka-weaving",
+      "name": "Dhaka textile weaving",
+      "also_known_as": [
+        "Dhaka cloth"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Eastern hill towns, including Tehrathum and Dhankuta",
+      "description": "Handwoven patterned cloth known as dhaka is made by weavers in eastern Nepal and used for garments and accessories. Designs and production methods vary by maker.",
+      "explore": "Look for a working loom or cooperative, ask about the maker and purchase directly if you can.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Dhaka_topi",
+        "https://www.britannica.com/place/Nepal/People"
+      ],
+      "image": {
+        "url": "/images/food-culture/dhaka-weaving.jpg",
+        "alt": "A Dhaka weaving center in Nepal.",
+        "creator": "Jim Holmes / AusAID",
+        "license": "CC BY 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Dhaka_Weaving_Center,_Nepal_(10692106583).jpg"
+      }
+    },
+    {
+      "slug": "tamu-lhosar",
+      "name": "Tamu Lhosar",
+      "also_known_as": [
+        "Gurung New Year"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "gandaki"
+      ],
+      "place": "Gurung communities, especially around Kaski, Lamjung and Gorkha",
+      "description": "A Gurung new-year observance marked by gatherings, traditional dress, music and dance. Celebrations are organized by local communities and diaspora groups.",
+      "explore": "Check local event announcements and ask organizers about public access and photography.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Lhosar",
+        "https://en.wikipedia.org/wiki/Gurung_people"
+      ],
+      "image": {
+        "url": "/images/food-culture/tamu-lhosar.jpg",
+        "alt": "A celebration of Tamu Lhosar in Nepal.",
+        "creator": "SPakhrin",
+        "license": "CC BY 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Gurung_Tamu_Lhosar_2018_04.jpg"
+      }
+    },
+    {
+      "slug": "gurung-ghatu-dance",
+      "name": "Ghatu dance tradition",
+      "also_known_as": [
+        "Ghatu Naach"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "gandaki"
+      ],
+      "place": "Gurung communities in parts of Gandaki",
+      "description": "A narrative dance tradition maintained by some Gurung communities, with performance styles and occasions specific to local groups.",
+      "explore": "Look for community-organized performances and let local performers explain the tradition and recording rules.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Gurung_people",
+        "https://www.britannica.com/place/Nepal/People"
+      ],
+      "image": {
+        "url": "/images/food-culture/ghatu-dance.jpg",
+        "alt": "Performers presenting the Ghatu dance tradition.",
+        "creator": "S Pakhrin",
+        "license": "CC BY 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Ghatu_Dance.jpg"
+      }
+    },
+    {
+      "slug": "mustang-tiji",
+      "name": "Tiji festival",
+      "also_known_as": [
+        "Tenchi"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "gandaki"
+      ],
+      "place": "Lo Manthang, Upper Mustang",
+      "description": "A multi-day Buddhist festival with masked dances and ritual performances in Lo Manthang. It follows the local monastery calendar and visitor access may be subject to current permit rules.",
+      "explore": "Verify dates, permits and local protocols well ahead of travel; attend as a respectful observer.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tiji_Festival",
+        "https://en.wikipedia.org/wiki/Lo_Manthang"
+      ],
+      "image": {
+        "url": "/images/food-culture/tiji-festival.jpg",
+        "alt": "A ritual dancer performing during the Tiji Festival in Lo Manthang, Upper Mustang.",
+        "creator": "Anek Rajbhandari",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:A_man_performing_a_traditional_ritual_dance_during_the_Tiji_Festival_in_Lo_Manthang,_Upper_Mustang,_Nepal.jpg"
+      }
+    },
+    {
+      "slug": "mustang-monastic-culture",
+      "name": "Mustang's monastery and village heritage",
+      "also_known_as": [
+        "Lo heritage"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "gandaki"
+      ],
+      "place": "Upper Mustang",
+      "description": "Upper Mustang's walled settlements, monasteries, household shrines and Tibetan-language heritage reflect a distinct trans-Himalayan history. Customs differ between villages and religious communities.",
+      "explore": "Use a locally licensed guide and follow restrictions on photography and entry in active religious spaces.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Upper_Mustang",
+        "https://whc.unesco.org/en/tentativelists/5263/"
+      ]
+    },
+    {
+      "slug": "tharu-maghi",
+      "name": "Maghi",
+      "also_known_as": [
+        "Maghi festival",
+        "Tharu New Year"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "lumbini",
+        "sudurpashchim"
+      ],
+      "place": "Tharu communities across the western Terai",
+      "description": "Maghi is an important seasonal gathering and new-year observance for many Tharu communities. Food, dance and family gatherings feature, with local variation.",
+      "explore": "Look for events hosted by Tharu organizations and ask before filming or photographing community activities.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tharu_people",
+        "https://www.britannica.com/place/Nepal/People"
+      ],
+      "image": {
+        "url": "/images/food-culture/maghi-celebration.jpg",
+        "alt": "People celebrating Maghe Sankranti in Nepal.",
+        "creator": "Aashisheyeish",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Celebration_of_maghe_1.jpg",
+        "context_note": "The source describes a Maghe Sankranti celebration and notes Tharu Maghi; customs differ among Tharu communities."
+      }
+    },
+    {
+      "slug": "tharu-stick-dance",
+      "name": "Tharu stick and community dances",
+      "also_known_as": [
+        "Sakhiya dance"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "lumbini",
+        "sudurpashchim"
+      ],
+      "place": "Tharu settlements in the western Terai",
+      "description": "Dance, music and storytelling are part of community celebrations in some Tharu groups. Names, choreography and performance settings vary by locality.",
+      "explore": "Choose a community-run event and follow performers' directions about participation and recording.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tharu_people",
+        "https://www.britannica.com/place/Nepal/People"
+      ]
+    },
+    {
+      "slug": "tharu-homestay-and-village-walk",
+      "name": "Tharu village and homestay experiences",
+      "also_known_as": [
+        "Community-based Terai tourism"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "lumbini",
+        "sudurpashchim"
+      ],
+      "place": "Community tourism areas in the western Terai",
+      "description": "Some Tharu communities welcome visitors through homestays, food experiences and village walks. These are locally operated experiences, not an invitation to enter private homes or photograph residents without consent.",
+      "explore": "Book with a community-run organization, agree on expectations and fees in advance, and ask before taking photographs.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tharu_people"
+      ]
+    },
+    {
+      "slug": "palpa-dhaka-craft",
+      "name": "Palpa Dhaka weaving",
+      "also_known_as": [
+        "Dhaka fabric"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "lumbini"
+      ],
+      "place": "Tansen and Palpa district",
+      "description": "Tansen is known for handwoven dhaka cloth and related textile work. The craft supports local makers and appears in clothing and gifts.",
+      "explore": "Visit a local workshop or cooperative and ask who made the piece and how the pattern was woven.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tansen",
+        "https://en.wikipedia.org/wiki/Dhaka_topi"
+      ]
+    },
+    {
+      "slug": "gaura-festival",
+      "name": "Gaura Parva",
+      "also_known_as": [
+        "Gaura",
+        "Gauri festival"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "sudurpashchim"
+      ],
+      "place": "Far-western Nepal, including Darchula, Baitadi and Dadeldhura",
+      "description": "A major regional festival in parts of far-western Nepal, observed through worship, songs, dance and community gatherings. Dates and customs vary by locality.",
+      "explore": "Check the local lunar-calendar date and public event details; ask organizers about appropriate visitor participation.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Gaura_Parva"
+      ],
+      "image": {
+        "url": "/images/food-culture/gaura.jpg",
+        "alt": "A scene from Gaura festival in western Nepal.",
+        "creator": "Janak Bhatta",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Gaura_festival_kuni.jpg"
+      }
+    },
+    {
+      "slug": "deuda-song-and-dance",
+      "name": "Deuda songs and circle dance",
+      "also_known_as": [
+        "Deuda"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "sudurpashchim",
+        "karnali"
+      ],
+      "place": "Far-western and parts of mid-western Nepal",
+      "description": "A regional song-and-dance form performed in groups, often with participants moving in a circle and singing responsively. Lyrics and styles reflect local life and language.",
+      "explore": "Attend a public community performance and ask permission before recording songs or participants.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Deuda",
+        "https://www.britannica.com/place/Nepal/People"
+      ],
+      "image": {
+        "url": "/images/food-culture/deuda.jpg",
+        "alt": "A Deuda dance performance.",
+        "creator": "Khaptad Digital Music",
+        "license": "CC BY-SA 3.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Deuda_dance.jpg"
+      }
+    },
+    {
+      "slug": "karnali-sinja-khas-heritage",
+      "name": "Sinja Valley and Khas language heritage",
+      "also_known_as": [
+        "Khas Bhasa",
+        "Sinja"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "karnali"
+      ],
+      "place": "Jumla district",
+      "description": "Sinja Valley is associated with the history of the Khas language and early Nepali literary traditions. Archaeological and cultural traces are spread across the valley.",
+      "explore": "Visit with a local guide and community context; protect archaeological remains and follow site rules.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Sinja_Valley",
+        "https://en.wikipedia.org/wiki/Khas_language"
+      ]
+    },
+    {
+      "slug": "karnali-deuda",
+      "name": "Karnali folk songs and seasonal gatherings",
+      "also_known_as": [
+        "Deuda traditions"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "karnali"
+      ],
+      "place": "Karnali communities",
+      "description": "Local music and dance traditions are shared at seasonal and community gatherings. Repertoires and performance styles vary across Karnali's districts and language communities.",
+      "explore": "Ask local cultural groups about public performances rather than expecting a staged show.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Deuda",
+        "https://www.britannica.com/place/Nepal/People"
+      ],
+      "image": {
+        "url": "/images/food-culture/deuda.jpg",
+        "alt": "A Deuda dance performance representing a regional folk tradition.",
+        "creator": "Khaptad Digital Music",
+        "license": "CC BY-SA 3.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Deuda_dance.jpg"
+      }
+    },
+    {
+      "slug": "tamang-selo-and-damphu",
+      "name": "Tamang Selo and damphu music",
+      "also_known_as": [
+        "Tamang Selo",
+        "Damphu"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Tamang communities in Bagmati and neighboring hill districts",
+      "description": "Tamang Selo is a music and dance tradition often accompanied by the damphu frame drum. Lyrics, rhythm and performance settings are diverse and community-led.",
+      "explore": "Attend a public performance or workshop and ask musicians about recording and participation.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Tamang_Selo",
+        "https://en.wikipedia.org/wiki/Tamang_people"
+      ]
+    },
+    {
+      "slug": "tamang-lhosar",
+      "name": "Sonam Lhosar",
+      "also_known_as": [
+        "Tamang New Year"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Tamang communities in the hills around Kathmandu and beyond",
+      "description": "A new-year festival observed by Tamang communities with gatherings, music, dance and traditional clothing. Public events and dates vary.",
+      "explore": "Check community announcements for current dates and public access.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Lhosar",
+        "https://en.wikipedia.org/wiki/Tamang_people"
+      ],
+      "image": {
+        "url": "/images/food-culture/sonam-lhosar.jpg",
+        "alt": "A portrait at a Sonam Lhosar celebration in Nepal.",
+        "creator": "Wikimedman",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sonam_Lhosar_Portrait.jpg"
+      }
+    },
+    {
+      "slug": "sherpa-language-and-village-life",
+      "name": "Sherpa language and village life",
+      "also_known_as": [
+        "Sherpa community experiences"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Solukhumbu and Sherpa communities in the Himalayan region",
+      "description": "Sherpa culture encompasses diverse language, Buddhist, family and village traditions. Tourism is one part of contemporary life, not a complete description of the community.",
+      "explore": "Choose a locally operated guide or homestay and let hosts decide what they want to share.",
+      "source_urls": [
+        "https://www.britannica.com/topic/Sherpa-people",
+        "https://en.wikipedia.org/wiki/Sherpa_people"
+      ]
+    },
+    {
+      "slug": "limbu-mundhum-storytelling",
+      "name": "Limbu Mundhum traditions",
+      "also_known_as": [
+        "Mundhum"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "koshi"
+      ],
+      "place": "Limbu communities in eastern Nepal",
+      "description": "Mundhum refers to oral knowledge and ritual traditions central to Kirat communities, including Limbu communities. Some knowledge is sacred or community-restricted.",
+      "explore": "Learn from community-approved cultural interpreters; do not record or reproduce restricted ceremonies.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Mundhum",
+        "https://en.wikipedia.org/wiki/Limbu_people"
+      ]
+    },
+    {
+      "slug": "maithili-language-and-folk-song",
+      "name": "Maithili language and folk song",
+      "also_known_as": [
+        "Maithili lok geet"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Mithila communities in Madhesh",
+      "description": "Maithili is widely used in the Mithila region and has rich literary and oral traditions, including songs associated with life-cycle events and seasonal celebrations.",
+      "explore": "Look for local performances or community arts programs and ask performers about the meaning of songs.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Maithili_language",
+        "https://en.wikipedia.org/wiki/Maithili_culture"
+      ]
+    },
+    {
+      "slug": "mithila-music-and-wedding-songs",
+      "name": "Mithila wedding and seasonal songs",
+      "also_known_as": [
+        "Sohar",
+        "Samdaun"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "madhesh"
+      ],
+      "place": "Maithil communities",
+      "description": "Songs accompany domestic, seasonal and life-cycle occasions in Maithil communities. Some are private family traditions rather than public performance.",
+      "explore": "Attend only public programs or invitations; ask permission before recording or sharing performances.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Maithili_culture",
+        "https://en.wikipedia.org/wiki/Maithili_language"
+      ]
+    },
+    {
+      "slug": "newar-kumari-tradition",
+      "name": "Kumari tradition",
+      "also_known_as": [
+        "Living goddess tradition"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley",
+      "description": "The Kumari tradition is a living religious institution with specific Newar Buddhist and Hindu contexts. The child and family are not tourist attractions; access and photography are tightly governed by local rules.",
+      "explore": "Learn through a museum or reputable local guide. Respect restrictions and never pursue or photograph a child outside permitted public events.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Kumari_(goddess)",
+        "https://en.wikipedia.org/wiki/Newar"
+      ],
+      "image": {
+        "url": "/images/food-culture/kumari-ghar.jpg",
+        "alt": "Kumari Ghar, the historic residence in Kathmandu.",
+        "creator": "Matt Zimmerman",
+        "license": "CC BY 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Kumari_Ghar,_Kathmandu,_Nepal_(23824761324).jpg",
+        "context_note": "This photo shows Kumari Ghar, not the Kumari or a religious ceremony."
+      }
+    },
+    {
+      "slug": "buddhist-thangka-workshops",
+      "name": "Thangka painting and Buddhist arts",
+      "also_known_as": [
+        "Thangka",
+        "Thanka"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati",
+        "gandaki"
+      ],
+      "place": "Kathmandu Valley and Himalayan Buddhist communities",
+      "description": "Thangka painting is a Buddhist religious art form practiced by trained artists. Styles, iconography and workshop traditions vary across communities and lineages.",
+      "explore": "Visit a maker-led studio or museum and ask before photographing religious paintings.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Thangka",
+        "https://en.wikipedia.org/wiki/Nepalese_art"
+      ],
+      "image": {
+        "url": "/images/food-culture/nepalese-thangka.jpg",
+        "alt": "A 17th-century Nepalese thangka depicting the Bejeweled Buddha preaching.",
+        "creator": "Anonymous",
+        "license": "CC0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Nepal,_17th_century_-_Thangka_with_Bejeweled_Buddha_Preaching_-_1973.69_-_Cleveland_Museum_of_Art.tif",
+        "context_note": "This is an artwork in a museum collection, not a photograph of a contemporary workshop."
+      }
+    },
+    {
+      "slug": "nepal-lokta-paper-craft",
+      "name": "Lokta paper craft",
+      "also_known_as": [
+        "Nepali paper"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati",
+        "gandaki"
+      ],
+      "place": "Paper-making communities and craft workshops",
+      "description": "Handmade paper from lokta bark is used in notebooks, prints and craft products. Production connects high-hill plant resources with craft workshops and urban markets.",
+      "explore": "Visit a workshop that explains sustainable sourcing and buy directly from the maker where possible.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Lokta_paper",
+        "https://www.britannica.com/place/Nepal/People"
+      ]
+    },
+    {
+      "slug": "buddhist-prayer-flags-and-courtesy",
+      "name": "Buddhist monastery visits and local etiquette",
+      "also_known_as": [
+        "Monastery cultural visits"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "koshi",
+        "gandaki",
+        "bagmati"
+      ],
+      "place": "Buddhist communities and monasteries across Nepal",
+      "description": "Monasteries are active religious and community spaces. Visitor rules differ; some halls, rituals and images are not open to photography or casual entry.",
+      "explore": "Ask permission at the entrance, dress modestly, follow posted rules and leave offerings only when invited or clearly explained.",
+      "source_urls": [
+        "https://www.britannica.com/place/Nepal/People",
+        "https://en.wikipedia.org/wiki/Buddhism_in_Nepal"
+      ]
+    },
+    {
+      "slug": "newar-jatra-processions",
+      "name": "Kathmandu Valley jatra processions",
+      "also_known_as": [
+        "Jatra"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu, Patan, Bhaktapur and surrounding settlements",
+      "description": "The Valley's annual jatra calendar includes processions and neighborhood events rooted in local religious and social life. Each jatra has its own organizers, route and protocol.",
+      "explore": "Find current dates from municipal or community notices and follow crowd-control instructions.",
+      "source_urls": [
+        "https://whc.unesco.org/en/list/121/"
+      ],
+      "image": {
+        "url": "/images/food-culture/bisket-jatra.jpg",
+        "alt": "A scene from Bisket Jatra, one of Kathmandu Valley’s traditional jatra processions.",
+        "creator": "Sushan Mool",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bisket_Jatra_VIbes.jpg"
+      }
+    },
+    {
+      "slug": "newar-music-and-mask-dance",
+      "name": "Newar masked dance and traditional music",
+      "also_known_as": [
+        "Lakhe dance"
+      ],
+      "kind": "culture",
+      "region_slugs": [
+        "bagmati"
+      ],
+      "place": "Kathmandu Valley",
+      "description": "Masked dance and traditional instrumental music are part of several Newar festival traditions. Performances are linked to specific communities and occasions rather than generic stage entertainment.",
+      "explore": "Attend public performances and ask organizers whether photography or audience participation is welcome.",
+      "source_urls": [
+        "https://en.wikipedia.org/wiki/Newar"
+      ],
+      "image": {
+        "url": "/images/food-culture/lakhey.jpg",
+        "alt": "A Lakhey masked dance performance.",
+        "creator": "Rohiteyshaha",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Lakhey_Naach.jpg"
+      }
+    }
+  ]
+}
