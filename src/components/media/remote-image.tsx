@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { useState } from "react";
 
-import { isOptimizableImageSrc } from "@/lib/images";
+import { getImageOptimizationSrc, isOptimizableImageSrc } from "@/lib/images";
 
 import { ImageFallback } from "./image-fallback";
 
@@ -23,21 +23,22 @@ type RemoteImageProps = {
  */
 export function RemoteImage({ src, alt, sizes, className, priority }: RemoteImageProps) {
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
+  const imageSrc = getImageOptimizationSrc(src, priority ? 1600 : 960);
 
-  if (!src || !isOptimizableImageSrc(src) || failedSrc === src) {
+  if (!imageSrc || !isOptimizableImageSrc(imageSrc) || failedSrc === imageSrc) {
     return <ImageFallback label={alt || undefined} />;
   }
 
   return (
     <Image
-      src={src}
+      src={imageSrc}
       alt={alt}
       fill
       sizes={sizes}
       className={className}
       loading={priority ? "eager" : undefined}
       fetchPriority={priority ? "high" : undefined}
-      onError={() => setFailedSrc(src)}
+      onError={() => setFailedSrc(imageSrc)}
     />
   );
 }

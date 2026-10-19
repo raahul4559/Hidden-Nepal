@@ -90,7 +90,13 @@ async function ExploreContent({ search: searchPromise }: { search: Promise<Desti
           <FiltersJumpLink count={activeFilterCount(search)} />
         </div>
         <div className="mt-4">
-          <SearchResults result={result} search={search} hrefFor={exploreHref} clearHref="/explore" />
+          <SearchResults
+            result={result}
+            search={search}
+            hrefFor={exploreHref}
+            clearHref="/explore"
+            priorityLead
+          />
         </div>
       </div>
       <aside id="filters" aria-label="Filters" className="scroll-mt-6 lg:order-first lg:col-span-4 xl:col-span-3">

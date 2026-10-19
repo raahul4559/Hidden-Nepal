@@ -60,7 +60,13 @@ export function ThemeGrid() {
                     )}
                   >
                     <Link
-                      href={exploreHref({ theme: theme.slug })}
+                      href={
+                        theme.slug === "food"
+                          ? "/food"
+                          : theme.slug === "culture"
+                            ? "/culture"
+                            : exploreHref({ theme: theme.slug })
+                      }
                       className="rounded-sm after:absolute after:inset-0 after:content-['']"
                     >
                       {theme.label}

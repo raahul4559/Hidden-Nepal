@@ -38,6 +38,7 @@ export function SearchResults({
   hrefFor,
   clearHref,
   omitFilters,
+  priorityLead,
 }: {
   result: LoadResult<SearchPage>;
   search: DestinationSearch;
@@ -46,6 +47,8 @@ export function SearchResults({
   clearHref: string;
   /** Filters fixed by the page itself (e.g. the province on province pages). */
   omitFilters?: FilterKey[];
+  /** Load the first result's photo eagerly — set when results are above the fold. */
+  priorityLead?: boolean;
 }) {
   const filters = activeFilters(search, omitFilters);
   const practical = Boolean(search.season || search.difficulty || search.budget);
@@ -127,6 +130,7 @@ export function SearchResults({
           <DestinationResults
             result={result}
             headingLevel="h3"
+            priorityLead={priorityLead}
             empty={{
               title: filters.length ? "No destinations match these filters" : "No destinations published yet",
               body: filters.length

@@ -60,7 +60,10 @@ const costSchema = z
   });
 
 const imageSchema = z.object({
-  url: z.url({ protocol: /^https$/ }),
+  url: z.union([
+    z.url({ protocol: /^https$/ }),
+    z.string().regex(/^\/[A-Za-z0-9/_-]+\.(?:avif|jpe?g|png|webp)$/i),
+  ]),
   alt: z.string().trim().min(1, "Images need alt text").max(300),
   caption: z.string().trim().max(200).optional(),
   credit: z.string().trim().max(200).optional(),

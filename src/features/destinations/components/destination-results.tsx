@@ -11,6 +11,8 @@ type DestinationResultsProps = {
   /** `featured` gives the first card a larger, editorial treatment. */
   layout?: "grid" | "featured";
   headingLevel?: "h2" | "h3";
+  /** Load the lead card's photo eagerly — set only when it is above the fold. */
+  priorityLead?: boolean;
 };
 
 /**
@@ -29,6 +31,7 @@ export function DestinationResults({
   empty,
   layout = "grid",
   headingLevel,
+  priorityLead = false,
 }: DestinationResultsProps) {
   if (result.status === "ok" && result.destinations.length > 0) {
     const count = result.destinations.length;
@@ -53,6 +56,7 @@ export function DestinationResults({
                 destination={d}
                 variant={lead ? "feature" : "default"}
                 headingLevel={headingLevel}
+                priority={priorityLead && i === 0}
               />
             </li>
           );
