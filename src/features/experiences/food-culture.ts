@@ -14,7 +14,7 @@ const experienceSchema = z.object({
   explore: z.string().min(10),
   source_urls: z.array(z.url({ protocol: /^https$/ })).min(1),
   image: z.object({
-    url: z.string().regex(/^\/images\/(?:food-culture|destinations)\/[a-z0-9-]+\.jpg$/),
+    url: z.string().regex(/^\/images\/(?:food-culture|destinations)\/[a-z0-9-]+\.(?:jpe?g|png)$/),
     alt: z.string().min(10),
     creator: z.string().min(1),
     license: z.string().min(1),

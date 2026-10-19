@@ -75,6 +75,7 @@ describe("food and culture explorer data", () => {
     const culture = FOOD_CULTURE_EXPERIENCES.filter((item) => item.kind === "culture");
     expect(culture.filter((item) => item.image)).toHaveLength(43);
     expect(culture.filter((item) => !item.image).map((item) => item.slug)).toEqual([]);
+    expect(new Set(culture.map((item) => item.image?.url)).size).toBe(43);
     expect(culture.find((item) => item.slug === "tharu-maghi")?.image?.context_note).toMatch(
       /customs differ/i,
     );
@@ -85,7 +86,6 @@ describe("food and culture explorer data", () => {
       /not a photograph of a contemporary workshop/i,
     );
     for (const slug of [
-      "mithila-samachakewa",
       "newar-guthi",
       "palpa-dhaka-craft",
       "tamang-selo-and-damphu",
@@ -95,6 +95,12 @@ describe("food and culture explorer data", () => {
     ]) {
       expect(culture.find((item) => item.slug === slug)?.image?.context_note, slug).toBeTruthy();
     }
+    expect(culture.find((item) => item.slug === "mithila-samachakewa")?.image?.url).toBe(
+      "/images/food-culture/sama-chakewa-figures.png",
+    );
+    expect(culture.find((item) => item.slug === "tamang-selo-and-damphu")?.image?.url).toBe(
+      "/images/food-culture/tamang-selo-performance.png",
+    );
   });
 
   it("uses the Kathmandu Valley place photo for Yomari with an explicit context note", () => {

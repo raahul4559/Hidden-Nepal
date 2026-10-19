@@ -949,12 +949,11 @@
         "https://en.wikipedia.org/wiki/Maithili_culture"
       ],
       "image": {
-        "url": "/images/destinations/mithila-art.jpg",
-        "alt": "A Mithila wall painting created for the Tulsi Puja festival in Nepal.",
-        "creator": "Shravan012",
-        "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting.jpg",
-        "context_note": "This regional painting shows Mithila visual culture, not the Sama-Chakewa figures or gathering."
+        "url": "/images/food-culture/sama-chakewa-figures.png",
+        "alt": "Clay figures of Sama, Chakeba and associated characters used in the Mithila festival.",
+        "creator": "Maithil hoon",
+        "license": "CC0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Idols_of_Sama_and_Chakeba.png"
       }
     },
     {
@@ -975,11 +974,11 @@
         "https://en.wikipedia.org/wiki/Mithila_(region)"
       ],
       "image": {
-        "url": "/images/destinations/mithila-art.jpg",
-        "alt": "A Mithila wall painting created for the Tulsi Puja festival in Nepal.",
-        "creator": "Shravan012",
-        "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting.jpg"
+        "url": "/images/food-culture/mithila-painting.jpg",
+        "alt": "An artist creating a Mithila painting.",
+        "creator": "Abhishek Singh",
+        "license": "CC BY-SA 2.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting_artist_-_Flickr_-_askmeaks.jpg"
       }
     },
     {
@@ -1000,11 +999,11 @@
         "https://en.wikipedia.org/wiki/Mithila_(region)"
       ],
       "image": {
-        "url": "/images/food-culture/mithila-painting.jpg",
-        "alt": "An artist creating a Mithila painting, an example of the art tradition.",
-        "creator": "Abhishek Singh",
-        "license": "CC BY-SA 2.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting_artist_-_Flickr_-_askmeaks.jpg"
+        "url": "/images/destinations/mithila-art.jpg",
+        "alt": "A Mithila wall painting created for the Tulsi Puja festival in Nepal.",
+        "creator": "Shravan012",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting.jpg"
       }
     },
     {
@@ -1508,12 +1507,12 @@
         "https://en.wikipedia.org/wiki/Dhaka_topi"
       ],
       "image": {
-        "url": "/images/food-culture/dhaka-weaving.jpg",
-        "alt": "A Dhaka weaving center in Nepal.",
-        "creator": "Jim Holmes / AusAID",
-        "license": "CC BY 2.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Dhaka_Weaving_Center,_Nepal_(10692106583).jpg",
-        "context_note": "The source documents a Dhaka weaving center in Nepal but does not identify this as a Palpa workshop."
+        "url": "/images/destinations/tansen.jpg",
+        "alt": "The hillside town of Tansen, Palpa, among trees and hills.",
+        "creator": "Vyacheslav Argenberg",
+        "license": "CC BY 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Tansen,_Palpa,_Nepal.jpg",
+        "context_note": "This photo shows Tansen, not the weaving process or a specific Dhaka workshop."
       }
     },
     {
@@ -1611,11 +1610,12 @@
         "https://www.britannica.com/place/Nepal/People"
       ],
       "image": {
-        "url": "/images/food-culture/deuda.jpg",
-        "alt": "A Deuda dance performance representing a regional folk tradition.",
-        "creator": "Khaptad Digital Music",
+        "url": "/images/destinations/jumla.jpg",
+        "alt": "Jumla, Nepal, in Karnali Province.",
+        "creator": "Soraj Shahi",
         "license": "CC BY-SA 3.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Deuda_dance.jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Tila_Valley_Jumla.JPG",
+        "context_note": "This is a Jumla landscape, not a Deuda performance."
       }
     },
     {
@@ -1637,12 +1637,11 @@
         "https://en.wikipedia.org/wiki/Tamang_people"
       ],
       "image": {
-        "url": "/images/food-culture/sonam-lhosar.jpg",
-        "alt": "A child at a Sonam Lhosar celebration in Nepal.",
-        "creator": "Wikimedman",
+        "url": "/images/food-culture/tamang-selo-performance.png",
+        "alt": "A Tamang woman singing and dancing to a traditional Tamang Selo song.",
+        "creator": "Damfutamang",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Sonam_Lhosar_Portrait.jpg",
-        "context_note": "This photo shows a Sonam Lhosar celebration, not a Tamang Selo music performance."
+        "source_url": "https://commons.wikimedia.org/wiki/File:Tamang_woman_dancing_on_their_traditional_song,_Tamang_selo.png"
       }
     },
     {
@@ -1714,12 +1713,12 @@
         "https://en.wikipedia.org/wiki/Limbu_people"
       ],
       "image": {
-        "url": "/images/food-culture/chasok-tangnam.jpg",
-        "alt": "A Limbu cultural performance at Chasok Tangnam in eastern Nepal.",
-        "creator": "Bibek Raj Hanggam",
+        "url": "/images/destinations/pathibhara-temple-view.jpg",
+        "alt": "Mountain view from the Pathibhara Temple area in Taplejung, eastern Nepal.",
+        "creator": "Rabinika",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Chasoke_Tangnam_Dhol_Nach_Lingtep_Meringden_Taplejung_Nepal.jpg",
-        "context_note": "This shows a public Chasok Tangnam performance, not restricted Mundhum oral or ritual knowledge."
+        "source_url": "https://commons.wikimedia.org/wiki/File:The_view_seen_from_Pathibhara_Temple_of_Taplejung_District_Nepal_01.jpg",
+        "context_note": "This shows a local pilgrimage landscape, not a Mundhum recitation or ceremony."
       }
     },
     {
@@ -1740,12 +1739,12 @@
         "https://en.wikipedia.org/wiki/Maithili_culture"
       ],
       "image": {
-        "url": "/images/food-culture/mithila-painting.jpg",
-        "alt": "An artist creating a Mithila painting in the Mithila cultural region.",
-        "creator": "Abhishek Singh",
-        "license": "CC BY-SA 2.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting_artist_-_Flickr_-_askmeaks.jpg",
-        "context_note": "This shows Mithila visual culture, not a Maithili-language or folk-song performance."
+        "url": "/images/destinations/janakpur.jpg",
+        "alt": "Janaki Mandir in Janakpur, a cultural landmark in the Mithila region.",
+        "creator": "Bijaya 2043",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Janaki_Temple_Janakpur-Janakpur030315_MG_36680059.jpg",
+        "context_note": "This shows a Mithila-region landmark, not a Maithili-language or folk-song performance."
       }
     },
     {
@@ -1767,12 +1766,12 @@
         "https://en.wikipedia.org/wiki/Maithili_language"
       ],
       "image": {
-        "url": "/images/destinations/mithila-art.jpg",
-        "alt": "A Mithila wall painting created for the Tulsi Puja festival in Nepal.",
-        "creator": "Shravan012",
+        "url": "/images/destinations/janaki-mandir.jpg",
+        "alt": "A devotional visit at Janaki Mandir in Janakpur, Mithila.",
+        "creator": "Bijay chaurasia",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting.jpg",
-        "context_note": "This depicts Mithila painting in the region, not wedding or seasonal singing."
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sadhu_in_Janaki_Temple,_Janakpur-September_22,_2016-IMG_7437.jpg",
+        "context_note": "This shows a Mithila-region devotional landmark, not wedding or seasonal singing."
       }
     },
     {
@@ -1793,12 +1792,12 @@
         "https://en.wikipedia.org/wiki/Newar"
       ],
       "image": {
-        "url": "/images/food-culture/kumari-ghar.jpg",
-        "alt": "Kumari Ghar, the historic residence in Kathmandu.",
-        "creator": "Matt Zimmerman",
-        "license": "CC BY 2.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Kumari_Ghar,_Kathmandu,_Nepal_(23824761324).jpg",
-        "context_note": "This photo shows Kumari Ghar, not the Kumari or a religious ceremony."
+        "url": "/images/destinations/kathmandu-durbar-square.jpg",
+        "alt": "Historic palace buildings at Kathmandu Durbar Square in Kathmandu.",
+        "creator": "Artha at English Wikipedia",
+        "license": "CC BY-SA 3.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Basantapurpalace.JPG",
+        "context_note": "This shows Basantapur Palace at the same historic square, not Kumari Ghar or the Kumari herself."
       }
     },
     {
@@ -1901,11 +1900,12 @@
         "https://whc.unesco.org/en/list/121/"
       ],
       "image": {
-        "url": "/images/food-culture/bisket-jatra.jpg",
-        "alt": "A scene from Bisket Jatra, one of Kathmandu Valley’s traditional jatra processions.",
-        "creator": "Sushan Mool",
+        "url": "/images/food-culture/newar-chariot-procession.jpg",
+        "alt": "Bhairab carried in a chariot through Kathmandu during Indra Jatra.",
+        "creator": "Arnav shk",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Bisket_Jatra_VIbes.jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Bhairab_in_the_Chariot.jpg",
+        "context_note": "This is one example, Indra Jatra; each Kathmandu Valley jatra has its own organizers and customs."
       }
     },
     {
