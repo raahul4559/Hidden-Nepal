@@ -207,11 +207,16 @@ destinations whose `practicalInfoStatus` is `VERIFIED`. Placeholder or
 unverified figures are never used to filter or rank. Budget bands use the
 per-person starting cost in NPR.
 
-**SEO.** Set `SITE_URL` (or deploy on Vercel) so canonical URLs, Open Graph
-and the sitemap use the right origin. Keyword searches and sample
-destinations are `noindex`. Unknown destination or province URLs render
-not-found pages with `noindex`; Next.js keeps status 200 once streaming has
-started.
+**SEO.** `SITE_URL` overrides the production origin. Vercel deployments use
+their configured production domain; other production deployments default to
+`https://hiddennepal-one.vercel.app`, while development defaults to localhost.
+Canonical URLs, Open Graph, social previews, structured data and the sitemap
+use that origin.
+`robots.txt` advertises the sitemap and blocks API crawling. Account and
+sign-in routes use `noindex`; filtered, sorted and paginated search results
+and sample destinations are also `noindex`. Unknown destination or province
+URLs render not-found pages with `noindex`; Next.js keeps status 200 once
+streaming has started.
 
 Experiences: the homepage shows five themes (Nature, Culture, Adventure,
 Villages, Food). Each groups one or more of the seven database categories
