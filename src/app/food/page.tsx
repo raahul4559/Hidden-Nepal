@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   description:
     "Explore Nepal through regional foodways, from Newar dishes and Mithila cooking to Himalayan grains and Tharu foods.",
   alternates: { canonical: "/food" },
+  openGraph: {
+    title: "Food and drink | Hidden Nepal",
+    description:
+      "Explore Nepal through regional foodways, from Newar dishes and Mithila cooking to Himalayan grains and Tharu foods.",
+    url: "/food",
+    images: [{ url: PHOTOS.food.src.src, alt: PHOTOS.food.alt }],
+  },
 };
 
 export default function FoodPage() {

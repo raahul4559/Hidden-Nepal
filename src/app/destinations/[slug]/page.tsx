@@ -5,6 +5,7 @@ import { Suspense } from "react";
 import { DestinationDetail } from "@/features/destinations/components/destination-detail";
 import { getDestinationBySlug } from "@/features/destinations/queries";
 import { destinationHref } from "@/features/destinations/schemas";
+import { DEFAULT_SOCIAL_IMAGE } from "@/lib/site";
 
 import { DestinationDetailSkeleton } from "./skeleton";
 
@@ -28,7 +29,9 @@ export async function generateMetadata({
       description: destination.summary,
       type: "article",
       url: destinationHref(destination.slug),
-      images: cover ? [{ url: cover.url, alt: cover.alt }] : undefined,
+      images: cover
+        ? [{ url: cover.url, alt: cover.alt }]
+        : [DEFAULT_SOCIAL_IMAGE],
     },
   };
 }

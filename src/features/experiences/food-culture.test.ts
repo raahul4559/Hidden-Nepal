@@ -87,16 +87,38 @@ describe("food and culture explorer data", () => {
     );
   });
 
-  it("has a locally bundled, credited photo for every culture entry", () => {
+  it("does not reuse an image across food and culture cards", () => {
+    const illustrated = FOOD_CULTURE_EXPERIENCES.filter((item) => item.image);
+    const paths = illustrated.map((item) => item.image?.url);
+    const hashes = illustrated.map((item) =>
+      createHash("sha256")
+        .update(readFileSync(join(process.cwd(), "public", item.image!.url.slice(1))))
+        .digest("hex"),
+    );
+
+    expect(new Set(paths).size).toBe(illustrated.length);
+    expect(new Set(hashes).size).toBe(illustrated.length);
+  });
+
+  it("uses distinct, locally bundled, credited photos for verified culture matches", () => {
     const culture = FOOD_CULTURE_EXPERIENCES.filter((item) => item.kind === "culture");
-    expect(culture.filter((item) => item.image)).toHaveLength(43);
-    expect(culture.filter((item) => !item.image).map((item) => item.slug)).toEqual([]);
-    expect(new Set(culture.map((item) => item.image?.url)).size).toBe(43);
+    const illustrated = culture.filter((item) => item.image);
+    expect(illustrated).toHaveLength(42);
+    expect(culture.filter((item) => !item.image).map((item) => item.slug)).toEqual([
+      "mithila-music-and-wedding-songs",
+    ]);
+    expect(new Set(illustrated.map((item) => item.image?.url)).size).toBe(42);
+    const imageHashes = illustrated.map((item) =>
+      createHash("sha256")
+        .update(readFileSync(join(process.cwd(), "public", item.image!.url.slice(1))))
+        .digest("hex"),
+    );
+    expect(new Set(imageHashes).size).toBe(42);
     expect(culture.find((item) => item.slug === "tharu-maghi")?.image?.context_note).toMatch(
       /customs differ/i,
     );
     expect(culture.find((item) => item.slug === "newar-kumari-tradition")?.image?.context_note).toMatch(
-      /not the Kumari/i,
+      /not the living Kumari/i,
     );
     expect(culture.find((item) => item.slug === "buddhist-thangka-workshops")?.image?.context_note).toMatch(
       /not a photograph of a contemporary workshop/i,
@@ -104,8 +126,6 @@ describe("food and culture explorer data", () => {
     for (const slug of [
       "newar-guthi",
       "palpa-dhaka-craft",
-      "maithili-language-and-folk-song",
-      "mithila-music-and-wedding-songs",
       "nepal-lokta-paper-craft",
     ]) {
       expect(culture.find((item) => item.slug === slug)?.image?.context_note, slug).toBeTruthy();
@@ -122,6 +142,38 @@ describe("food and culture explorer data", () => {
     );
     expect(mithilaPainting?.creator).toBe("Bhuvana Meenakshi");
     expect(mithilaPainting?.license).toBe("CC BY-SA 3.0");
+
+    expect(culture.find((item) => item.slug === "tihar-lights-and-bhai-tika")?.image).toMatchObject({
+      url: "/images/food-culture/tihar-bhai-tika.jpg",
+      creator: "Sandesh Lamsal Nepal",
+      license: "CC BY-SA 4.0",
+    });
+    expect(culture.find((item) => item.slug === "chhath-puja")?.image?.source_url).toBe(
+      "https://commons.wikimedia.org/wiki/File:Chhath_Puja_Sandhya_Ghats_Malangwa_Bhelhi_Sarlahi_2.jpg",
+    );
+    expect(culture.find((item) => item.slug === "newar-gaijatra")?.image?.source_url).toBe(
+      "https://commons.wikimedia.org/wiki/File:Floats_Gai_Jatra.jpg",
+    );
+    expect(culture.find((item) => item.slug === "maithili-language-and-folk-song")?.image).toMatchObject({
+      url: "/images/food-culture/maithili-thakur-performance.jpg",
+      creator: "Devendra Fadnavis",
+      license: "CC BY 3.0",
+    });
+    expect(culture.find((item) => item.slug === "newar-kumari-tradition")?.image).toMatchObject({
+      url: "/images/food-culture/kumari-ghar-courtyard.jpg",
+      creator: "Faj2323",
+      license: "CC BY-SA 4.0",
+    });
+  });
+
+  it("uses a directly matching photo for Newar feast and khaja traditions", () => {
+    const khaja = FOOD_CULTURE_EXPERIENCES.find((item) => item.slug === "newar-khwa-swan")?.image;
+    expect(khaja).toMatchObject({
+      url: "/images/food-culture/newari-khaja-set.jpg",
+      creator: "Gaurav Dhwaj Khadka",
+      license: "CC BY-SA 4.0",
+      source_url: "https://commons.wikimedia.org/wiki/File:Newari_Khaja_Set.jpg",
+    });
   });
 
   it("uses a dedicated, credited Yomari dumpling photo", () => {

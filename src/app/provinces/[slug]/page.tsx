@@ -26,18 +26,31 @@ export function generateStaticParams() {
   return PROVINCES.map((p) => ({ slug: p.slug }));
 }
 
-export async function generateMetadata({ params }: PageProps<"/provinces/[slug]">): Promise<Metadata> {
+export async function generateMetadata({
+  params,
+  searchParams,
+}: PageProps<"/provinces/[slug]">): Promise<Metadata> {
   const { slug } = await params;
   const province = getProvince(slug);
   if (!province) return { title: "Province not found", robots: { index: false } };
 
+  const search = parseDestinationSearch(await searchParams);
   const title = `${province.name} Province`;
   const description = `Lesser-known destinations in ${province.name} Province, Nepal, known for ${listFormat(province.knownFor)}.`;
   return {
     title,
     description,
     alternates: { canonical: provinceHref(province.slug) },
-    openGraph: { title, description, url: provinceHref(province.slug) },
+    robots:
+      activeFilterCount(search) > 0 || search.sort || (search.page && search.page > 1)
+        ? { index: false, follow: true }
+        : undefined,
+    openGraph: {
+      title,
+      description,
+      url: provinceHref(province.slug),
+      images: ["/images/destinations/kathmandu-valley.jpg"],
+    },
   };
 }
 

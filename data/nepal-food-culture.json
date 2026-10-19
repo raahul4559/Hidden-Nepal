@@ -5,8 +5,8 @@
     "editorial_method": "Factual summaries are paraphrased from the linked references. This is a curated discovery guide, not an exhaustive inventory or a substitute for community-led interpretation.",
     "coverage_notes": [
       "28 of 30 food entries have locally bundled, attributed images. Cards without a directly matching, reusable photo omit the image until one is verified.",
-    "All 43 cultural entries have locally bundled photos with creator, license and source metadata. Where a photo illustrates a related place, artwork or celebration rather than the exact practice, a visible context note says so.",
-    "Contextual photos are not evidence that a particular event is occurring or that a depicted practice is universal; follow community-specific visitor and photography guidance.",
+      "42 of 43 cultural entries have locally bundled photos with creator, license and source metadata. The Mithila wedding and seasonal songs card omits its unrelated landmark photo until a directly relevant reusable image is verified.",
+      "Contextual photos are not evidence that a particular event is occurring or that a depicted practice is universal; follow community-specific visitor and photography guidance.",
       "Includes representative foodways, festivals, performing arts, crafts and community traditions associated with all seven provinces.",
       "Practices vary by community, locality, family and year. A province tag indicates a useful place to begin exploring, not exclusive ownership or universal practice.",
       "Festival dates move with lunar calendars. Confirm current dates and visitor access locally; ask before photographing people, rituals or private religious spaces.",
@@ -63,6 +63,7 @@
       "Nepal's food and cultural life is too diverse to represent completely in one directory; further community review and district-level research are needed.",
       "Items are discovery leads, not endorsements of commercial operators. No ratings, current event dates, prices or access guarantees are asserted.",
       "Directly matching, reusable photos were not verified for Wachipa or Yangben; those food cards intentionally omit photos pending verification.",
+      "A directly relevant, reusable photo was not verified for Mithila wedding and seasonal songs; that culture card intentionally omits its photo pending verification.",
       "Copyrighted prose and third-party photography are not copied into this dataset."
     ]
   },
@@ -337,11 +338,11 @@
         "https://en.wikipedia.org/wiki/Newar"
       ],
       "image": {
-        "url": "/images/food-culture/newari-khaja.jpg",
-        "alt": "A Newar khaja set with assorted traditional foods.",
+        "url": "/images/food-culture/newari-khaja-set.jpg",
+        "alt": "A Newari khaja set served with beaten rice, beans, fish, vegetables and curry.",
         "creator": "Gaurav Dhwaj Khadka",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Khaja_Set_2.jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Newari_Khaja_Set.jpg"
       }
     },
     {
@@ -859,11 +860,11 @@
         "https://en.wikipedia.org/wiki/Tihar"
       ],
       "image": {
-        "url": "/images/food-culture/tihar.jpg",
-        "alt": "A person lights a traditional lamp during Tihar.",
-        "creator": "Mithun Kunwar / Radomianin",
+        "url": "/images/food-culture/tihar-bhai-tika.jpg",
+        "alt": "A brother and sister wearing marigold garlands and tika for Bhai Tika during Tihar.",
+        "creator": "Sandesh Lamsal Nepal",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Sister_lighting_traditional_lamp_during_Tihar_festival_(edited).jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Tihar_Celebration_in_Nepal_(Brother_and_Sister).jpg"
       }
     },
     {
@@ -908,11 +909,11 @@
         "https://en.wikipedia.org/wiki/Chhath"
       ],
       "image": {
-        "url": "/images/food-culture/chhath-prasad.jpg",
-        "alt": "Prasad offerings prepared for Chhath Puja.",
-        "creator": "Gaurav Dhwaj Khadka",
+        "url": "/images/food-culture/chhath-puja-ghats.jpg",
+        "alt": "Illuminated Chhath Puja evening ghats along the Jhim River between Malangwa and Bhelhi, Sarlahi.",
+        "creator": "Pustam EGR",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Chhath_Puja_Prasad.jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Chhath_Puja_Sandhya_Ghats_Malangwa_Bhelhi_Sarlahi_2.jpg"
       }
     },
     {
@@ -1056,11 +1057,11 @@
         "https://en.wikipedia.org/wiki/Gai_Jatra"
       ],
       "image": {
-        "url": "/images/food-culture/gai-jatra.jpg",
-        "alt": "A satirical performance during Gai Jatra (Saparu).",
-        "creator": "Nyeta",
+        "url": "/images/food-culture/gai-jatra-festival-floats.jpg",
+        "alt": "Festival floats being carried through Taumadhi Square during Gai Jatra in Bhaktapur.",
+        "creator": "Perrine Aguiar",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Political_satire_in_Gai_Jatra_(Sāpāru).jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Floats_Gai_Jatra.jpg"
       }
     },
     {
@@ -1723,12 +1724,11 @@
         "https://en.wikipedia.org/wiki/Maithili_culture"
       ],
       "image": {
-        "url": "/images/destinations/janakpur.jpg",
-        "alt": "Janaki Mandir in Janakpur, a cultural landmark in the Mithila region.",
-        "creator": "Bijaya 2043",
-        "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Janaki_Temple_Janakpur-Janakpur030315_MG_36680059.jpg",
-        "context_note": "This shows a Mithila-region landmark, not a Maithili-language or folk-song performance."
+        "url": "/images/food-culture/maithili-thakur-performance.jpg",
+        "alt": "Maithili Thakur singing at the Sanskruti Arts Festival in 2023.",
+        "creator": "Devendra Fadnavis",
+        "license": "CC BY 3.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Maithili_Thakur_performing_at_Sanskruti_Arts_Festival_2023.jpg"
       }
     },
     {
@@ -1748,15 +1748,7 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Maithili_culture",
         "https://en.wikipedia.org/wiki/Maithili_language"
-      ],
-      "image": {
-        "url": "/images/destinations/janaki-mandir.jpg",
-        "alt": "A devotional visit at Janaki Mandir in Janakpur, Mithila.",
-        "creator": "Bijay chaurasia",
-        "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Sadhu_in_Janaki_Temple,_Janakpur-September_22,_2016-IMG_7437.jpg",
-        "context_note": "This shows a Mithila-region devotional landmark, not wedding or seasonal singing."
-      }
+      ]
     },
     {
       "slug": "newar-kumari-tradition",
@@ -1776,12 +1768,12 @@
         "https://en.wikipedia.org/wiki/Newar"
       ],
       "image": {
-        "url": "/images/destinations/kathmandu-durbar-square.jpg",
-        "alt": "Historic palace buildings at Kathmandu Durbar Square in Kathmandu.",
-        "creator": "Artha at English Wikipedia",
-        "license": "CC BY-SA 3.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Basantapurpalace.JPG",
-        "context_note": "This shows Basantapur Palace at the same historic square; it is not the Kumari or Kumari Ghar."
+        "url": "/images/food-culture/kumari-ghar-courtyard.jpg",
+        "alt": "The carved courtyard of Kumari Ghar at Kathmandu Durbar Square.",
+        "creator": "Faj2323",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Kumari_Ghar,_Kathmandu_Durbar_Square.jpg",
+        "context_note": "This image shows Kumari Ghar itself, not the living Kumari; follow current access and photography rules."
       }
     },
     {

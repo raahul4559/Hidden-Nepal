@@ -5,6 +5,11 @@ export const siteConfig = {
     "Hidden waterfalls, remote villages, Himalayan lakes, trekking routes, cultural heritage and regional food: a guide to travelling Nepal with care.",
 } as const;
 
+export const DEFAULT_SOCIAL_IMAGE = {
+  url: "/images/destinations/kathmandu-valley.jpg",
+  alt: "Swayambhunath Stupa overlooking Kathmandu Valley, Nepal.",
+} as const;
+
 /** Every entry must resolve to a real route or an on-page section. */
 export const mainNav = [
   { label: "Experiences", href: "/#experiences" },

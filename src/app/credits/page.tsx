@@ -3,11 +3,18 @@ import Image from "next/image";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { PHOTOS } from "@/content/photos";
+import { DEFAULT_SOCIAL_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/credits" },
   title: "Photo credits",
   description: "Attribution and licenses for photography used on Hidden Nepal.",
+  openGraph: {
+    title: "Photo credits | Hidden Nepal",
+    description: "Attribution and licenses for photography used on Hidden Nepal.",
+    url: "/credits",
+    images: [DEFAULT_SOCIAL_IMAGE],
+  },
 };
 
 export default function CreditsPage() {

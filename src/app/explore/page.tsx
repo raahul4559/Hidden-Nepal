@@ -30,9 +30,17 @@ export async function generateMetadata({ searchParams }: PageProps<"/explore">):
     description: described ? `${described} in Nepal. ${BASE_DESCRIPTION}` : BASE_DESCRIPTION,
     // Canonical uses only validated params, so junk query strings collapse.
     alternates: { canonical: exploreHref(search) },
-    // Free-text results are thin and unbounded; keep them out of the index.
-    robots: search.q ? { index: false, follow: true } : undefined,
-    openGraph: { title, url: exploreHref(search) },
+    // Filtered and paginated result pages are useful to visitors, not search indexes.
+    robots:
+      activeFilterCount(search) > 0 || search.sort || (search.page && search.page > 1)
+        ? { index: false, follow: true }
+        : undefined,
+    openGraph: {
+      title,
+      description: described ? `${described} in Nepal. ${BASE_DESCRIPTION}` : BASE_DESCRIPTION,
+      url: exploreHref(search),
+      images: ["/images/destinations/kathmandu-valley.jpg"],
+    },
   };
 }
 

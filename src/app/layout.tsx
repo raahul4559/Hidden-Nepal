@@ -3,8 +3,8 @@ import { Fraunces, Manrope } from "next/font/google";
 
 import { SiteFooter } from "@/components/layout/site-footer";
 import { SiteHeader } from "@/components/layout/site-header";
-import { siteConfig } from "@/lib/site";
-import { getSiteUrl } from "@/lib/site-url";
+import { DEFAULT_SOCIAL_IMAGE, siteConfig } from "@/lib/site";
+import { absoluteUrl, getSiteUrl } from "@/lib/site-url";
 
 import "./globals.css";
 
@@ -23,18 +23,47 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = {
   metadataBase: getSiteUrl(),
+  applicationName: siteConfig.name,
   title: {
     default: `${siteConfig.name} | ${siteConfig.tagline}`,
     template: `%s | ${siteConfig.name}`,
   },
   description: siteConfig.description,
   openGraph: {
+    title: `${siteConfig.name} | ${siteConfig.tagline}`,
     siteName: siteConfig.name,
     type: "website",
     locale: "en_GB",
     description: siteConfig.description,
+    url: absoluteUrl("/"),
+    images: [DEFAULT_SOCIAL_IMAGE],
   },
-  twitter: { card: "summary_large_image" },
+  twitter: {
+    card: "summary_large_image",
+    images: [DEFAULT_SOCIAL_IMAGE.url],
+  },
+};
+
+const siteStructuredData = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": absoluteUrl("/#organization"),
+      name: siteConfig.name,
+      url: absoluteUrl("/"),
+      description: siteConfig.description,
+    },
+    {
+      "@type": "WebSite",
+      "@id": absoluteUrl("/#website"),
+      url: absoluteUrl("/"),
+      name: siteConfig.name,
+      description: siteConfig.description,
+      publisher: { "@id": absoluteUrl("/#organization") },
+      inLanguage: "en",
+    },
+  ],
 };
 
 export const viewport: Viewport = {
@@ -48,6 +77,12 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${manrope.variable} ${fraunces.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(siteStructuredData).replace(/</g, "\\u003c"),
+          }}
+        />
         <a
           href="#main"
           className="sr-only z-50 rounded-md bg-ivory px-4 py-2 font-semibold text-navy focus:not-sr-only focus:fixed focus:top-4 focus:left-4"

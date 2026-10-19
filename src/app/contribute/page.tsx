@@ -2,12 +2,20 @@ import type { Metadata } from "next";
 
 import { PageHeader } from "@/components/layout/page-header";
 import { PlaceSubmissionForm } from "@/features/submissions/components/place-submission-form";
+import { DEFAULT_SOCIAL_IMAGE } from "@/lib/site";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/contribute" },
   title: "Suggest a place",
   description:
     "Tell Hidden Nepal about a lesser-known place: a waterfall, village, trail, festival or kitchen worth a visit.",
+  openGraph: {
+    title: "Suggest a place | Hidden Nepal",
+    description:
+      "Tell Hidden Nepal about a lesser-known place: a waterfall, village, trail, festival or kitchen worth a visit.",
+    url: "/contribute",
+    images: [DEFAULT_SOCIAL_IMAGE],
+  },
 };
 
 const GUIDANCE = [

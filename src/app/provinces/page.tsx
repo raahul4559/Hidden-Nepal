@@ -8,6 +8,13 @@ export const metadata: Metadata = {
   description:
     "Browse lesser-known destinations across Nepal's seven provinces, from the Terai plains to the high Himalaya.",
   alternates: { canonical: "/provinces" },
+  openGraph: {
+    title: "Provinces of Nepal | Hidden Nepal",
+    description:
+      "Browse lesser-known destinations across Nepal's seven provinces, from the Terai plains to the high Himalaya.",
+    url: "/provinces",
+    images: ["/images/destinations/kathmandu-valley.jpg"],
+  },
 };
 
 export default function ProvincesPage() {

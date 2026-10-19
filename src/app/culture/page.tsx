@@ -12,6 +12,13 @@ export const metadata: Metadata = {
   description:
     "Explore Nepal's living cultural traditions, festivals, music, crafts and community experiences across all seven provinces.",
   alternates: { canonical: "/culture" },
+  openGraph: {
+    title: "Culture and living traditions | Hidden Nepal",
+    description:
+      "Explore Nepal's living cultural traditions, festivals, music, crafts and community experiences across all seven provinces.",
+    url: "/culture",
+    images: [{ url: PHOTOS.culture.src.src, alt: PHOTOS.culture.alt }],
+  },
 };
 
 export default function CulturePage() {
