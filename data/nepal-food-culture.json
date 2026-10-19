@@ -949,7 +949,7 @@
         "https://en.wikipedia.org/wiki/Maithili_culture"
       ],
       "image": {
-        "url": "/images/food-culture/sama-chakewa-figures.png",
+        "url": "/images/food-culture/sama-chakewa-figures.jpg",
         "alt": "Clay figures of Sama, Chakeba and associated characters used in the Mithila festival.",
         "creator": "Maithil hoon",
         "license": "CC0",
@@ -975,10 +975,10 @@
       ],
       "image": {
         "url": "/images/food-culture/mithila-painting.jpg",
-        "alt": "An artist creating a Mithila painting.",
-        "creator": "Abhishek Singh",
-        "license": "CC BY-SA 2.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting_artist_-_Flickr_-_askmeaks.jpg"
+        "alt": "A colorful Mithila painting by Bhuvana Meenakshi featuring a fish motif.",
+        "creator": "Bhuvana Meenakshi",
+        "license": "CC BY-SA 3.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Madhubani_painting_by_Bhuvana_Meenakshi.jpg"
       }
     },
     {
@@ -1076,7 +1076,7 @@
         "alt": "A satirical performance during Gai Jatra (Saparu).",
         "creator": "Nyeta",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Political_satire_in_Gai_Jatra_(Sā_pāru).jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Political_satire_in_Gai_Jatra_(Sāpāru).jpg"
       }
     },
     {
@@ -1123,12 +1123,12 @@
         "https://en.wikipedia.org/wiki/Newar"
       ],
       "image": {
-        "url": "/images/destinations/kathmandu-valley.jpg",
-        "alt": "A sadhu at Kathmandu Durbar Square in the Kathmandu Valley.",
-        "creator": "Anton Gutmann / Aristeas",
+        "url": "/images/destinations/patan-durbar-square.jpg",
+        "alt": "A shrine and devotional statue in a historic Newar setting.",
+        "creator": "Alexander Shafir",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Saddhu_at_Durbar_Square,_Kathmandu_(edited).jpg",
-        "context_note": "This shows a Kathmandu Valley heritage setting, not a guthi meeting or private institution."
+        "source_url": "https://commons.wikimedia.org/wiki/File:Nepal_Patan_Durbar_Square_20_(full_res).jpg",
+        "context_note": "This shows a Newar heritage setting, not a guthi meeting or private institution."
       }
     },
     {
@@ -1637,7 +1637,7 @@
         "https://en.wikipedia.org/wiki/Tamang_people"
       ],
       "image": {
-        "url": "/images/food-culture/tamang-selo-performance.png",
+        "url": "/images/food-culture/tamang-selo-performance.jpg",
         "alt": "A Tamang woman singing and dancing to a traditional Tamang Selo song.",
         "creator": "Damfutamang",
         "license": "CC BY-SA 4.0",
@@ -1797,7 +1797,7 @@
         "creator": "Artha at English Wikipedia",
         "license": "CC BY-SA 3.0",
         "source_url": "https://commons.wikimedia.org/wiki/File:Basantapurpalace.JPG",
-        "context_note": "This shows Basantapur Palace at the same historic square, not Kumari Ghar or the Kumari herself."
+        "context_note": "This shows Basantapur Palace at the same historic square; it is not the Kumari or Kumari Ghar."
       }
     },
     {

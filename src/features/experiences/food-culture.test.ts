@@ -88,7 +88,6 @@ describe("food and culture explorer data", () => {
     for (const slug of [
       "newar-guthi",
       "palpa-dhaka-craft",
-      "tamang-selo-and-damphu",
       "maithili-language-and-folk-song",
       "mithila-music-and-wedding-songs",
       "nepal-lokta-paper-craft",
@@ -96,11 +95,17 @@ describe("food and culture explorer data", () => {
       expect(culture.find((item) => item.slug === slug)?.image?.context_note, slug).toBeTruthy();
     }
     expect(culture.find((item) => item.slug === "mithila-samachakewa")?.image?.url).toBe(
-      "/images/food-culture/sama-chakewa-figures.png",
+      "/images/food-culture/sama-chakewa-figures.jpg",
     );
     expect(culture.find((item) => item.slug === "tamang-selo-and-damphu")?.image?.url).toBe(
-      "/images/food-culture/tamang-selo-performance.png",
+      "/images/food-culture/tamang-selo-performance.jpg",
     );
+    const mithilaPainting = culture.find((item) => item.slug === "mithila-painting")?.image;
+    expect(mithilaPainting?.source_url).toBe(
+      "https://commons.wikimedia.org/wiki/File:Madhubani_painting_by_Bhuvana_Meenakshi.jpg",
+    );
+    expect(mithilaPainting?.creator).toBe("Bhuvana Meenakshi");
+    expect(mithilaPainting?.license).toBe("CC BY-SA 3.0");
   });
 
   it("uses the Kathmandu Valley place photo for Yomari with an explicit context note", () => {
