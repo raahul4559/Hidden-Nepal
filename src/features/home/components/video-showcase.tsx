@@ -10,22 +10,11 @@ const videos = [
     src: "/videos/manang-green-lake.mp4",
     poster: "/videos/manang-green-lake-poster.jpg",
     name: "Green Lake, Manang",
-    width: 1280,
-    height: 720,
   },
   {
     src: "/videos/annapurna-himalayas.mp4",
     poster: "/videos/annapurna-himalayas-poster.jpg",
     name: "Annapurna Himalayas",
-    width: 1280,
-    height: 720,
-  },
-  {
-    src: "/videos/nepal-aerial-reel.mp4",
-    poster: "/videos/nepal-aerial-reel-poster.jpg",
-    name: "Nepal from above",
-    width: 720,
-    height: 1280,
   },
 ] as const;
 
@@ -166,12 +155,7 @@ export function VideoShowcase() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Video ${i + 1} of ${videos.length}`}
-                className={cn(
-                  "relative w-full shrink-0 snap-center snap-always",
-                  video.width < video.height
-                    ? "aspect-video"
-                    : "aspect-[5/4] sm:aspect-[16/9.5]",
-                )}
+                className="relative aspect-[5/4] w-full shrink-0 snap-center snap-always sm:aspect-[16/9.5]"
               >
                 <video
                   ref={(element) => {
@@ -186,14 +170,13 @@ export function VideoShowcase() {
                   loop
                   playsInline
                   preload={i === 0 ? "auto" : "none"}
-                  width={video.width}
-                  height={video.height}
-                  className={cn(
-                    "absolute object-cover",
-                    video.width < video.height
-                      ? "left-1/2 top-1/2 h-[177.7778%] w-[56.25%] -translate-x-1/2 -translate-y-1/2 -rotate-90"
-                      : "inset-0 h-full w-full",
-                  )}
+                  width={1280}
+                  height={720}
+                  className="absolute inset-0 h-full w-full object-cover"
+                />
+                <div
+                  aria-hidden
+                  className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_55%,rgb(0_0_0_/_0.16)_100%)]"
                 />
               </div>
             ))}
@@ -205,7 +188,7 @@ export function VideoShowcase() {
               onClick={() => goTo(index - 1)}
               disabled={index === 0}
               aria-label="Previous video"
-              className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-foreground/10 disabled:pointer-events-none disabled:opacity-35"
+              className="inline-flex size-11 shrink-0 items-center justify-center text-[#2C2C2E] transition-colors hover:text-[#414145] disabled:pointer-events-none disabled:opacity-35"
             >
               <ChevronLeft aria-hidden className="size-5" strokeWidth={1.75} />
             </button>
@@ -219,10 +202,10 @@ export function VideoShowcase() {
                   aria-label={`Show video ${i + 1}: ${video.name}`}
                   aria-current={i === index ? "true" : undefined}
                   className={cn(
-                    "h-1.5 rounded-full bg-foreground/25 transition-all duration-300",
+                    "h-1.5 rounded-full bg-[#2C2C2E]/40 transition-all duration-300",
                     i === index
-                      ? "w-7 bg-foreground/70"
-                      : "hover:bg-foreground/50",
+                      ? "w-7 bg-[#2C2C2E]"
+                      : "hover:bg-[#2C2C2E]/75",
                   )}
                 />
               ))}
@@ -233,7 +216,7 @@ export function VideoShowcase() {
               onClick={() => goTo(index + 1)}
               disabled={index === videos.length - 1}
               aria-label="Next video"
-              className="inline-flex size-11 shrink-0 items-center justify-center rounded-full border border-border text-foreground transition-colors hover:bg-foreground/10 disabled:pointer-events-none disabled:opacity-35"
+              className="inline-flex size-11 shrink-0 items-center justify-center text-[#2C2C2E] transition-colors hover:text-[#414145] disabled:pointer-events-none disabled:opacity-35"
             >
               <ChevronRight aria-hidden className="size-5" strokeWidth={1.75} />
             </button>
