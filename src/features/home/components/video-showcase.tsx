@@ -131,10 +131,10 @@ export function VideoShowcase() {
     <section
       ref={sectionRef}
       aria-label="Nepal mountain videos"
-      className="py-16 sm:py-24"
+      className="pt-16 pb-12 sm:pt-24 sm:pb-12"
     >
-      <div className="container-page">
-        <div className="mx-auto w-full max-w-6xl">
+      <div className="mx-auto w-full max-w-[88rem] px-4 sm:px-6 lg:px-10">
+        <div className="mx-auto w-full">
           <div
             ref={viewportRef}
             onScroll={handleScroll}
@@ -151,7 +151,7 @@ export function VideoShowcase() {
                 role="group"
                 aria-roledescription="slide"
                 aria-label={`Video ${i + 1} of ${videos.length}`}
-                className="relative aspect-[3/2] w-full shrink-0 snap-center snap-always sm:aspect-video"
+                className="relative aspect-[5/4] w-full shrink-0 snap-center snap-always sm:aspect-[16/9.5]"
               >
                 <video
                   ref={(element) => {
