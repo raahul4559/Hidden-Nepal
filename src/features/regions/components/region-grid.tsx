@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
@@ -84,12 +84,12 @@ function ProvinceList({ counts, className }: { counts: Counts; className?: strin
                   {province.knownFor.join(" · ")}
                 </p>
                 {count !== undefined ? (
-                  <p className="mt-3 text-xs font-semibold tracking-wide text-teal uppercase">
+                  <p className="mt-3 text-xs font-semibold tracking-wide text-teal">
                     {countLabel(count)}
                   </p>
                 ) : null}
               </div>
-              <ArrowRight
+              <ChevronRight
                 aria-hidden
                 className="mt-2 size-5 text-ivory/40 transition-[color,transform] duration-300 group-hover:translate-x-1 group-hover:text-teal"
               />

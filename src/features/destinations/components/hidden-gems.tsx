@@ -1,4 +1,4 @@
-import { ArrowRight, CloudOff, Compass } from "lucide-react";
+import { ChevronRight, CloudOff, Compass } from "lucide-react";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
@@ -79,27 +79,33 @@ function SpotlightItem({ destination, index }: { destination: DestinationSpotlig
 
   return (
     <li className="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
-      <div
+      <figure
         className={cn(
-          "relative aspect-[4/3] overflow-hidden rounded-md bg-navy-800 lg:col-span-7 lg:aspect-[5/4]",
+          "lg:col-span-7",
           reversed && "lg:order-2",
         )}
       >
-        <RemoteImage
-          src={cover?.url}
-          alt={cover?.alt ?? ""}
-          sizes="(min-width: 1024px) 58vw, 100vw"
-          className="object-cover"
-        />
-        {cover?.credit ? (
-          <PhotoCredit
-            author={cover.credit}
-            license={cover.license}
-            sourceUrl={cover.sourceUrl}
-            className="absolute right-2 bottom-2"
+        <div className="relative aspect-[4/3] overflow-hidden rounded-md bg-navy-800 lg:aspect-[5/4]">
+          <RemoteImage
+            src={cover?.url}
+            alt={cover?.alt ?? ""}
+            sizes="(min-width: 1024px) 58vw, 100vw"
+            className="object-cover"
           />
+          {destination.isSample ? (
+            <SampleBadge className="absolute top-3 left-3 z-10" />
+          ) : null}
+        </div>
+        {cover?.credit ? (
+          <figcaption className="mt-2">
+            <PhotoCredit
+              author={cover.credit}
+              license={cover.license}
+              sourceUrl={cover.sourceUrl}
+            />
+          </figcaption>
         ) : null}
-      </div>
+      </figure>
 
       <div className={cn("lg:col-span-5", reversed && "lg:order-1")}>
         <div className="flex flex-wrap items-center gap-3">
@@ -109,7 +115,6 @@ function SpotlightItem({ destination, index }: { destination: DestinationSpotlig
           <p className="eyebrow text-muted-foreground">
             {[category?.shortLabel, place].filter(Boolean).join(" · ")}
           </p>
-          {destination.isSample ? <SampleBadge /> : null}
         </div>
         <h3 className="mt-4 font-serif text-3xl leading-[1.1] text-balance sm:text-4xl lg:text-5xl">
           {destination.name}
@@ -120,7 +125,7 @@ function SpotlightItem({ destination, index }: { destination: DestinationSpotlig
           className="group mt-7 inline-flex items-center gap-2 rounded-sm font-semibold text-himalaya"
         >
           Read about {destination.name}
-          <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
+          <ChevronRight aria-hidden className="size-4 transition-transform group-hover:translate-x-1" />
         </Link>
       </div>
     </li>

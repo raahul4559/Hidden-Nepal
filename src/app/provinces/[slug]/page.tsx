@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { ArrowLeft, ArrowRight } from "lucide-react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { connection } from "next/server";
@@ -99,7 +99,7 @@ export default async function ProvincePage({ params, searchParams }: PageProps<"
         <div className="container-page flex flex-wrap items-center justify-between gap-4 py-8">
           {previous ? (
             <Link href={provinceHref(previous.slug)} className="group inline-flex items-center gap-2 rounded-sm font-semibold text-himalaya">
-              <ArrowLeft aria-hidden className="size-4 transition-transform group-hover:-translate-x-0.5" />
+              <ChevronLeft aria-hidden className="size-4 transition-transform group-hover:-translate-x-0.5" />
               {previous.name}
             </Link>
           ) : <span />}
@@ -109,7 +109,7 @@ export default async function ProvincePage({ params, searchParams }: PageProps<"
           {next ? (
             <Link href={provinceHref(next.slug)} className="group inline-flex items-center gap-2 rounded-sm font-semibold text-himalaya">
               {next.name}
-              <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />
+              <ChevronRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />
             </Link>
           ) : <span />}
         </div>

@@ -140,19 +140,19 @@ function ExperienceCard({ experience }: { experience: FoodCultureExperience }) {
               sizes="(min-width: 1280px) 33vw, (min-width: 768px) 50vw, 100vw"
               className="object-cover"
             />
-            <div className="absolute right-2 bottom-2 max-w-[calc(100%-1rem)]">
-              <PhotoCredit
-                author={experience.image.creator}
-                license={experience.image.license}
-                sourceUrl={experience.image.source_url}
-              />
-            </div>
           </div>
-          {experience.image.context_note ? (
-            <figcaption className="border-t border-border px-4 py-2 text-xs leading-relaxed text-muted-foreground">
-              {experience.image.context_note}
-            </figcaption>
-          ) : null}
+          <figcaption className="space-y-1 border-t border-border px-4 py-2">
+            <PhotoCredit
+              author={experience.image.creator}
+              license={experience.image.license}
+              sourceUrl={experience.image.source_url}
+            />
+            {experience.image.context_note ? (
+              <p className="text-xs leading-relaxed text-muted-foreground">
+                {experience.image.context_note}
+              </p>
+            ) : null}
+          </figcaption>
         </figure>
       ) : null}
       <div className="flex flex-1 flex-col p-5 sm:p-6">

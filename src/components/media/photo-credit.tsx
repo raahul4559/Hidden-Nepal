@@ -7,7 +7,7 @@ type PhotoCreditProps = {
   className?: string;
 };
 
-/** License-required attribution, styled to sit quietly over an image. */
+/** License-required attribution shown outside the photograph itself. */
 export function PhotoCredit({
   author,
   license,
@@ -16,25 +16,22 @@ export function PhotoCredit({
 }: PhotoCreditProps) {
   const text = `Photo: ${author}${license ? `, ${license}` : ""}`;
   return (
-    <span
-      className={cn(
-        "inline-block max-w-full truncate rounded-sm bg-navy/70 px-1.5 py-0.5 text-[0.6875rem] leading-tight text-ivory/90 backdrop-blur-sm",
-        className,
-      )}
-    >
+    <p className={cn("text-xs leading-relaxed text-muted-foreground", className)}>
       {sourceUrl ? (
         <a
           href={sourceUrl}
           target="_blank"
           rel="noopener noreferrer license"
-          className="underline-offset-2 hover:underline focus-visible:outline-gold"
+          aria-label={text}
+          className="rounded-sm underline underline-offset-2 hover:text-foreground"
         >
-          {text}
+          Photo: {author}
+          {license ? ` · ${license}` : ""}
           <span className="sr-only"> (opens in a new tab)</span>
         </a>
       ) : (
         text
       )}
-    </span>
+    </p>
   );
 }

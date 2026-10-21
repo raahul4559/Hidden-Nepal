@@ -33,7 +33,7 @@ export default function FoodPage() {
         intro="Explore everyday staples, regional dishes, seasonal ingredients and community food traditions across Nepal."
       />
       <section className="container-page pt-10">
-        <figure className="relative overflow-hidden rounded-md bg-navy-800">
+        <figure className="overflow-hidden rounded-md bg-white">
           <div className="relative aspect-[16/7] min-h-52">
             <Image
               src={photo.src}
@@ -44,14 +44,14 @@ export default function FoodPage() {
               placeholder="blur"
               className="object-cover"
             />
-            <figcaption className="absolute right-3 bottom-3">
-              <PhotoCredit
-                author={`${photo.caption} · ${photo.author}`}
-                license={photo.license}
-                sourceUrl={photo.sourceUrl}
-              />
-            </figcaption>
           </div>
+          <figcaption className="border-t border-border px-4 py-2">
+            <PhotoCredit
+              author={`${photo.caption} · ${photo.author}`}
+              license={photo.license}
+              sourceUrl={photo.sourceUrl}
+            />
+          </figcaption>
         </figure>
       </section>
       <FoodCultureExplorer kind="food" experiences={experiences} />

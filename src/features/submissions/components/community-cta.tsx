@@ -1,7 +1,6 @@
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { LinkButton } from "@/components/ui/link-button";
 import { PHOTOS } from "@/content/photos";
 
@@ -19,12 +18,6 @@ export function CommunityCta() {
             placeholder="blur"
             sizes="(min-width: 1024px) 50vw, 100vw"
             className="object-cover object-[50%_35%]"
-          />
-          <PhotoCredit
-            author={photo.author}
-            license={photo.license}
-            sourceUrl={photo.sourceUrl}
-            className="absolute right-3 bottom-3"
           />
         </div>
 
@@ -44,7 +37,7 @@ export function CommunityCta() {
           <div className="mt-10 flex flex-wrap items-center gap-4">
             <LinkButton href="/contribute" variant="accent" size="xl">
               Suggest a place
-              <ArrowRight aria-hidden data-icon="inline-end" />
+              <ChevronRight aria-hidden data-icon="inline-end" />
             </LinkButton>
             <p className="text-sm text-ivory/65">Takes about five minutes. No account needed.</p>
           </div>

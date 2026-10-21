@@ -53,16 +53,16 @@ export function ResponsibleTravel() {
               sizes="(min-width: 1024px) 50vw, 100vw"
               className="object-cover"
             />
-            <PhotoCredit
-              author={photo.author}
-              license={photo.license}
-              sourceUrl={photo.sourceUrl}
-              className="absolute right-2 bottom-2"
-            />
           </div>
           <figcaption className="mt-3 text-sm text-muted-foreground">
             {photo.caption}
           </figcaption>
+          <PhotoCredit
+            author={photo.author}
+            license={photo.license}
+            sourceUrl={photo.sourceUrl}
+            className="mt-1"
+          />
         </figure>
 
         <div>

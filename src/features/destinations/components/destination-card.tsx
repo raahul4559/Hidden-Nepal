@@ -1,4 +1,4 @@
-import { ArrowUpRight, MapPin } from "lucide-react";
+import { ChevronRight, MapPin } from "lucide-react";
 import Link from "next/link";
 import { cn } from "cn";
 
@@ -58,21 +58,22 @@ export function DestinationCard({
           className="object-cover transition-transform duration-700 ease-out-soft motion-safe:group-hover:scale-[1.03]"
           priority={priority}
         />
-        {cover?.credit ? (
+        {destination.isSample ? (
+          <SampleBadge className="absolute top-3 left-3 z-10" />
+        ) : null}
+      </div>
+      {cover?.credit ? (
+        <div className="relative z-10 border-t border-border px-4 py-2">
           <PhotoCredit
             author={cover.credit}
             license={cover.license}
             sourceUrl={cover.sourceUrl}
-            className="absolute right-2 bottom-2 z-10"
           />
-        ) : null}
-      </div>
+        </div>
+      ) : null}
 
       <div className={cn("flex flex-1 flex-col p-5", feature && "lg:justify-end lg:p-8")}>
-        <div className="flex flex-wrap items-center justify-between gap-2">
-          {category ? <p className="eyebrow text-himalaya">{category.shortLabel}</p> : null}
-          {destination.isSample ? <SampleBadge /> : null}
-        </div>
+        {category ? <p className="eyebrow text-himalaya">{category.shortLabel}</p> : null}
         <Heading
           className={cn(
             "mt-2 font-serif leading-tight text-balance",
@@ -106,7 +107,7 @@ export function DestinationCard({
           className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-himalaya"
         >
           View destination
-          <ArrowUpRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <ChevronRight className="size-4 transition-transform duration-300 group-hover:translate-x-0.5" />
         </span>
       </div>
     </article>

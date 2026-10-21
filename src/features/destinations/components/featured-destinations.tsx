@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
@@ -30,7 +30,7 @@ export function FeaturedDestinations() {
             className="group inline-flex items-center gap-1.5 self-start rounded-sm font-semibold text-himalaya lg:self-auto"
           >
             Browse all destinations
-            <ArrowRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />
+            <ChevronRight aria-hidden className="size-4 transition-transform group-hover:translate-x-0.5" />
           </Link>
         </div>
         <div className="mt-12">

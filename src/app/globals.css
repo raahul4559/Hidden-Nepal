@@ -98,7 +98,7 @@
   --color-ring: var(--ring);
 
   --font-sans: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
-  --font-serif: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-serif: var(--font-manrope), ui-sans-serif, system-ui, sans-serif;
   --font-heading: var(--font-serif);
 
   --radius-sm: calc(var(--radius) * 0.6);
@@ -169,13 +169,12 @@
   }
 }
 
-/* Small uppercase label used above section headings. */
+/* Small supporting label used above section headings. */
 @utility eyebrow {
   font-size: 0.75rem;
   line-height: 1rem;
   font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
+  letter-spacing: 0.025em;
 }
 
 /* Thin rule with a gold lead, used as an editorial divider. */

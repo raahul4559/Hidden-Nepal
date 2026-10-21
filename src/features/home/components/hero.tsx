@@ -1,6 +1,5 @@
 import Image from "next/image";
 
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { PHOTOS } from "@/content/photos";
 import { DestinationSearchForm } from "@/features/destinations/components/destination-search-form";
 
@@ -47,12 +46,6 @@ export function Hero() {
         <DestinationSearchForm className="mt-10 max-w-4xl motion-safe:animate-in motion-safe:fade-in motion-safe:duration-700 motion-safe:delay-150 motion-safe:fill-mode-backwards" />
       </div>
 
-      <PhotoCredit
-        author={`${photo.caption} · ${photo.author}`}
-        license={photo.license}
-        sourceUrl={photo.sourceUrl}
-        className="absolute right-3 bottom-3 max-w-[calc(100%-1.5rem)] sm:right-4 sm:bottom-4"
-      />
     </section>
   );
 }

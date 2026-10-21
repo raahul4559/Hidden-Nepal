@@ -96,15 +96,16 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
             </Suspense>
           </div>
         </div>
-        {cover?.credit ? (
+      </header>
+      {cover?.credit ? (
+        <div className="container-page flex justify-end py-2">
           <PhotoCredit
             author={cover.caption ? `${cover.caption} · ${cover.credit}` : cover.credit}
             license={cover.license}
             sourceUrl={cover.sourceUrl}
-            className="absolute right-3 bottom-3 max-w-[calc(100%-1.5rem)]"
           />
-        ) : null}
-      </header>
+        </div>
+      ) : null}
 
       {destination.isSample ? <SampleNotice /> : null}
 
@@ -151,15 +152,15 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
                           sizes="(min-width: 1024px) 30vw, (min-width: 640px) 50vw, 100vw"
                           className="object-cover"
                         />
-                        {image.credit ? (
-                          <PhotoCredit
-                            author={image.credit}
-                            license={image.license}
-                            sourceUrl={image.sourceUrl}
-                            className="absolute right-2 bottom-2"
-                          />
-                        ) : null}
                       </div>
+                      {image.credit ? (
+                        <PhotoCredit
+                          author={image.credit}
+                          license={image.license}
+                          sourceUrl={image.sourceUrl}
+                          className="mt-2"
+                        />
+                      ) : null}
                       {image.caption ? (
                         <figcaption className="mt-2 text-sm text-muted-foreground">{image.caption}</figcaption>
                       ) : null}
@@ -312,7 +313,7 @@ function PracticalInfo({ info }: { info: VerifiedPracticalInfo }) {
           <div key={label} className="flex gap-3 py-3.5">
             <Icon aria-hidden className="mt-0.5 size-4 shrink-0 text-himalaya" />
             <div>
-              <dt className="text-xs font-semibold tracking-wide text-muted-foreground uppercase">{label}</dt>
+              <dt className="text-xs font-semibold tracking-wide text-muted-foreground">{label}</dt>
               <dd className="mt-0.5 font-medium">{value}</dd>
             </div>
           </div>
@@ -364,7 +365,7 @@ function PlanBlock({ title, children }: { title: string; children: React.ReactNo
   const empty = Array.isArray(items) ? items.length === 0 : !items;
   return (
     <div>
-      <h3 className="text-sm font-semibold tracking-wide text-muted-foreground uppercase">{title}</h3>
+      <h3 className="text-sm font-semibold tracking-wide text-muted-foreground">{title}</h3>
       <div className="mt-3 space-y-3 leading-relaxed">
         {empty ? <p className="text-muted-foreground">No verified information yet.</p> : items}
       </div>

@@ -1,10 +1,9 @@
-import { ArrowUpRight } from "lucide-react";
+import { ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { cn } from "cn";
 
 import { SectionHeading } from "@/components/editorial/section-heading";
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { PHOTOS } from "@/content/photos";
 import { exploreHref } from "@/features/destinations/schemas";
 
@@ -80,19 +79,12 @@ export function ThemeGrid() {
                   >
                     {theme.description}
                   </p>
-                  <ArrowUpRight
+                  <ChevronRight
                     aria-hidden
                     className="absolute top-4 left-4 size-5 text-gold opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-within:opacity-100"
                   />
                 </div>
 
-                {/* Sits above the stretched link so it remains clickable. */}
-                <PhotoCredit
-                  author={photo.author}
-                  license={photo.license}
-                  sourceUrl={photo.sourceUrl}
-                  className="absolute top-2 right-2 z-10 max-w-[calc(100%-3rem)] opacity-90"
-                />
               </li>
             );
           })}

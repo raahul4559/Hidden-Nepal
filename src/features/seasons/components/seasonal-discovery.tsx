@@ -1,4 +1,4 @@
-import { ArrowRight, CloudRain, Flower2, Leaf, Snowflake } from "lucide-react";
+import { ChevronRight, CloudRain, Flower2, Leaf, Snowflake } from "lucide-react";
 import Link from "next/link";
 
 import { SectionHeading } from "@/components/editorial/section-heading";
@@ -61,7 +61,7 @@ export function SeasonalDiscovery() {
                   className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-himalaya"
                 >
                   Places for {season.label.toLowerCase()}
-                  <ArrowRight className="size-4 transition-transform group-hover:translate-x-1" />
+                  <ChevronRight className="size-4 transition-transform group-hover:translate-x-1" />
                 </span>
               </li>
             );
