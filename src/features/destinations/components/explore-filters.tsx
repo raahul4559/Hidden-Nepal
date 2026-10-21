@@ -11,6 +11,7 @@ import { SEASONS } from "@/features/seasons/seasons";
 
 import { BUDGETS, DIFFICULTIES, SORTS } from "../filters";
 import type { DestinationSearch } from "../schemas";
+import { DestinationSuggestionsInput } from "./destination-suggestions-input";
 
 const control =
   "h-11 w-full rounded-md border border-input bg-white px-3 text-sm text-navy placeholder:text-ink-muted";
@@ -44,11 +45,9 @@ export function ExploreFilters({
 
       <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-1">
         <Field label="Keyword" htmlFor="f-q" className="sm:col-span-2 lg:col-span-1">
-          <input
+          <DestinationSuggestionsInput
             id="f-q"
             name="q"
-            type="search"
-            maxLength={80}
             defaultValue={search.q}
             placeholder="Name, district or description"
             className={control}

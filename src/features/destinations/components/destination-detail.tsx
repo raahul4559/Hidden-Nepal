@@ -5,7 +5,6 @@ import {
   ExternalLink,
   ChevronRight,
   Clock,
-  FlaskConical,
   Gauge,
   MapPin,
   Mountain,
@@ -16,7 +15,6 @@ import Link from "next/link";
 import { connection } from "next/server";
 import { Suspense } from "react";
 
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { RemoteImage } from "@/components/media/remote-image";
 import { getCategory } from "@/features/experiences/categories";
 import { SaveDestination } from "@/features/saved/components/save-destination";
@@ -98,16 +96,6 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
           </div>
         </div>
       </header>
-      {cover?.credit ? (
-        <div className="container-page flex justify-end py-2">
-          <PhotoCredit
-            author={cover.caption ? `${cover.caption} · ${cover.credit}` : cover.credit}
-            license={cover.license}
-            sourceUrl={cover.sourceUrl}
-          />
-        </div>
-      ) : null}
-
       {destination.isSample ? <SampleNotice /> : null}
 
       {/* Body */}
@@ -154,14 +142,6 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
                           className="object-cover"
                         />
                       </div>
-                      {image.credit ? (
-                        <PhotoCredit
-                          author={image.credit}
-                          license={image.license}
-                          sourceUrl={image.sourceUrl}
-                          className="mt-2"
-                        />
-                      ) : null}
                       {image.caption ? (
                         <figcaption className="mt-2 text-sm text-muted-foreground">{image.caption}</figcaption>
                       ) : null}
@@ -240,11 +220,10 @@ function SampleNotice() {
   return (
     <div role="note" className="border-b border-gold/40 bg-gold/10">
       <div className="container-page flex items-start gap-3 py-4 text-sm leading-relaxed">
-        <FlaskConical aria-hidden className="mt-0.5 size-4 shrink-0 text-navy" />
+        <ShieldQuestion aria-hidden className="mt-0.5 size-4 shrink-0 text-navy" />
         <p>
-          <strong className="font-semibold">Sample content.</strong> This destination is
-          development sample data. Its practical details are placeholders and must not be
-          used to plan a trip.
+          <strong className="font-semibold">Travel details are not verified.</strong> Practical
+          information is placeholder content and must not be used to plan a trip.
         </p>
       </div>
     </div>

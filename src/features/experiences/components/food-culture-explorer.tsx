@@ -4,7 +4,6 @@ import Image from "next/image";
 import { Search } from "lucide-react";
 import { useMemo, useState } from "react";
 
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { PROVINCES } from "@/features/regions/provinces";
 
 import {
@@ -141,18 +140,13 @@ function ExperienceCard({ experience }: { experience: FoodCultureExperience }) {
               className="object-cover"
             />
           </div>
-          <figcaption className="space-y-1 border-t border-border px-4 py-2">
-            <PhotoCredit
-              author={experience.image.creator}
-              license={experience.image.license}
-              sourceUrl={experience.image.source_url}
-            />
-            {experience.image.context_note ? (
+          {experience.image.context_note ? (
+            <figcaption className="border-t border-border px-4 py-2">
               <p className="text-xs leading-relaxed text-muted-foreground">
                 {experience.image.context_note}
               </p>
-            ) : null}
-          </figcaption>
+            </figcaption>
+          ) : null}
         </figure>
       ) : null}
       <div className="flex flex-1 flex-col p-5 sm:p-6">

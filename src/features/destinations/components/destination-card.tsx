@@ -2,7 +2,6 @@ import { ChevronRight, MapPin } from "lucide-react";
 import Link from "next/link";
 import { cn } from "cn";
 
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { RemoteImage } from "@/components/media/remote-image";
 import { getCategory } from "@/features/experiences/categories";
 
@@ -20,8 +19,7 @@ type DestinationCardProps = {
 };
 
 /**
- * Whole card is clickable via a stretched link on the title; the photo
- * credit sits above it so its own link stays reachable.
+ * Whole card is clickable via a stretched link on the title.
  */
 export function DestinationCard({
   destination,
@@ -59,16 +57,9 @@ export function DestinationCard({
           priority={priority}
         />
       </div>
-      {destination.isSample || cover?.credit ? (
-        <div className="relative z-10 space-y-2 border-t border-border px-4 py-2">
-          {destination.isSample ? <SampleBadge /> : null}
-          {cover?.credit ? (
-          <PhotoCredit
-            author={cover.credit}
-            license={cover.license}
-            sourceUrl={cover.sourceUrl}
-          />
-          ) : null}
+      {destination.isSample ? (
+        <div className="relative z-10 border-t border-border px-4 py-2">
+          <SampleBadge />
         </div>
       ) : null}
 

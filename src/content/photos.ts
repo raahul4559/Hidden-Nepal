@@ -12,8 +12,7 @@ import waterfalls from "@/assets/photos/waterfalls.jpg";
 
 /**
  * Bundled photography. Every image comes from Wikimedia Commons under the
- * license recorded here; author, license and source must stay attached
- * wherever the image is shown (see <PhotoCredit> and /credits).
+ * license recorded here; preserve attribution in the /credits directory.
  */
 export type Photo = {
   src: StaticImageData;

@@ -190,6 +190,48 @@ export function searchDestinations(
   });
 }
 
+/** Small, published-only result set for destination search suggestions. */
+export function suggestDestinations(query: string): Promise<LoadResult<{
+  suggestions: { slug: string; name: string; district: string | null; region: string }[];
+}>> {
+  return load("suggestions", async (db) => {
+    const contains = { contains: query, mode: "insensitive" } as const;
+    const rows = await db.destination.findMany({
+      where: {
+        ...PUBLISHED,
+        OR: [
+          { name: contains },
+          { district: contains },
+          { region: { name: contains } },
+        ],
+      },
+      select: {
+        slug: true,
+        name: true,
+        district: true,
+        region: { select: { name: true } },
+      },
+      orderBy: [{ name: "asc" }, { slug: "asc" }],
+      take: 12,
+    });
+    const suggestions = rows.map(({ slug, name, district, region }) => ({
+      slug,
+      name,
+      district,
+      region: region.name,
+    }));
+    const normalizedQuery = query.toLowerCase();
+    suggestions.sort(
+      (a, b) =>
+        Number(!a.name.toLowerCase().startsWith(normalizedQuery)) -
+          Number(!b.name.toLowerCase().startsWith(normalizedQuery)) ||
+        a.name.localeCompare(b.name),
+    );
+
+    return { suggestions: suggestions.slice(0, 6) };
+  });
+}
+
 /** Districts that have published destinations, optionally within a province. */
 export function getDistricts(region?: ProvinceSlug): Promise<LoadResult<{ districts: string[] }>> {
   return load("districts", async (db) => {
@@ -214,6 +256,43 @@ export function getHiddenGems(limit = 3): Promise<SpotlightListResult> {
     });
     return {
       destinations: rows.map((row) => ({ ...toSummary(row), description: row.description })),
+    };
+  });
+}
+
+/** Attribution metadata for images on published destination pages. */
+export function getPublishedImageCredits(): Promise<LoadResult<{
+  imageCredits: {
+    destination: string;
+    caption: string | null;
+    credit: string;
+    license: string | null;
+    sourceUrl: string | null;
+  }[];
+}>> {
+  return load("published image credits", async (db) => {
+    const rows = await db.destinationImage.findMany({
+      where: {
+        credit: { not: null },
+        destination: { status: "PUBLISHED" },
+      },
+      select: {
+        caption: true,
+        credit: true,
+        license: true,
+        sourceUrl: true,
+        destination: { select: { name: true } },
+      },
+      orderBy: [{ destination: { name: "asc" } }, { position: "asc" }],
+    });
+    return {
+      imageCredits: rows.map((row) => ({
+        destination: row.destination.name,
+        caption: row.caption,
+        credit: row.credit!,
+        license: row.license,
+        sourceUrl: row.sourceUrl,
+      })),
     };
   });
 }

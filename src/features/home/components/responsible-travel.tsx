@@ -2,7 +2,6 @@ import { Camera, Footprints, HandHeart, Landmark, Leaf } from "lucide-react";
 import Image from "next/image";
 
 import { SectionHeading } from "@/components/editorial/section-heading";
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { PHOTOS } from "@/content/photos";
 
 const photo = PHOTOS.terraces;
@@ -57,12 +56,6 @@ export function ResponsibleTravel() {
           <figcaption className="mt-3 text-sm text-muted-foreground">
             {photo.caption}
           </figcaption>
-          <PhotoCredit
-            author={photo.author}
-            license={photo.license}
-            sourceUrl={photo.sourceUrl}
-            className="mt-1"
-          />
         </figure>
 
         <div>

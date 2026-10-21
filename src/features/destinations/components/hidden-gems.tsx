@@ -5,7 +5,6 @@ import { Suspense } from "react";
 import { cn } from "cn";
 
 import { SectionHeading } from "@/components/editorial/section-heading";
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { RemoteImage } from "@/components/media/remote-image";
 import { getCategory } from "@/features/experiences/categories";
 
@@ -93,16 +92,9 @@ function SpotlightItem({ destination, index }: { destination: DestinationSpotlig
             className="object-cover"
           />
         </div>
-        {destination.isSample || cover?.credit ? (
+        {destination.isSample ? (
           <figcaption className="mt-2 space-y-2">
-            {destination.isSample ? <SampleBadge /> : null}
-            {cover?.credit ? (
-              <PhotoCredit
-                author={cover.credit}
-                license={cover.license}
-                sourceUrl={cover.sourceUrl}
-              />
-            ) : null}
+            <SampleBadge />
           </figcaption>
         ) : null}
       </figure>

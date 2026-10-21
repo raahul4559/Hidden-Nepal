@@ -30,7 +30,7 @@ describe("DestinationResults", () => {
     expect(screen.getByRole("heading", { name: "Test Place" })).toBeInTheDocument();
     expect(screen.getByText(/Test District, Karnali/)).toBeInTheDocument();
     expect(screen.getByText(/2,990 m/)).toBeInTheDocument();
-    expect(screen.getByText("Sample content")).toBeInTheDocument();
+    expect(screen.getByText("Unverified details")).toBeInTheDocument();
   });
 
   it("shows the empty state when nothing is published", () => {

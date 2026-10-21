@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Image from "next/image";
 
 import { PageHeader } from "@/components/layout/page-header";
-import { PhotoCredit } from "@/components/media/photo-credit";
 import { PHOTOS } from "@/content/photos";
 import { FoodCultureExplorer } from "@/features/experiences/components/food-culture-explorer";
 import { FOOD_CULTURE_EXPERIENCES, FOOD_CULTURE_METADATA } from "@/features/experiences/food-culture";
@@ -45,13 +44,6 @@ export default function FoodPage() {
               className="object-cover"
             />
           </div>
-          <figcaption className="border-t border-border px-4 py-2">
-            <PhotoCredit
-              author={`${photo.caption} · ${photo.author}`}
-              license={photo.license}
-              sourceUrl={photo.sourceUrl}
-            />
-          </figcaption>
         </figure>
       </section>
       <FoodCultureExplorer kind="food" experiences={experiences} />

@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { getCategory } from "@/features/experiences/categories";
 import { THEMES } from "@/features/experiences/themes";
 
+import { DestinationSuggestionsInput } from "./destination-suggestions-input";
 import type { DestinationSearch } from "../schemas";
 
 type DestinationSearchFormProps = {
@@ -46,14 +47,11 @@ export function DestinationSearchForm({
         <label htmlFor="search-q" className="text-xs font-semibold text-ink-muted">
           Where to?
         </label>
-        <input
+        <DestinationSuggestionsInput
           id="search-q"
           name="q"
-          type="search"
-          maxLength={80}
           defaultValue={defaultValues?.q}
           placeholder="A lake, village, trail or district"
-          autoComplete="off"
           className={fieldClass}
         />
       </div>
