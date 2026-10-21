@@ -131,7 +131,7 @@ export function VideoShowcase() {
     <section
       ref={sectionRef}
       aria-label="Nepal mountain videos"
-      className="relative isolate pt-16 pb-28 sm:pt-14 sm:pb-28"
+      className="relative isolate pt-16 pb-28 sm:pt-22 sm:pb-10"
     >
       {/* Navy band continues the hero; its tail eases into the page background. */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-[#EDE7DE]" />
