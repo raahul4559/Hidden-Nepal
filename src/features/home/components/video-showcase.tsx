@@ -128,7 +128,11 @@ export function VideoShowcase() {
   };
 
   return (
-    <section ref={sectionRef} aria-label="Nepal mountain videos" className="py-16 sm:py-24">
+    <section
+      ref={sectionRef}
+      aria-label="Nepal mountain videos"
+      className="py-16 sm:py-24"
+    >
       <div className="container-page">
         <div className="mx-auto w-full max-w-6xl">
           <div
@@ -170,7 +174,7 @@ export function VideoShowcase() {
             ))}
           </div>
 
-          <div className="mt-5 flex items-center justify-center gap-4">
+          <div className="mt-6 flex items-center justify-center gap-4">
             <button
               type="button"
               onClick={() => goTo(index - 1)}
