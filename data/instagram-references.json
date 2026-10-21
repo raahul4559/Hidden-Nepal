@@ -1,0 +1,10 @@
+{
+  "metadata": {
+    "schemaVersion": "1.0.0",
+    "updatedAt": "2026-10-21T00:00:00.000Z",
+    "accessNote": "No Instagram Graph API credentials were available when this file was created. Instagram was not scraped and no post was invented. Add real public post URLs (with attribution and permission) here, or configure INSTAGRAM_ACCESS_TOKEN and INSTAGRAM_USER_ID, then run `npm run data:instagram`.",
+    "format": "posts[] entries require destinationSlug, postUrl, rightsStatus and attribution. places[] entries require province, district, latitude, longitude and a reliable geoSourceUrl (OpenStreetMap, Wikidata, NTB, UNESCO or government)."
+  },
+  "posts": [],
+  "places": []
+}

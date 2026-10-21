@@ -1,6 +1,10 @@
 import type { PrismaClient } from "@/generated/prisma/client";
 
 import { upsertDestination } from "./destinations";
+import {
+  seedInstagramReferences,
+  type InstagramSeedSummary,
+} from "./instagram";
 import { seedReferenceData } from "./reference";
 import { RESEARCHED_DESTINATIONS } from "./researched-destinations";
 import { SAMPLE_DESTINATIONS } from "./sample-destinations";
@@ -10,9 +14,14 @@ export type SeedOptions = {
   samples: boolean;
   /** Source-attributed destination records from data/nepal-tourism-destinations.json. */
   researched?: boolean;
+  /** Editor-supplied Instagram references and places from data/instagram-references.json. */
+  instagram?: boolean;
 };
 
-export async function seedDatabase(prisma: PrismaClient, { samples, researched }: SeedOptions) {
+export async function seedDatabase(
+  prisma: PrismaClient,
+  { samples, researched, instagram }: SeedOptions,
+) {
   const reference = await seedReferenceData(prisma);
 
   let sampleDestinations = 0;
@@ -43,12 +52,23 @@ export async function seedDatabase(prisma: PrismaClient, { samples, researched }
     }
   }
 
+  let instagramResult: InstagramSeedSummary = {
+    skipped: true,
+    posts: 0,
+    places: 0,
+    rejected: 0,
+  };
+  if (instagram !== false) {
+    instagramResult = await seedInstagramReferences(prisma);
+  }
+
   return {
     ...reference,
     sampleDestinations,
     researchedPublished,
     researchedDrafts,
     preservedSampleDestinations,
+    instagram: instagramResult,
   };
 }
 
@@ -66,5 +86,6 @@ export function resolveSeedOptions(env: Record<string, string | undefined>): See
   return {
     samples: requested,
     researched: env.SEED_RESEARCHED_DATA?.toLowerCase() !== "false",
+    instagram: env.SEED_INSTAGRAM_DATA?.toLowerCase() !== "false",
   };
 }

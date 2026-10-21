@@ -89,6 +89,10 @@ SEED_SAMPLE_DATA=false npm run db:seed   # reference and researched data; no dev
 
 The seed is **idempotent**. Rows are upserted by slug and a destination's
 categories, images and seasons are replaced, so re-running never duplicates.
+Editor-supplied Instagram references and places in
+[`data/instagram-references.json`](./data/instagram-references.json) are also
+imported by default through the same idempotent importer as
+`npm run data:instagram`; set `SEED_INSTAGRAM_DATA=false` to skip them.
 
 The researched catalogue in [`data/nepal-tourism-destinations.json`](./data/nepal-tourism-destinations.json)
 is imported and published by default so the full 59-record inventory is
@@ -149,6 +153,18 @@ are for development only:
 
 Inspect data with `npm run db:studio`.
 
+### Instagram references
+
+Permitted Instagram permalinks can be attached to destinations. The importer
+uses the authorized Instagram Graph API when `INSTAGRAM_ACCESS_TOKEN` and
+`INSTAGRAM_USER_ID` are set; otherwise it imports real, manually supplied post
+URLs from [`data/instagram-references.json`](./data/instagram-references.json).
+It never scrapes Instagram or rehosts Instagram images. Only `PERMITTED`
+references are shown on destination pages, as outbound links with creator
+attribution. Run `npm run data:instagram:dry` first; the full format, access
+rules and report fields are in
+[`docs/instagram-collection.md`](./docs/instagram-collection.md).
+
 ### Schema changes
 
 1. Edit `prisma/schema.prisma`.
@@ -180,6 +196,8 @@ behaviour, indexes and planned models are in
 | `npm run db:deploy`                         | Apply committed migrations (production/CI)                       |
 | `npm run db:seed`                           | Seed reference data (+ samples unless disabled)                  |
 | `npm run db:studio`                         | Prisma Studio                                                    |
+| `npm run data:instagram`                    | Import permitted Instagram references (Graph API or manual)      |
+| `npm run data:instagram:dry`                | Validate/report the Instagram import without writing             |
 | `npm run admin:grant -- <email> [--revoke]` | Make an existing account ADMIN (or revert to USER)               |
 
 The first Playwright run needs a browser: `npx playwright install chromium`.

@@ -13,6 +13,7 @@ RateLimit                                         (standalone counters)
 Region 1 ── * Destination * ── * Category        via DestinationCategory
                   │
                   ├── * DestinationImage          ordered gallery
+                  ├── * DestinationInstagramPost  permitted Instagram links
                   └── * DestinationSeason         best seasons
 ```
 
@@ -26,6 +27,7 @@ Region 1 ── * Destination * ── * Category        via DestinationCategory
 | `Destination` | A place | `slug` unique and formatted; range CHECKs |
 | `DestinationCategory` | Destination ↔ category; lowest `position` is primary | PK `(destinationId, categoryId)` |
 | `DestinationImage` | Gallery with attribution; `position 0` is the cover | unique `(destinationId, position)` |
+| `DestinationInstagramPost` | Permitted Instagram permalinks with caption, creator, location tag and rights status | `shortcode` and `url` unique; only `PERMITTED` rows render publicly |
 | `DestinationSeason` | Best seasons (`SPRING`, `MONSOON`, `AUTUMN`, `WINTER`) | PK `(destinationId, season)` |
 | `Activity` / `DestinationActivity` | Things to do; shown only when practical info is `VERIFIED` | slug format; PK `(destinationId, activityId)` |
 | `DestinationSource` | References for the published text | https only; unique `(destinationId, url)` |
@@ -42,6 +44,7 @@ both; neither implies the content is verified.
 | Destination → Region | **Restrict** | A province with destinations must not vanish. |
 | DestinationCategory → Category | **Restrict** | Retiring a category is a deliberate reassignment. |
 | DestinationCategory / Image / Season → Destination | **Cascade** | Children are owned by the destination. |
+| DestinationInstagramPost → Destination | **Cascade** | A post link means nothing without its place. |
 | PlaceSubmission → Region / Category / User | **SetNull** | A suggestion outlives the things it references. |
 | SavedDestination → User / Destination | **Cascade** | A save means nothing without either side. |
 
@@ -62,6 +65,8 @@ both; neither implies the content is verified.
 | `Destination(status, name)` | Explore → A–Z sort |
 | `Destination(regionId, district)` | Explore → district filter |
 | `Destination(status, practicalInfoStatus, estimatedCostMin)` | Explore → verified-only budget filter |
+| `DestinationInstagramPost(destinationId, collectedAt DESC)` | Destination page: recent permitted posts |
+| `DestinationInstagramPost(rightsStatus)` | Moderation/reporting of unverified links |
 | Unique `slug` on Destination, Category, Region | Lookups by URL |
 
 Text search currently uses `ILIKE` (`contains` + `insensitive`). With more

@@ -54,6 +54,7 @@ describe("resolveSeedOptions", () => {
     expect(resolveSeedOptions({ NODE_ENV: "development" })).toEqual({
       samples: true,
       researched: true,
+      instagram: true,
     });
   });
 
@@ -61,10 +62,11 @@ describe("resolveSeedOptions", () => {
     expect(resolveSeedOptions({ SEED_SAMPLE_DATA: "false" })).toEqual({
       samples: false,
       researched: true,
+      instagram: true,
     });
     expect(
       resolveSeedOptions({ NODE_ENV: "production", SEED_SAMPLE_DATA: "false" }),
-    ).toEqual({ samples: false, researched: true });
+    ).toEqual({ samples: false, researched: true, instagram: true });
   });
 
   it("refuses samples in production", () => {
@@ -75,6 +77,15 @@ describe("resolveSeedOptions", () => {
     expect(resolveSeedOptions({ SEED_RESEARCHED_DATA: "false" })).toEqual({
       samples: true,
       researched: false,
+      instagram: true,
+    });
+  });
+
+  it("can opt out of Instagram reference imports", () => {
+    expect(resolveSeedOptions({ SEED_INSTAGRAM_DATA: "false" })).toEqual({
+      samples: true,
+      researched: true,
+      instagram: false,
     });
   });
 });

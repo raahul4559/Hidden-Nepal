@@ -69,6 +69,21 @@ enum SubmissionStatus {
   SPAM
 }
 
+/// How an Instagram reference reached the catalogue. GRAPH_API means it came
+/// from an authorized Instagram Graph API response; MANUAL means an editor
+/// supplied the permalink. No unauthenticated scraping is supported.
+enum InstagramSourceMethod {
+  GRAPH_API
+  MANUAL
+}
+
+/// Whether the platform has explicit permission to show the reference.
+/// Only PERMITTED references are rendered on public pages.
+enum InstagramRightsStatus {
+  PERMITTED
+  UNVERIFIED
+}
+
 // ─── Identity ───────────────────────────────────────────────────────────────
 
 /// Core user record. Field names follow Auth.js conventions so its adapter
@@ -183,12 +198,13 @@ model Destination {
   practicalInfoStatus     InfoStatus @default(UNVERIFIED)
   practicalInfoVerifiedAt DateTime?
 
-  categories DestinationCategory[]
-  images     DestinationImage[]
-  seasons    DestinationSeason[]
-  activities DestinationActivity[]
-  sources    DestinationSource[]
-  savedBy    SavedDestination[]
+  categories      DestinationCategory[]
+  images          DestinationImage[]
+  seasons         DestinationSeason[]
+  activities      DestinationActivity[]
+  sources         DestinationSource[]
+  instagramPosts  DestinationInstagramPost[]
+  savedBy         SavedDestination[]
 
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
@@ -240,6 +256,36 @@ model DestinationImage {
   updatedAt     DateTime    @updatedAt
 
   @@unique([destinationId, position])
+}
+
+/// An Instagram post linked to a destination. The permalink is the durable
+/// reference; Instagram media URLs are never rehosted and are shown only as
+/// an optional reference. Unique shortcode + URL make imports idempotent.
+model DestinationInstagramPost {
+  id              String        @id @default(cuid())
+  destination     Destination   @relation(fields: [destinationId], references: [id], onDelete: Cascade)
+  destinationId   String
+  /// Shortcode parsed from /p/, /reel/ or /tv/ URLs. Globally unique so the
+  /// same post cannot be attached to two destinations.
+  shortcode       String        @unique
+  /// Canonical https://www.instagram.com/... permalink.
+  url             String        @unique
+  creatorUsername String?
+  caption         String?       @db.Text
+  locationTag     String?
+  /// Optional media reference returned by the Graph API or supplied manually.
+  /// Instagram CDN URLs expire, so this is metadata, not a hosted asset.
+  imageUrl        String?
+  sourceMethod    InstagramSourceMethod
+  rightsStatus    InstagramRightsStatus @default(UNVERIFIED)
+  rightsNote      String?
+  collectedAt     DateTime      @default(now())
+  verifiedAt      DateTime?
+  createdAt       DateTime      @default(now())
+  updatedAt       DateTime      @updatedAt
+
+  @@index([destinationId, collectedAt(sort: Desc)])
+  @@index([rightsStatus])
 }
 
 /// Things to do. Seeded from src/features/destinations/activities.ts.

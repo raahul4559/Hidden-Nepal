@@ -1,6 +1,7 @@
 import {
   BookOpen,
   CalendarRange,
+  Camera,
   ExternalLink,
   ChevronRight,
   Clock,
@@ -170,6 +171,8 @@ export function DestinationDetail({ destination }: { destination: Detail }) {
               </ul>
             </section>
           ) : null}
+
+          <InstagramReferences posts={destination.instagramPosts} />
 
           <Sources sources={destination.sources} />
         </div>
@@ -370,6 +373,50 @@ function PlanBlock({ title, children }: { title: string; children: React.ReactNo
         {empty ? <p className="text-muted-foreground">No verified information yet.</p> : items}
       </div>
     </div>
+  );
+}
+
+function InstagramReferences({ posts }: { posts: Detail["instagramPosts"] }) {
+  if (!posts.length) return null;
+
+  return (
+    <section aria-labelledby="instagram-title" className="mt-14 border-t border-border pt-8">
+      <h2 id="instagram-title" className="flex items-center gap-2 font-serif text-2xl">
+        <Camera aria-hidden className="size-5 text-himalaya" />
+        From Instagram
+      </h2>
+      <p className="mt-2 text-sm text-muted-foreground">
+        Posts linked with permission. Captions and images remain the property of their
+        creators; links open Instagram in a new tab.
+      </p>
+      <ul className="mt-4 grid gap-3">
+        {posts.map((post) => (
+          <li key={post.url} className="rounded-md border border-border bg-white p-4">
+            <a
+              href={post.url}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-1.5 text-sm font-semibold text-himalaya underline-offset-2 hover:underline"
+            >
+              {post.creatorUsername ? `@${post.creatorUsername}` : "View Instagram post"}
+              <ExternalLink aria-hidden className="size-3.5" />
+              <span className="sr-only"> (opens Instagram in a new tab)</span>
+            </a>
+            {post.locationTag ? (
+              <p className="mt-1 flex items-center gap-1 text-xs text-muted-foreground">
+                <MapPin aria-hidden className="size-3" />
+                {post.locationTag}
+              </p>
+            ) : null}
+            {post.caption ? (
+              <p className="mt-2 line-clamp-3 text-sm leading-relaxed text-foreground/80">
+                {post.caption}
+              </p>
+            ) : null}
+          </li>
+        ))}
+      </ul>
+    </section>
   );
 }
 

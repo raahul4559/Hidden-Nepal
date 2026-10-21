@@ -4,6 +4,8 @@
  * - Always: Nepal's seven provinces and the experience categories.
  * - By default: researched destinations from data/nepal-tourism-destinations.json;
  *   records needing review are saved as drafts.
+ * - Unless SEED_INSTAGRAM_DATA=false: editor-supplied Instagram references and
+ *   places from data/instagram-references.json (idempotent).
  * - Unless SEED_SAMPLE_DATA=false: four DEVELOPMENT SAMPLE destinations whose
  *   practical details are placeholders (see prisma/seed/sample-destinations.ts).
  */
@@ -28,7 +30,9 @@ seedDatabase(prisma, resolveSeedOptions(process.env))
       `Seeded ${result.regions} provinces, ${result.categories} categories, ${result.activities} activities, ` +
         `${result.researchedPublished} researched destinations (published), ${result.researchedDrafts} researched destinations (draft), ` +
         `${result.preservedSampleDestinations} existing sample destinations preserved, and ` +
-        `${result.sampleDestinations} development sample destinations.`,
+        `${result.sampleDestinations} development sample destinations. ` +
+        `Instagram references: ${result.instagram.posts} posts, ${result.instagram.places} new places` +
+        `${result.instagram.skipped ? " (no references file)" : ""}.`,
     );
   })
   .catch((error) => {

@@ -43,6 +43,9 @@ next-env.d.ts
 /src/generated/prisma
 !.env.example
 
+# generated data-collection reports
+/data/reports/
+
 # playwright
 /test-results/
 /playwright-report/

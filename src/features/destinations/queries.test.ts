@@ -135,6 +135,15 @@ describe("toDetail", () => {
     safetyInfo: null,
     activities: [{ activity: { slug: "hiking", name: "Hiking" } }],
     sources: [{ title: "Source", url: "https://example.org", publisher: null, accessedAt: null }],
+    instagramPosts: [
+      {
+        url: "https://www.instagram.com/p/abc123/",
+        creatorUsername: "creator",
+        caption: "A caption",
+        locationTag: "Rara Lake",
+        collectedAt: new Date("2026-02-02"),
+      },
+    ],
     latitude: new Decimal(29.53),
     longitude: new Decimal(82.08),
   } as unknown as Parameters<typeof toDetail>[0];
@@ -151,6 +160,17 @@ describe("toDetail", () => {
       activities: ["Hiking"],
     });
     expect(detail.sources).toHaveLength(1);
+  });
+
+  it("keeps permitted Instagram references separate from practical info", () => {
+    const detail = toDetail(row);
+    expect(detail.instagramPosts).toHaveLength(1);
+    expect(detail.instagramPosts[0]?.url).toBe("https://www.instagram.com/p/abc123/");
+  });
+
+  it("omits coordinates when verified practical info has none", () => {
+    const detail = toDetail({ ...row, latitude: null, longitude: null });
+    expect(detail.practicalInfo?.coordinates).toBeNull();
   });
 
   it.each(["PLACEHOLDER", "UNVERIFIED"] as const)("withholds %s practical info entirely", (status) => {

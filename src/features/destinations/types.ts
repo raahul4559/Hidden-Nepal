@@ -16,6 +16,15 @@ export type DestinationImageView = {
   sourceUrl: string | null;
 };
 
+/** A permitted Instagram permalink shown as an outbound reference. */
+export type DestinationInstagramReference = {
+  url: string;
+  creatorUsername: string | null;
+  caption: string | null;
+  locationTag: string | null;
+  collectedAt: Date;
+};
+
 /** Card-level view of a published destination. */
 export type DestinationSummary = {
   slug: string;
@@ -59,6 +68,8 @@ export type DestinationDetail = Omit<DestinationSummary, "elevationM" | "coverIm
   description: string | null;
   categories: CategorySlug[];
   images: DestinationImageView[];
+  /** Only rightsStatus PERMITTED is selected. */
+  instagramPosts: DestinationInstagramReference[];
   practicalInfo: VerifiedPracticalInfo | null;
   /** References for the published text, shown regardless of verification. */
   sources: { title: string; url: string; publisher: string | null; accessedAt: Date | null }[];
