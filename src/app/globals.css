@@ -173,6 +173,14 @@
   }
 }
 
+/* Carousel viewport: keeps native scrolling and swiping, hides the scrollbar. */
+@utility no-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
 /* Small supporting label used above section headings. */
 @utility eyebrow {
   font-size: 0.75rem;

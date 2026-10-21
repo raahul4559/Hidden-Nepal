@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { FeaturedDestinations } from "@/features/destinations/components/featured-destinations";
 import { HiddenGems } from "@/features/destinations/components/hidden-gems";
 import { ThemeGrid } from "@/features/experiences/components/theme-grid";
+import { ContentSection } from "@/features/home/components/content-section";
 import { Hero } from "@/features/home/components/hero";
 import { ResponsibleTravel } from "@/features/home/components/responsible-travel";
 import { VideoShowcase } from "@/features/home/components/video-showcase";
@@ -29,6 +30,7 @@ export default function HomePage() {
     <>
       <Hero />
       <VideoShowcase />
+      <ContentSection />
       <ThemeGrid />
       <FeaturedDestinations />
       <HiddenGems />
