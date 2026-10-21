@@ -3,6 +3,7 @@ import { connection } from "next/server";
 
 import { getSitemapDestinations } from "@/features/destinations/queries";
 import { destinationHref, provinceHref } from "@/features/destinations/schemas";
+import { getSitemapGuides } from "@/features/guides/queries";
 import { PROVINCES } from "@/features/regions/provinces";
 import { absoluteUrl } from "@/lib/site-url";
 
@@ -16,6 +17,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     { url: absoluteUrl("/food"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/culture"), changeFrequency: "monthly", priority: 0.7 },
     { url: absoluteUrl("/provinces"), changeFrequency: "weekly", priority: 0.7 },
+    { url: absoluteUrl("/guides"), changeFrequency: "weekly", priority: 0.7 },
     ...PROVINCES.map((p) => ({
       url: absoluteUrl(provinceHref(p.slug)),
       changeFrequency: "weekly" as const,
@@ -36,5 +38,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
         }))
       : [];
 
-  return [...staticRoutes, ...destinations];
+  const guideResult = await getSitemapGuides();
+  const guides: MetadataRoute.Sitemap =
+    guideResult.status === "ok"
+      ? guideResult.guides.map((guide) => ({
+          url: absoluteUrl(`/guides/${guide.slug}`),
+          lastModified: guide.updatedAt,
+          changeFrequency: "monthly" as const,
+          priority: 0.6,
+        }))
+      : [];
+
+  return [...staticRoutes, ...destinations, ...guides];
 }

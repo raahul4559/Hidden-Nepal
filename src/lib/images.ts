@@ -2,7 +2,7 @@
  * Hosts that next/image may optimise. Shared with next.config.ts so that the
  * UI can fall back gracefully instead of throwing on an unknown host.
  */
-export const REMOTE_IMAGE_HOSTS = ["upload.wikimedia.org"] as const;
+export const REMOTE_IMAGE_HOSTS = ["upload.wikimedia.org", "res.cloudinary.com"] as const;
 
 /**
  * Use Commons-generated thumbnails instead of making the image optimizer

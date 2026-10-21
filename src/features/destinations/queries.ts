@@ -230,7 +230,7 @@ export function getProvinceCounts(): Promise<LoadResult<{ counts: Partial<Record
   });
 }
 
-const detailSelect = {
+export const detailSelect = {
   slug: true,
   name: true,
   summary: true,

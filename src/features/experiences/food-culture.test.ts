@@ -103,17 +103,15 @@ describe("food and culture explorer data", () => {
   it("uses distinct, locally bundled, credited photos for verified culture matches", () => {
     const culture = FOOD_CULTURE_EXPERIENCES.filter((item) => item.kind === "culture");
     const illustrated = culture.filter((item) => item.image);
-    expect(illustrated).toHaveLength(42);
-    expect(culture.filter((item) => !item.image).map((item) => item.slug)).toEqual([
-      "mithila-music-and-wedding-songs",
-    ]);
-    expect(new Set(illustrated.map((item) => item.image?.url)).size).toBe(42);
+    expect(illustrated).toHaveLength(43);
+    expect(culture.filter((item) => !item.image)).toEqual([]);
+    expect(new Set(illustrated.map((item) => item.image?.url)).size).toBe(43);
     const imageHashes = illustrated.map((item) =>
       createHash("sha256")
         .update(readFileSync(join(process.cwd(), "public", item.image!.url.slice(1))))
         .digest("hex"),
     );
-    expect(new Set(imageHashes).size).toBe(42);
+    expect(new Set(imageHashes).size).toBe(43);
     expect(culture.find((item) => item.slug === "tharu-maghi")?.image?.context_note).toMatch(
       /customs differ/i,
     );
@@ -144,9 +142,22 @@ describe("food and culture explorer data", () => {
     expect(mithilaPainting?.license).toBe("CC BY-SA 3.0");
 
     expect(culture.find((item) => item.slug === "tihar-lights-and-bhai-tika")?.image).toMatchObject({
-      url: "/images/food-culture/tihar-bhai-tika.jpg",
-      creator: "Sandesh Lamsal Nepal",
+      url: "/images/food-culture/tihar.jpg",
+      creator: "Mithun Kunwar",
       license: "CC BY-SA 4.0",
+    });
+    expect(culture.find((item) => item.slug === "mithila-mural-and-house-art")?.image).toMatchObject({
+      url: "/images/destinations/mithila-art.jpg",
+      creator: "Sntshkumar750",
+      license: "CC BY-SA 4.0",
+      source_url: "https://commons.wikimedia.org/wiki/File:Madhubani_paintings.jpg",
+    });
+    expect(culture.find((item) => item.slug === "mithila-music-and-wedding-songs")?.image).toMatchObject({
+      url: "/images/food-culture/maithili-singer-pawan-narayan.jpg",
+      creator: "Im mr.prashant",
+      license: "CC BY-SA 4.0",
+      source_url: "https://commons.wikimedia.org/wiki/File:Pawan_Narayan_Maithili_Singer.jpg",
+      context_note: expect.stringMatching(/not a wedding or seasonal-song ritual/i),
     });
     expect(culture.find((item) => item.slug === "chhath-puja")?.image?.source_url).toBe(
       "https://commons.wikimedia.org/wiki/File:Chhath_Puja_Sandhya_Ghats_Malangwa_Bhelhi_Sarlahi_2.jpg",

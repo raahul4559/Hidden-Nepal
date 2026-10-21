@@ -6,6 +6,8 @@ import { AuthorizationError, type CurrentUser, isAdmin } from "@/features/auth/s
 import { UserRole } from "@/generated/prisma/enums";
 import { getDb } from "@/lib/db";
 
+import { recordAudit } from "./data";
+
 /**
  * Administrative user management. Each function re-checks that the actor is
  * an admin, even though callers already did: the check sits next to the
@@ -52,6 +54,19 @@ export async function setUserRole(
   assertActorIsAdmin(actor);
   if (actor.id === targetUserId) return { status: "self_change" };
 
-  const result = await db().user.updateMany({ where: { id: targetUserId }, data: { role } });
-  return result.count === 1 ? { status: "ok" } : { status: "not_found" };
+  const client = db();
+  const existing = await client.user.findUnique({
+    where: { id: targetUserId },
+    select: { role: true },
+  });
+  if (!existing) return { status: "not_found" };
+
+  await client.$transaction(async (tx) => {
+    await tx.user.update({ where: { id: targetUserId }, data: { role } });
+    await recordAudit(tx, actor.id, "user.role_changed", "user", targetUserId, {
+      previousRole: existing.role,
+      role,
+    });
+  });
+  return { status: "ok" };
 }

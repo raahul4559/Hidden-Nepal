@@ -29,5 +29,6 @@ export async function changeUserRole(_previous: RoleFormState, formData: FormDat
   if (result.status === "not_found") return { status: "error", message: "That user no longer exists." };
 
   revalidatePath("/admin");
+  revalidatePath("/admin/users");
   return { status: "ok", message: "Role updated." };
 }

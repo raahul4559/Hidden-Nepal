@@ -5,7 +5,7 @@
     "editorial_method": "Factual summaries are paraphrased from the linked references. This is a curated discovery guide, not an exhaustive inventory or a substitute for community-led interpretation.",
     "coverage_notes": [
       "28 of 30 food entries have locally bundled, attributed images. Cards without a directly matching, reusable photo omit the image until one is verified.",
-      "42 of 43 cultural entries have locally bundled photos with creator, license and source metadata. The Mithila wedding and seasonal songs card omits its unrelated landmark photo until a directly relevant reusable image is verified.",
+      "All 43 cultural entries have locally bundled photos with creator, license and source metadata. The Mithila wedding and seasonal songs card uses a contemporary Maithili singer photo, not a depiction of a wedding or seasonal-song ritual.",
       "Contextual photos are not evidence that a particular event is occurring or that a depicted practice is universal; follow community-specific visitor and photography guidance.",
       "Includes representative foodways, festivals, performing arts, crafts and community traditions associated with all seven provinces.",
       "Practices vary by community, locality, family and year. A province tag indicates a useful place to begin exploring, not exclusive ownership or universal practice.",
@@ -63,7 +63,6 @@
       "Nepal's food and cultural life is too diverse to represent completely in one directory; further community review and district-level research are needed.",
       "Items are discovery leads, not endorsements of commercial operators. No ratings, current event dates, prices or access guarantees are asserted.",
       "Directly matching, reusable photos were not verified for Wachipa or Yangben; those food cards intentionally omit photos pending verification.",
-      "A directly relevant, reusable photo was not verified for Mithila wedding and seasonal songs; that culture card intentionally omits its photo pending verification.",
       "Copyrighted prose and third-party photography are not copied into this dataset."
     ]
   },
@@ -860,11 +859,11 @@
         "https://en.wikipedia.org/wiki/Tihar"
       ],
       "image": {
-        "url": "/images/food-culture/tihar-bhai-tika.jpg",
-        "alt": "A brother and sister wearing marigold garlands and tika for Bhai Tika during Tihar.",
-        "creator": "Sandesh Lamsal Nepal",
+        "url": "/images/food-culture/tihar.jpg",
+        "alt": "A woman lighting traditional oil lamps inside a decorated home during Tihar.",
+        "creator": "Mithun Kunwar",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Tihar_Celebration_in_Nepal_(Brother_and_Sister).jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Sister_lighting_traditional_lamp_during_Tihar_festival_(edited).jpg"
       }
     },
     {
@@ -985,10 +984,11 @@
       ],
       "image": {
         "url": "/images/destinations/mithila-art.jpg",
-        "alt": "A Mithila wall painting created for the Tulsi Puja festival in Nepal.",
-        "creator": "Shravan012",
+        "alt": "Madhubani paintings displayed on a wall at Madhubani Railway Station in Bihar, India.",
+        "creator": "Sntshkumar750",
         "license": "CC BY-SA 4.0",
-        "source_url": "https://commons.wikimedia.org/wiki/File:Mithila_Painting.jpg"
+        "source_url": "https://commons.wikimedia.org/wiki/File:Madhubani_paintings.jpg",
+        "context_note": "This photograph is from the Bihar side of the cross-border Mithila cultural region; it illustrates the broader tradition, not a Nepal attraction."
       }
     },
     {
@@ -1748,7 +1748,15 @@
       "source_urls": [
         "https://en.wikipedia.org/wiki/Maithili_culture",
         "https://en.wikipedia.org/wiki/Maithili_language"
-      ]
+      ],
+      "image": {
+        "url": "/images/food-culture/maithili-singer-pawan-narayan.jpg",
+        "alt": "Maithili playback singer Pawan Narayan performing onstage with a microphone.",
+        "creator": "Im mr.prashant",
+        "license": "CC BY-SA 4.0",
+        "source_url": "https://commons.wikimedia.org/wiki/File:Pawan_Narayan_Maithili_Singer.jpg",
+        "context_note": "This shows a contemporary Maithili playback singer, not a wedding or seasonal-song ritual."
+      }
     },
     {
       "slug": "newar-kumari-tradition",

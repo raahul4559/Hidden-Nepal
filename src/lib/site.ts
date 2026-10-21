@@ -16,6 +16,7 @@ export const mainNav = [
   { label: "Provinces", href: "/#provinces" },
   { label: "Seasons", href: "/#seasons" },
   { label: "Explore", href: "/explore" },
+  { label: "Guides", href: "/guides" },
 ] as const;
 
 export const navCta = { label: "Suggest a place", href: "/contribute" } as const;

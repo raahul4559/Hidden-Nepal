@@ -8,6 +8,8 @@ behind it and records models that are planned but not yet built.
 ```
 User 1 ── * PlaceSubmission * ── 0..1 Region / Category
 User 1 ── * SavedDestination * ── 1 Destination
+User 1 ── * TravelGuide
+User 1 ── * AuditLog                                  (append-only)
 RateLimit                                         (standalone counters)
 
 Region 1 ── * Destination * ── * Category        via DestinationCategory
@@ -32,6 +34,8 @@ Region 1 ── * Destination * ── * Category        via DestinationCategory
 | `Activity` / `DestinationActivity` | Things to do; shown only when practical info is `VERIFIED` | slug format; PK `(destinationId, activityId)` |
 | `DestinationSource` | References for the published text | https only; unique `(destinationId, url)` |
 | `PlaceSubmission` | Community suggestions from `/contribute`, moderated (`PENDING` → `APPROVED`/`REJECTED`/`SPAM`) | consent must be true; lowercase email; length limits; reviewed ⇒ `reviewedAt` |
+| `TravelGuide` | Long-form public guide with the same `PublishStatus` lifecycle as destinations | `slug` unique; published ⇒ `publishedAt`; author is `SetNull` |
+| `AuditLog` | Append-only record of admin content changes | actor is `SetNull`; indexed by entity and creation time |
 
 `Destination.isFeatured` drives the homepage "Featured" grid and
 `Destination.isHiddenGem` the editorial "Off the map" section. Editors set

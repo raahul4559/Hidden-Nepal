@@ -59,7 +59,7 @@ const costSchema = z
     path: ["max"],
   });
 
-const imageSchema = z.object({
+export const destinationImageSchema = z.object({
   url: z.union([
     z.url({ protocol: /^https$/ }),
     z.string().regex(/^\/[A-Za-z0-9/_-]+\.(?:avif|jpe?g|png|webp)$/i),
@@ -124,7 +124,7 @@ export const destinationInputSchema = z
       }),
 
     /** Ordered; the first is the cover. */
-    images: z.array(imageSchema).max(12).default([]),
+    images: z.array(destinationImageSchema).max(12).default([]),
     sources: z
       .array(
         z.object({
