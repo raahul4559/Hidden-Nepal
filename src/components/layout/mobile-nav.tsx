@@ -60,7 +60,7 @@ export function MobileNav({ items, cta }: { items: readonly NavItem[]; cta?: Nav
               <Link
                 href={cta.href}
                 onClick={() => setOpen(false)}
-                className="inline-flex h-11 w-full items-center justify-center rounded-md bg-teal px-5 text-base font-semibold text-navy"
+                className="inline-flex h-11 w-full items-center justify-center rounded-md bg-teal-button px-5 text-base font-semibold text-white transition-colors hover:bg-teal-button-hover"
               >
                 {cta.label}
               </Link>

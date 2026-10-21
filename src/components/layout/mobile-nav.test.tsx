@@ -29,4 +29,15 @@ describe("MobileNav", () => {
     expect(button).toHaveAttribute("aria-expanded", "false");
     expect(button).toHaveFocus();
   });
+
+  it("uses white text with a high-contrast teal background for its CTA", () => {
+    render(<MobileNav items={items} cta={{ label: "Suggest a place", href: "/contribute" }} />);
+    fireEvent.click(screen.getByRole("button", { name: "Open menu" }));
+
+    expect(screen.getByRole("link", { name: "Suggest a place" })).toHaveClass(
+      "bg-teal-button",
+      "text-white",
+      "hover:bg-teal-button-hover",
+    );
+  });
 });

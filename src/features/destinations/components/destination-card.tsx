@@ -58,17 +58,17 @@ export function DestinationCard({
           className="object-cover transition-transform duration-700 ease-out-soft motion-safe:group-hover:scale-[1.03]"
           priority={priority}
         />
-        {destination.isSample ? (
-          <SampleBadge className="absolute top-3 left-3 z-10" />
-        ) : null}
       </div>
-      {cover?.credit ? (
-        <div className="relative z-10 border-t border-border px-4 py-2">
+      {destination.isSample || cover?.credit ? (
+        <div className="relative z-10 space-y-2 border-t border-border px-4 py-2">
+          {destination.isSample ? <SampleBadge /> : null}
+          {cover?.credit ? (
           <PhotoCredit
             author={cover.credit}
             license={cover.license}
             sourceUrl={cover.sourceUrl}
           />
+          ) : null}
         </div>
       ) : null}
 

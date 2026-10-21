@@ -18,6 +18,8 @@
   --navy-700: #1d4062;
   --blue: #1769aa;
   --teal: #20b8a6;
+  --teal-button: #0f766e;
+  --teal-button-hover: #115e59;
   --gold: #d6b36a;
   --ivory: #f7f5f0;
   --ivory-deep: #efeae0;
@@ -72,6 +74,8 @@
   --color-navy-700: var(--navy-700);
   --color-himalaya: var(--blue);
   --color-teal: var(--teal);
+  --color-teal-button: var(--teal-button);
+  --color-teal-button-hover: var(--teal-button-hover);
   --color-gold: var(--gold);
   --color-ivory: var(--ivory);
   --color-ivory-deep: var(--ivory-deep);

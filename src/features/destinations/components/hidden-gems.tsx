@@ -92,17 +92,17 @@ function SpotlightItem({ destination, index }: { destination: DestinationSpotlig
             sizes="(min-width: 1024px) 58vw, 100vw"
             className="object-cover"
           />
-          {destination.isSample ? (
-            <SampleBadge className="absolute top-3 left-3 z-10" />
-          ) : null}
         </div>
-        {cover?.credit ? (
-          <figcaption className="mt-2">
-            <PhotoCredit
-              author={cover.credit}
-              license={cover.license}
-              sourceUrl={cover.sourceUrl}
-            />
+        {destination.isSample || cover?.credit ? (
+          <figcaption className="mt-2 space-y-2">
+            {destination.isSample ? <SampleBadge /> : null}
+            {cover?.credit ? (
+              <PhotoCredit
+                author={cover.credit}
+                license={cover.license}
+                sourceUrl={cover.sourceUrl}
+              />
+            ) : null}
           </figcaption>
         ) : null}
       </figure>
