@@ -10,8 +10,8 @@ import { LinkButton } from "@/components/ui/link-button";
 import { CATEGORIES } from "@/features/experiences/categories";
 import { PROVINCES } from "@/features/regions/provinces";
 
-import { type SubmissionFormState, submitPlace } from "../actions";
-import { HONEYPOT_FIELD, type PlaceSubmissionField } from "../validation";
+import { type SubmissionFormState, submitPlace, type SubmissionFieldError } from "../actions";
+import { HONEYPOT_FIELD } from "../validation";
 
 const initialState: SubmissionFormState = { status: "idle" };
 
@@ -57,8 +57,8 @@ export function PlaceSubmissionForm() {
 
   const errors = state.status === "error" ? state.fieldErrors : {};
   const values = state.status === "error" ? state.values : {};
-  const errorFor = (field: PlaceSubmissionField) => errors[field];
-  const describedBy = (field: PlaceSubmissionField, hint?: boolean) =>
+  const errorFor = (field: SubmissionFieldError) => errors[field];
+  const describedBy = (field: SubmissionFieldError, hint?: boolean) =>
     [hint && `${field}-hint`, errors[field] && `${field}-error`].filter(Boolean).join(" ") || undefined;
 
   return (
@@ -133,6 +133,25 @@ export function PlaceSubmissionForm() {
           </SelectShell>
         </Field>
 
+        <Field
+          id="district"
+          label="District"
+          hint="So we can find it. Leave blank if you’re not sure."
+          error={errorFor("district")}
+        >
+          <input
+            id="district"
+            name="district"
+            maxLength={80}
+            defaultValue={values.district}
+            aria-invalid={!!errorFor("district")}
+            aria-describedby={describedBy("district", true)}
+            className={cn(control, "h-12")}
+          />
+        </Field>
+      </div>
+
+      <div className="grid gap-7 sm:grid-cols-2">
         <Field id="category" label="Type of experience" error={errorFor("category")}>
           <SelectShell>
             <select
@@ -152,24 +171,24 @@ export function PlaceSubmissionForm() {
             </select>
           </SelectShell>
         </Field>
-      </div>
 
-      <Field
-        id="locationDetails"
-        label="Where is it?"
-        hint="District, nearest village or town, or how you get there."
-        error={errorFor("locationDetails")}
-      >
-        <input
+        <Field
           id="locationDetails"
-          name="locationDetails"
-          maxLength={200}
-          defaultValue={values.locationDetails}
-          aria-invalid={!!errorFor("locationDetails")}
-          aria-describedby={describedBy("locationDetails", true)}
-          className={cn(control, "h-12")}
-        />
-      </Field>
+          label="Where is it?"
+          hint="District, nearest village or town, or how you get there."
+          error={errorFor("locationDetails")}
+        >
+          <input
+            id="locationDetails"
+            name="locationDetails"
+            maxLength={200}
+            defaultValue={values.locationDetails}
+            aria-invalid={!!errorFor("locationDetails")}
+            aria-describedby={describedBy("locationDetails", true)}
+            className={cn(control, "h-12")}
+          />
+        </Field>
+      </div>
 
       <Field
         id="description"
@@ -191,6 +210,84 @@ export function PlaceSubmissionForm() {
           className={cn(control, "py-3 leading-relaxed")}
         />
       </Field>
+
+      <fieldset className="grid gap-7 border-t border-border pt-7 sm:grid-cols-2">
+        <legend className="sr-only">Approximate location (optional)</legend>
+        <Field
+          id="latitude"
+          label="Latitude"
+          optional
+          hint="Decimal degrees, e.g. 28.2094. Add both coordinates or neither."
+          error={errorFor("latitude")}
+        >
+          <input
+            id="latitude"
+            name="latitude"
+            inputMode="decimal"
+            maxLength={12}
+            defaultValue={values.latitude}
+            aria-invalid={!!errorFor("latitude")}
+            aria-describedby={describedBy("latitude", true)}
+            className={cn(control, "h-12")}
+          />
+        </Field>
+        <Field
+          id="longitude"
+          label="Longitude"
+          optional
+          hint="Decimal degrees, e.g. 83.9716."
+          error={errorFor("longitude")}
+        >
+          <input
+            id="longitude"
+            name="longitude"
+            inputMode="decimal"
+            maxLength={12}
+            defaultValue={values.longitude}
+            aria-invalid={!!errorFor("longitude")}
+            aria-describedby={describedBy("longitude", true)}
+            className={cn(control, "h-12")}
+          />
+        </Field>
+      </fieldset>
+
+      <fieldset className="grid gap-7 border-t border-border pt-7 sm:grid-cols-2">
+        <legend className="sr-only">Photo (optional)</legend>
+        <Field
+          id="image"
+          label="Upload a photo"
+          optional
+          hint="JPEG, PNG, WebP or AVIF up to 8 MB. Every file is checked before it is stored."
+          error={errorFor("image")}
+        >
+          <input
+            id="image"
+            name="image"
+            type="file"
+            accept="image/jpeg,image/png,image/webp,image/avif"
+            aria-invalid={!!errorFor("image")}
+            aria-describedby={describedBy("image", true)}
+            className="block w-full text-sm text-ink-muted file:mr-3 file:rounded-md file:border-0 file:bg-navy file:px-4 file:py-2 file:text-sm file:font-semibold file:text-ivory"
+          />
+        </Field>
+        <Field
+          id="imageAlt"
+          label="Describe the photo"
+          optional
+          hint="What does it show? Used as alt text if we publish the photo."
+          error={errorFor("imageAlt")}
+        >
+          <input
+            id="imageAlt"
+            name="imageAlt"
+            maxLength={200}
+            defaultValue={values.imageAlt}
+            aria-invalid={!!errorFor("imageAlt")}
+            aria-describedby={describedBy("imageAlt", true)}
+            className={cn(control, "h-12")}
+          />
+        </Field>
+      </fieldset>
 
       <fieldset className="grid gap-7 border-t border-border pt-7 sm:grid-cols-2">
         <legend className="sr-only">About you (optional)</legend>
@@ -260,7 +357,7 @@ function Field({
   optional,
   children,
 }: {
-  id: PlaceSubmissionField;
+  id: SubmissionFieldError;
   label: string;
   hint?: string;
   error?: string;

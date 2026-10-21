@@ -211,11 +211,13 @@ The first Playwright run needs a browser: `npx playwright install chromium`.
 | `/provinces`, `/provinces/[slug]` | All seven provinces; each prerendered, with its published destinations, filters and pagination                                                                                                        |
 | `/sitemap.xml`, `/robots.txt`     | Sitemap of static routes, provinces and published non-sample destinations (read at request time)                                                                                                      |
 | `/destinations/[slug]`            | Published destination: gallery, description, sources, related places. Practical details (difficulty, budget, seasons, activities, access, safety, coordinates) only when `VERIFIED`                   |
-| `/contribute`                     | Place suggestion form, stored as `PlaceSubmission` (status `PENDING`)                                                                                                                                 |
+| `/contribute`                     | Place suggestion form: validated, rate-limited and stored as `PlaceSubmission` (status `PENDING`)                                                                                                     |
 | `/credits`                        | Attribution for bundled photography                                                                                                                                                                   |
 | `/login`, `/register`             | Sign in and create an account. `?next=` returns to a same-site path only                                                                                                                              |
-| `/account`                        | Profile, saved destinations, sign out (this device or everywhere). Signed-in users only                                                                                                               |
-| `/admin`                          | Role management. Admins only; everyone else gets a 404                                                                                                                                                |
+| `/account`                        | Profile, saved destinations, your trips, sign out (this device or everywhere). Signed-in users only                                                                                                   |
+| `/trips`, `/trips/[id]`           | Private trip planner: create or rename a trip, add, reorder and remove stops, notes and optional day. Signed-in users only                                                                            |
+| `/admin`                          | Content dashboard and role management. Admins only; everyone else gets a 404                                                                                                                          |
+| `/admin/submissions`, `/admin/submissions/[id]` | Community suggestion queue: inspect a suggestion, approve, reject, request changes or reopen. Admins only                                                                               |
 | `/api/auth/*`                     | Auth.js endpoints (CSRF-protected)                                                                                                                                                                    |
 | `/api/me/saved-destinations`      | `GET` list, `POST`/`DELETE` `{ slug }`. Session user only                                                                                                                                             |
 | `/api/admin/users/[id]/role`      | `PATCH { role }`. Admins only; not their own role                                                                                                                                                     |
@@ -239,6 +241,53 @@ streaming has started.
 Experiences: the homepage shows five themes (Nature, Culture, Adventure,
 Villages, Food). Each groups one or more of the seven database categories
 (`src/features/experiences/themes.ts`).
+
+## Community suggestions and moderation
+
+`/contribute` accepts a place name, province, optional district, description,
+optional category, coordinate pair and photo, plus contact details and an
+optional account link. A province requires a district (or "Not sure"), and the
+two coordinates must be supplied together. The form is parsed by Zod, protected
+by a honeypot and limited to 5 submissions per IP and 10 per signed-in account
+per hour. Photos reuse the admin upload validation: JPEG, PNG, WebP or AVIF,
+8 MB maximum, with the file signature checked before upload. Contact details are
+for follow-up only and are never published.
+
+Every new suggestion starts `PENDING`. Admins review it at `/admin/submissions`,
+where they can approve, reject, request changes or reopen according to
+[`src/features/admin/submission-review.ts`](./src/features/admin/submission-review.ts).
+Rejecting or requesting changes requires an explanation. Each decision records
+the reviewer, timestamp and audit entry in the same transaction.
+
+**Approval never publishes a place.** It records that an editor accepted the
+suggestion; the destination entry is still researched, written and published
+separately. A submitted photo also needs explicit permission before reuse. The
+full data model and transition rules are in
+[`docs/data-model.md`](./docs/data-model.md#community-submissions-and-moderation).
+The transition matrix is unit-tested in
+`src/features/admin/submission-review.test.ts`; account linking, per-IP limits,
+permissions, audit rows and the no-publication guarantee are covered by
+`tests/integration/moderation.test.ts`.
+
+## Trip planning
+
+Signed-in users can create private trips at `/trips` and open one at
+`/trips/[id]`. A trip has a name and notes; stops are published destinations
+kept in a stable order, with optional per-stop notes and a day number (1–60).
+Stops can be added, moved up or down, edited and removed. Both the list and the
+planner are linked from `/account`.
+
+Every trip and stop is scoped by the session user's id in the query itself, so
+another account's ids return not-found rather than data. Limits are 20 trips per
+account and 50 stops per trip, and a destination can appear only once per trip.
+The service layer (`src/features/trips/service.ts`) has no React or Next.js
+imports, leaving room for a later AI planner, map view or sharing endpoint.
+Trips are `PRIVATE`; `PUBLIC` visibility exists in the schema for future
+sharing but is never accepted from input. See
+[`docs/data-model.md`](./docs/data-model.md#trip-planning).
+Validation, ordering and unauthorized/error-state handling have unit tests;
+`tests/integration/trips.test.ts` exercises persistence, ownership, ordering,
+removal and limits against PostgreSQL.
 
 ## Authentication and authorization
 
@@ -278,11 +327,11 @@ signs it out everywhere.
 | Passwords      | scrypt (Node `crypto`, N=2¹⁷, r=8, p=1, random 16-byte salt) in `src/features/auth/password.ts`. A DB CHECK rejects anything not in the `scrypt$…` format. 10–128 characters, no composition rules.                                                            |
 | Sessions       | Encrypted JWT cookie (Auth.js), 7 days, refreshed daily. HttpOnly, SameSite=Lax, Secure on HTTPS. The token holds only the user id and `sessionVersion`.                                                                                                       |
 | Current user   | `getCurrentUser()` in `src/features/auth/session.ts` re-reads the user (role included) from the database on every request. Role changes apply immediately; bumping `sessionVersion` revokes every session ("Sign out everywhere", `admin:grant --revoke`).     |
-| Pages          | `requireUser()` redirects to `/login?next=…`; `requireAdminPage()` returns 404 for non-admins. `src/proxy.ts` only adds an early redirect when there is no session cookie. It is not the access check.                                                         |
+| Pages          | `requireUser()` redirects to `/login?next=…`; `requireAdminPage()` returns 404 for non-admins. `src/proxy.ts` only adds an early redirect for `/account`, `/admin` and `/trips` when there is no session cookie. It is not the access check. |
 | Server Actions | Each resolves the user itself (`getCurrentUser`/`assertAdmin`) and validates input with Zod. Next.js rejects cross-origin calls.                                                                                                                               |
 | Route Handlers | Each calls `assertUser`/`assertAdmin`. Mutations also require a same-origin `Origin` header and `application/json` (`src/lib/http.ts`).                                                                                                                        |
-| Ownership      | Saved destinations are always queried by the session user's id; ids sent by the browser are ignored. Admin services re-check the actor's role next to the data.                                                                                                |
-| Rate limits    | PostgreSQL-backed fixed windows (`RateLimit` table, hashed keys): sign-in 5 per email and 30 per IP per 15 min; registration 5 per IP per hour. Enforced inside the Credentials provider, so direct posts to `/api/auth/callback/credentials` are limited too. |
+| Ownership      | Saved destinations and trips are always queried by the session user's id; ids sent by the browser are ignored. Admin services re-check the actor's role next to the data.                                                                                      |
+| Rate limits    | PostgreSQL-backed fixed windows (`RateLimit` table, hashed keys): sign-in 5 per email and 30 per IP per 15 min; registration 5 per IP per hour; suggestions 5 per IP and 10 per account per hour, applied after validation. Enforced inside the Credentials provider, so direct posts to `/api/auth/callback/credentials` are limited too. |
 | CSRF           | Server Actions: Next.js Origin check. Auth.js endpoints: double-submit CSRF token. JSON APIs: Origin check + JSON content type + SameSite cookies.                                                                                                             |
 | Errors         | Sign-in failures say "Incorrect email or password" for both unknown email and wrong password (with matching timing). Unexpected errors are logged without credentials and shown generically.                                                                   |
 
@@ -327,8 +376,9 @@ prisma/
   seed.ts                Seed entry point
   seed/                  Reference data, sample destinations, idempotent writer
 docs/data-model.md       Model decisions and planned models
+docs/admin-cms.md        Admin screens, moderation, validation and uploads
 src/
-  app/                   Routes: /, /explore, /credits, 404, error boundary
+  app/                   Routes: /, /explore, /trips, /contribute, /admin, 404, error boundary
   assets/photos/         Bundled, licensed photography
   components/
     ui/                  shadcn/ui primitives (button, input, link-button)
@@ -340,10 +390,11 @@ src/
   features/
     destinations/        Search + input validation, queries, cards, detail, states
     seasons/             Season definitions and homepage section
-    submissions/         Place suggestion form, server action, validation
+    submissions/         Place suggestion form, server action, validation, rate limits
     auth/                Auth.js credentials check, session DAL, actions, forms, rate limits
     saved/               Saved destinations: service, actions, save button
-    admin/               Role management (service, action, form)
+    trips/               Private itineraries: validation, ordering, service, actions, UI
+    admin/               Content dashboard, role management, submissions moderation
     experiences/         Categories, themes and the theme grid
     regions/             Province definitions and grid
     home/                Hero, responsible-travel section
@@ -354,7 +405,7 @@ src/
     site.ts              Site name, tagline, navigation
     http.ts              Route Handler helpers: same-origin check, JSON errors
   auth.ts                Auth.js configuration
-  proxy.ts               Optimistic redirect for /account and /admin
+  proxy.ts               Optimistic redirect for /account, /admin and /trips
 scripts/grant-admin.ts   First-admin bootstrap (npm run admin:grant)
 tests/e2e/               Playwright specs
 tests/integration/       Database tests (real PostgreSQL)
@@ -418,6 +469,9 @@ is credited where it appears, and is listed on `/credits`. When adding images:
 
 - Phase 5: Authentication (Auth.js), USER/ADMIN roles with server-side
   checks, saved destinations, minimal role management.
+- Phase 6: Community suggestion moderation and private trip planning, with
+  ownership checks, rate limits, audit trails and database-backed tests.
 
-Still to come: admin and moderation, trips and guides, password reset (needs
-an email provider).
+Still to come: public/shared itineraries, an AI trip planner, an interactive
+map, a local-guide directory, booking inquiries, and password reset (needs an
+email provider).

@@ -28,6 +28,10 @@ const GUIDANCE = [
     body: "An editor reviews every suggestion. Promising places are researched and checked with local sources before anything is published.",
   },
   {
+    title: "Photos and coordinates",
+    body: "A photo, approximate coordinates or the best time of year help us check a place faster. Only upload images you took yourself or have permission to share.",
+  },
+  {
     title: "Your details",
     body: "Name and email are optional. We use them only to follow up about this suggestion, and never publish them.",
   },

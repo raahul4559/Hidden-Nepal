@@ -9,7 +9,7 @@ import "dotenv/config";
 import { execFileSync } from "node:child_process";
 
 import { PrismaPg } from "@prisma/adapter-pg";
-import { afterAll, beforeAll, describe, expect, it } from "vitest";
+import { afterAll, beforeAll, describe, expect, it, vi } from "vitest";
 
 import { PrismaClient } from "@/generated/prisma/client";
 
@@ -18,6 +18,23 @@ import { seedDatabase } from "../../prisma/seed/index";
 import type { DestinationInput } from "@/features/destinations/validation";
 
 import { SAMPLE_DESTINATIONS } from "../../prisma/seed/sample-destinations";
+
+const mocks = vi.hoisted(() => {
+  if (process.env.TEST_DATABASE_URL) process.env.DATABASE_URL = process.env.TEST_DATABASE_URL;
+  return {
+    auth: vi.fn().mockResolvedValue(null),
+    headers: new Headers({ "x-forwarded-for": "203.0.113.10" }),
+  };
+});
+
+vi.mock("@/auth", () => ({ auth: mocks.auth }));
+vi.mock("next/headers", () => ({ headers: async () => mocks.headers }));
+// Request-scope helpers have no request to attach to in a test.
+vi.mock("next/server", async (original) => ({
+  ...(await original<object>()),
+  connection: async () => {},
+}));
+vi.mock("next/cache", () => ({ revalidatePath: vi.fn() }));
 
 const url = process.env.TEST_DATABASE_URL;
 
@@ -58,7 +75,7 @@ describe.skipIf(!url)("database (integration)", () => {
   }
 
   it("seeds reference data and samples, and re-seeding changes nothing", async () => {
-    await seedDatabase(prisma, { samples: true });
+    await seedDatabase(prisma, { samples: true, researched: false, instagram: false });
     const first = await counts();
 
     expect(first).toEqual({
@@ -70,7 +87,7 @@ describe.skipIf(!url)("database (integration)", () => {
       seasons: SAMPLE_DESTINATIONS.reduce((n, d) => n + (d.seasons?.length ?? 0), 0),
     });
 
-    await seedDatabase(prisma, { samples: true });
+    await seedDatabase(prisma, { samples: true, researched: false, instagram: false });
     expect(await counts()).toEqual(first);
   });
 
@@ -164,7 +181,7 @@ describe.skipIf(!url)("database (integration)", () => {
       prisma.placeSubmission.create({ data: { ...base, submitterEmail: "Upper@Case.com" } }),
     ).rejects.toThrow(/PlaceSubmission_email_lowercase/);
     await expect(prisma.placeSubmission.create({ data: { ...base, status: "APPROVED" } })).rejects.toThrow(
-      /PlaceSubmission_reviewed_has_timestamp/,
+      /PlaceSubmission_review_attributed/,
     );
   });
 
@@ -173,6 +190,7 @@ describe.skipIf(!url)("database (integration)", () => {
     const data = new FormData();
     data.set("placeName", "Action test place");
     data.set("region", "koshi");
+    data.set("district", "Bhojpur");
     data.set("category", "waterfalls");
     data.set("description", "Submitted through the real server action in a test.");
     data.set("submitterEmail", "Tester@Example.com");

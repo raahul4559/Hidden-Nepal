@@ -16,7 +16,7 @@ const valid = {
 
 const fieldsWithErrors = (input: unknown) => {
   const r = placeSubmissionSchema.safeParse(input);
-  return r.success ? [] : r.error.issues.map((i) => i.path[0]);
+  return r.success ? [] : [...new Set(r.error.issues.map((i) => i.path[0]))];
 };
 
 describe("placeSubmissionSchema", () => {
@@ -32,7 +32,7 @@ describe("placeSubmissionSchema", () => {
 
   it("lowercases email and accepts known slugs", () => {
     const parsed = placeSubmissionSchema.parse(
-      form({ ...valid, submitterEmail: "Guide@Example.COM", region: "karnali", category: "waterfalls" }),
+      form({ ...valid, submitterEmail: "Guide@Example.COM", region: "karnali", district: "Humla", category: "waterfalls" }),
     );
     expect(parsed).toMatchObject({ submitterEmail: "guide@example.com", region: "karnali", category: "waterfalls" });
   });
@@ -49,5 +49,38 @@ describe("placeSubmissionSchema", () => {
     expect(
       fieldsWithErrors(form({ ...valid, region: "atlantis", category: "nightlife", submitterEmail: "nope" })),
     ).toEqual(["region", "category", "submitterEmail"]);
+  });
+
+  it("requires a district when a province is chosen, but not otherwise", () => {
+    expect(fieldsWithErrors(form({ ...valid, region: "bagmati" }))).toEqual(["district"]);
+    expect(fieldsWithErrors(form({ ...valid, region: "bagmati", district: "Kathmandu" }))).toEqual([]);
+    // "Not sure" (no province) keeps the district genuinely optional.
+    expect(fieldsWithErrors(form({ ...valid, district: "Kathmandu" }))).toEqual([]);
+  });
+
+  it("accepts optional coordinates only as a valid pair", () => {
+    const parsed = placeSubmissionSchema.parse(
+      form({ ...valid, latitude: "28.2094", longitude: "83.9716" }),
+    );
+    expect(parsed).toMatchObject({ latitude: 28.2094, longitude: 83.9716 });
+
+    expect(fieldsWithErrors(form({ ...valid, latitude: "28.2094" }))).toEqual(["longitude"]);
+    expect(fieldsWithErrors(form({ ...valid, longitude: "83.9716" }))).toEqual(["latitude"]);
+    expect(fieldsWithErrors(form({ ...valid, latitude: "91", longitude: "83.9716" }))).toEqual([
+      "latitude",
+    ]);
+    expect(fieldsWithErrors(form({ ...valid, latitude: "28.2094", longitude: "-181" }))).toEqual([
+      "longitude",
+    ]);
+    expect(fieldsWithErrors(form({ ...valid, latitude: "north", longitude: "83.9716" }))).toEqual([
+      "latitude",
+    ]);
+  });
+
+  it("caps the optional image alt text", () => {
+    expect(fieldsWithErrors(form({ ...valid, imageAlt: "x".repeat(201) }))).toEqual(["imageAlt"]);
+    expect(placeSubmissionSchema.parse(form({ ...valid, imageAlt: "  A quiet path  " })).imageAlt).toBe(
+      "A quiet path",
+    );
   });
 });

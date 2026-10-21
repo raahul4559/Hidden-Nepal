@@ -28,6 +28,10 @@ const ACTION_LABELS: Record<string, string> = {
   "image.updated": "edited image details",
   "image.deleted": "removed an image",
   "image.reordered": "reordered a gallery",
+  "submission.approved": "approved a suggestion",
+  "submission.rejected": "rejected a suggestion",
+  "submission.changes_requested": "requested changes to a suggestion",
+  "submission.reopened": "reopened a suggestion",
   "user.role_changed": "changed a user role",
 };
 
@@ -60,6 +64,7 @@ export default async function AdminDashboardPage() {
 
   const data = result;
   const pending = data.submissions.PENDING;
+  const changesRequested = data.submissions.CHANGES_REQUESTED;
 
   const cards = [
     {
@@ -83,7 +88,14 @@ export default async function AdminDashboardPage() {
     {
       label: "Pending submissions",
       value: pending,
-      note: pending ? "Moderation arrives in the next chunk" : "Nothing waiting",
+      href: "/admin/submissions",
+      note: pending ? "Waiting for an editor" : "Nothing waiting",
+    },
+    {
+      label: "Changes requested",
+      value: changesRequested,
+      href: "/admin/submissions?status=CHANGES_REQUESTED",
+      note: "Returned to the submitter",
     },
     {
       label: "Published guides",

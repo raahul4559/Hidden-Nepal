@@ -11,7 +11,7 @@ export function AdminPagination({
   pageSize,
 }: {
   base: string;
-  filters: AdminListFilters;
+  filters: AdminListFilters<string>;
   total: number;
   page: number;
   pageCount: number;

@@ -1,22 +1,28 @@
 import { PublishStatus } from "@/generated/prisma/enums";
 
-export type AdminListFilters = {
+/**
+ * Shared shape for admin queue filters. `S` is the status enum of the queue;
+ * destinations and guides use PublishStatus, submissions use SubmissionStatus.
+ */
+export type AdminListFilters<S extends string = PublishStatus> = {
   q: string;
-  status: PublishStatus | "ALL";
+  status: S | "ALL";
   page: number;
 };
 
-export function parseAdminListFilters(
+const first = (value: string | string[] | undefined) =>
+  Array.isArray(value) ? value[0] : value;
+
+export function parseAdminListFilters<S extends string = PublishStatus>(
   params: Record<string, string | string[] | undefined>,
-): AdminListFilters {
-  const first = (value: string | string[] | undefined) =>
-    Array.isArray(value) ? value[0] : value;
+  allowedStatuses?: readonly S[],
+  defaultStatus: S | "ALL" = "ALL",
+): AdminListFilters<S> {
+  const statuses = (allowedStatuses ?? Object.values(PublishStatus)) as readonly string[];
 
   const rawStatus = first(params.status);
-  const status =
-    rawStatus && Object.values(PublishStatus).includes(rawStatus as PublishStatus)
-      ? (rawStatus as PublishStatus)
-      : "ALL";
+  const status: S | "ALL" =
+    rawStatus && statuses.includes(rawStatus) ? (rawStatus as S) : defaultStatus;
 
   const rawPage = Number(first(params.page));
   const page = Number.isInteger(rawPage) && rawPage > 0 ? Math.min(rawPage, 10_000) : 1;
@@ -28,10 +34,10 @@ export function parseAdminListFilters(
   };
 }
 
-export function adminListHref(
+export function adminListHref<S extends string>(
   base: string,
-  filters: AdminListFilters,
-  overrides: Partial<AdminListFilters> = {},
+  filters: AdminListFilters<S>,
+  overrides: Partial<AdminListFilters<S>> = {},
 ) {
   const next = { ...filters, ...overrides };
   const query = new URLSearchParams();

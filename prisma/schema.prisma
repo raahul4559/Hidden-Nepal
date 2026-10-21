@@ -67,6 +67,18 @@ enum SubmissionStatus {
   APPROVED
   REJECTED
   SPAM
+  /// Sent back to the submitter for more detail. Never published: like every
+  /// other non-PENDING state it requires a reviewer, an explanation and a
+  /// timestamp.
+  CHANGES_REQUESTED
+}
+
+/// Sharing scope of a saved itinerary. Only PRIVATE can be set today; PUBLIC
+/// is reserved for a later shareable-itinerary feature and is never accepted
+/// from input yet.
+enum TripVisibility {
+  PRIVATE
+  PUBLIC
 }
 
 /// How an Instagram reference reached the catalogue. GRAPH_API means it came
@@ -105,9 +117,13 @@ model User {
   updatedAt      DateTime  @updatedAt
 
   placeSubmissions  PlaceSubmission[]
-  savedDestinations SavedDestination[]
-  travelGuides      TravelGuide[]
-  auditLogs         AuditLog[]
+  /// Suggestions this account has reviewed. SetNull: moderation history
+  /// survives the deletion of a reviewer account.
+  reviewedSubmissions PlaceSubmission[] @relation("PlaceSubmissionReview")
+  savedDestinations   SavedDestination[]
+  travelGuides        TravelGuide[]
+  auditLogs           AuditLog[]
+  trips               Trip[]
 }
 
 /// A user's favourite destination. The composite key prevents duplicates.
@@ -207,6 +223,7 @@ model Destination {
   sources         DestinationSource[]
   instagramPosts  DestinationInstagramPost[]
   savedBy         SavedDestination[]
+  tripStops       TripStop[]
 
   publishedAt DateTime?
   createdAt   DateTime  @default(now())
@@ -390,10 +407,19 @@ model PlaceSubmission {
   /// SetNull: deleting a province/category must not erase suggestions.
   region          Region?          @relation(fields: [regionId], references: [id], onDelete: SetNull)
   regionId        String?
+  district        String?
   category        Category?        @relation(fields: [categoryId], references: [id], onDelete: SetNull)
   categoryId      String?
   locationDetails String?
   description     String
+  /// Optional coordinates, always written together (CHECK constraint).
+  latitude        Decimal?         @db.Decimal(9, 6)
+  longitude       Decimal?         @db.Decimal(9, 6)
+  /// Optional photo supplied with the suggestion. Validated (type, size,
+  /// signature) before upload and never rendered publicly while pending.
+  imageUrl        String?
+  imagePublicId   String?
+  imageAlt        String?
   submitterName   String?
   /// Optional, lowercase; used only to follow up on this suggestion.
   submitterEmail  String?
@@ -404,10 +430,56 @@ model PlaceSubmission {
   consentToShare  Boolean
   status          SubmissionStatus @default(PENDING)
   reviewNotes     String?
+  /// Admin who made the decision. Null while a suggestion is pending.
+  reviewer        User?            @relation("PlaceSubmissionReview", fields: [reviewerId], references: [id], onDelete: SetNull)
+  reviewerId      String?
   reviewedAt      DateTime?
   createdAt       DateTime         @default(now())
   updatedAt       DateTime         @updatedAt
 
   // Moderation queue: oldest pending first.
   @@index([status, createdAt])
+}
+
+// ─── Trip planning ──────────────────────────────────────────────────────────
+
+/// A saved itinerary. Owned by exactly one account; every read and mutation
+/// is scoped to that owner, so no user can see or change another user's trips.
+model Trip {
+  id         String         @id @default(cuid())
+  user       User           @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId     String
+  title      String
+  /// Free-text planning notes for the trip as a whole.
+  notes      String?        @db.Text
+  visibility TripVisibility @default(PRIVATE)
+  stops      TripStop[]
+  createdAt  DateTime       @default(now())
+  updatedAt  DateTime       @updatedAt
+
+  // Profile: one traveller's trips, most recently edited first.
+  @@index([userId, updatedAt(sort: Desc)])
+}
+
+/// One place in an itinerary, in a stable order. `position` is gapless from 0
+/// and unique within the trip; `destinationName` is a snapshot so the stop
+/// stays readable if its destination is later removed from the catalogue.
+model TripStop {
+  id              String       @id @default(cuid())
+  trip            Trip         @relation(fields: [tripId], references: [id], onDelete: Cascade)
+  tripId          String
+  destination     Destination? @relation(fields: [destinationId], references: [id], onDelete: SetNull)
+  destinationId   String?
+  destinationName String
+  position        Int
+  /// Optional day of the itinerary (1-based); null means not scheduled yet.
+  day             Int?
+  notes           String?      @db.Text
+  createdAt       DateTime     @default(now())
+  updatedAt       DateTime     @updatedAt
+
+  @@unique([tripId, position])
+  /// One stop per place: re-adding a destination is rejected instead of duplicating.
+  @@unique([tripId, destinationId])
+  @@index([tripId])
 }

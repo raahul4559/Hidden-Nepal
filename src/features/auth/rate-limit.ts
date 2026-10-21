@@ -18,6 +18,10 @@ export const RATE_LIMITS = {
   /** One client trying many accounts. */
   loginPerIp: { name: "login:ip", limit: 30, windowMs: 15 * 60_000 },
   registerPerIp: { name: "register:ip", limit: 5, windowMs: 60 * 60_000 },
+  /** One client sending place suggestions to /contribute. */
+  submissionPerIp: { name: "submission:ip", limit: 5, windowMs: 60 * 60_000 },
+  /** A signed-in account sending place suggestions. */
+  submissionPerUser: { name: "submission:user", limit: 10, windowMs: 60 * 60_000 },
 } as const satisfies Record<string, RateLimitRule>;
 
 export type RateLimitResult = { ok: true } | { ok: false; retryAfterSeconds: number };

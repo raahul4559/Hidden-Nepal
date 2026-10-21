@@ -13,6 +13,7 @@ exists. All pages are `noindex, nofollow`.
 | `/admin/destinations` | Search, filter by status, paginate, create, edit, preview, publish, unpublish, archive, restore |
 | `/admin/destinations/[id]/images` | Upload or add by URL, edit alt text and attribution, reorder, choose the cover, remove |
 | `/admin/guides` | Same lifecycle for long-form travel guides; published guides appear at `/guides` |
+| `/admin/submissions` | Review community suggestions: inspect the full record and photo, approve, reject, request changes or reopen |
 | `/admin/categories` | Edit the seven experience names, descriptions and sort order |
 | `/admin/instagram` | Add public Instagram references through the idempotent importer |
 | `/admin/users` | Change another user's role (never your own) |
@@ -37,6 +38,36 @@ query but keeps it for editors. Restore returns it to `DRAFT`; publishing sets
 `publishedAt` only when it is missing. Deletes are limited to gallery images,
 which are confirmed before removal; destination rows are archived rather than
 destroyed.
+
+## Community suggestions
+
+`/contribute` writes a `PlaceSubmission` with status `PENDING`; nothing enters
+the destination catalogue automatically. The queue at `/admin/submissions`
+filters by status, searches place, district and submitter, and links to a detail
+page with the description, province/district, category, coordinates, location
+details, photo and submitter contact.
+
+The detail page offers only the decisions that make sense for the current
+status (`src/features/admin/submission-review.ts`):
+
+| From | Allowed decisions |
+| --- | --- |
+| `PENDING` | approve, reject, request changes |
+| `CHANGES_REQUESTED` | approve, reject, request changes, reopen |
+| `REJECTED` | approve, request changes, reopen |
+| `SPAM` | approve, reopen |
+| `APPROVED` | none — approval is final |
+
+Rejecting or requesting changes requires a written explanation. Each decision
+records the reviewer and timestamp and appends an `AuditLog` row in the same
+transaction. `reviewSubmission` re-checks `isAdmin` next to the data as well as
+in the server action, so a direct service call cannot bypass the role check.
+
+**Approval does not publish.** It records that an editor accepted the
+suggestion. Creating the destination, writing researched copy and publishing it
+remain separate steps, so an unverified suggestion or photo cannot reach
+travellers through this queue. The photo is visible to admins only; reusing it
+in a destination requires explicit permission from the submitter.
 
 ## Audit log
 
@@ -65,6 +96,12 @@ upload. See `.env.example` for the variable names. `res.cloudinary.com` is in
 the `next/image` allow-list, and `next.config.ts` raises the server-action body
 limit to 10 MB so an 8 MB image fits inside the multipart envelope.
 
+Community suggestions reuse `validateImageMeta` and the signature check before
+uploading. If Cloudinary is unconfigured, the photo field returns a clear error
+and the rest of the suggestion can still be submitted. A file uploaded for a
+submission whose database write then fails is destroyed as an orphan, the same
+way as an admin upload.
+
 When a file upload succeeds but the database write fails, the action attempts
 to destroy the orphaned asset. Removing an image row does not delete the
 storage asset; that is a separate, deliberate operation.
@@ -91,6 +128,11 @@ database" state instead of fake content.
   renamed non-images.
 - `src/features/admin/actions/authorization.test.ts` confirms unauthorized
   callers cannot create content, change status, upload or edit categories.
+- `src/features/admin/submission-review.test.ts` covers allowed transitions,
+  the mandatory explanations and status labels.
 - `tests/integration/admin.test.ts` exercises CRUD, persistence, publication
   visibility, archive/restore, duplicate slugs, guides and audit rows when
   `TEST_DATABASE_URL` is configured.
+- `tests/integration/moderation.test.ts` covers suggestion account linking,
+  per-IP rate limits, non-admin refusal, every review transition, audit rows and
+  the guarantee that approval does not publish a destination.

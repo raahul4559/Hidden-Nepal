@@ -8,9 +8,11 @@ import { LinkButton } from "@/components/ui/link-button";
 import { logout, logoutEverywhere } from "@/features/auth/actions";
 import { ProfileForm } from "@/features/auth/components/profile-form";
 import { type CurrentUser, isAdmin, requireUser } from "@/features/auth/session";
+import { formatDate } from "@/features/destinations/format";
 import { destinationHref } from "@/features/destinations/schemas";
 import { SaveToggle } from "@/features/saved/components/save-toggle";
 import { listSavedDestinations } from "@/features/saved/service";
+import { listTrips } from "@/features/trips/service";
 
 export const metadata: Metadata = {
   title: "Your account",
@@ -34,12 +36,26 @@ async function AccountContent() {
 
   return (
     <div className="container-page grid gap-12 py-14 sm:py-20 lg:grid-cols-12 lg:gap-16">
-      <section aria-labelledby="saved-title" className="lg:col-span-7">
-        <h2 id="saved-title" className="font-serif text-3xl">
-          Saved destinations
-        </h2>
-        <SavedList user={user} />
-      </section>
+      <div className="space-y-12 lg:col-span-7">
+        <section aria-labelledby="saved-title">
+          <h2 id="saved-title" className="font-serif text-3xl">
+            Saved destinations
+          </h2>
+          <SavedList user={user} />
+        </section>
+
+        <section aria-labelledby="trips-title">
+          <div className="flex flex-wrap items-baseline justify-between gap-3">
+            <h2 id="trips-title" className="font-serif text-3xl">
+              Your trips
+            </h2>
+            <Link href="/trips" className="text-sm font-semibold text-himalaya underline underline-offset-2">
+              Open trip planner
+            </Link>
+          </div>
+          <TripsList user={user} />
+        </section>
+      </div>
 
       <aside className="space-y-10 lg:col-span-5">
         <section aria-labelledby="profile-title">
@@ -121,6 +137,46 @@ async function SavedList({ user }: { user: CurrentUser }) {
         </li>
       ))}
     </ul>
+  );
+}
+
+async function TripsList({ user }: { user: CurrentUser }) {
+  const trips = await listTrips(user).catch(() => null);
+  if (!trips) {
+    return <p className="mt-6 text-muted-foreground">Your trips couldn’t be loaded. Please try again.</p>;
+  }
+  if (trips.length === 0) {
+    return (
+      <div className="mt-6 rounded-md border border-border bg-white p-6">
+        <p className="text-muted-foreground">You haven’t planned a trip yet.</p>
+        <LinkButton href="/trips" size="lg" className="mt-5">
+          Start a trip
+        </LinkButton>
+      </div>
+    );
+  }
+  return (
+    <>
+      <ul className="mt-6 divide-y divide-border rounded-md border border-border bg-white">
+        {trips.map((trip) => (
+          <li key={trip.id}>
+            <Link
+              href={`/trips/${trip.id}`}
+              className="flex flex-col gap-1 p-5 transition-colors hover:bg-ivory sm:flex-row sm:items-center sm:justify-between"
+            >
+              <span className="font-serif text-xl text-navy">{trip.title}</span>
+              <span className="text-sm text-ink-muted">
+                {trip.stopCount} {trip.stopCount === 1 ? "stop" : "stops"} · updated{" "}
+                {formatDate(trip.updatedAt)}
+              </span>
+            </Link>
+          </li>
+        ))}
+      </ul>
+      <LinkButton href="/trips" variant="outline" className="mt-4">
+        All trips
+      </LinkButton>
+    </>
   );
 }
 

@@ -29,6 +29,7 @@ export function getAdminDashboard() {
       archivedDestinations,
       totalDestinations,
       pendingSubmissions,
+      changesRequestedSubmissions,
       approvedSubmissions,
       rejectedSubmissions,
       spamSubmissions,
@@ -44,6 +45,7 @@ export function getAdminDashboard() {
       db.destination.count({ where: { status: "ARCHIVED" } }),
       db.destination.count(),
       db.placeSubmission.count({ where: { status: "PENDING" } }),
+      db.placeSubmission.count({ where: { status: "CHANGES_REQUESTED" } }),
       db.placeSubmission.count({ where: { status: "APPROVED" } }),
       db.placeSubmission.count({ where: { status: "REJECTED" } }),
       db.placeSubmission.count({ where: { status: "SPAM" } }),
@@ -75,10 +77,16 @@ export function getAdminDashboard() {
       },
       submissions: {
         PENDING: pendingSubmissions,
+        CHANGES_REQUESTED: changesRequestedSubmissions,
         APPROVED: approvedSubmissions,
         REJECTED: rejectedSubmissions,
         SPAM: spamSubmissions,
-        total: pendingSubmissions + approvedSubmissions + rejectedSubmissions + spamSubmissions,
+        total:
+          pendingSubmissions +
+          changesRequestedSubmissions +
+          approvedSubmissions +
+          rejectedSubmissions +
+          spamSubmissions,
       },
       guides: {
         PUBLISHED: publishedGuides,
